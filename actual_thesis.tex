@@ -23,20 +23,38 @@
 
 \section{Calculations Schema}
 
+\begin{itemize}
+\item \underline{go over all items in equation 13 and explain how they are calculated}
 
+\item \underline{explain what's calculated in exiting mcmc and what needs new calculations}
 
-\section{Calculating sufficient statistics}
+\item \underline{explain loci and population independency, enabling simple summing of ln\_lds}
+
+\end{itemize}
+
 \subsection{Choice of Reference Model}
 \begin{itemize}
 \item \underline{for post-choosing of reference model, calculate all possible ref models}
 
+ \textbf{TODO: rephrase: start by stating explicitly what we're doing (enabling a single run of mcmc for comparing using multiple ref models)		}
+ 
 When approaching the implementation of mcref, the following considerations occured; By its nature, the use of mcref requires choosing a reference model that is best suited for comparing the competing hypotheses. Every hypothesis being weighted requires a long execution of gphocs. A researcher utilizing mcref may wish to compare between many candidate hypotheses and may wish to obtain comparisons based on many reference models.
 
 Given these considerations, in an attempt to reduce gphocs runs, we decided each run will calculate and emit sufficient statistics enabling "post-choosing" of the reference model. This is accomplished by having a single gphocs run emit data pertaining to all viable reference models.
 
-This was accomplished in two ways, depending on the type of reference model; In calculating statistics for the clade-reference-model, the calculation naturally fitted a root-to-leaf recursive pattern, allowing us to heavily reuse previous calculations done for descendant clades. In calculating statistics for the comb-reference-model, due to the changing nature of the comb-age, it being dependant on the comb-leaves, this optimization could not take place.
+\item \underline{natural trade-off between emitting data and model flexibility}
+
+There's a scale\/trade-off between printing and running mcmc. One goal of ours was not having output linear to \#loci. 
+
+\item \underline{winning strategy - aggregated stats across all loci}
+	
+our solution to the above was the maximal way of printing data \~\#pops and does not restrict post calculations. 
 
 \end{itemize}
+
+
+\section{Calculating sufficient statistics}
+
 \subsection{Calculating Clade Reference Model}
 \begin{itemize}
 
