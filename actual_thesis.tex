@@ -1,5 +1,96 @@
 %
-\documentclass[10pt,a4paper]{article}
+\documentclass[11pt]{article}
+
+\usepackage{times}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathabx} 
+\usepackage{graphicx}
+\usepackage{color} 
+\usepackage{setspace} 
+\usepackage{rotating}
+\usepackage{natbib}
+
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{lscape}
+%\usepackage{cite}
+\usepackage{xr}
+%\externaldocument{poly-div-supp}
+
+
+\usepackage{hyperref}
+\urlstyle{rm}
+\hypersetup{
+  colorlinks,
+  urlcolor=blue,
+  linkcolor=black,
+  citecolor=black
+}
+
+% Text layout
+\oddsidemargin 0in
+\evensidemargin 0in
+\topmargin -.5in
+\textwidth 6.5in
+\textheight 9in
+
+\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
+
+
+
+
+\newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\ld}{\mathcal{L}}
+\newcommand{\ignore}[1]{}
+
+\newcommand{\mcref}{\textsc{McRef}\xspace}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\X}{\vect{X}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Tr}{\mathcal{T}}
+\newcommand{\B}{\vect{B}}
+\newcommand{\Y}{\vect{Y}}
+\newcommand{\G}{\vect{G}}
+\newcommand{\T}{\vect{\Theta}}
+\newcommand{\GT}{\G\T}
+\newcommand{\Mref}{\M_{ref}}
+\newcommand{\Pref}{\widetilde{P}}
+\newcommand{\rbf}{\text{BF}}
+%\newcommand{\hbf}{\text{BF}}
+\newcommand{\Om}{\Omega}
+
+
+\newcommand{\GTref}{\widetilde{\GT}}
+\newcommand{\Gref}{\widetilde{\G}}
+\newcommand{\Tref}{\widetilde{\T}}
+\newcommand{\Z}{\vect{Z}}
+\newcommand{\Zref}{\widetilde{\Z}}
+\newcommand{\Omref}{\widetilde{\Om}}
+
+\newcommand{\Fext}{F_{Z}}
+
+\newcommand{\troot}{\theta_{root}}
+
+\newcommand{\Gc}{\G_c}
+\newcommand{\Gm}{\G_m}
+
+\def\comb{\rotatebox[origin=c]{90}{$\exists$}}
+\newcommand{\Mcomb}{\M_{\comb}}
+\newcommand{\tmin}{\tau_{\text{min}}}
+
+% Two lines from genres
+\def\@cite#1#2{(#1\if@tempswa , #2\fi)}
+\def\@biblabel#1{}
+
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage[normalem]{ulem}
@@ -13,7 +104,7 @@
 \usepackage[linesnumbered,lined,boxed,commentsnumbered,noend,ruled,vlined]{algorithm2e}
 \graphicspath{ {images/} }
 \author{Ron Visbord}
-\newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
+% \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
 \title{Thesis!}
 
 \begin{document}
