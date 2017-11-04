@@ -12,7 +12,6 @@
 \usepackage{setspace} 
 \usepackage{rotating}
 \usepackage{natbib}
-
 \usepackage{multirow}
 \usepackage{xspace}
 \usepackage{lscape}
@@ -43,16 +42,10 @@
 \makeatletter
 \renewcommand{\@biblabel}[1]{\quad#1.}
 \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
-
-
-
-
 \newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
 \newcommand{\ld}{\mathcal{L}}
 \newcommand{\ignore}[1]{}
-
 \newcommand{\mcref}{\textsc{McRef}\xspace}
-
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\X}{\vect{X}}
 \newcommand{\M}{\mathcal{M}}
@@ -67,27 +60,21 @@
 \newcommand{\rbf}{\text{BF}}
 %\newcommand{\hbf}{\text{BF}}
 \newcommand{\Om}{\Omega}
-
-
 \newcommand{\GTref}{\widetilde{\GT}}
 \newcommand{\Gref}{\widetilde{\G}}
 \newcommand{\Tref}{\widetilde{\T}}
 \newcommand{\Z}{\vect{Z}}
 \newcommand{\Zref}{\widetilde{\Z}}
 \newcommand{\Omref}{\widetilde{\Om}}
-
 \newcommand{\Fext}{F_{Z}}
-
 \newcommand{\troot}{\theta_{root}}
-
 \newcommand{\Gc}{\G_c}
 \newcommand{\Gm}{\G_m}
-
-\def\comb{\rotatebox[origin=c]{90}{$\exists$}}
 \newcommand{\Mcomb}{\M_{\comb}}
 \newcommand{\tmin}{\tau_{\text{min}}}
 
 % Two lines from genres
+\def\comb{\rotatebox[origin=c]{90}{$\exists$}}
 \def\@cite#1#2{(#1\if@tempswa , #2\fi)}
 \def\@biblabel#1{}
 
@@ -115,6 +102,17 @@
 \section{Calculations Schema}
 
 \begin{itemize}
+
+
+\item \underline{story}
+
+We want to calculate the Relative bayes factor. Formula (13) is an example for RBF on the null reference model. it's divided into genealogy likelihoods and free parameter likelihoods. Some of the free paraameter likelihoods are the same in hyp and ref. Some are different in ref and dependant on the specific genealogies.
+
+Recall that the genealogy likelihoods are calculated via kingman coalescent. Since we assume short unlinked independent loci, we calculate genealogy likelihood independently per genealogy. To get the over-all genealogy likelihood we simply multiply the independent likelihoods of the specific genealogies. 
+
+We also want the ability to "compose" different reference models in hins-sight. For this we calculate genealogy likelihood seperately for each population.
+
+
 \item \underline{go over all items in equation 13 and explain how they are calculated}
 
 Consider formula (13) for calculating the Bayes factor of model $M$ relative to $M_0$ - 
@@ -128,7 +126,7 @@ Consider formula (13) for calculating the Bayes factor of model $M$ relative to 
 \end{align}
 \end{small}
 %
- As described in (9) we estimate this expression using $\#N$ MCMC samples of $\{G\Theta^{(i)}\}$ - 
+\textit{(... Maybe mention more complex models to clarify that this is just an example...))}  As described in (9) we estimate this expression using $\#N$ MCMC samples of $\{G\Theta^{(i)}\}$ - 
 %
 \begin{equation}\label{eq:rbf}
  \frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
@@ -147,7 +145,7 @@ The second and third fractions represent the prior probability of the free varia
 
 \item \underline{explain loci and population independency, enabling simple summing of ln\_lds}
 
-As previously stated, we consider here a model for sequence data at short unlinked loci, meaning G contains information on the local tree in each locus, and distinct loci are assumed to be independent. This assumption allows us to calculate (13) by individually calculating $P(g^{(i)} | \Mref, \theta_0=\troot^{(i)})$ on every distinct genealogy $g \in G$, and later multiplicatively aggregating results into the global calculation of $P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)})$. The kingman coalescent model also allows us to calculate genealogy likelihood independently per population. This means that im more advanced reference models we can reuse existing gphocs genealogy likelihood calculations of uneffected. 
+As previously stated, we consider here a model with sequence data at short unlinked loci, meaning $G$ contains information on the local tree in each locus, and distinct loci are assumed to be independent. This assumption allows us to calculate (13) by individually calculating $P(g^{(i)} | \Mref, \theta_0=\troot^{(i)})$ on every distinct genealogy $g \in G$, and later multiplicatively aggregating results into the calculation of $P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)})$. The kingman coalescent model also allows us to calculate genealogy likelihood independently per population. This means that im more advanced reference models we can reuse existing gphocs genealogy likelihood calculations of uneffected. 
 
 \end{itemize}
 
@@ -161,16 +159,28 @@ When approaching the implementation of mcref, the following considerations occur
 
 Given these considerations, in an attempt to reduce gphocs runs, we decided each run will calculate and emit sufficient statistics enabling "post-choosing" of the reference model. This is accomplished by having a single gphocs run emit data pertaining to all viable reference models.
 
-\item \underline{natural trade-off between emitting data and model flexibility}
+\item \underline{natural trade-off between emitting data and ref-model flexibility}
 
-There's a scale\/trade-off between printing and running mcmc. One goal of ours was not having output linear to \#loci. 
+When constructing a reference model, one can consider three axes of choice - 
+\begin{itemize}
+\item The \textbf{type} of reference modelto use. Here we preset the null, clade and comb reference models, but concievably there are numerous more types, including a combination of types.
+\item The \textbf{topological construction} of the reference model, e.g. what population should be "turned" into the root of the clade/comb
+\item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
+\end{itemize}
 
-\item \underline{winning strategy - aggregated stats across all loci per population}
-	
-our solution to the above was the maximal way of printing data \~\#pops and does not restrict post calculations. 
+Assuming a single run of mcmc, there exists a natural trade-off between the flexibility of choice of reference model and the amoount of data the mcmc process is required to emit. Obviously, if the entire internal state (genealogies, and free parameter values) of every mcmc iteration is emitted, the RBF for every valid reference model can later be calculated. However, this yields an unreasonable amount of data, proportional to the size of the model, the number of free parameters and the amount of loci. At the other end of the spectrum, if the reference model is known before execution, all relevant statistics can be calculated during mcmc and only the RBF value need be emitted.
 
 
-\item \underline{not plugging theta into stats allows more flexibility}
+Our schema aims to maintain as free a choice as possible on all three axes, while minimizing both the number of mcmc executions and the amount of stored data. To support choice of reference model type, we emit genealogy statistics pertaining to all types. To support different topologies, we make use of the independence between populations under the kingman coalescent model and emit seperate statistics for each population. This leads to reuse of statistics calculated for populations which are identically mapped from the hypothesis model to the reference model, in effect allowing composition of populations and clades/combs.  We also aggregate statistics per population across all loci, eventually  writing data in proportion only to the size of the model and number of free parameters. Finally, to support different mapping of parameters, we emit values the hypothesis parameters (taus and thetas) and calculate a sub section of the genealogy likelihood, postponing for later the injection of the value of theta. In practical terms, this means that calculation of the following formula for genealogy likelihood on a population, is split. During mcmc we calculate only the enumerator iside the exponant in the formula, completing the calculation with the chosen theta value later. This allows choosing thetas for the reference model which best bridge the competing hypotheses - 
+
+\begin{equation}
+P(G_i|\theta_p, \tau_p)
+  = \Big( \frac{2}{\theta_p} \Big)  \prod_{I\in INT_i(p)} \bigg(  \exp \Big\{ -  \frac{(n^2-n)\tau_I}{\theta_p}   \Big\}  \bigg)
+\end{equation}
+
+Where $INT_i(p)$ are intervals between coalescence events in $G_i$ and $\tau_I$ is the time span of interval $I$
+
+
 
 \end{itemize}
 
