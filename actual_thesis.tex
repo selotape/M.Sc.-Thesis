@@ -104,7 +104,7 @@
 \begin{itemize}
 
 
-\item \underline{go over all items in equation 13 and explain how they are calculated}
+\item \underline{go over items in equation 13 and explain}
 
 Consider formula (13) for calculating the Bayes factor of model $M$ relative to $M_0$ - 
 %
@@ -128,15 +128,15 @@ Consider formula (13) for calculating the Bayes factor of model $M$ relative to 
 %
 % 
  
-The first (left-most) fraction of the right-hand of the formula are the genealogy likelihoods. These are calculated under the standard kingman coalescent model (\textit{?? more words explaining kingman coalescent (constant mut-rate, likelihood of common ancestor etc)?? }). The denominator is constantly recalculated by gphocs as part of the MCMC flow. The enumerator then needs to be calculated similiarly per mcmc iteration. This is done inside gphocs by "super-imposing" $G$ onto $M_0$ and again calculating the kingman coalescent genealogy likelihood of $G$ in $M_0$.
+The first (left-most) fraction of the right-hand of the formula is the genealogy likelihoods. These are calculated under the standard kingman coalescent model (\textit{?? more words explaining kingman coalescent (constant mut-rate, likelihood of common ancestor etc)?? }). The denominator is constantly recalculated by gphocs as part of the MCMC flow. The enumerator then needs to be calculated similiarly per mcmc iteration. This is done inside gphocs by "super-imposing" $G$ onto $M_0$ and again calculating the kingman coalescent genealogy likelihood of $G$ in $M_0$.
 
-The second and third fractions represent the prior probability of the free variables. Again, the denomenator is calculated as part of the mcmc flow in gphocs and the enumerator need to be calculated for $\M_0$  .... \textit{no idea what to say about these except that we ignore them most of the time. Should I mention tau-bounds?}
+The second and third fractions represent the prior probability of the free variables. Again, the denomenator is calculated as part of the mcmc flow in gphocs and the enumerator needs to be calculated for $\M_0$  .... \textit{no idea what to say about these except that we ignore them most of the time. Should I mention tau-bounds?}
  
 
 
 \item \underline{explain loci and population independency, enabling simple summing of ln\_lds}
 
-As previously stated, we consider here a model with sequence data at short unlinked loci, meaning $G$ contains information on the local tree in each locus, and distinct loci are assumed to be independent. This assumption allows us to calculate (13) by individually calculating $P(g^{(i)} | \Mref, \theta_0=\troot^{(i)})$ on every distinct genealogy $g \in G$, and later multiplicatively aggregating results into the calculation of $P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)})$. The kingman coalescent model also allows us to calculate genealogy likelihood independently per population. This means that im more advanced reference models we can reuse existing gphocs genealogy likelihood calculations of uneffected. 
+As previously stated, we consider here a model with sequence data at short unlinked loci, meaning $G$ contains information on the local tree in each locus, and distinct loci are assumed to be independent. This assumption allows us to calculate (13) by individually calculating $P(g^{(i)} | \M_0, \theta_0=\troot^{(i)})$ on every distinct genealogy $g \in G$, and later multiplicatively aggregating results into the calculation of $P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)})$. The kingman coalescent model also allows us to calculate genealogy likelihood independently per population. This allows us in more advanced reference models to reuse existing gphocs genealogy likelihood calculations of some populations. 
 
 \end{itemize}
 
