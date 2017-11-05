@@ -104,30 +104,17 @@
 \begin{itemize}
 
 
-\item \underline{go over items in equation 13 and explain}
+\item \underline{explain required calculations for equation 9}
 
-Consider formula (13) for calculating the Bayes factor of model $M$ relative to $M_0$ - 
+Consider formula (9) for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\{\GT^{(i)}\}$:
 %
-\begin{small}
-\begin{align}
-\frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
-&=~~ \frac{ P(\G|\M_0,\theta_0=\troot) }{ P(\G|\M,\T)}~ 
-     \frac{ P(\theta_0=\troot|\M_0)}{P(\troot|\M)}\
-     \frac{ \Pref(\{\tau_p\}|\G)}{P(\{\tau_p\}|\M)} ~. \label{eq:rbf_null}
-\end{align}
-\end{small}
-%
-\textit{(... Maybe mention more complex models to clarify that this is just an example...))}  As described in (9) we estimate this expression using $\#N$ MCMC samples of $\{G\Theta^{(i)}\}$ - 
 %
 \begin{equation}\label{eq:rbf}
- \frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
-  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{ P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)}) }{ P(\G^{(i)}|\M,\T)}~ 
-     \frac{ P(\theta_0=\troot^{(i)}|\M_0)}{P(\troot^{(i)}|\M)}\
-     \frac{ \Pref(\{\tau_p\}^{(i)}|\G)}{P(\{\tau_p\}^{(i)}|\M)} ~.
+ \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ = \frac{1}{N} \sum_{i=1}^{N}
+\frac{\Pref(\G^{(i)}|\Theta^{(i)}) }{P(\G^{(i)}|\Theta^{(i)})}
+\frac{\Pref(\Theta^{(i)}|\Mref) }{P(\Theta^{(i)}|\M)}.
 \end{equation}
-%
-% 
- 
+
 The first (left-most) fraction of the right-hand of the formula is the genealogy likelihoods. These are calculated under the standard kingman coalescent model (\textit{?? more words explaining kingman coalescent (constant mut-rate, likelihood of common ancestor etc)?? }). The denominator is constantly recalculated by gphocs as part of the MCMC flow. The enumerator then needs to be calculated similiarly per mcmc iteration. This is done inside gphocs by "super-imposing" $G$ onto $M_0$ and again calculating the kingman coalescent genealogy likelihood of $G$ in $M_0$.
 
 The second and third fractions represent the prior probability of the free variables. Again, the denomenator is calculated as part of the mcmc flow in gphocs and the enumerator needs to be calculated for $\M_0$  .... \textit{no idea what to say about these except that we ignore them most of the time. Should I mention tau-bounds?}
