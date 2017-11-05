@@ -1,4 +1,4 @@
-%
+ %
 \documentclass[11pt]{article}
 
 \usepackage{times}
@@ -133,11 +133,6 @@ The first (left-most) fraction of the right-hand of the formula is the genealogy
 The second and third fractions represent the prior probability of the free variables. Again, the denomenator is calculated as part of the mcmc flow in gphocs and the enumerator needs to be calculated for $\M_0$  .... \textit{no idea what to say about these except that we ignore them most of the time. Should I mention tau-bounds?}
  
 
-
-\item \underline{explain loci and population independency, enabling simple summing of ln\_lds}
-
-As previously stated, we consider here a model with sequence data at short unlinked loci, meaning $G$ contains information on the local tree in each locus, and distinct loci are assumed to be independent. This assumption allows us to calculate (13) by individually calculating $P(g^{(i)} | \M_0, \theta_0=\troot^{(i)})$ on every distinct genealogy $g \in G$, and later multiplicatively aggregating results into the calculation of $P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)})$. The kingman coalescent model also allows us to calculate genealogy likelihood independently per population. This allows us in more advanced reference models to reuse existing gphocs genealogy likelihood calculations of some populations. 
-
 \end{itemize}
 
 \subsection{Choice of Reference Model}
@@ -154,7 +149,7 @@ Given these considerations, in an attempt to reduce gphocs runs, we decided each
 
 When constructing a reference model, one can consider three axes of choice - 
 \begin{itemize}
-\item The \textbf{type} of reference modelto use. Here we preset the null, clade and comb reference models, but concievably there are numerous more types, including a combination of types.
+\item The \textbf{type} of reference model to use. Here we present the null, clade and comb reference models, but concievably there are numerous more, including a combination of types.
 \item The \textbf{topological construction} of the reference model, e.g. what population should be "turned" into the root of the clade/comb
 \item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
 \end{itemize}
@@ -171,6 +166,13 @@ P(G_i|\theta_p, \tau_p)
 
 Where $INT_i(p)$ are intervals between coalescence events in $G_i$ and $\tau_I$ is the time span of interval $I$
 
+
+
+
+
+\item \underline{explain loci and population independency, enabling simple summing of ln\_lds}
+
+As previously stated, we consider here a model with sequence data at short unlinked loci, meaning $G$ contains information on the local tree in each locus, and distinct loci are assumed to be independent. This assumption allows us to calculate (13) by individually calculating $P(g^{(i)} | \M_0, \theta_0=\troot^{(i)})$ on every distinct genealogy $g \in G$, and later multiplicatively aggregating results into the calculation of $P(\G^{(i)}|\M_0,\theta_0=\troot^{(i)})$. The kingman coalescent model also allows us to calculate genealogy likelihood independently per population. This allows us in more advanced reference models to reuse existing gphocs genealogy likelihood calculations of some populations. 
 
 
 \end{itemize}
