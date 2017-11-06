@@ -114,28 +114,27 @@ Consider formula (9) for calculating the Bayes factor of model $M$ relative to $
 \end{equation}
 
 The main effort of mcref is in calculating this formula and it's derivitives for specific reference models such as (13), (19) and (?) for the null, comb and clade reference models.
-
-The denominator, which is the joint genealogy and parameter likelihoods, is constantly calculated by gphocs as part of the MCMC flow. the enumerator then is what remains to be calculated for all $\{\GT^{(i)}\}$. 
+The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for all $\{\GT^{(i)}\}$. 
 	
-\item \underline{for post-choosing of reference model, calculate all possible ref models}
- 
-Several considerations led us towards the goal of making the above calculations as generic as possible, enabling choice of multiple reference model based on data from a single MCMC run; By its nature, the use of mcref requires choosing the reference model that is best suited for comparing the competing hypotheses. Every hypothesis being weighted requires a long execution of gphocs. A researcher utilizing mcref may wish to compare between many candidate hypotheses and may wish to obtain comparisons based on many reference models.
-
-Given these considerations, our objective is to output a collection of values for each $G^{(i)}$ which allows to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible..
-
 \item \underline{natural trade-off between emitting data and ref-model flexibility}
 
 When constructing a reference model, one can consider three axes of choice - 
 \begin{itemize}
+\item The \textbf{topological construction} of the reference model, e.g. what population should be "turned into" the root of the clade/comb
+
 \item The \textbf{type} of reference model to use. Here we present the null, clade and comb reference models, but concievably there are numerous more, including a combination of types.
-\item The \textbf{topological construction} of the reference model, e.g. what population should be "turned" into the root of the clade/comb
+
 \item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
 \end{itemize}
 
-Assuming a single run of mcmc, there exists a natural trade-off between the flexibility of choice of reference model and the amoount of data the mcmc process is required to emit. Obviously, if the entire internal state (genealogies, and free parameter values) of every mcmc iteration is emitted, the RBF for every valid reference model can later be calculated. However, this yields an unreasonable amount of data, proportional to the size of the model, the number of free parameters and the amount of loci. At the other end of the spectrum, if the reference model is known before execution, all relevant statistics can be calculated during mcmc and only the RBF value need be emitted.
+We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the mcmc process is required to emit. If the reference model is predetermined before MCMC execution, formula (9) can be calculated during mcmc and only the final RBF value need be emitted. However changing a reference model would require another full MCMC run.
+Contrarily, if all of $\GT^{(i)}$ is stored ( i.e. all genealogies, and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However, this yields an unreasonable amount of data, proportional to the size of the model and the number of free parameters and the amount of loci.
 
+Given these considerations our objective is, for each $\GT^{(i)}$, to output the minimal amount of statistics, sufficient to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
 
-Our schema aims to maintain as free a choice as possible on all three axes, while minimizing both the number of mcmc executions and the amount of stored data. To support choice of reference model type, we emit genealogy statistics pertaining to all types. To support different topologies, we make use of the independence between populations under the kingman coalescent model and emit seperate statistics for each population. This leads to reuse of statistics calculated for populations which are identically mapped from the hypothesis model to the reference model, in effect allowing composition of populations and clades/combs.  We also aggregate statistics per population across all loci, eventually  writing data in proportion only to the size of the model and number of free parameters. Finally, to support different mapping of parameters, we emit values the hypothesis parameters (taus and thetas) and calculate a sub section of the genealogy likelihood, postponing for later the injection of the value of theta. In practical terms, this means that calculation of the following formula for genealogy likelihood on a population, is split. During mcmc we calculate only the enumerator iside the exponant in the formula, completing the calculation with the chosen theta value later. This allows choosing thetas for the reference model which best bridge the competing hypotheses - 
+The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes. 
+
+To support different topologies, we make use of the independence between populations under the kingman coalescent model and emit seperate statistics for each population. This leads to reuse of statistics calculated for populations which are identically mapped from the hypothesis model to the reference model, in effect allowing composition of populations and clades/combs.  We also aggregate statistics per population across all loci, eventually  writing data in proportion only to the size of the model and number of free parameters. To support choice of reference model type, we emit genealogy statistics pertaining to all types. Finally, to support different mapping of parameters, we emit values the hypothesis parameters (taus and thetas) and calculate a sub section of the genealogy likelihood, postponing for later the injection of the value of theta. In practical terms, this means that calculation of the following formula for genealogy likelihood on a population, is split. During mcmc we calculate only the enumerator iside the exponant in the formula, completing the calculation with the chosen theta value later. This allows choosing thetas for the reference model which best bridge the competing hypotheses - 
 
 \begin{equation}
 P(G_i|\theta_p, \tau_p)
