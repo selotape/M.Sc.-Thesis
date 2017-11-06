@@ -110,12 +110,12 @@ Consider formula (9) for calculating the Bayes factor of model $M$ relative to $
 %
 %
 \begin{equation}\label{eq:rbf}
- \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ = \frac{1}{N} \sum_{i=1}^{N}
-\frac{\Pref(\G^{(i)}|\Theta^{(i)}) }{P(\G^{(i)}|\Theta^{(i)})}
-\frac{\Pref(\Theta^{(i)}|\Mref) }{P(\Theta^{(i)}|\M)}.
+ \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-The denominators (from right to left) are the parameter priors and the genealogy likelihoods, which under the kingman coalescent model depend only on population parameters. They are constantly calculated by gphocs as part of the MCMC flow. The enumerators then are what remains to be calculated for all $\{\GT^{(i)}\}$. 
+The main effort of mcref is in calculating this formula and it's derivitives for specific reference models such as (13), (19) and (?) for the null, comb and clade reference models.
+
+The denominator, which is the joint genealogy and parameter likelihoods, is constantly calculated by gphocs as part of the MCMC flow. the enumerator then is what remains to be calculated for all $\{\GT^{(i)}\}$. 
 	
 \item \underline{for post-choosing of reference model, calculate all possible ref models}
  
