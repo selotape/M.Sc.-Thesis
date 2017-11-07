@@ -130,7 +130,7 @@ When constructing a reference model, one can consider three axes of choice -
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the mcmc process is required to emit. If the reference model is predetermined before MCMC execution, formula (9) can be calculated during mcmc and only the final RBF value need be emitted. However changing a reference model would require another full MCMC run.
 Contrarily, if all of $\GT^{(i)}$ is stored ( i.e. all genealogies, and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However, this yields an unreasonable amount of data, proportional to the size of the model and the number of free parameters and the amount of loci.
 
-Given these considerations our objective is, for each $\GT^{(i)}$, to output the minimal amount of statistics, sufficient to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
+Given these considerations our objective is, for each of $\GT^{(i)}$, to output the minimal amount of statistics, sufficient to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
 
 The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes. 
 
