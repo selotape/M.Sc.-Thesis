@@ -1,7 +1,6 @@
  %
 \documentclass[11pt]{article}
 
-
 \usepackage{times}
 
 \usepackage{amsmath}
@@ -135,12 +134,21 @@ Given these considerations our objective is, for each of $\GT^{(i)}$, to output 
 
 The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes. 
 
-To support different topologies, we make use of the independence between populations under the kingman coalescent model and emit seperate statistics for each population. This leads to reuse of statistics calculated for populations which are identically mapped from the hypothesis model to the reference model, in effect allowing composition of populations and clades/combs.  We also aggregate statistics per population across all loci, eventually  writing data in proportion only to the size of the model and number of free parameters. To support choice of reference model type, we emit genealogy statistics pertaining to all types. Finally, to support different mapping of parameters, we emit values the hypothesis parameters (taus and thetas) and calculate a sub section of the genealogy likelihood, postponing for later the injection of the value of theta. In practical terms, this means that calculation of the following formula for genealogy likelihood on a population, is split. During mcmc we calculate only the enumerator iside the exponant in the formula, completing the calculation with the chosen theta value later. This allows choosing thetas for the reference model which best bridge the competing hypotheses - 
 
-\begin{equation}
-P(G_i|\theta_p, \tau_p)
-  = \Big( \frac{2}{\theta_p} \Big)  \prod_{I\in INT_i(p)} \bigg(  \exp \Big\{ -  \frac{(n^2-n)\tau_I}{\theta_p}   \Big\}  \bigg)
-\end{equation}
+
+\begin{align}
+% 
+P(G^{(i)}|\{\theta\}^{(i)}, \{\tau\}^{(i)}, \{\mu\}^{(i)}) =~~ 
+\prod_{(i)} \Bigg(&  \prod_{p \in \Tr} \prod_{I\in INT_{G_i}(p)} 
+      \bigg(  \Big( \frac{2}{\theta_{p,i}} \Big) \exp \Big\{ -  \frac{(n^2-n)\tau_I}{\theta_{p,i}}   \Big\}  \bigg)  \notag \Bigg)  \cdotp\\ % ~~   
+\Bigg(&\prod_{b \in \B} \prod_{I\in INT_{G_i}(mb)} 
+      \bigg(  m_{b,i} \exp \Big\{ -  m_{b,i} n~\tau_I   \Big\}  \bigg) \Bigg)  \\ %
+\label{eq:is_harmonic}
+\end{align}
+
+Formula (2) is a detailed expansion of the estimated genealogy likelihood on samples $G^{(i)}$.
+
+
 
 Where $INT_i(p)$ are intervals between coalescence events in $G_i$ and $\tau_I$ is the time span of interval $I$
 
