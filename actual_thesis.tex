@@ -108,33 +108,33 @@
 
 \item \underline{explain required calculations for equation 9}
 
-Consider formula (9) for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\{\GT^{(i)}\}$:
+Consider formula (9) for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
 %
 %
 \begin{equation}\label{eq:rbf}
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-The main effort of mcref is in calculating this formula and it's derivitives for specific reference models such as (13), (19) and (?) for the null, comb and clade reference models.
-The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for all $\{\GT^{(i)}\}$. 
+The main job of mcref is in calculating this formula and its derivitives for specific reference models such as (13) for the null reference model, (19) for the comb model and (?) for the clade model.
+The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for iterations2 $\GT^{(i)}$. 
 	
 \item \underline{natural trade-off between emitting data and ref-model flexibility}
 
-When constructing a reference model, one can consider three axes of choice - 
+When constructing a reference model, one might consider three axes of choice - 
 \begin{itemize}
 \item The \textbf{topological construction} of the reference model, e.g. what population should be "turned into" the root of the clade/comb
 
-\item The \textbf{type} of reference model to use. Here we present the null, clade and comb reference models, but concievably there are numerous more, including a combination of types.
+\item The \textbf{type} of reference model to use. Here we present the null, clade and comb reference models, but concievably there are numerous more, including any combination thereof.
 
 \item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
 \end{itemize}
 
-We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the mcmc process is required to emit. If the reference model is predetermined before MCMC execution, formula (9) can be calculated during mcmc and only the final RBF value need be emitted. However changing a reference model would require another full MCMC run.
-Contrarily, if all of $\GT^{(i)}$ is stored ( i.e. all genealogies, and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However, this yields an unreasonable amount of data, proportional to the size of the model and the number of free parameters and the amount of loci.
+We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. If the reference model is predetermined before MCMC execution, formula (9) can be calculated during iteration and only the final RBF value need be emitted. However, changing a reference model would require another full run of MCMC.
+Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies  and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However, this yields an unreasonable amount of data, proportional to the size of the model and the number of free parameters and the amount of loci.
 
-Given these considerations our objective is, for each of $\GT^{(i)}$, to output the minimal amount of statistics, sufficient to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
+Assuming this trade-off and the high cost of a single MCMC run, our objective is, for each sample $\GT_i$, to output the minimal amount of statistics sufficient for computing $\Pref(\GT^{(i)}|\Mref)$ on as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
 
-To accomplish this we develop the following expansion of genealogy likelihood of some sample $G_i$:
+To accomplish this we develop the following expansion of the log of genealogy likelihood of some sample $\GT_i$:
 
 \begin{align}
 P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  
@@ -173,7 +173,7 @@ ln{\big(P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big)} =~~  \\
 \end{align}
 
 
-In the above series of formulae, $\It$ and $\Ib$ are the intervals between coalescence events and migration events accordingly in the genealogy on locus $l$ in MCMC iteration $i$. 
+In the above series of formulae, $\It$ and $\Ib$ are the sets of intervals between coalescence events and migration events, accordingly, in the genealogy on locus $l$ in MCMC iteration $i$.
 
 We apply the natural logarithm on likelihoods. This transforms the infinitesimal probabilities to more managable numbers and, more importantly, allows us per MCMC iteration to aggregate statistics across all loci thus reaching our goal for amount of emittted stats; For each MCMC iteration we calculate and emit for every population and migration band the inner terms $\sum_{g_l}\sum_{\It}(n^2-n)t_I $ and $\sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I$ as well as the sizes $|\It|$ and $|\Ib|$.
 Mcref then has the capacity to compose different reference models by choosing and plugging into the calculation different topologies ($\Tr$, $B$) and different parameter mappings ($\theta_p$, $\mu_b$).
