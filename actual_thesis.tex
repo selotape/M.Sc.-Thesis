@@ -148,7 +148,7 @@ P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) =
 \prod_{p\in\Tr} \prod_{I \in \mathbb{I}_{g_l}^{\Tr}} \frac{2}{\theta_p} \exp{\bigg(-\frac{(n^2-n)t_I}{\theta_p}\bigg)} 
 \\
 \ln{\bigg(\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~)\bigg)} = 
-\sum_{p\in\Tr}|\It|\ln{\frac{2}{\theta_p}} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}
+\sum_{p\in\Tr}|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}
 \label{eq:is_harmonic}
 \end{align}
 
@@ -159,16 +159,24 @@ P(g_l | \{\tau\}_i, \{\mu\}_i, \B ) =
 \prod_{b\in B} \prod_{I  \Ib} \mu_b ~ \exp{( - \mu_b~ n~t_I )}
 \\
 \ln{\bigg(\prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )\bigg)}=
-\sum_{b\in B}|\Ib|\ln{\mu_b} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I
+\sum_{b\in B}|\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I
 \label{eq:is_harmonic}
 \end{align}
 
 
-Where $INT_{l}(p)$ and $INT_{l}(b)$ are the intervals between coalescence events and migration events accordingly in locus $l$ of $G_i$, and $\tau_I$ is the time span of interval $I$.
-
-To minimize the 
 
 
+\begin{align}
+ln{\big(P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big)} =~~  \\
+\sum_{p\in\Tr}|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p} + \sum_{b\in B}|\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I
+\label{eq:is_harmonic}
+\end{align}
+
+
+
+
+
+Where $\It$ and $\Ib$ are the intervals between coalescence events and migration events accordingly in the genealogy on locus $l$ in MCMC iteration $i$
 
 
 
