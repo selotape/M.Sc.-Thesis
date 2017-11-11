@@ -134,7 +134,7 @@ Contrarily, if all of $\GT^{(i)}$ is stored ( i.e. all genealogies, and free par
 
 Given these considerations our objective is, for each of $\GT^{(i)}$, to output the minimal amount of statistics, sufficient to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
 
-The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes.  This is showcased in the following expansion of the genealogy likelihood of some sample $G_i$:
+To accomplish this we develop the following expansion of genealogy likelihood of some sample $G_i$:
 
 \begin{align}
 P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  
@@ -173,10 +173,10 @@ ln{\big(P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big)} =~~  \\
 \end{align}
 
 
+In the above series of formulae, $\It$ and $\Ib$ are the intervals between coalescence events and migration events accordingly in the genealogy on locus $l$ in MCMC iteration $i$. 
 
-
-
-Where $\It$ and $\Ib$ are the intervals between coalescence events and migration events accordingly in the genealogy on locus $l$ in MCMC iteration $i$
+We apply the natural logarithm on likelihoods. This transforms the infinitesimal probabilities to more managable numbers and, more importantly, allows us per MCMC iteration to aggregate statistics across all loci thus reaching our goal for amount of emittted stats; For each MCMC iteration we calculate and emit for every population and migration band the inner terms $\sum_{g_l}\sum_{\It}(n^2-n)t_I $ and $\sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I$ as well as the sizes $|\It|$ and $|\Ib|$.
+Mcref then has the capacity to compose different reference models by choosing and plugging into the calculation different topologies ($\Tr$, $B$) and different parameter mappings ($\theta_p$, $\mu_b$).
 
 
 
