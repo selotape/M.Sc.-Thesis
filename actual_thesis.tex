@@ -136,6 +136,8 @@ Assuming this trade-off and the high cost of a single MCMC run, our objective is
 
 To accomplish this we develop the following expansion of the log of genealogy likelihood of some sample $\GT_i$:
 
+\underline{awkward version I:}
+
 \begin{align}
 P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  
 \prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~) \cdot \prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )
@@ -168,9 +170,32 @@ P(g_l | \{\tau\}_i, \{\mu\}_i, \B ) =
 
 \begin{align}
 ln{\big(P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big)} =~~  \\
-\sum_{p\in\Tr}|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p} + \sum_{b\in B}|\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I
+\sum_{p\in\Tr}\Big(|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}\Big) + \sum_{b\in B} \Big( |\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I \Big)
 \label{eq:is_harmonic}
 \end{align}
+
+
+
+\underline{awkward version II:}
+
+\begin{small}
+\begin{align}
+ ln\big(P(G_i|&\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big) ~~~
+=~~   \notag \\ 
+%
+&=~~ ln{\Big(\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~) \cdot \prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )\Big)} \notag \\ 
+%
+&=~~ ln{\Big(\prod_{g_l \in G_i} \prod_{p\in\Tr} \prod_{I \in \It} \frac{2}{\theta_p} \exp{\Big(-\frac{(n^2-n)~t_I}{\theta_p}\Big)}  \cdot \prod_{g_l \in G_i} 
+\prod_{b\in B} \prod_{I \in \Ib} \mu_b ~ \exp{( - \mu_b~ n~t_I )} \Big)} \notag \\ 
+&=~~ \sum_{p\in\Tr}\Big(|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}\Big) + \sum_{b\in B} \Big( |\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I \Big) \notag \\ 
+\label{eq:is_harmonic}
+\end{align}
+\end{small}
+
+
+
+
+
 
 
 In the above series of formulae, $\It$ and $\Ib$ are the sets of intervals between coalescence events and migration events, accordingly, in the genealogy on locus $l$ in MCMC iteration $i$.
