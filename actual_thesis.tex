@@ -54,6 +54,8 @@
 \newcommand{\Y}{\vect{Y}}
 \newcommand{\G}{\vect{G}}
 \newcommand{\T}{\vect{\Theta}}
+\newcommand{\It}{\mathbb{I}_{g_l}^{\Tr}}
+\newcommand{\Ib}{\mathbb{I}_{g_l}^B}
 \newcommand{\GT}{\G\T}
 \newcommand{\Mref}{\M_{ref}}
 \newcommand{\Pref}{\widetilde{P}}
@@ -135,21 +137,29 @@ Given these considerations our objective is, for each of $\GT^{(i)}$, to output 
 The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes.  This is showcased in the following expansion of the genealogy likelihood of some sample $G_i$:
 
 \begin{align}
-% 
-& P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  \prod_{g_l \in G_i} P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) \cdot \prod_{g_l \in G_i} P(g_l | \{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \B )
+P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  
+\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~) \cdot \prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )
 \label{eq:is_harmonic}
 \end{align}
 
 
 \begin{align}
-P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) = \prod_{p\in\Tr} \prod_{I\in INT_{g_l}(T)} \frac{2}{\theta_p} \exp{-\frac{(n^2-n)t_I}{\theta_p}}\\
+P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) = 
+\prod_{p\in\Tr} \prod_{I \in \mathbb{I}_{g_l}^{\Tr}} \frac{2}{\theta_p} \exp{\bigg(-\frac{(n^2-n)t_I}{\theta_p}\bigg)} 
+\\
+\ln{\bigg(\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~)\bigg)} = 
+\sum_{p\in\Tr}|\It|\ln{\frac{2}{\theta_p}} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}
 \label{eq:is_harmonic}
 \end{align}
 
 
 
 \begin{align}
-P(g_l | \{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \B ) = \prod_{p\in B} \prod_{I\in INT_{g_l}(B)} \frac{2}{\theta_p} \exp{-\frac{(n^2-n)t_I}{\theta_p}}\\
+P(g_l | \{\tau\}_i, \{\mu\}_i, \B ) = 
+\prod_{b\in B} \prod_{I  \Ib} \mu_b ~ \exp{( - \mu_b~ n~t_I )}
+\\
+\ln{\bigg(\prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )\bigg)}=
+\sum_{b\in B}|\Ib|\ln{\mu_b} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I
 \label{eq:is_harmonic}
 \end{align}
 
