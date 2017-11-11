@@ -132,25 +132,33 @@ Contrarily, if all of $\GT^{(i)}$ is stored ( i.e. all genealogies, and free par
 
 Given these considerations our objective is, for each of $\GT^{(i)}$, to output the minimal amount of statistics, sufficient to compute $\Pref(\GT^{(i)}|\Mref)$ for as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet})
 
-The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes. 
+The computation schema we describe uses a single MCMC, emits statistics in proportion to the model and number of MCMC iterations, and allows free choice on all three axes.  This is showcased in the following expansion of the genealogy likelihood of some sample $G_i$:
+
+\begin{align}
+% 
+& P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  \prod_{g_l \in G_i} P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) \cdot \prod_{g_l \in G_i} P(g_l | \{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \B )
+\label{eq:is_harmonic}
+\end{align}
+
+
+\begin{align}
+P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) = \prod_{p\in\Tr} \prod_{I\in INT_{g_l}(T)} \frac{2}{\theta_p} \exp{-\frac{(n^2-n)t_I}{\theta_p}}\\
+\label{eq:is_harmonic}
+\end{align}
 
 
 
 \begin{align}
-% 
-P(G^{(i)}|\{\theta\}^{(i)}, \{\tau\}^{(i)}, \{\mu\}^{(i)}) =~~ 
-\prod_{(i)} \Bigg(&  \prod_{p \in \Tr} \prod_{I\in INT_{G_i}(p)} 
-      \bigg(  \Big( \frac{2}{\theta_{p,i}} \Big) \exp \Big\{ -  \frac{(n^2-n)\tau_I}{\theta_{p,i}}   \Big\}  \bigg)  \notag \Bigg)  \cdotp\\ % ~~   
-\Bigg(&\prod_{b \in \B} \prod_{I\in INT_{G_i}(mb)} 
-      \bigg(  m_{b,i} \exp \Big\{ -  m_{b,i} n~\tau_I   \Big\}  \bigg) \Bigg)  \\ %
+P(g_l | \{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \B ) = \prod_{p\in B} \prod_{I\in INT_{g_l}(B)} \frac{2}{\theta_p} \exp{-\frac{(n^2-n)t_I}{\theta_p}}\\
 \label{eq:is_harmonic}
 \end{align}
 
-Formula (2) is a detailed expansion of the estimated genealogy likelihood on samples $G^{(i)}$.
+
+Where $INT_{l}(p)$ and $INT_{l}(b)$ are the intervals between coalescence events and migration events accordingly in locus $l$ of $G_i$, and $\tau_I$ is the time span of interval $I$.
+
+To minimize the 
 
 
-
-Where $INT_i(p)$ are intervals between coalescence events in $G_i$ and $\tau_I$ is the time span of interval $I$
 
 
 
