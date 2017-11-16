@@ -17,6 +17,8 @@
 \usepackage{lscape}
 %\usepackage{cite}
 \usepackage{xr}
+\usepackage{bbm}
+
 %\externaldocument{poly-div-supp}
 
 
@@ -54,8 +56,9 @@
 \newcommand{\Y}{\vect{Y}}
 \newcommand{\G}{\vect{G}}
 \newcommand{\T}{\vect{\Theta}}
-\newcommand{\It}{\mathbb{I}_{g_l}^p}
-\newcommand{\Ib}{\mathbb{I}_{g_l}^b}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\Ip}{\mathbb{I}_{G_l}^p}
+\newcommand{\Ib}{\mathbb{I}_{G_l}^b}
 \newcommand{\GT}{\G\T}
 \newcommand{\Mref}{\M_{ref}}
 \newcommand{\Pref}{\widetilde{P}}
@@ -65,6 +68,7 @@
 \newcommand{\GTref}{\widetilde{\GT}}
 \newcommand{\Gref}{\widetilde{\G}}
 \newcommand{\Tref}{\widetilde{\T}}
+\newcommand{\1}{\mathbbm{1}}
 \newcommand{\Z}{\vect{Z}}
 \newcommand{\Zref}{\widetilde{\Z}}
 \newcommand{\Omref}{\widetilde{\Om}}
@@ -135,67 +139,29 @@ Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all
 With this trade-off in mind, and knowing the high cost of a single MCMC run, we set an objective to emit the minimal amount of statistics sufficient for computing $\Pref(\GT^{(i)}|\Mref)$ on as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet}).
 To accomplish this objective we develop the following expansion of the log of genealogy likelihood of some sample $\GT_i$:
 
-\underline{awkward version I:}
-
-\begin{align}
-P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M) =~~  
-\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~) \cdot \prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )
-\label{eq:is_harmonic}
-\end{align}
-
-
-\begin{align}
-P(g_l | \{\theta\}_i, \{\tau\}_i, \Tr ) = 
-\prod_{p\in\Tr} \prod_{I \in \It} \frac{2}{\theta_p} \exp{\bigg(-\frac{(n^2-n)t_I}{\theta_p}\bigg)} 
-\\
-\ln{\bigg(\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~)\bigg)} = 
-\sum_{p\in\Tr}|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}
-\label{eq:is_harmonic}
-\end{align}
-
-
-
-\begin{align}
-P(g_l | \{\tau\}_i, \{\mu\}_i, \B ) = 
-\prod_{b\in B} \prod_{I  \Ib} \mu_b ~ \exp{( - \mu_b~ n~t_I )}
-\\
-\ln{\bigg(\prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )\bigg)}=
-\sum_{b\in B}|\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I
-\label{eq:is_harmonic}
-\end{align}
-
-
-
-
-\begin{align}
-ln{\big(P(G_i|\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big)} =~~  \\
-\sum_{p\in\Tr}\Big(|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}\Big) + \sum_{b\in B} \Big( |\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I \Big)
-\label{eq:is_harmonic}
-\end{align}
-
-
 
 \underline{less awkward version II:}
 
 \begin{small}
 \begin{align}
- ln\big(P(G_i|&\{\theta\}_i, \{\tau\}_i, \{\mu\}_i, \M)\big) ~~~
+ \ln\big(P(\mathbf{G}|&\{\theta\}, \{\tau\}, \{\mu\}, \M)\big) ~~~
 =~~   \notag \\ 
 %
-&=~~ ln{\Big(\prod_{g_l \in G_i} P(~g_l~|~\{\theta\}_i,~\{\tau\}_i,~\Tr~) \cdot \prod_{g_l \in G_i} P(g_l | \{\tau\}_i, \{\mu\}_i, \B )\Big)} \notag \\ 
+&=~~  ln\big( \prod_{G_l\in \mathbf{G}} P(G_l|\{\theta\}, \{\tau\}, \{\mu\}, \M)\big) \notag \\ 
 %
-&=~~ ln{\Big(\prod_{g_l \in G_i} \prod_{p\in\Tr} \prod_{I \in \It} \frac{2}{\theta_p} \exp{\Big(-\frac{(n^2-n)~t_I}{\theta_p}\Big)}  \cdot \prod_{g_l \in G_i} 
-\prod_{b\in B} \prod_{I \in \Ib} \mu_b ~ \exp{( - \mu_b~ n~t_I )} \Big)} \notag \\ 
-&=~~ \sum_{p\in\Tr}\Big(|\It|\ln{(\frac{2}{\theta_p})} - \frac{\sum_{g_l}\sum_{\It}(n^2-n)t_I}{\theta_p}\Big) + \sum_{b\in B} \Big( |\Ib|\ln{(\mu_b)} - \sum_{g_l}\sum_{\Ib}\mu_b~ n~t_I \Big) \notag \\ 
+&=~~ ln{\Big(\prod_{G_l \in \mathbf{G}} \prod_{p\in\Tr} \prod_{I \in \Ip} (\frac{2}{\theta_p})^{\1_c(I)} \exp{\Big(-\frac{(n^2-n)~t}{\theta_p}\Big)}  \cdot 
+\prod_{G_l \in \mathbf{G}} 
+\prod_{b\in B} \prod_{I \in \Ib} m_{b}^{\1_m(I)} ~ \exp{( - m_b~ n~t )} \Big)} \notag \\ 
+&=~~ \sum_{p\in\Tr}\Big(NC_{G_l}(p)\ln{(\frac{2}{\theta_p})} - \frac{\sum_{G_l}\sum_{\Ip}(n^2-n)t}{\theta_p}\Big) + \sum_{b\in B} \Big( NM_{G_l}(b)\ln{(m_b)} - m_b\sum_{G_l}\sum_{\Ib}~ n~t \Big) \notag \\ 
 \label{wut}
 \end{align}
 \end{small}
 
 
 
-Where $\It$ is the set of intervals between coalescence events in population $p$ in the genealogy over locus $l$ in MCMC iteration $i$ and $\Ib$ is the set of intervals between migration events in migration band $b$, and $t_I$ is the time span of interval $I$.
+Where $\Ip$ is the set of intervals between coalescence events in population $p$ in the genealogy over locus $l$ in MCMC iteration $i$ and $\Ib$ is the set of intervals between migration events in migration band $b$, and $t_I$ is the time span of interval $I$.
 
-Formula (my9) captures our computational choices. By applying the natural logarithm on the genealogy likelihood we transform the infinitesimal genealogy likelihoods into larger more manageable numbers and, more importantly, we are able to aggregate statistics across loci, thus attaining our goal for amount of emittted statistics. The aggregation occurs during each MCMC iteration, where for every population and migration band we calculate and emit the inner terms $\sum_{g_l}\sum_{\It}~(n^2-n)t_I $ and $\sum_{g_l}\sum_{\Ib}~\mu_b~ n~t_I$ as well as the sizes $|\It|$ and $|\Ib|$. We also emit the MCMC sampled parameter values $(\{\theta\}_i, \{\tau\}_i, \{\mu\}_i)$.
+Formula (my9) captures our computational choices. By applying the natural logarithm on the genealogy likelihood we transform the infinitesimal genealogy likelihoods into larger more manageable numbers and, more importantly, we are able to aggregate statistics across loci, thus attaining our goal for amount of emittted statistics. The aggregation occurs during each MCMC iteration, where for every population and migration band we calculate and emit the inner terms $\sum_{g_l}\sum_{\Ip}~(n^2-n)t_I $ and $\sum_{g_l}\sum_{\Ib}~\mu_b~ n~t_I$ as well as the sizes $|\Ip|$ and $|\Ib|$. We also emit the MCMC sampled parameter values $(\{\theta\}_i, \{\tau\}_i, \{\mu\}_i)$.
 
 Mcref then has the capacity to calculate the genealogy likelihood on many different reference models by choosing and plugging into (my9) different topologies ($\Tr$, $B$) and parameter mappings ($\theta_p$, $\mu_b$).
 
