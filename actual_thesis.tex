@@ -136,8 +136,13 @@ When constructing a reference model, one might consider three axes of choice -
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
 Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of data, in proportion to the size of the model and to the number of loci.
 
-With this trade-off in mind, and knowing the high cost of a single MCMC run, we set an objective to emit the minimal amount of statistics sufficient for computing $\Pref(\GT^{(i)}|\Mref)$ on as many reference models as possible. This amount should not be proportional to the amount of locus data (\textit{...phrasing isn't perfect yet}).
-To accomplish this objective we develop the following expansion of the log of genealogy likelihood of some sample $\GT_i$:
+With this trade-off in mind, and knowing the high cost of a single MCMC run, we set an objective to emit the minimal amount of statistics sufficient for computing $\Pref(\GT^{(i)}|\Mref)$ on as many reference models as possible. This amount should not be proportional to the amount of locus data.
+
+
+To accomplish this we wish to express $P(\G|M,\Theta)$, where $\G$ is a series of locus-specific independant genealogies $\G=\{G_1,...G_L\}$. According to kingman coalescent theory, the likelihood of a local genealogy $G_l$ can be expressed through the contribution to likelihood of the time intervals it is composed of. The time intervals of $G_l$ are the parts of the genealogy in a given population $p$ during which the number of lineages is constant. We denote the set of such intervals in genealogy $G_l$ in population $p$ by $\Ip$. Similarly, we denote 
+$\Ib$ as the set of intervals for migration band $b$, i.e. intervals in the target population of $b$ that also intersect the life span of migration band b. We denote the number of lineages within interval $I$ by $n_I$ and it's length $t_I$. We also define two indicator functions over these intervals, $\1_c(I)$ and $\1_m(I)$, which indicate accordingly whether interval $I$ ends in a coalescence event and whether $I$ ends in migration event.
+
+
 
 
 \underline{less awkward version II:}
@@ -157,9 +162,6 @@ To accomplish this objective we develop the following expansion of the log of ge
 \end{align}
 \end{small}
 
-
-
-Where $\Ip$ is the set of intervals between coalescence events in population $p$ in the genealogy over locus $l$ in MCMC iteration $i$ and $\Ib$ is the set of intervals between migration events in migration band $b$, and $t_I$ is the time span of interval $I$.
 
 Formula (my9) captures our computational choices. By applying the natural logarithm on the genealogy likelihood we transform the infinitesimal genealogy likelihoods into larger more manageable numbers and, more importantly, we are able to aggregate statistics across loci, thus attaining our goal for amount of emittted statistics. The aggregation occurs during each MCMC iteration, where for every population and migration band we calculate and emit the inner terms $\sum_{g_l}\sum_{\Ip}~(n^2-n)t_I $ and $\sum_{g_l}\sum_{\Ib}~\mu_b~ n~t_I$ as well as the sizes $|\Ip|$ and $|\Ib|$. We also emit the MCMC sampled parameter values $(\{\theta\}_i, \{\tau\}_i, \{\mu\}_i)$.
 
