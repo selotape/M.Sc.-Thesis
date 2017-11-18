@@ -140,7 +140,7 @@ With this trade-off in mind, and knowing the high cost of a single MCMC run, we 
 
 
 To accomplish this we wish to express the genealogy likelihood $P(\G|\Theta, M)$ where $\G$ is a series of locus-specific independant genealogies $\G=\{G_1,...G_L\}$. Following kingman coalescent theory, the likelihood of a local genealogy $G_l$ can be expressed through the contribution to likelihood of the time intervals it is composed of. The time intervals of $G_l$ are the parts of the genealogy in a given population $p$ during which the number of lineages is constant. We denote the set of such intervals in genealogy $G_l$ in population $p$ by $\Ip$. Similarly, we denote 
-$\Ib$ as the set of intervals for migration band $b$, i.e. intervals in the target population of $b$ that also intersect the life span of migration band b. We denote the number of lineages within interval $I$ by $n_I$ and it's length $t_I$. We also define two indicator functions over these intervals, $\1_c(I)$ and $\1_m(I)$, which indicate accordingly whether interval $I$ ends in a coalescence event and whether $I$ ends in migration event. Finally we define the total number of coalescence events across loci in some population $NC(p) := \sum_{G_l\in\mathbf{G}}\sum_{I \in \Ip} \1_c(I)$, and the total number of migration event in some migration band $NM(b):= $
+$\Ib$ as the set of intervals for migration band $b$, i.e. intervals in the target population of $b$ that also intersect the life span of migration band b. We denote the number of lineages within interval $I$ by $n_I$ and it's length $t_I$. We also define two indicator functions over these intervals, $\1_c(I)$ and $\1_m(I)$, which indicate accordingly whether interval $I$ ends in a coalescence event and whether $I$ ends in migration event.
 
 
 
@@ -164,9 +164,22 @@ $\Ib$ as the set of intervals for migration band $b$, i.e. intervals in the targ
 \end{align}
 \end{small}
 
+We have 4 different sums across local genealogies and intervals. We nickname these num-coals $NC(p)$, coal-stats $CS(p)$, num-migs $NM(b)$ and mig-stats $MS(b)$, reaching a final genealogy formula - 
 
 
-Formula (my2) captures our computational choices. By applying the natural logarithm on the genealogy likelihood we transform the infinitesimal genealogy likelihoods into larger more manageable numbers and, more importantly, are able to aggregate statistics across loci, thus attaining our goal for amount of emittted statistics. The aggregation occurs during each MCMC iteration, where for every population and migration band we calculate and emit the inner terms $\sum_{g_l}\sum_{\Ip}~(n^2-n)t_I $ and $\sum_{g_l}\sum_{\Ib}~\mu_b~ n~t_I$ as well as the sizes $|\Ip|$ and $|\Ib|$. We also emit the MCMC sampled parameter values $(\{\theta\}_i, \{\tau\}_i, \{\mu\}_i)$.
+\begin{small}
+\begin{align}
+ \ln & \big(P(\mathbf{G}|\Theta, \M)\big) ~~~
+=~~   \notag \\ 
+%
+&~~ \sum_{p\in\Tr} \Big(\ln{(\frac{2}{\theta_p})}~NC(p)  - 
+\frac{CS(p)}{\theta_p}\Big) + \sum_{b\in B} \Big( \ln{(m_b)}~NM(b) - m_b~MS(b) \Big) \notag \\ 
+\label{wut}
+\end{align}
+\end{small}
+
+
+Formula (my2) captures our computational choices. By applying the natural logarithm on the genealogy likelihood we transform the infinitesimal genealogy likelihoods into larger more manageable numbers and, more importantly, are able to aggregate statistics across loci, thus attaining our goal for amount of emittted statistics. The aggregation occurs during each MCMC iteration, where we calculate and emit $NC(p)$, $CS(p)$, $NM(b)$ and $MS(b)$ for every population and migration band. We also emit the MCMC sampled parameter values $(\{\theta\}_i, \{\tau\}_i, \{\mu\}_i)$.
 
 Mcref then has the capacity to calculate the genealogy likelihood on many different reference models by choosing and plugging into (my2) different topologies ($\Tr$, $B$) and parameter mappings ($\theta_p$, $\mu_b$).
 
