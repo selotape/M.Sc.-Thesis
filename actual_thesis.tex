@@ -57,8 +57,8 @@
 \newcommand{\G}{\vect{G}}
 \newcommand{\T}{\vect{\Theta}}
 \newcommand{\I}{\mathbb{I}}
-\newcommand{\Ip}{\mathbb{I}_{G_l}^p}
-\newcommand{\Ib}{\mathbb{I}_{G_l}^b}
+\newcommand{\Ip}{\mathcal{I}(p,l)}
+\newcommand{\Ib}{\mathcal{I}(b,l)}
 \newcommand{\GT}{\G\T}
 \newcommand{\Mref}{\M_{ref}}
 \newcommand{\Pref}{\widetilde{P}}
@@ -136,51 +136,106 @@ When constructing a reference model, one might consider three axes of choice -
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
 Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of data, in proportion to the size of the model and to the number of loci.
 
-With this trade-off in mind, and knowing the high cost of a single MCMC run, we set an objective to emit the minimal amount of statistics sufficient for computing $\Pref(\GT^{(i)}|\Mref)$ on as many reference models as possible. This amount should not be proportional to the amount of locus data.
+% START ILAN'S EDITS
 
-
-To accomplish this we wish to express the genealogy likelihood $P(\G|\Theta, M)$ where $\G$ is a series of locus-specific independant genealogies $\G=\{G_1,...G_L\}$. Following kingman coalescent theory, the likelihood of a local genealogy $G_l$ can be calculated by decomposing i to independant time intervals and aggregating their lieklihood. The time intervals of $G_l$ are the parts of the genealogy in a given population $p$ during which the number of lineages is constant. We denote this set of intervals in genealogy $G_l$ in population $p$ by $\Ip$. Similarly, we denote 
-$\Ib$ as the set of intervals for migration band $b$, i.e. intervals in the target population of $b$ that also intersect the life span of migration band b. We denote the number of lineages within interval $I$ by $n_I$ and it's length $t_I$. We also define two indicator functions over these intervals, $\1_c(I)$ and $\1_m(I)$, which indicate accordingly whether interval $I$ ends in a coalescence event and whether $I$ ends in a migration event. Following is a formula for genealogy likelihood using the above definitions:
-
+We designed a computational scheme that aims to find a reasonable middle ground between these two extreme options.
+Our objective was to maximize the number of reference models we could consider after running a single MCMC sampling chain without blowing up the output trace.
+This is done by identifying a collection of sufficient statistics for $\G$ that satisfy two conditions:
+%
+%
+\begin{enumerate}
+ \item The number of sufficient statistics depends on the complexity of the target model , $\M$, but not on the size of the data (i.e., the number of individuals and the number of loci).
+ \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference models and values of model parameters (namely, migration rates and population sizes).
+\end{enumerate}
+%
+%
+Sufficient statistics that satisfy these conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \M)$ under Kingman's coalescent, which we briefly recall here.
+First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\M)$. Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
+\begin{itemize}
+ \item $t(I)$ -- the elapsed time of the interval.
+ \item $n(I)$ -- the number of lineages of $\G_l$ alive during that time in the target population.
+ \item $isCoal(I)$ ~,~ $isInMig(I)$  -- binary values that indicate whether the event above the interval is a coalescent event or incoming migration event (respectively).
+\end{itemize}
+%
+%
+The contribution of population $p$ to $P(G_l|\T,\M)$ can then be expressed as a product over the set of relevant time intervals $\Ip$:
+%
+%
 \begin{small}
 \begin{align}
- \ln & \big(P(\mathbf{G}|\Theta, \M)\big) ~~~
-=~~   \notag \\ 
+f_{coal}(\G_l,p|\T,\M) 
+& ~\triangleq~ \prod_{I \in \Ip} \left(\frac{2}{\theta_p}\right)^{isCoal(I)} \exp\left(-\frac{2}{\theta_p}{n(I) \choose 2}t(I)\right) ~. %\notag\\
+% & ~=~ \left(\frac{2}{\theta_p}\right)^{numCoals(G_l,p)} \exp\left( -\frac{1}{\theta_p} \sum_{I \in \Ip} (n(I)^2-n(I))~t(I) \right) ~.
+\label{eqn:ld-coal}
+\end{align}
+\end{small}
 %
-&=~~  ln\big( \prod_{ G_l \in \mathbf{G}} P(G_l|\{\theta\}, \{\tau\}, \{\mu\}, \M)\big) \notag \\ 
 %
-&=~~ ln{\Big(\prod_{G_l \in \mathbf{G}} \prod_{p\in\Tr} \prod_{I \in \Ip} (\frac{2}{\theta_p})^{\1_c(I)} \exp{\Big(-\frac{(n_I^2-n_I)~t_I}{\theta_p}\Big)}  \cdot 
-\prod_{G_l \in \mathbf{G}} 
-\prod_{b\in B} \prod_{I \in \Ib} m_{b}^{\1_m(I)} ~ \exp{( - m_b~ n_I~t_I )} \Big)} \notag \\ 
+Similarly, the contribution of migration band $b$ to $P(G_l|\T,\M)$ can be expressed as a product over the set of time intervals $\Ib$ defined by events in the target population of the migration band:
 %
-&=~~ \sum_{p\in\Tr}\Big(\ln{(\frac{2}{\theta_p})}\sum_{G_l}\sum_{\Ip} \1_c(I)  - 
-\frac{\sum_{G_l}\sum_{\Ip}(n_I^2-n_I)t_I}{\theta_p}\Big) + \sum_{b\in B} \Big( \ln{(m_b)}\sum_{G_l}\sum_{\Ib} \1_m(I) - m_b\sum_{G_l}\sum_{\Ib}~ n_I~t_I \Big) \notag \\ 
-\label{wut}
+%
+\begin{small}
+\begin{equation}
+f_{mig}(\G_l,b|\T,\M) ~\triangleq~ \prod_{I \in \Ib} m_{b}^{isInMig(I)} ~ \exp \left( - m_b~ n(I)~t(I)\right) ~.
+\label{eqn:ld-mig}
+\end{equation}
+\end{small}
+%
+%
+
+Using these notations, the genealogy log likelihood can be expressed as follows:
+%
+%
+\begin{small}
+\begin{align}
+\ln \left( P(\G| \T,\M) \right) ~&=~ \ln \left( \prod_{l}  P(G_l| \T,\M) \right)  \notag \\ 
+%
+&=~  \ln \left( ~\prod_{l}  \left( \prod_{p} f_{coal}(\G_l,p|\T,\M) ~ \prod_{b} f_{mig}(\G_l,b|\T,\M) \right) ~\right) \notag \\ 
+%
+&=~  \sum_{p}\sum_{l}\ln \left( f_{coal}(\G_l,p|\T,\M) \right) ~ + ~ \sum_{b}\sum_{l}\ln \left( f_{mig}(\G_l,b|\T,\M) \right)~. 
+\label{eqn:ld-details}
 \end{align}
 \end{small}
 
-Formula (my2) contains 4 sums across local genealogies and intervals. We nickname these num-coals $NC(p)$, coal-stats $CS(p)$, num-migs $NM(b)$ and mig-stats $MS(b)$, reaching a final genealogy formula - 
-
-
+The key to likelihood calculation is to sum over the log-likelihood contributions across time intervals and across loci:
+%
+%
 \begin{small}
 \begin{align}
- \ln & \big(P(\mathbf{G}|\Theta, \M)\big) ~~~
-=~~   
-%
- \sum_{p\in\Tr} \Big(\ln{(\frac{2}{\theta_p})}~NC(p)  - 
-\frac{CS(p)}{\theta_p}\Big) + \sum_{b\in B} \Big( \ln{(m_b)}~NM(b) - m_b~MS(b) \Big) \notag \\ 
-\label{wut}
+\sum_{l}\ln \left( f_{coal}(\G_l,p|\T,\M) \right) &=~ %\sum_{l} \sum_{I \in \Ip} \left( isCoal(I)\cdot \ln \left( \frac{2}{\theta_p}\right)~-~\frac{(n(I)^2-n(I))~t(I)}{\theta_p} \right)\notag \\
+%&=~ 
+\ln\left( \frac{2}{\theta_p}\right) \sum_{l} \sum_{I \in \Ip} isCoal(I)  - \frac{2}{\theta_p} \sum_{l} \sum_{I \in \Ip}{n(I)\choose 2}t(I) ~.
+\label{eqn:ld-coal-stats}\\
+% &\notag\\
+\sum_{l}\ln \left( f_{mig}(\G_l,b|\T,\M) \right) &=~ %\sum_{l} \sum_{I \in \Ib} \left( isInMig(I)\cdot \ln\left( m_b\right) ~-~ m_b n(I) t(I) \right) \notag \\
+%&=~
+\ln\left( m_b\right) \sum_{l} \sum_{I \in \Ip} isInMig(I)  - m_b \sum_{l} \sum_{I \in \Ip}n(I) t(I) ~.
+\label{eqn:ld-mig-stats}
 \end{align}
 \end{small}
 
+Note that the four double sums in these expressions depend on the local genealogies $\G$ and the divergence times $\{\tau_p\}$, but they do not depend on the population size and migration rate parameters. We thus denote these sums respectively as $numCoals(\G,p)$, $coalStats(\G,p)$,  $numMigs(\G,b)$, and $migStats(\G,b)$, and the log-likelihood can be expressed as follows:
+%
+%
+\begin{small}
+\begin{align}
+\ln \left( P(\G| \T,\M) \right) ~=&~ \sum_{p}  \ln\left( \frac{2}{\theta_p}\right)\cdot numCoals(\G,p) - \frac{1}{\theta_p}\cdot coalStats(\G,p) \\
+& +~ \sum_{b}  \ln\left( m_b\right)\cdot numMigs(\G,b) - m_b \cdot migStats(\G,b) ~. 
+\label{eqn:ld-final}
+\end{align}
+\end{small}
 
-Formula (my2) captures our computational choices. By applying the natural logarithm on the genealogy likelihood we transform the infinitesimal genealogy likelihoods into larger more manageable numbers and, more importantly, are able to aggregate statistics across loci, thus attaining our goal for amount of emittted statistics. The aggregation occurs during each MCMC iteration, where we calculate and emit $NC(p)$, $CS(p)$, $NM(b)$ and $MS(b)$ for every population and migration band. We also emit the MCMC sampled parameter values $(\{\theta\}_i, \{\tau\}_i, \{\mu\}_i)$.
+The summary statistics $\{numCoals(\G,p), coalStats(\G,p)\}_p$ and $\{numMigs(\G,b), migStats(\G,b)\}_b$ satisfy our first objective in that their number depends on the complexity of model the $\M$ but not on the size of the data.
+%
+They also partly satisfy the second condition, because statistics computed for a given set of local genealogies, $\G$, and given values of divergence times enable computation of the likelihood $P(\G|\T,\M)$ for any set of values of the population size and migration rate parameters.
+%
+To fully satisfy the second condition we will need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
 
-Mcref then has the capacity to calculate the genealogy likelihood on many different reference models by choosing and plugging into (my2) different topologies ($\Tr$, $B$) and parameter mappings ($\theta_p$, $\mu_b$).
+% HERE TRANSISTION TO CALCULATIONS OF STATS FOR ALTERNATIVE CLADE / COMB MODELS
 
+% END ILAN'S EDITS
 
 \end{itemize}
-
 
 \section{Calculating sufficient statistics}
 
