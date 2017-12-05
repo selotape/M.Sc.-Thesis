@@ -242,7 +242,11 @@ We do this, following the theory explained in chapter \textit{\#123\#}, by embed
 
 Note that the null reference model has a distinct set of intervals with different elapsed times and number of lineages.
 
-To satisfy our second requirement condition, of supporting a wide variety of reference models, 
+To satisfy our second condition over the sufficient statistics, of supporting a wide variety of reference models, we must repeat the proccess illustrated in Fig 1 for any sub-topology we may appear in a reference model (except for those already existant in the hypothesis model, for which we already have sufficient statistics). this means we got's to cumpute dis shit repeatedly on many different sub topologies. Enter optimizations!!
+
+
+- Clearly state what reference models we support
+
 
 
 \end{itemize}
@@ -252,19 +256,6 @@ To satisfy our second requirement condition, of supporting a wide variety of ref
 \subsection{Calculating Clade Reference Model}
 \begin{itemize}
 
-\item \underline{recursively calculate num coals \& coal stats of son clades}
-
-To calculate the genealogy likelihood of the reference model given the locus data, the following data was needed:
-\begin{enumerate}
-\item Number of coalescence events per population and of migration events per migration band
-\item Coal-stats (needs a descriptive name/explanation)
-\item Reference model theta and tau values and priors
-\end{enumerate}
-
-
-The construction of the reference model states that the theta and tau priors of the reference and those of the hypothesis models are
-equal. Because of this, during calculation of the relative-bayes-factor the priors of the hypothesis and reference cancel out. Therefore for the main body of our work, calculation of these priors was skipped. Theta values are required in practice by mcref. They were readily available in existing data structures and were directly emitted to trace files.
-
 
 \item \underline{aggregate stats via merge-sort of event-chains of sons and calculate}
 
@@ -272,7 +263,7 @@ Calculation of coal-stats and num-coal of a given clade was done recursively dow
 
 The num-coals of a "leaf-clade" (i.e. a clade containing only a single population leaf) is taken direcly from gphocs' calculation of num-coals. The num-coals of a clade rooted in a higher population is simply the sum of num-coals of clades rooted in it's two child populations plus the num-coals of the top population in the clade.
 
-The coal-stats of a "leaf-clade" is calculated based on it's chronological event chain. We percieve every event in the event chain as the end of a time interval inside the population where no coalescence took place. The likelihood of this interval is \#formula-for-intervals. Using this technique, we run up the event chain, aggregating coal-stats of all intervals. We currently ignore theta, plugging it later (during mcref) into the population genealogy likelihood across all loci. 
+The coal-stats of a "leaf-clade" is calculated based on it's chronological event chain. We percieve every event in the event chain as the end of a time interval inside the population where no coalescence took place. The likelihood of this interval is \#formula-for-intervals. Using this technique, we run up the event chain, aggregating coal-stats of all intervals.
 
 The coal-stats of a clade rooted in a higher pop is also based on the clades event-chain, but this event-chain is non-trivial due to populations being "merged" into the current clade. The event-chain for the current clade is obtained by merge-sorting the events of the clades rooted in the two child populations of the current population, and then appending the event-chain of the current population. On this merged event-chain we again calculate coal-stats in the same manner.
 
@@ -290,13 +281,9 @@ The main algorithmic difference between the calculation of comb num-coals and co
 
 During event partitioning we pay careful attention to "border events". These are coalescence or migration events whose interval spans across the comb-age, i.e. the preceding event time is below the comb age and the current event is above the comb age. In this case, we split the event interval into two intervals; An interval from the preceding event time up to the comb-age, which is counted towards the leaf coal-stats, and an interval from the comb-age up to the current event time, which is counted towards the comb coal-stats.
 
-\item \underline{merge-sort no longer works since we need to repartition events by new comb-age}
-
-Multiple combs rooted in different populations necessarily have different leaf decendants. Since the comb-age is set to the minimal leaf population start time, different combs might always have different comb-ages. For this reason, the event partitioning on leaves takes place a-new for each comb.
-
-Since the event partitioning differs between combs, the technique used in clade-reference calculation, of reusing event-chains of children clades via merge-sort of children poopulation event chains, no longer works. To calculate comb coal-stats we are forced to recursively recalculate the chronological event-chain for every comb.
 
 \end{itemize}
+
 
 \subsection{Debugging results}
 
@@ -355,6 +342,18 @@ To clarify results and to help in the understanding and debugging of mcref runs,
 
 Multiple debug plots are also emitted by mcref. Their goal is to help the researcher assert the experiment was executed as planned. These plots contain the kingman coalescence and kingman migration of every population and migration in both the hypothesis and reference models. They also contain the aggregate coal-stats of the hypothesis and reference model, allowing us to assert that coal-stats of a reference model always exceed those of it's hypothesis \#here-goes-an-explanation-of-the-previous-sentence. 
 \end{itemize}
+
+
+\subsection{Omitted Text}
+\begin{itemize}
+
+\item \underline{Omit priors in final gene\_ld}
+
+The construction of the reference model states that the theta and tau priors of the reference and those of the hypothesis models are
+equal. Because of this, during calculation of the relative-bayes-factor the priors of the hypothesis and reference cancel out. Therefore for the main body of our work, calculation of these priors was skipped. Theta values are required in practice by mcref. They were readily available in existing data structures and were directly emitted to trace files.
+
+\end{itemize}
+
 
 \section{Tau bounds}
 
