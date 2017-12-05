@@ -61,6 +61,7 @@
 \newcommand{\Ib}{\mathcal{I}(b,l)}
 \newcommand{\GT}{\G\T}
 \newcommand{\Mref}{\M_{ref}}
+\newcommand{\Mnull}{\M_{null}}
 \newcommand{\Pref}{\widetilde{P}}
 \newcommand{\rbf}{\text{BF}}
 %\newcommand{\hbf}{\text{BF}}
@@ -107,10 +108,8 @@
 
 \section{Calculations Schema}
 
-\begin{itemize}
 
-
-\item \underline{explain required calculations for equation 9}
+\subsection{Detached paragraph explaining required calculations for equation 9}
 
 Consider formula (9) for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
 %
@@ -120,9 +119,9 @@ Consider formula (9) for calculating the Bayes factor of model $M$ relative to $
 \end{equation}
 
 The main job of mcref is in calculating this formula and its derivitives for specific reference models such as (13) for the null reference model, (19) for the comb model and (?) for the clade model.
-The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for iterations $\GT^{(i)}$. This is done by mapping $\GT$ inside $\Mref$ and using standard kingman-coalescence methodology and will be explained in detail later.
-	
-\item \underline{natural trade-off between emitting data and ref-model flexibility}
+The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for iterations $\GT^{(i)}$. This is done by mapping $\GT$ inside $\Mref$ and using standard kingman-coalescence methodology and will be explained in detail later.\\
+
+\subsection{Trade-off between emitting data and ref-model flexibility}
 
 When constructing a reference model, one might consider three axes of choice - 
 \begin{itemize}
@@ -230,8 +229,7 @@ They also partly satisfy the second condition, because statistics computed for a
 %
 To fully satisfy the second condition we will need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
 %
-We do this, following the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the distict set of intervals in the reference model. The following illustrates embedding a single local genealogy into the null reference model - 
-
+We do this, following the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the distinct set of intervals in the reference model. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
@@ -239,17 +237,19 @@ We do this, following the theory explained in chapter \textit{\#123\#}, by embed
 \caption{Embedding a local genealogy in the null reference model}
 \end{figure}
 
+Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and number of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
-Note that the null reference model has a distinct set of intervals with different elapsed times and number of lineages.
+To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We've implemented two types of embeddings. A \textbf{Clade} reference model embedding and a \textbf{Comb} reference model embedding. Each of these is supported on any sub-tree of the hypothesis topology, as depicted in Figure 2. 
 
-To satisfy our second condition over the sufficient statistics, of supporting a wide variety of reference models, we must repeat the proccess illustrated in Fig 1 for any sub-topology we may appear in a reference model (except for those already existant in the hypothesis model, for which we already have sufficient statistics). this means we got's to cumpute dis shit repeatedly on many different sub topologies. Enter optimizations!!
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]
+{embed_in_comb_and_clade}
+\caption{Any node in the hypothesis topology can be "converted" into a comb or clade}
+\end{figure}
 
 
-- Clearly state what reference models we support
 
-
-
-\end{itemize}
 
 \section{Calculating sufficient statistics}
 
