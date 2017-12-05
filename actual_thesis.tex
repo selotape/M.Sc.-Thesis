@@ -136,7 +136,6 @@ When constructing a reference model, one might consider three axes of choice -
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
 Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of data, in proportion to the size of the model and to the number of loci.
 
-% START ILAN'S EDITS
 
 We designed a computational scheme that aims to find a reasonable middle ground between these two extreme options.
 Our objective was to maximize the number of reference models we could consider after running a single MCMC sampling chain without blowing up the output trace.
@@ -144,13 +143,13 @@ This is done by identifying a collection of sufficient statistics for $\G$ that 
 %
 %
 \begin{enumerate}
- \item The number of sufficient statistics depends on the complexity of the target model , $\M$, but not on the size of the data (i.e., the number of individuals and the number of loci).
+ \item The number of sufficient statistics depends on the complexity of the target model, $\M$, but not on the size of the data (i.e. the number of individuals and the number of loci).
  \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference models and values of model parameters (namely, migration rates and population sizes).
 \end{enumerate}
 %
 %
 Sufficient statistics that satisfy these conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \M)$ under Kingman's coalescent, which we briefly recall here.
-First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\M)$. Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
+First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\M)$ \textit{\# maybe put illustration of multiple loci?\#}.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
 \begin{itemize}
  \item $t(I)$ -- the elapsed time of the interval.
  \item $n(I)$ -- the number of lineages of $\G_l$ alive during that time in the target population.
@@ -230,10 +229,21 @@ The summary statistics $\{numCoals(\G,p), coalStats(\G,p)\}_p$ and $\{numMigs(\G
 They also partly satisfy the second condition, because statistics computed for a given set of local genealogies, $\G$, and given values of divergence times enable computation of the likelihood $P(\G|\T,\M)$ for any set of values of the population size and migration rate parameters.
 %
 To fully satisfy the second condition we will need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
+%
+We do this, following the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the distict set of intervals in the reference model. The following illustrates embedding a single local genealogy into the null reference model - 
 
-% HERE TRANSISTION TO CALCULATIONS OF STATS FOR ALTERNATIVE CLADE / COMB MODELS
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{embed_in_null_model}
+\caption{Embedding a local genealogy in the null reference model}
+\end{figure}
 
-% END ILAN'S EDITS
+
+Note that the null reference model has a distinct set of intervals with different elapsed times and number of lineages.
+
+To satisfy our second requirement condition, of supporting a wide variety of reference models, 
+
 
 \end{itemize}
 
