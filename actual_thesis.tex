@@ -109,7 +109,7 @@
 \section{Calculations Schema}
 
 
-\subsection{Detached paragraph explaining required calculations for equation 9}
+\subsection{\textcolor{red}{Detached paragraph} Required calculations for equation 9}
 
 Consider formula (9) for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
 %
@@ -227,9 +227,9 @@ The summary statistics $\{numCoals(\G,p), coalStats(\G,p)\}_p$ and $\{numMigs(\G
 %
 They also partly satisfy the second condition, because statistics computed for a given set of local genealogies, $\G$, and given values of divergence times enable computation of the likelihood $P(\G|\T,\M)$ for any set of values of the population size and migration rate parameters.
 %
-To fully satisfy the second condition we will need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
+To fully satisfy the second condition we need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
 %
-We do this, following the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the distinct set of intervals in the reference model. 
+We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the distinct set of intervals in the reference model. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
@@ -239,37 +239,16 @@ We do this, following the theory explained in chapter \textit{\#123\#}, by embed
 
 Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and number of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
-To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We've implemented two types of embeddings. A \textbf{Clade} reference model embedding and a \textbf{Comb} reference model embedding. Each of these is supported on any sub-tree of the hypothesis topology, as depicted in Figure 2. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]
-{embed_in_comb_and_clade}
-\caption{Any node in the hypothesis topology can be "converted" into a comb or clade}
-\end{figure}
-
+To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by collapsing every sub-topology into both a clade and a comb reference model and caculating summary statistics over this new sub-topology. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by gphocs.
+%
+To calculate summary statistics for both reference model types for all sub-topologies in an efficient manner, calculation is done recursively down the population tree, starting from the root population. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
+%
+The $coalStats$ calculation of a clade is based on it's chronological event chain \#TODO - maybe explain what the "event-chain" is?\#. The event-chain of a clade is obtained by merge-sorting the events-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#.
 
 
 
 \section{Calculating sufficient statistics}
 
-\subsection{Calculating Clade Reference Model}
-\begin{itemize}
-
-
-\item \underline{aggregate stats via merge-sort of event-chains of sons and calculate}
-
-Calculation of coal-stats and num-coal of a given clade was done recursively down the population tree, starting from the root population. 
-
-The num-coals of a "leaf-clade" (i.e. a clade containing only a single population leaf) is taken direcly from gphocs' calculation of num-coals. The num-coals of a clade rooted in a higher population is simply the sum of num-coals of clades rooted in it's two child populations plus the num-coals of the top population in the clade.
-
-The coal-stats of a "leaf-clade" is calculated based on it's chronological event chain. We percieve every event in the event chain as the end of a time interval inside the population where no coalescence took place. The likelihood of this interval is \#formula-for-intervals. Using this technique, we run up the event chain, aggregating coal-stats of all intervals.
-
-The coal-stats of a clade rooted in a higher pop is also based on the clades event-chain, but this event-chain is non-trivial due to populations being "merged" into the current clade. The event-chain for the current clade is obtained by merge-sorting the events of the clades rooted in the two child populations of the current population, and then appending the event-chain of the current population. On this merged event-chain we again calculate coal-stats in the same manner.
-
-
-
-\end{itemize}
 \subsection{Calculating Comb Reference Model}
 \begin{itemize}
 
