@@ -243,19 +243,20 @@ To satisfy our second requirement, of supporting a wide variety of reference mod
 %
 To calculate summary statistics for both reference model types for all sub-topologies in an efficient manner, calculation is done recursively down the population tree, starting from the root population. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
 %
-The $coalStats$ calculation of a clade is based on it's chronological event chain \#TODO - maybe explain what the "event-chain" is?\#. The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The functions $recursive_coal_stats$ and $recursive_num_coals$ are pseudo-implementations of this logic:
+The $coalStats$ calculation of a clade is based on it's chronological event chain (\#TODO - explain "event-chain"?\#). The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The following functions, $recursive\_coal\_stats$ and $recursive\_num\_coals$, are pseudo-python implementations of this logic:
 %
 \begin{lstlisting}[language=Python]
 
 def recursive_coal_stats(topology_root):
     if is_leaf_population(topology_root):
         emit(GPHOCS.COAL_STATS[topology_root.id])
-        return GPHOCS.EVENT_CHAIN[topology_root.id]
+        return GPHOCS.EVENT_CHAINS[topology_root.id]
 
     left_event_chain = recursive_coal_stats(topology_root.left)
     right_event_chain = recursive_coal_stats(topology_root.right)
 
-    current_event_chain = GPHOCS.event_chain(topology_root).append(merge_sort(left_event_chain, right_event_chain))
+    merged_children_event_chain = merge_sort(left_event_chain, right_event_chain)
+    current_event_chain = merged_children_event_chain.append(GPHOCS.EVENT_CHAINS[topology_root.id])
     current_coal_stats = reduce_event_chain_to_coal_stats(current_event_chain)
     emit(current_coal_stats)
 
@@ -275,24 +276,16 @@ def recursive_num_coals(topology_root):
 
 \end{lstlisting}
 
-Calculation of summary statistics for the comb reference model is done very similiarly, but with special attention to comb-leaves. Comb-leaves are the populations which remain under the comb after it has been collapes. in every iteration of the reco
+Calculation of summary statistics for the comb reference model is done very similiarly, but with special attention to comb-leaves. Comb-leaves are leaf populations which are decendant to the collapsed comb population. When calculating the summary statistics of the comb itself, we only take into account intervals which occur above the comb-age (\#TODO - explain comb-age\#). Intervals below the comb-age are counted towards their original leaf population and intervals which intersect the comb-age are split into two parts - below and above the comb-age (See figure 2 for example). Using this method, full summary statistics are emitted for the comb-leaves.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{split_interval_on_comb_age}
+\caption{Splitting an interval in a comb-leaf which spans the comb-age}
+\end{figure}
 
 \section{Calculating sufficient statistics}
-
-\subsection{Calculating Comb Reference Model}
-\begin{itemize}
-
-\item \underline{partitioning events to below \& above comb-age}
-
-The main algorithmic difference between the calculation of comb num-coals and coal-stats and of clade num-coals and coal-stats is in the partitioning of events in comb-leaves (i.e. leaf populations descendant from the comb root). Leaf populations under the comb are handled as follows: Events whose occurrence time is below the comb-age are counted towards the leaf coal-stats. Events whose occurrence time is above the comb-age are counted towards the comb coal-stats. 
-
-\item \underline{split border events into intervals below and above comb-age}
-
-During event partitioning we pay careful attention to "border events". These are coalescence or migration events whose interval spans across the comb-age, i.e. the preceding event time is below the comb age and the current event is above the comb age. In this case, we split the event interval into two intervals; An interval from the preceding event time up to the comb-age, which is counted towards the leaf coal-stats, and an interval from the comb-age up to the current event time, which is counted towards the comb coal-stats.
-
-
-\end{itemize}
 
 
 \subsection{Debugging results}
