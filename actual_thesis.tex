@@ -229,7 +229,7 @@ They also partly satisfy the second condition, because statistics computed for a
 %
 To fully satisfy the second condition we need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
 %
-We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the distinct set of intervals in the reference model. 
+We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the new set of intervals in the reference model. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
@@ -237,14 +237,45 @@ We do this, using the theory explained in chapter \textit{\#123\#}, by embedding
 \caption{Embedding a local genealogy in the null reference model}
 \end{figure}
 
-Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and number of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
+Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
-To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by collapsing every sub-topology into both a clade and a comb reference model and caculating summary statistics over this new sub-topology. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by gphocs.
+To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by "collapsing" every sub-topology into both a clade and a comb reference model and caculating summary statistics over this new sub-topology. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by gphocs.
 %
 To calculate summary statistics for both reference model types for all sub-topologies in an efficient manner, calculation is done recursively down the population tree, starting from the root population. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
 %
-The $coalStats$ calculation of a clade is based on it's chronological event chain \#TODO - maybe explain what the "event-chain" is?\#. The event-chain of a clade is obtained by merge-sorting the events-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#.
+The $coalStats$ calculation of a clade is based on it's chronological event chain \#TODO - maybe explain what the "event-chain" is?\#. The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The functions $recursive_coal_stats$ and $recursive_num_coals$ are pseudo-implementations of this logic:
+%
+\begin{lstlisting}[language=Python]
 
+def recursive_coal_stats(topology_root):
+    if is_leaf_population(topology_root):
+        emit(GPHOCS.COAL_STATS[topology_root.id])
+        return GPHOCS.EVENT_CHAIN[topology_root.id]
+
+    left_event_chain = recursive_coal_stats(topology_root.left)
+    right_event_chain = recursive_coal_stats(topology_root.right)
+
+    current_event_chain = GPHOCS.event_chain(topology_root).append(merge_sort(left_event_chain, right_event_chain))
+    current_coal_stats = reduce_event_chain_to_coal_stats(current_event_chain)
+    emit(current_coal_stats)
+
+    return current_event_chain
+
+def recursive_num_coals(topology_root):
+    if is_leaf_population(topology_root):
+        emit(GPHOCS.NUM_COALS[topology_root.id])
+        return GPHOCS.NUM_COALS[topology_root.id]
+
+    left_num_coals = recursive_num_coals(topology_root.left)
+    right_num_coals = recursive_num_coals(topology_root.right)
+
+    current_num_coals = GPHOCS.NUM_COALS[topology_root.id] + left_num_coals + right_num_coals
+    emit(current_num_coals)
+    return current_num_coals
+
+\end{lstlisting}
+
+Calculation of summary statistics for the comb reference model is done very similiarly, but with special attention to comb-leaves. Comb-leaves are the populations which remain under the comb after it has been collapes. in every iteration of the reco
 
 
 \section{Calculating sufficient statistics}
