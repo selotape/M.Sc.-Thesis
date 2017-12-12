@@ -109,9 +109,9 @@
 \section{Calculations Schema}
 
 
-\subsection{\textcolor{red}{Detached paragraph} Required calculations for equation 9}
+\subsection{The Computational Objective}
 
-Consider formula (9) for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
+Consider formula (9) \textcolor{red}{(TODO - cross-reference)} for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
 %
 %
 \begin{equation}\label{eq:rbf}
@@ -120,8 +120,6 @@ Consider formula (9) for calculating the Bayes factor of model $M$ relative to $
 
 The main job of mcref is in calculating this formula and its derivitives for specific reference models such as (13) for the null reference model, (19) for the comb model and (?) for the clade model.
 The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for iterations $\GT^{(i)}$. This is done by mapping $\GT$ inside $\Mref$ and using standard kingman-coalescence methodology and will be explained in detail later.\\
-
-\subsection{Trade-off between emitting data and ref-model flexibility}
 
 When constructing a reference model, one might consider three axes of choice - 
 \begin{itemize}
@@ -147,6 +145,8 @@ This is done by identifying a collection of sufficient statistics for $\G$ that 
 \end{enumerate}
 %
 %
+\subsection{Efficient Sufficient Statistics for the Genealogy Likelihood $\mathbf{P(G|\Theta, \M)}$}
+
 Sufficient statistics that satisfy these conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \M)$ under Kingman's coalescent, which we briefly recall here.
 First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\M)$ \textit{\# maybe put illustration of multiple loci?\#}.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
 \begin{itemize}
@@ -223,18 +223,29 @@ Note that the four double sums in these expressions depend on the local genealog
 \end{align}
 \end{small}
 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]
+{two_locus}
+\caption{\textcolor{red}{A two-locus figure with migration, illustrating what statistics need to be recorded}}
+\end{figure}
+
+
 The summary statistics $\{numCoals(\G,p), coalStats(\G,p)\}_p$ and $\{numMigs(\G,b), migStats(\G,b)\}_b$ satisfy our first objective in that their number depends on the complexity of model the $\M$ but not on the size of the data.
 %
 They also partly satisfy the second condition, because statistics computed for a given set of local genealogies, $\G$, and given values of divergence times enable computation of the likelihood $P(\G|\T,\M)$ for any set of values of the population size and migration rate parameters.
 %
-To fully satisfy the second condition we need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
+
+\subsection{Sufficient Statistics Supporting Multiple Reference Models}
+To fully satisfy the second condition over sufficient statistics,	 we need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
 %
 We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the new set of intervals in the reference model. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {embed_in_null_model}
-\caption{Embedding a local genealogy in the null reference model}
+\caption{Embedding a single local genealogy into the null reference model. In the reference model, the genealogy induces a new set of intervals with different elapsed times and number of lineages. \textcolor{red}{TODO - make intervals legible}}
 \end{figure}
 
 Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
@@ -282,7 +293,7 @@ Calculation of summary statistics for the comb reference model is done very simi
 \centering
 \includegraphics[width=0.8\textwidth]
 {split_interval_on_comb_age}
-\caption{Splitting an interval in a comb-leaf which spans the comb-age}
+\caption{The genealogy depicted in figure 1, embedded into a comb reference model. Intervals which span the comb-age are split to two parts, below and above the comb-age, and counted respectively toward the sufficient statistics of the comb-leaf and the comb.}
 \end{figure}
 
 \section{Calculating sufficient statistics}
