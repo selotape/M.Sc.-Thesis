@@ -111,15 +111,15 @@
 
 \subsection{The Computational Objective}
 
-Consider formula (9) \textcolor{red}{(TODO - cross-reference)} for calculating the Bayes factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
+Consider formula (9) \textcolor{red}{(TODO - cross-reference)} for calculating the Bayes Factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
 %
 %
 \begin{equation}\label{eq:rbf}
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-The main job of mcref is in calculating this formula and its derivitives for specific reference models such as (13) for the null reference model, (19) for the comb model and (?) for the clade model.
-The denominator, which is the joint genealogy and parameter likelihood, is constantly calculated by gphocs as part of the MCMC flow. The enumerator then is what remains to be calculated for iterations $\GT^{(i)}$. This is done by mapping $\GT$ inside $\Mref$ and using standard kingman-coalescence methodology and will be explained in detail later.\\
+The job of mcref is calculating this formula and its realisations for specific reference models. 
+The denominator is constantly calculated by gphocs as part of the MCMC flow. The enumerator, which is the Model Pairing Conditional described in (\textcolor{red}{456}), remains to be calculated. The following chapter addresses the genealogy likelihood over the reference model, which is the main part in calculating the Model Pairing Conditional.\\
 
 When constructing a reference model, one might consider three axes of choice - 
 \begin{itemize}
