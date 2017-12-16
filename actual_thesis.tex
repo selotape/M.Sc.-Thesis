@@ -17,6 +17,7 @@
 \usepackage{lscape}
 %\usepackage{cite}
 \usepackage{xr}
+\externaldocument{mcref}
 \usepackage{bbm}
 
 %\externaldocument{poly-div-supp}
@@ -72,7 +73,7 @@
 \newcommand{\1}{\mathbbm{1}}
 \newcommand{\Z}{\vect{Z}}
 \newcommand{\Zref}{\widetilde{\Z}}
-\newcommand{\Omref}{\widetilde{\Om}}
+\newcommand{\Omref}{\widet	ilde{\Om}}
 \newcommand{\Fext}{F_{Z}}
 \newcommand{\troot}{\theta_{root}}
 \newcommand{\Gc}{\G_c}
@@ -111,10 +112,10 @@
 
 \subsection{The Computational Objective}
 
-Consider formula (9) \textcolor{red}{(TODO - cross-reference)} for calculating the Bayes Factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
+Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
 %
 %
-\begin{equation}\label{eq:rbf}
+\begin{equation}
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
