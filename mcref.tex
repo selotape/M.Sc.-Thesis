@@ -290,9 +290,14 @@ similarity between the compared models.
 We propose here an alternative way to evaluate the fit of model $\M$ by estimating its likelihood relative to some
 reference model $\Mref$. 
 %
-As before, assume you have obtained MCMC samples $\{\GT^{(i)}\}$ according to an approximate posterior probability distribution $P(\GT|\M,\X)$.
+As before, assume a collection $\{\GT^{(i)}\}$ sampled via MCMC according to an approximate posterior probability distribution $P(\GT|\M,\X)$.
 %
-We wish to use these MCMC samples to directly estimate the ratio $P(\X|\M) / P(\X|\Mref)$, which is known as the {\em Bayes factor of $\M$ relative to $\Mref$}:
+We wish to use these MCMC samples to estimate the {\em Bayes factor of $\M$ relative to $\Mref$}, which is simply the ratio $P(\X|\M) / P(\X|\Mref)$.
+%
+Note that for any reference model, the Bayes factor can be estimated obtaining a separate MCMC sample of
+$\GT$ conditioned on $\Mref$ and estimating $P(\X|\M)$ and $P(\X|\Mref)$ via the harmonic mean.
+%
+However, for some reference models we can obtain a direct estimate by applying the following sequence of equations (and without running an additional MCMC):
 %
 %
 \begin{small}
@@ -309,16 +314,15 @@ We wish to use these MCMC samples to directly estimate the ratio $P(\X|\M) / P(\
 The key to this derivation is the conditional probability distribution $\Pref(\GT|\Mref)$,
 which we refer to as the {\em model pairing conditional}.
 %
-This distribution acts as a ``bridge'' between $\M$ and $\Mref$, because it is defined over the the hidden variables of
-the model of interest ($\GT$), and its integral produces the likelihood under the reference model
+This distribution acts as a bridge between the model of interest and the reference model: it is defined over the the hidden variables of
+$\M$, but its integral produces the likelihood under $\Mref$
 (see Equation \ref{eq:pref} above).
 %
-The special notation, $\Pref$, indicates that this probability function is not naturally defined by either
-$\M$ or $\Mref$, and it thus requires specification based on both models.
+The special notation $\Pref$ indicates that this probability function is not naturally defined by either
+model, and it requires explicit specification.
 %
-Much of the discussion in the following sections is devoted to specific constructions for $\Pref$ in a variety of cases.
-%
-To act as a valid model-pairing function, the conditional distribution $\Pref(\GT|\Mref)$ must satisfy two conditions:
+There will typically be some degree of freedom associated with the specification of $\Pref$, but  the following two conditions must be met
+by any model-pairing conditional distribution to ensure the sequence of equations above:
 %
 (1) $\int P(\X|\G) \Pref(\GT|\Mref)d\GT=P(\X|\Mref)$, and
 (2) there is no $\GT$ for which $\Pref(\GT|\Mref)>0$ and $P(\GT|\M,\X)=0$.
@@ -354,11 +358,10 @@ For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mre
 This is the key advantage of direct estimation of the Bayes factor, when compared to
 estimation via the ratio of two likelihoods estimated by harmonic mean.
 %
-Realizing this potential requires appropriate construct of model-pairing conditional functions.
+However, to realize this potential we need to define a valid model-pairing conditional function for $\M$ and $\Mref$,
+and this is not possible for all pairs of models. 
 %
-%While this is not necessarily feasible for all pairs $(\M,\Mref)$,
-In the following sections we present a series of cases where $\Pref$ can be naturally defined and used via Equation \ref{eq:rbf}
-to estimate Bayes factors.
+The following sections present specific constructions of $\Pref$ in a series of cases.
 
 
 \subsection*{The null reference model $\M_0$}
@@ -374,7 +377,7 @@ of hidden variables in $\M$ to the space of hidden variables in $\M_0$.
 Let us denote by $\Gref$ and $\Tref$ the hidden variables of $\M_0$.
 %
 Because both $\M$ and $\M_0$ have no migration bands, then we may assume that the genealogical information used
-by both models is the same, implying a natural one-to-one mapping between $\G$ and $\Gref$.
+by both models is the same, implying a natural one-to-one mapping between $\G$ and $\Gref$ (see next section on discussion of migration).
 %
 However, while $\Tref=\{\theta_0\}$, $\T$ will typically consist of more parameters: $\T=\{\tau_p\}\cup\{\theta_p\}$.
 %
@@ -418,7 +421,7 @@ complete conditional $\Pref(\GT|\Mref)$ as follows:
 \end{small}
 %
 %
-The main model-pairing property (Equation \ref{eq:pref}) is thus guaranteed:
+The main model-pairing condition (Equation \ref{eq:pref}) is thus satisfied:
 %
 %
 \begin{small}
@@ -440,15 +443,16 @@ P(\X|\M_0)
 % function with $\Pref$ to indicate that it is not strictly implied by any of the models of interest.
 
 %
-Note that this property is guaranteed regardless of how $\Pref(\Z|\G,\troot)$ is defined.
-However, careful specification of this conditional probability distribution is required 
-to establish the second property, which requires that there is no $\GT$ for which $\Pref(\GT|\Mref)>0$ and $P(\GT|\M,\X)=0$.
+Note that this condition is satisfied regardless of how $\Pref(\Z|\G,\troot)$ is defined.
 %
-Furthermore, our aim is to define this conditional probability to be as similar as possible to $P(\Z|\M)$,
-to reduce the variance of the ratio
+The conditional distribution $\Pref(\Z|\G,\troot)$ is thus designed to ensure the second condition,
+which requires that there is no $\GT$ for which $\Pref(\GT|\Mref)>0$ and $P(\GT|\M,\X)=0$.
+%
+Another design objective is to ensure that this conditional probability is similar to $P(\Z|\M)$,
+and by this reducing the variance of the ratio
 $\Pref(\GT|\Mref) / P(\GT|\M)$ used in the estimation of the Bayes factor (see Equation \ref{eq:rbf}).
 %
-In our case here, the variable set $\Z$ consists of all divergence time parameters ($\{\tau_p\}$)
+In the case of the null reference model, the variable set $\Z$ consists of all divergence time parameters ($\{\tau_p\}$)
 and all population size parameters other than $\troot$ ~($\{\theta_p\}_{p\neq root}$).
 %
 We start by defining $\Pref(\{\theta_p\}_{p\neq root}|\GT\setminus\Z)$ based exactly on the the prior distribution
@@ -461,16 +465,16 @@ assumed by $\M$:
 \end{equation}
 
 
-The remaining conditional distribution, $\Pref(\{\tau_p\}|\G)$, cannot simply be defined using the
+The remaining conditional distribution $\Pref(\{\tau_p\}|\G)$ cannot simply be defined using the
 prior under $\M$, because this may lead to conflicts with the genealogies in $\G$.
 %
-Conflicts occur when there is a divergence time, $\tau_p$, which is deeper than the most recent common ancestor
+Conflicts occur when there is a divergence time $\tau_p$, which is deeper than the most recent common ancestor
 in $\G$ of two individuals that are each a descendant of a different daughter population of population $p$.
 %
-Because this implies $P(\GT|\M) = 0$, we must also guarantee that $\Pref(\GT|\M_0)=0$.
+Because such a conflict implies that $P(\GT|\M) = 0$, we must also guarantee that $\Pref(\GT|\M_0)=0$.
 %
-This is established by defining $\Pref(\{\tau_p\}|\G)$ as a product of uniform distributions for each parameter $\tau_p$
-over its valid range, as defined by the coalescent events in $\G$
+This guarantee is achieved by computing for each $\tau_p$ an upper bound based on the coalescent events in $\G$
+and defining $\Pref(\{\tau_p\}|\G)$ as a product of uniform distributions in the feasible ranges of $\{\tau_p\}$
 %
 (the complete derivation is given in Appendix \ref{ap:cond_nomig}).
 %
@@ -489,7 +493,7 @@ Consequently, the ratio used in Equation \ref{eq:rbf} to estimate the Bayes fact
 \end{align}
 \end{small}
 
-Note that the terms relating to the prior probability of parameters $\{\theta_p\}_{p\neq root}$ cancel out,
+Note that the terms relating to the prior probability of parameters $\{\theta_p\}_{p\neq root}$ cancel out int the third term,
 and  if we assume that $\M$ and $\M_0$ use the same prior distribution over population size parameters,
 then the middle term in Equation \ref{eq:rbf_null} also cancels out.
 %
@@ -503,13 +507,13 @@ becomes an adjusted version of the genealogy likelihoods $P(\G|\Mref,\Tref)/P(\G
 Assume now that the reference model is still the null model, $\M_0$, but the model of interest, $\M$, has a non-empty
 set of migration bands, $B$, associated with migration rate parameters, $\{m_b\}$.
 %
-Migration complicates the mapping between $\M$ and $\M_0$, because the genealogies in $\M$ hold information
+Migration complicates the mapping between $\M$ and $\M_0$ because the genealogies in $\M$ hold information
 about migration events, but the genealogies in $\M_0$ do not.
 %
-For each possible genealogy $\G$ in $\M$, let us denote by $\Gc$ the information on coalescent events in $\G$
-and $\Gm$ the information on migration events in $\G$ (timing of event, branch in $\Gc$, source and target populations).
+For a sequence of locus-genealogies $\G$ in $\M$, let us denote by $\Gc$ the coalescent trees implied by $\G$
+and let us denote by $\Gm$ the information on migration events in $\G$ (locus, timing of event, branch in $\Gc$, source and target populations).
 %
-Note that there is a natural mapping between $\Gc$ and $\Gref$ and that $P(\X|\G) = P(\X|\Gc)$.
+Because the genealogies $\Gref$ in $\M_0$ have no migration events, then there is a natural mapping between $\Gc$ and $\Gref$ and $P(\X|\G) = P(\X|\Gc)$.
 Thus, a mapping between the hidden variables of $\M$ and the hidden variables of $\M_0$ can be defined by
 mapping $\Gc$ to $\Gref$ and mapping a population size parameter $\troot$ in $\M$ to the single parameter $\theta_0$
 of $\M_0$.
@@ -532,11 +536,11 @@ This implies a slight modification of the model-pairing conditional specified in
 It is easy to confirm that such a model-pairing conditional probability function satisfies the model-pairing condition of
 Equation \ref{eq:pref} (by following the same set of equations as in Equation \ref{eq:likelihood_null}).
 %
-We are thus left to specify the conditional distribution $\Pref(\Z|\Gc,\troot)$ to ensure that for all $\GT$ where $P(\Gc,\troot,\Z|\M,\X)=0$
-we also have $\Pref(\Z|\Gc,\troot)=0$.
+We are thus left to specify the conditional distribution $\Pref(\Z|\Gc,\troot)$ to ensure that all $\GT$ for which $P(\Gc,\troot,\Z|\M,\X)=0$
+also satisfy $\Pref(\Z|\Gc,\troot)=0$.
 %
-Since the genealogy tree $\Gc$ does not imply any restrictions to the population size and migration rate parameters, we may define
-their probability based on their prior probability under $\M$:
+Since the genealogy trees $\Gc$ do not restrict the population size and migration rate parameters, we may define
+the conditional probability for these parameters based on their prior probability under $\M$:
 %
 %
 \begin{equation}
@@ -544,12 +548,20 @@ their probability based on their prior probability under $\M$:
  \Pref(\{\tau_p\},\Gm|\Gc) \ \prod_{p\neq root} P(\theta_p|\M)\ \prod_b P(m_b|\M)\  ~.\label{eq:cond_tau_mig}
 \end{equation}
 %
-In Appendix \ref{ap:cond_mig} we present a specification for $\Pref(\{\tau_p\},\Gm|\Gc)$ that ensures $\Pref(\{\tau_p\},\Gm|\Gc)=0$
-whenever $P(\{\tau_p\},\Gm,\Gc|\M)=0$.
+
+The construction of the conditional $\Pref(\{\tau_p\},\Gm|\Gc)$ is complicated by the fact that the divergence times $\{\tau_p\}$ and the migration events in $\Gm$
+are entangled in a complex dependency structure.
 %
-This is more complicated in models with migration because divergence times and times of migration events apply mutual restrictions
-on one another.
+A migration event between populations $p_1$ and $p_2$ at time $t$ implies that the divergence times of all populations ancestral to $p_1$ and $p_2$ is at least $t$.
 %
+At the same time, this migration event may also relax the upper bound of these divergence times.
+%
+Thus, bounds on divergence times cannot be determined solely based on $\Gc$, and the conditional $\Pref(\{\tau_p\},\Gm|\Gc)$ cannot be factored into a product of
+two separate probability distributions for $\{\tau_p\}$ and $\Gm$.
+%
+In Appendix \ref{ap:cond_mig} we present a specification for the joint conditional distribution $\Pref(\{\tau_p\},\Gm|\Gc)$,
+which addresses this complex dependence and ensures that $\Pref(\{\tau_p\},\Gm|\Gc)=0$ whenever $P(\{\tau_p\},\Gm,\Gc|\M)=0$.
+%%
 Plugging in this conditional probability function, the ratio used in Equation \ref{eq:rbf} to estimate the Bayes factor of $\M$ relative to $\M_0$ is expressed as follows:
 %
 %
@@ -562,7 +574,7 @@ Plugging in this conditional probability function, the ratio used in Equation \r
 \end{align}
 \end{small}
 
-Importantly, the construction of $\Pref(\{\tau_p\},\Gm|\Gc)$ given in Appendix \ref{ap:cond_mig} ensures that some of its terms cancel out with the genealogy likelihood
+The construction of $\Pref(\{\tau_p\},\Gm|\Gc)$ given in Appendix \ref{ap:cond_mig} ensures that some of its terms cancel out with the genealogy likelihood
 $P(\Gc,\Gm|\M,\T)$, to reduce the variance of this ratio across our samples.
 
 
