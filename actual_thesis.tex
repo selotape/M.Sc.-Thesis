@@ -112,15 +112,16 @@
 
 \subsection{The Computational Objective}
 
-Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ relative to $\Mref$ using the MCMC samples $\GT^{(i)}$:
+Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ relative to $\Mref$:
 %
 %
 \begin{equation}
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-The job of mcref is calculating this formula and its realisations for specific reference models. 
-The denominator is constantly calculated by gphocs as part of the MCMC flow. The enumerator, which is the Model Pairing Conditional described in (\textcolor{red}{456}), remains to be calculated. The following chapter addresses the genealogy likelihood over the reference model, which is the main part in calculating the Model Pairing Conditional.\\
+Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by gphocs in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the Model Pairing Conditional $\Pref(\GT^{(i)}|\Mref)$. As examplified in ($\ref{eq:pref_null}$), this is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. The following chapter addresses calculation of the genealogy likelihood efficiently and for multiple reference models, as this represents the bulk of our computational challenge.\\
+
+Killer connecting sentence.\\
 
 When constructing a reference model, one might consider three axes of choice - 
 \begin{itemize}
@@ -130,6 +131,22 @@ When constructing a reference model, one might consider three axes of choice -
 
 \item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
 \end{itemize}
+
+We imagine the process of constructing a reference model as a series of transformations on the hypothesis model; 
+\begin{enumerate}
+\item We First "collapse" some sub-tree of the hypothesis. Collapsing is the process of merging the populations of the subtree.  Denote $clade(p)$ as a population which is the result of merging all the populations of the sub-tree rooted at $p$ into a single population. Similiarly $comb(p)$ will denote collapsing the sub-tree rooted at $p$ but perserving it's leaves up to the comb-age.
+\item We then map the hidden parameters of the hypothesis model onto parameters of the reference model. We note that
+\end{enumerate}
+
+Under this process, any population and migration band which is mapped identically from the hypothesis onto the reference model (i.e. it was not collapsed and it's parameters were mapped identically) behaves exactly the same as in the reference model, allowing us, when calculating genealogy likelihoods, to reuse statistics gathered by gphocs.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{reuse_statistics}
+\caption{When collapsing population $ab$ and identically mapping the rest of the hypothesis onto $\Mref$, we must only recalculate genealogy likelihood inside $clade(ab)$ and may reuse statistics for populations $abc$ and $c$ calculated by gphocs, thus saving valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses and add clearer names for the pops}}
+\end{figure}
+
 
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
 Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of data, in proportion to the size of the model and to the number of loci.
@@ -239,14 +256,13 @@ They also partly satisfy the second condition, because statistics computed for a
 %
 
 \subsection{Sufficient Statistics Supporting Multiple Reference Models}
-To fully satisfy the second condition over sufficient statistics,	 we need to extend the set of statistics to enable calculation of $P(\G|\T,\Mref)$ for reference models that are structurally different from $\M$.
-%
-We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies in the reference model and calculating the summary statistics over the new set of intervals in the reference model. 
+To support a wide variety of reference models (as stated in the second condition over sufficient stats) we must calculate $\{numCoals(\G,clade(p)), coalStats(\G,clade(p))\}_p$%
+We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies inside $p$ into $clade(p)$ and calculating the summary statistics over the new set of intervals in the $clade(p)$. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {embed_in_null_model}
-\caption{Embedding a single local genealogy into the null reference model. In the reference model, the genealogy induces a new set of intervals with different elapsed times and number of lineages. \textcolor{red}{TODO - make intervals legible}}
+\caption{Embedding a local genealogy into a clade created by collapsing population $abc$. In $clade(abc)$, the genealogy induces a new set of intervals with different elapsed times and number of lineages. From this set we calculate $numCoals(\G,clade(abc))$ and $coalStats(\G,clade(abc))$ \textcolor{red}{TODO - make intervals legible}}
 \end{figure}
 
 Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
@@ -288,7 +304,8 @@ def recursive_num_coals(topology_root):
 
 \end{lstlisting}
 
-Calculation of summary statistics for the comb reference model is done very similiarly, but with special attention to Comb-leaves. Comb-leaves are leaf populations which are decendant to the collapsed comb population. When calculating the summary statistics of the comb itself, we only take into account intervals which occur above the comb-age (\#TODO - explain comb-age\#). Intervals below the comb-age are counted towards their original leaf population and intervals which intersect the comb-age are split into two parts - below and above the comb-age (See figure 2 for example). Using this method, full summary statistics are emitted for the comb-leaves.
+
+\textcolor{red}{Come back to this after we explain Clade stats properly:} Calculation of summary statistics for the comb reference model is done very similiarly, but with special attention to Comb-leaves. Comb-leaves are leaf populations which are decendant to the collapsed comb population. When calculating the summary statistics of the comb itself, we only take into account intervals which occur above the comb-age (\#TODO - explain comb-age\#). Intervals below the comb-age are counted towards their original leaf population and intervals which intersect the comb-age are split into two parts - below and above the comb-age (See figure 2 for example). Using this method, full summary statistics are emitted for the comb-leaves.
 
 \begin{figure}[h]
 \centering
