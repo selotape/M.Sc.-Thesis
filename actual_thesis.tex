@@ -135,7 +135,11 @@ When constructing a reference model, one might consider three axes of choice -
 
 We imagine the process of constructing a reference model as a series of transformations on the hypothesis model; 
 \begin{enumerate}
-\item We First "collapse" some subtree of the hypothesis. Collapsing is the process of merging the populations of the subtree.  Denote $clade(p)$ as a population which is the result of merging all the populations of the subtree rooted at $p$ into a single population. Similiarly $comb(p)$ will denote collapsing the subtree rooted at $p$ but perserving it's leaves up to the comb-age.
+\item We First "collapse" some subtree of the hypothesis. 
+
+Collapsing is the process of merging the populations of a subtree. "Clade-Collapsing" is the act of the merging all the populations of a subtree rooted at some population $P$ into a single population. This new population will contain the entire genealogies previously positioned in all popuulations of the subtree. We denote the resulting merged population $clade(P)$. Figure $(\ref{fig:clade_collapse_AB})$ illustrates a clade-collapsing of a subtree rooted at $AB$ into a new population, $clade(AB)$. 
+
+Similiarly, "Comb-Collapsing" is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. We will formally describe this operation later.
 \item We then map the hidden parameters of the hypothesis model onto parameters of the reference model. We note that
 \end{enumerate}
 
@@ -146,6 +150,7 @@ Under this process, any population and migration band which is mapped identicall
 \includegraphics[width=0.8\textwidth]
 {reuse_statistics}
 \caption{\textbf{construction of e reference model}When collapsing population $ab$ and identically mapping the rest of the hypothesis onto $\Mref$, we must only recalculate genealogy likelihood inside $clade(ab)$ and may reuse statistics for populations $abc$ and $c$ calculated by \gp, thus saving valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses and add clearer names for the pops}}
+\label{fig:clade_collapse_AB}
 \end{figure}
 
 
