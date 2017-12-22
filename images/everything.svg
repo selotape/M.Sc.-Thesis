@@ -204,9 +204,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.73866726"
-     inkscape:cx="498.92338"
-     inkscape:cy="808.62621"
+     inkscape:zoom="1.3763449"
+     inkscape:cx="735.14418"
+     inkscape:cy="401.14388"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -269,9 +269,11 @@
          id="tspan9175"
          x="346.6156"
          y="516.35144"
-         style="stroke-width:0.9375">M<tspan
-   style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan9179">hyp</tspan></tspan></text>
+         style="stroke-width:0.9375"><tspan
+           style="-inkscape-font-specification:cmsy10;font-family:cmsy10;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+           id="tspan1967">M</tspan><tspan
+           style="font-size:64.99999762%;baseline-shift:sub;font-style:italic"
+           id="tspan9179">hyp</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
@@ -322,9 +324,11 @@
          id="tspan9175-9-1"
          x="639.33539"
          y="519.13623"
-         style="stroke-width:0.9375">M<tspan
-   style="font-size:24.375px;baseline-shift:sub;stroke-width:0.9375"
-   id="tspan9179-1-1">ref</tspan></tspan></text>
+         style="stroke-width:0.9375"><tspan
+           style="-inkscape-font-specification:cmsy10;font-family:cmsy10;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+           id="tspan1965">M</tspan><tspan
+           style="font-size:24.375px;baseline-shift:sub;stroke-width:0.9375;font-style:italic"
+           id="tspan9179-1-1">ref</tspan></tspan></text>
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:1.96875012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart-3)"
        d="M 487.49999,213.29973 C 417.75553,174.75358 417.75553,174.75358 417.75553,174.75358"
@@ -1307,8 +1311,8 @@
          x="300.07538"
          y="626.96631"
          style="font-size:11.25px;stroke-width:0.9375">τ<tspan
-   style="font-size:11.25px;baseline-shift:sub"
-   id="tspan644-8-4-7">abc</tspan></tspan></text>
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan1827">ABC</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
@@ -1322,8 +1326,8 @@
          x="260.72748"
          y="734.16986"
          style="font-size:11.25px;stroke-width:0.9375">τ<tspan
-   style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
-   id="tspan644-5-2-0-5">ab</tspan></tspan></text>
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1825">AB</tspan></tspan></text>
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669845;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009503, 1.54669836;stroke-dashoffset:0;stroke-opacity:1"
        d="M 442.5,625.79971 H 330"
@@ -1567,13 +1571,6 @@
        inkscape:export-xdpi="484.38293"
        inkscape:export-ydpi="484.38293" />
     <path
-       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937512, 0.70312505999999997;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 685.31247,733.61222 H 571.87499"
-       id="path4910-5-8-6-0-6-9-1-3-1-0"
-       inkscape:connector-curvature="0"
-       inkscape:export-xdpi="484.38293"
-       inkscape:export-ydpi="484.38293" />
-    <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 548.43749,789.86222 h 164.0625 l -56.25,-117.1875 18.75,-46.875 84.375,164.0625 h 56.25 l -107.8125,-210.9375 v -32.8125 h -70.3125 v 32.8125 z"
        id="path258-7"
@@ -1583,7 +1580,7 @@
        inkscape:export-ydpi="484.38293" />
     <text
        xml:space="preserve"
-       style="display:inline;font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="588.82538"
        y="626.96631"
        id="text642-66"
@@ -1594,34 +1591,12 @@
          x="588.82538"
          y="626.96631"
          style="font-size:11.25px;stroke-width:0.9375">τ<tspan
-   style="font-size:11.25px;baseline-shift:sub"
-   id="tspan644-7">abc</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="display:inline;font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="549.47748"
-       y="734.16986"
-       id="text642-6-7"
-       inkscape:export-xdpi="484.38293"
-       inkscape:export-ydpi="484.38293"><tspan
-         sodipodi:role="line"
-         id="tspan640-2-6"
-         x="549.47748"
-         y="734.16986"
-         style="font-size:11.25px;stroke-width:0.9375">τ<tspan
-   style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
-   id="tspan644-5-6">ab</tspan></tspan></text>
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1969">ABC</tspan></tspan></text>
     <path
        style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669845;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009503, 1.54669835999999994;stroke-dashoffset:0;stroke-opacity:1"
        d="m 731.24999,625.79972 h -112.5"
        id="path4910-5-8-6-0-5"
-       inkscape:connector-curvature="0"
-       inkscape:export-xdpi="484.38293"
-       inkscape:export-ydpi="484.38293" />
-    <path
-       style="display:inline;fill:none;stroke:#000000;stroke-width:1.546875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062501, 1.54687500000000000;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 684.37499,733.61222 h -112.5"
-       id="path4910-5-8-6-0-6-9-3"
        inkscape:connector-curvature="0"
        inkscape:export-xdpi="484.38293"
        inkscape:export-ydpi="484.38293" />
@@ -1809,6 +1784,116 @@
        sodipodi:nodetypes="cc"
        inkscape:export-xdpi="484.38293"
        inkscape:export-ydpi="484.38293" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="277.84424"
+       y="815.64349"
+       id="text1831"><tspan
+         sodipodi:role="line"
+         id="tspan1829"
+         x="277.84424"
+         y="815.64349"
+         style="font-size:22.5px;stroke-width:0.9375">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="384.375"
+       y="799.23724"
+       id="text1835"><tspan
+         sodipodi:role="line"
+         id="tspan1833"
+         x="384.375"
+         y="832.41595"
+         style="stroke-width:0.9375"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="382.58051"
+       y="815.64349"
+       id="text1831-9"><tspan
+         sodipodi:role="line"
+         id="tspan1829-2"
+         x="382.58051"
+         y="815.64349"
+         style="font-size:22.5px;stroke-width:0.9375">B</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="486.79675"
+       y="815.62885"
+       id="text1831-9-5"><tspan
+         sodipodi:role="line"
+         id="tspan1829-2-4"
+         x="486.79675"
+         y="815.62885"
+         style="font-size:22.5px;stroke-width:0.9375">C</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="281.25"
+       y="677.36224"
+       id="text1879"><tspan
+         sodipodi:role="line"
+         id="tspan1877"
+         x="281.25"
+         y="710.54095"
+         style="stroke-width:0.9375"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="274.09424"
+       y="687.41107"
+       id="text1831-0"><tspan
+         sodipodi:role="line"
+         id="tspan1829-5"
+         x="274.09424"
+         y="687.41107"
+         style="font-size:22.50000006px;stroke-width:0.9375">AB</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="299.83154"
+       y="584.0152"
+       id="text1831-0-9"><tspan
+         sodipodi:role="line"
+         id="tspan1829-5-4"
+         x="299.83154"
+         y="584.0152"
+         style="font-size:22.5px;stroke-width:0.9375">ABC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="570.38831"
+       y="813.57611"
+       id="text1831-6"><tspan
+         sodipodi:role="line"
+         id="tspan1829-9"
+         x="570.38831"
+         y="813.57611"
+         style="font-size:22.5px;stroke-width:0.9375">Clade(AB)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="778.48389"
+       y="814.70221"
+       id="text1831-9-5-4"><tspan
+         sodipodi:role="line"
+         id="tspan1829-2-4-7"
+         x="778.48389"
+         y="814.70221"
+         style="font-size:22.5px;stroke-width:0.9375">C</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="588.58154"
+       y="584.0152"
+       id="text1831-0-9-7"><tspan
+         sodipodi:role="line"
+         id="tspan1829-5-4-5"
+         x="588.58154"
+         y="584.0152"
+         style="font-size:22.5px;stroke-width:0.9375">ABC</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
