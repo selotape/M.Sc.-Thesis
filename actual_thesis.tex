@@ -79,6 +79,7 @@
 \newcommand{\Gc}{\G_c}
 \newcommand{\Gm}{\G_m}
 \newcommand{\Mcomb}{\M_{\comb}}
+\newcommand{\gp}{G-PhoCS }
 \newcommand{\tmin}{\tau_{\text{min}}}
 
 % Two lines from genres
@@ -119,7 +120,7 @@ Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ re
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by gphocs in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the Model Pairing Conditional $\Pref(\GT^{(i)}|\Mref)$. As examplified in ($\ref{eq:pref_null}$), this is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. The following chapter addresses calculation of the genealogy likelihood efficiently and for multiple reference models, as this represents the bulk of our computational challenge.\\
+Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the Model Pairing Conditional $\Pref(\GT^{(i)}|\Mref)$. It is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses calculation of the genealogy likelihood efficiently, as it is the main component making up the Model Pairing Conditional and represents the bulk of our computational challenge.\\
 
 Killer connecting sentence.\\
 
@@ -134,7 +135,7 @@ When constructing a reference model, one might consider three axes of choice -
 
 We imagine the process of constructing a reference model as a series of transformations on the hypothesis model; 
 \begin{enumerate}
-\item We First "collapse" some sub-tree of the hypothesis. Collapsing is the process of merging the populations of the subtree.  Denote $clade(p)$ as a population which is the result of merging all the populations of the sub-tree rooted at $p$ into a single population. Similiarly $comb(p)$ will denote collapsing the sub-tree rooted at $p$ but perserving it's leaves up to the comb-age.
+\item We First "collapse" some subtree of the hypothesis. Collapsing is the process of merging the populations of the subtree.  Denote $clade(p)$ as a population which is the result of merging all the populations of the subtree rooted at $p$ into a single population. Similiarly $comb(p)$ will denote collapsing the subtree rooted at $p$ but perserving it's leaves up to the comb-age.
 \item We then map the hidden parameters of the hypothesis model onto parameters of the reference model. We note that
 \end{enumerate}
 
@@ -144,12 +145,12 @@ Under this process, any population and migration band which is mapped identicall
 \centering
 \includegraphics[width=0.8\textwidth]
 {reuse_statistics}
-\caption{When collapsing population $ab$ and identically mapping the rest of the hypothesis onto $\Mref$, we must only recalculate genealogy likelihood inside $clade(ab)$ and may reuse statistics for populations $abc$ and $c$ calculated by gphocs, thus saving valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses and add clearer names for the pops}}
+\caption{\textbf{construction of e reference model}When collapsing population $ab$ and identically mapping the rest of the hypothesis onto $\Mref$, we must only recalculate genealogy likelihood inside $clade(ab)$ and may reuse statistics for populations $abc$ and $c$ calculated by \gp, thus saving valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses and add clearer names for the pops}}
 \end{figure}
 
 
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
-Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of data, in proportion to the size of the model and to the number of loci.
+Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of traced information, in proportion to the size of the model and to the number of loci.
 
 
 We designed a computational scheme that aims to find a reasonable middle ground between these two extreme options.
@@ -267,9 +268,9 @@ We do this, using the theory explained in chapter \textit{\#123\#}, by embedding
 
 Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
-To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by collapsing every sub-tree into both a clade and a comb reference model and caculating summary statistics over this new sub-tree. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by gphocs.
+To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by collapsing every subtree into both a clade and a comb reference model and caculating summary statistics over this new subtree. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
 %
-To calculate summary statistics for both reference model types for all sub-trees in an efficient manner, calculation is done recursively down the population tree, starting from the root population. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
+To calculate summary statistics for both reference model types for all subtrees in an efficient manner, calculation is done recursively down the population tree, starting from the root population. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
 %
 The $coalStats$ calculation of a clade is based on it's chronological event chain (\#TODO - explain "event-chain"?\#). The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The following functions, $recursive\_coal\_stats$ and $recursive\_num\_coals$, are pseudo-python implementations of this logic:
 %
@@ -319,7 +320,7 @@ def recursive_num_coals(topology_root):
 
 \subsection{Debugging results}
 
-When examining results of gphocs calculations for mcref we were faced with the challenge of validating our results. \#explanation-on-why-this-was-needed. We wished to double-check every statistic emitted, with the simple goal of predictably and reliably reaching our intended calculation.
+When examining results of \gp calculations for mcref we were faced with the challenge of validating our results. \#explanation-on-why-this-was-needed. We wished to double-check every statistic emitted, with the simple goal of predictably and reliably reaching our intended calculation.
 
 This was accomplished using a variaty of techniques, restricted by the target statistic and reference model and by the tools at our disposal. 
 
@@ -328,16 +329,16 @@ This was accomplished using a variaty of techniques, restricted by the target st
 
 \item \underline{in comb: compare leaves when comb-age:=inf. Compare root comb when comb-age:=0}
 
-To validate our comb coal-stats calculations we permanantly set the comb-age to various values, allowing us to predict results. When setting a high comb-age (essentially infinite), we asserted That the coal-stats of comb-leaves is equal to the leaf population stats calculated by gphocs. When setting comb-age to zero (thus reducing the comb to a clade), we asserted that the coal-stats of the root-comb is equal those of the null reference model (calculated independently by the clade algorithm and by a preexisting gphocs implementation).
+To validate our comb coal-stats calculations we permanantly set the comb-age to various values, allowing us to predict results. When setting a high comb-age (essentially infinite), we asserted That the coal-stats of comb-leaves is equal to the leaf population stats calculated by \gp. When setting comb-age to zero (thus reducing the comb to a clade), we asserted that the coal-stats of the root-comb is equal those of the null reference model (calculated independently by the clade algorithm and by a preexisting \gp implementation).
 
 
 
-\item \underline{in clade: compare "leaf clade" with leaf. Compare root-clade with gphocs-calculated root-clade}
-To assert clade coal-stats, we applied techniques similiar to those used for the comb algorithm. Leaf-rooted clades were compared with leaf stat calculated by gphocs and the root-clade (aka the null reference modle) was compared with independantly calculated stats for the null reference model. 
+\item \underline{in clade: compare "leaf clade" with leaf. Compare root-clade with \gp -calculated root-clade}
+To assert clade coal-stats, we applied techniques similiar to those used for the comb algorithm. Leaf-rooted clades were compared with leaf stat calculated by \gp and the root-clade (aka the null reference modle) was compared with independantly calculated stats for the null reference model. 
 
 \item \underline{In tau bounds: monotonouty up pop tree. Assert diff(bound, tau) neg correlated with \#loci}
 
-We expected each tau bound to decrease towards its corresponding population tau as the number of loci increases. This due to an increase in the number of coalescence events, leading to an increase in chance of some coalescence event occurring closer to the population tau. We ran a simple set of gphocs experiments using the same sequence data, changing only the number of loci in-use. We observed a negative correlation between the number of loci and the tau bound, as expected.
+We expected each tau bound to decrease towards its corresponding population tau as the number of loci increases. This due to an increase in the number of coalescence events, leading to an increase in chance of some coalescence event occurring closer to the population tau. We ran a simple set of \gp experiments using the same sequence data, changing only the number of loci in-use. We observed a negative correlation between the number of loci and the tau bound, as expected.
 
 Another simple validation we performed was asserting that bounds are monotonously decreasing down the population tree.
 
@@ -348,14 +349,14 @@ Another simple validation we performed was asserting that bounds are monotonousl
 \begin{itemize}
 \item \underline{configuration}
 
-When setting up mcref, several parameters are configured. The parameters pertain to standard I/O (e.g. where the trace data files are stored and where to store output), to the phylogenic population models (i.e. the structure of the reference and hypothesis models), to gphocs configuration (e.g. what alpha \& beta to use for gamma priora, what print multipliers were applied to trace data when emitted by gphocs etc.), to statistical calculations (e.g. how many bootstrap iterations to run during confidence calculation and how much burn-in and sample-skip to use in genealogy likelihood calculation) and to debugging (e.g. what debug calculations to run and visualizations to emit). 
+When setting up mcref, several parameters are configured. The parameters pertain to standard I/O (e.g. where the trace data files are stored and where to store output), to the phylogenic population models (i.e. the structure of the reference and hypothesis models), to \gp configuration (e.g. what alpha \& beta to use for gamma priora, what print multipliers were applied to trace data when emitted by gphocs etc.), to statistical calculations (e.g. how many bootstrap iterations to run during confidence calculation and how much burn-in and sample-skip to use in genealogy likelihood calculation) and to debugging (e.g. what debug calculations to run and visualizations to emit). 
 
 \item \underline{calculating kingman coalescence and kingman migration for the reference model}
 
 Calculating the reference model genealogy likelihood was done using the standard kingman coalescence model, in the same manner implemented in gphocs. The theta of the actual comb/clade population was set to that of the population at the top of the comb/clade and plugged into \#gen\_ld\_ln-formula. 
 
 \item \underline{calculating tau priors for hypothesis and reference models}
-tau priors for the hypothesis model were calculated using the same gamma-distribution used by gphocs, based on taus emitted during the gphocs run. tau priors for the reference model were calculated using a uniform distribution based on tau-bounds, as described in the chapter about tau bounds.
+tau priors for the hypothesis model were calculated using the same gamma-distribution used by gphocs, based on taus emitted during the \gp run. tau priors for the reference model were calculated using a uniform distribution based on tau-bounds, as described in the chapter about tau bounds.
 
 \item \underline{estimating variance using bootstrap}
 
@@ -368,7 +369,7 @@ With the goal of optimizing the practical run-time and usability of mcref, sever
 
 \item \underline{visualizing results}
 
-To clarify results and to help in the understanding and debugging of mcref runs, several visual outputs were developed. each mcref run emits plots of the genealogy-log-likelihood of the reference model and of the hypothesis model, as well as a plot of the rbf calculation across gphocs iterations and a plot of the harmonic mean of likelihood of the hypothesis model.
+To clarify results and to help in the understanding and debugging of mcref runs, several visual outputs were developed. each mcref run emits plots of the genealogy-log-likelihood of the reference model and of the hypothesis model, as well as a plot of the rbf calculation across \gp iterations and a plot of the harmonic mean of likelihood of the hypothesis model.
 
 \item \underline{debugging visualizations}
 
