@@ -102,8 +102,8 @@
 \usepackage[utf8]{inputenc}
 
 % Default fixed font does not support bold face
-\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
-\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
 
 % Custom colors
 \usepackage{color}
@@ -167,18 +167,9 @@ Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ re
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the Model Pairing Conditional $\Pref(\GT^{(i)}|\Mref)$. It is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses calculation of the genealogy likelihood efficiently, as it is the main component making up the Model Pairing Conditional and represents the bulk of our computational challenge.\\
+Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the Model Pairing Conditional $\Pref(\GT^{(i)}|\Mref)$. This is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses calculation of the \textbf{genealogy likelihood} efficiently, as it is the main component making up the Model Pairing Conditional and represents the bulk of our computational challenge.\\
 
 Killer connecting sentence.\\
-
-When constructing a reference model, one might consider three axes of choice - 
-\begin{itemize}
-\item The \textbf{topological construction} of the reference model, e.g. what population should be "turned into" the root of the clade/comb
-
-\item The \textbf{type} of reference model to use. Here we present the null, clade and comb reference models, but concievably there are numerous more, including any combination thereof.
-
-\item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
-\end{itemize}
 
 We imagine the process of constructing a reference model as a series of transformations on the hypothesis model; 
 \begin{enumerate}
@@ -190,7 +181,7 @@ Similiarly, "Comb-Collapsing" is the act of the merging populations of a subtree
 See figure (\ref{fig:comb_collapse_and_split_interval}) for examples. We will formally describe this operation later.
 
 
-\item We then map the hidden parameters of the hypothesis model onto parameters of the reference model.
+\item We then map the hidden parameters of the hypothesis model onto parameters of the reference model s.t. the two conditions of a valid model-pairing function are met.
 \end{enumerate}
 
 Under this process, any part of the topology which is not transformed, such as populations $ABC$ and $C$ in \ref{fig:clade_collapse_AB}, are mapped identically into the reference model. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
@@ -321,21 +312,23 @@ We do this by embedding the local genealogies inside $p$ into $clade(p)$ and cal
 \centering
 \includegraphics[width=0.8\textwidth]
 {embed_in_null_model}
-\caption{Embedding a local genealogy into a clade created by collapsing population $abc$. In $clade(abc)$, the genealogy induces a new set of intervals with different elapsed times and number of lineages. From this set we calculate $numCoals(\G,clade(abc))$ and $coalStats(\G,clade(abc))$ \textcolor{red}{TODO - make intervals legible}}
+\caption{Embedding a local genealogy into a clade created by collapsing population $ABC$. In $clade(ABC)$, the genealogy induces a new set of intervals with different elapsed times and number of lineages. From this set we calculate $numCoals(\G,clade(ABC))$ and $coalStats(\G,clade(ABC))$ \textcolor{red}{TODO - make intervals legible}}
 \end{figure}
 
 Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
 To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by clade-collapsing every subtree and caculating summary statistics over the resulting clade. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
 %
-To calculate summary statistics for all poossible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The following pseudo-python calculates $numCoals$ and $coalStats$ of a clade using preexisting data from \gp (\pythoninline{num_coals_from_gphocs} and \pythoninline{intervals_from_gphocs}) and a statistical utility for calculating $coalStats$ of a set of sorted intervals (\pythoninline{calculate_coal_stats}):
+To calculate summary statistics for all poossible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The following pseudo-python calculates $numCoals$ and $coalStats$ of a clade. It does so using a statistical utility for calculating $coalStats$ of a set of sorted intervals (\pythoninline{calculate_coal_stats}), and it accesses preexisting data from \gp (\pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
 %
 
 \begin{python}
 
+
 def recursive_num_coals(pop):
-    """TODO - document"""
-    
+    """recursively calculate and store num of coalescence
+    events in clade(pop) as well as all descendant clades"""
+
     pop_num_coals = num_coals_from_gphocs(pop)
 
     if is_leaf(pop):
@@ -351,9 +344,11 @@ def recursive_num_coals(pop):
 
 
 def recursive_coal_stats(pop):
-    """TODO - document"""
-    pop_intervals = intervals_from_gphocs(pop)
-    
+    """recursively calculate and store coalescence stats
+    of clade(pop) as well as all descendant clades"""
+
+    pop_intervals = sorted_intervals_from_gphocs(pop)
+
     if is_leaf(pop):
         return pop_intervals
 
