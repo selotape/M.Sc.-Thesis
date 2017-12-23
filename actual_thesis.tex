@@ -137,25 +137,31 @@ We imagine the process of constructing a reference model as a series of transfor
 \begin{enumerate}
 \item We First "collapse" some subtree of the hypothesis. 
 
-Collapsing is the process of merging the populations of a subtree. "Clade-Collapsing" is the act of the merging all the populations of a subtree rooted at some population $P$ into a single population. This new population will contain the entire genealogies previously positioned in all popuulations of the subtree. We denote the resulting merged population $clade(P)$. Figure $(\ref{fig:clade_collapse_AB})$ illustrates a clade-collapsing of a subtree rooted at $AB$ into a new population, $clade(AB)$. 
+Collapsing is the process of merging the populations of a subtree. "Clade-Collapsing" is the act of the merging all the populations of a subtree rooted at some population $P$ into a single population. This new population contains the portion of the genealogies previously located inside the subtree. We denote the resulting merged population $clade(P)$. Figure $(\ref{fig:clade_collapse_AB})$ illustrates a clade-collapsing of a subtree rooted at $AB$ into a new population, $clade(AB)$. 
 
-Similiarly, "Comb-Collapsing" is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. We will formally describe this operation later.
-\item We then map the hidden parameters of the hypothesis model onto parameters of the reference model. We note that
+Similiarly, "Comb-Collapsing" is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. 
+See figure (\ref{fig:comb_collapse_and_split_interval}) for examples. We will formally describe this operation later.
+
+
+\item We then map the hidden parameters of the hypothesis model onto parameters of the reference model.
 \end{enumerate}
 
-Under this process, any population and migration band which is mapped identically from the hypothesis onto the reference model (i.e. it was not collapsed and it's parameters were mapped identically) behaves exactly the same as in the reference model, allowing us, when calculating genealogy likelihoods, to reuse statistics gathered by gphocs.
+Under this process, any part of the topology which is not transformed, such as populations $ABC$ and $C$ in \ref{fig:clade_collapse_AB}, are mapped identically into the reference model. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {clade_collapse_AB}
-\caption{\textbf{construction of e reference model}When collapsing population $ab$ and identically mapping the rest of the hypothesis onto $\Mref$, we must only recalculate genealogy likelihood inside $clade(ab)$ and may reuse statistics for populations $abc$ and $c$ calculated by \gp, thus saving valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses and add clearer names for the pops}}
+\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing population $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we may reuse statistics for $ABC$ and $C$ calculated by \gp and need only recalculate genealogy likelihood inside $clade(AB)$. This is because only the subtree of $AB$ was transformed during the mapping. This saves valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses}}
 \label{fig:clade_collapse_AB}
 \end{figure}
 
 
 We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
-Contrarily, if the entirety of every sample in  $\GT^{(i)}$ is stored ( i.e. all genealogies and free parameter values in every iteration), the RBF for every valid reference model can later be calculated. However this would yield an unreasonable amount of traced information, in proportion to the size of the model and to the number of loci.
+%
+On the other hand, the RBF for every reference model can be computed in post-processing if the MCMC prints out the full hidden state $\GT$ in each iteration.
+%
+However this would yield an unreasonable amount of traced information, in proportion to the size of the model and to the number of loci.
 
 
 We designed a computational scheme that aims to find a reasonable middle ground between these two extreme options.
@@ -273,9 +279,9 @@ We do this, using the theory explained in chapter \textit{\#123\#}, by embedding
 
 Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
-To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by collapsing every subtree into both a clade and a comb reference model and caculating summary statistics over this new subtree. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
+To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by clade-collapsing every subtree and caculating summary statistics over the resulting clade. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
 %
-To calculate summary statistics for both reference model types for all subtrees in an efficient manner, calculation is done recursively down the population tree, starting from the root population. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
+To calculate summary statistics for all poossible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
 %
 The $coalStats$ calculation of a clade is based on it's chronological event chain (\#TODO - explain "event-chain"?\#). The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The following functions, $recursive\_coal\_stats$ and $recursive\_num\_coals$, are pseudo-python implementations of this logic:
 %
@@ -318,6 +324,7 @@ def recursive_num_coals(topology_root):
 \includegraphics[width=0.8\textwidth]
 {split_interval_on_comb_age}
 \caption{The genealogy depicted in figure 1, embedded into a comb reference model. Intervals which span the comb-age are split to two parts - below and above the comb-age, and counted respectively toward the sufficient statistics of the comb-leaf and the comb.}
+\label{fig:comb_collapse_and_split_interval}
 \end{figure}
 
 \section{Calculating sufficient statistics}
