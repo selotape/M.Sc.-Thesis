@@ -135,6 +135,15 @@ showstringspaces=false            %
 }
 {}
 
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
 
 \graphicspath{ {images/} }
 \author{Ron Visbord}
@@ -319,14 +328,14 @@ Figure 1 illustrates embedding a single local genealogy into the null reference 
 
 To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by clade-collapsing every subtree and caculating summary statistics over the resulting clade. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
 %
-To calculate summary statistics for all poossible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The $numCoals$ and $numMigs$ of a clade rooted at pop $p$, respectively, are simply the sum of $numCoals$ or $numMigs$ of it's two child clades plus the $numCoals$ or $numMigs$ of population $p$.
-%
-The $coalStats$ calculation of a clade is based on it's chronological event chain (\#TODO - explain "event-chain"?\#). The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The following functions, $recursive\_coal\_stats$ and $recursive\_num\_coals$, are pseudo-python implementations of this logic:
+To calculate summary statistics for all poossible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The following pseudo-python calculates $numCoals$ and $coalStats$ of a clade using preexisting data from \gp (\pythoninline{num_coals_from_gphocs} and \pythoninline{intervals_from_gphocs}) and a statistical utility for calculating $coalStats$ of a set of sorted intervals (\pythoninline{calculate_coal_stats}):
 %
 
 \begin{python}
 
 def recursive_num_coals(pop):
+    """TODO - document"""
+    
     pop_num_coals = num_coals_from_gphocs(pop)
 
     if is_leaf(pop):
@@ -342,6 +351,7 @@ def recursive_num_coals(pop):
 
 
 def recursive_coal_stats(pop):
+    """TODO - document"""
     pop_intervals = intervals_from_gphocs(pop)
     
     if is_leaf(pop):
