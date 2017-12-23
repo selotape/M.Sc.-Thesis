@@ -2,7 +2,6 @@
 \documentclass[11pt]{article}
 
 \usepackage{times}
-
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -19,8 +18,6 @@
 \usepackage{xr}
 \externaldocument{mcref}
 \usepackage{bbm}
-
-%\externaldocument{poly-div-supp}
 
 
 \usepackage{hyperref}
@@ -98,6 +95,47 @@
 \usepackage[normalem]{ulem}
 \usepackage{graphicx}
 \usepackage[linesnumbered,lined,boxed,commentsnumbered,noend,ruled,vlined]{algorithm2e}
+
+
+
+
+\usepackage[utf8]{inputenc}
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={recursive_num_coals,recursive_coal_stats},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+
 \graphicspath{ {images/} }
 \author{Ron Visbord}
 % \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
@@ -269,7 +307,7 @@ They also partly satisfy the second condition, because statistics computed for a
 
 \subsection{Sufficient Statistics Supporting Multiple Reference Models}
 To support a wide variety of reference models (as stated in the second condition over sufficient stats) we must calculate $\{numCoals(\G,clade(p)), coalStats(\G,clade(p))\}_p$%
-We do this, using the theory explained in chapter \textit{\#123\#}, by embedding the local genealogies inside $p$ into $clade(p)$ and calculating the summary statistics over the new set of intervals in the $clade(p)$. 
+We do this by embedding the local genealogies inside $p$ into $clade(p)$ and calculating the summary statistics over the new set of intervals in the $clade(p)$. 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
@@ -285,37 +323,42 @@ To calculate summary statistics for all poossible clades in an efficient manner,
 %
 The $coalStats$ calculation of a clade is based on it's chronological event chain (\#TODO - explain "event-chain"?\#). The event-chain of a clade is obtained by merge-sorting the event-chains of it's two child clades, and then appending the event-chain of the clades root population. On this merged event-chain we calculate $coalStats$ as described in \#456\#. The following functions, $recursive\_coal\_stats$ and $recursive\_num\_coals$, are pseudo-python implementations of this logic:
 %
-\begin{lstlisting}[language=Python]
 
-def recursive_coal_stats(topology_root):
-    if is_leaf_population(topology_root):
-        emit(GPHOCS.COAL_STATS[topology_root.id])
-        return GPHOCS.EVENT_CHAINS[topology_root.id]
+\begin{python}
 
-    left_event_chain = recursive_coal_stats(topology_root.left)
-    right_event_chain = recursive_coal_stats(topology_root.right)
+def recursive_coal_stats(pop):
+    pop_intervals = intervals_from_gphocs(pop)
+    
+    if is_leaf(pop):
+        return pop_intervals
 
-    merged_children_event_chain = merge_sort(left_event_chain, right_event_chain)
-    current_event_chain = merged_children_event_chain.append(GPHOCS.EVENT_CHAINS[topology_root.id])
-    current_coal_stats = reduce_event_chain_to_coal_stats(current_event_chain)
-    emit(current_coal_stats)
+    left_intervals = recursive_coal_stats(pop.left)
+    right_intervals = recursive_coal_stats(pop.right)
+    merged_intervals = merge_sort(left_intervals, right_intervals)
 
-    return current_event_chain
+    clade_intervals = merged_intervals.append(pop_intervals)
 
-def recursive_num_coals(topology_root):
-    if is_leaf_population(topology_root):
-        emit(GPHOCS.NUM_COALS[topology_root.id])
-        return GPHOCS.NUM_COALS[topology_root.id]
+    clade_coal_stats = calculate_coal_stats(clade_intervals)
+    store(clade_coal_stats)
 
-    left_num_coals = recursive_num_coals(topology_root.left)
-    right_num_coals = recursive_num_coals(topology_root.right)
+    return clade_intervals
 
-    current_num_coals = GPHOCS.NUM_COALS[topology_root.id] + left_num_coals + right_num_coals
-    emit(current_num_coals)
+
+def recursive_num_coals(pop):
+    pop_num_coals = num_coals_from_gphocs(pop)
+
+    if is_leaf(pop):
+        return pop_num_coals
+
+    left_num_coals = recursive_num_coals(pop.left)
+    right_num_coals = recursive_num_coals(pop.right)
+
+    current_num_coals = pop_num_coals + left_num_coals + right_num_coals
+    store(current_num_coals)
+
     return current_num_coals
 
-\end{lstlisting}
-
+\end{python}
 
 \textcolor{red}{Come back to this after we explain Clade stats properly:} Calculation of summary statistics for the comb reference model is done very similiarly, but with special attention to Comb-leaves. Comb-leaves are leaf populations which are decendant to the collapsed comb population. When calculating the summary statistics of the comb itself, we only take into account intervals which occur above the comb-age (\#TODO - explain comb-age\#). Intervals below the comb-age are counted towards their original leaf population and intervals which intersect the comb-age are split into two parts - below and above the comb-age (See figure 2 for example). Using this method, full summary statistics are emitted for the comb-leaves.
 
