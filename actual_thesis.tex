@@ -119,7 +119,7 @@ language=Python,
 basicstyle=\ttm,
 otherkeywords={self},             % Add keywords here
 keywordstyle=\ttb\color{deepblue},
-emph={recursive_num_coals,recursive_coal_stats},          % Custom highlighting
+emph={recursive_num_coals,recursive_coal_stats},% Custom highlighting
 emphstyle=\ttb\color{deepred},    % Custom highlighting style
 stringstyle=\color{deepgreen},
 frame=tb,                         % Any extra options here
@@ -326,6 +326,21 @@ The $coalStats$ calculation of a clade is based on it's chronological event chai
 
 \begin{python}
 
+def recursive_num_coals(pop):
+    pop_num_coals = num_coals_from_gphocs(pop)
+
+    if is_leaf(pop):
+        return pop_num_coals
+
+    left_num_coals = recursive_num_coals(pop.left)
+    right_num_coals = recursive_num_coals(pop.right)
+
+    current_num_coals = pop_num_coals + left_num_coals + right_num_coals
+    store(current_num_coals)
+
+    return current_num_coals
+
+
 def recursive_coal_stats(pop):
     pop_intervals = intervals_from_gphocs(pop)
     
@@ -342,21 +357,6 @@ def recursive_coal_stats(pop):
     store(clade_coal_stats)
 
     return clade_intervals
-
-
-def recursive_num_coals(pop):
-    pop_num_coals = num_coals_from_gphocs(pop)
-
-    if is_leaf(pop):
-        return pop_num_coals
-
-    left_num_coals = recursive_num_coals(pop.left)
-    right_num_coals = recursive_num_coals(pop.right)
-
-    current_num_coals = pop_num_coals + left_num_coals + right_num_coals
-    store(current_num_coals)
-
-    return current_num_coals
 
 \end{python}
 
