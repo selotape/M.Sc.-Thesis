@@ -25,7 +25,7 @@
 \hypersetup{
   colorlinks,
   urlcolor=blue,
-  linkcolor=black,Processor
+  linkcolor=black,
   citecolor=black
 }
 
@@ -175,13 +175,13 @@ We imagine the process of constructing a reference model as a series of transfor
 \begin{enumerate}
 \item We First "collapse" some subtree of the hypothesis. 
 
-Collapsing is the process of merging the populations of a subtree. "Clade-Collapsing" is the act of the merging all the populations of a subtree rooted at some population $P$ into a single population. This new population contains the portion of the genealogies previously located inside the subtree. We denote the resulting merged population $clade(P)$. Figure $(\ref{fig:clade_collapse_AB})$ illustrates a clade-collapsing of a subtree rooted at $AB$ into a new population, $clade(AB)$. 
+Collapsing is the process of merging the populations of a subtree. \textbf{Clade-Collapsing} is the act of the merging all the populations of a subtree rooted at some population $P$ into a single population. This new population contains the portion of the genealogies previously located inside the subtree. We denote the resulting merged population $clade(P)$. Figure $(\ref{fig:clade_collapse_AB})$ illustrates a clade-collapsing of a subtree rooted at $AB$ into a new population, $clade(AB)$. 
 
 Similiarly, "Comb-Collapsing" is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. 
 See figure (\ref{fig:comb_collapse_and_split_interval}) for examples. We will formally describe this operation later.
 
 
-\item We then map the hidden parameters of the hypothesis model onto parameters of the reference model s.t. the two conditions of a valid model-pairing function are met.
+\item We then map the hidden parameters of $\M$ onto parameters of $\Mref$ to define the model-pairing conditional $\Pref$ (see section ASDF).
 \end{enumerate}
 
 Under this process, any part of the topology which is not transformed are mapped identically into the reference model. See for example populations $ABC$ and $C$ in figure \ref{fig:clade_collapse_AB}. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
