@@ -171,16 +171,7 @@ Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the M
 
 Killer connecting sentence.\\
 
-When constructing a reference model, one might consider three axes of choice - 
-\begin{itemize}
-\item The \textbf{topological construction} of the reference model, e.g. what population should be "turned into" the root of the clade/comb
-
-\item The \textbf{type} of reference model to use. Here we present the null, clade and comb reference models, but concievably there are numerous more, including any combination thereof.
-
-\item The \textbf{mapping of free parameters} of the hypothesis model onto the reference model s.t. the two conditions of a valid model-pairing function are met.
-\end{itemize}
-
-We imagine the process of constructing a reference model as a series of transformations on the hypothesis model; 
+We imagine the process of constructing a reference model as a series of transformations on the hypothesis model:
 \begin{enumerate}
 \item We First "collapse" some subtree of the hypothesis. 
 
@@ -193,13 +184,13 @@ See figure (\ref{fig:comb_collapse_and_split_interval}) for examples. We will fo
 \item We then map the hidden parameters of the hypothesis model onto parameters of the reference model s.t. the two conditions of a valid model-pairing function are met.
 \end{enumerate}
 
-Under this process, any part of the topology which is not transformed, such as populations $ABC$ and $C$ in \ref{fig:clade_collapse_AB}, are mapped identically into the reference model. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
+Under this process, any part of the topology which is not transformed are mapped identically into the reference model. See for example populations $ABC$ and $C$ in figure \ref{fig:clade_collapse_AB}. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {clade_collapse_AB}
-\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing population $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we may reuse statistics for $ABC$ and $C$ calculated by \gp and need only recalculate genealogy likelihood inside $clade(AB)$. This is because only the subtree of $AB$ was transformed during the mapping. This saves valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses}}
+\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing population $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we reuse statistics  calculated by \gp for $ABC$ and $C$, and need only recalculate genealogy likelihood inside $clade(AB)$. This saves valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses}}
 \label{fig:clade_collapse_AB}
 \end{figure}
 
