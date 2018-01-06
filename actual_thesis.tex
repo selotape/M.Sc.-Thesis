@@ -169,20 +169,25 @@ Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ re
 
 Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. This is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses calculation of the \textbf{genealogy likelihood} efficiently, as it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
 
-Every demographic model $\M$ has a large variety of valid reference models, which we would like to consider. A reference model $\Mref$ may be obtained from the hypothesis model $\M$ via the following \textcolor{red}{three} step process:
+\subsection{Constructing a Reference Model}
+
+
+Every demographic model $\M$ has a large variety of valid reference models, which we would like to consider. A reference model $\Mref$ may be obtained from the hypothesis model $\M$ via the following \textcolor{red}{three}-step process:
+
 \begin{enumerate}
-\item We First "collapse" some subtree of the hypothesis. 
+\item First, \textbf{choose a subtree} of the population phylogeny of $\M$. The subtree is associated with the population $p$ at its root. 
 
-Collapsing is the process of merging the populations of a subtree. \textbf{Clade-Collapsing} is the act of the merging all the populations of a subtree rooted at some population $P$ into a single population. This new population contains the portion of the genealogies previously located inside the subtree. We denote the resulting merged population $clade(P)$. Figure $(\ref{fig:clade_collapse_AB})$ illustrates a clade-collapsing of a subtree rooted at $AB$ into a new population, $clade(AB)$. 
+\item Then \textbf{collapse the subtree} using one of the structural collapse operations. Gerenarlly speaking, collapsing is the act of merging the populations of a subtree. Here we introduce two types of collapsing; 
 
-Similiarly, "Comb-Collapsing" is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. 
-See figure (\ref{fig:comb_collapse_and_split_interval}) for examples. We will formally describe this operation later.
+Clade-Collapsing is the act of the merging all the populations of a subtree rooted at population $P$ into a single population. This new population contains the portion of the genealogies previously located inside the subtree. We denote the resulting merged population $clade(P)$ (Figure $(\ref{fig:clade_collapse_AB})$). 
+
+Similiarly, Comb-Collapsing is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. This will be described later.
 
 
-\item We then map the hidden parameters of $\M$ onto parameters of $\Mref$ to define the model-pairing conditional $\Pref$ (see section ASDF).
+\item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$ to define the model pairing conditional $\Pref$ (see section \textcolor{red}{ASDF}).
 \end{enumerate}
 
-Under this process, any part of the topology which is not transformed are mapped identically into the reference model. See for example populations $ABC$ and $C$ in figure \ref{fig:clade_collapse_AB}. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
+Under this process, any part of the topology which is not transformed is mapped identically onto the reference model. See for example populations $ABC$ and $C$ in figure \ref{fig:clade_collapse_AB}. This allows us, when calculating genealogy likelihoods, to reuse statistics gathered by \gp.
 
 \begin{figure}[h]
 \centering
@@ -317,7 +322,7 @@ Figure 1 illustrates embedding a single local genealogy into the null reference 
 
 To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by clade-collapsing every subtree and caculating summary statistics over the resulting clade. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
 %
-To calculate summary statistics for all poossible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The following pseudo-python calculates $numCoals$ and $coalStats$ of a clade. It does so using a statistical utility for calculating $coalStats$ of a set of sorted intervals (\pythoninline{calculate_coal_stats}), and it accesses preexisting data from \gp (\pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
+To calculate summary statistics for all possible clades in an efficient manner, calculation is done recursively down the hypothesis population tree, starting from the root. The following pseudo-python calculates $numCoals$ and $coalStats$ of a clade. It does so using a statistical utility for calculating $coalStats$ of a set of sorted intervals (\pythoninline{calculate_coal_stats}), and it accesses preexisting data from \gp (\pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
 %
 
 \begin{python}
