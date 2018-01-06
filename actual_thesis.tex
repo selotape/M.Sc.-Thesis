@@ -169,9 +169,7 @@ Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ re
 
 Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. This is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses calculation of the \textbf{genealogy likelihood} efficiently, as it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
 
-Killer connecting sentence.\\
-
-We imagine the process of constructing a reference model as a series of transformations on the hypothesis model:
+Every demographic model $\M$ has a large variety of valid reference models, which we would like to consider. A reference model $\Mref$ may be obtained from the hypothesis model $\M$ via the following \textcolor{red}{three} step process:
 \begin{enumerate}
 \item We First "collapse" some subtree of the hypothesis. 
 
