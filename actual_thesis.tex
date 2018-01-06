@@ -167,21 +167,21 @@ Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ re
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. This is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses calculation of the \textbf{genealogy likelihood} efficiently, as it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
+Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. This is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses efficiently calculating the \textbf{genealogy likelihood}, as it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
 
 \subsection{Constructing a Reference Model}
 
 
-Every demographic model $\M$ has a large variety of valid reference models, which we would like to consider. A reference model $\Mref$ may be obtained from the hypothesis model $\M$ via the following \textcolor{red}{three}-step process:
+Every demographic model $\M$ has a variety of compatible reference models, which we would like to consider. A compatible reference model $\Mref$ may be obtained from the hypothesis model $\M$ by applying the following three-step process:
 
 \begin{enumerate}
 \item First, \textbf{choose a subtree} of the population phylogeny of $\M$. The subtree is associated with the population $p$ at its root. 
 
-\item Then \textbf{collapse the subtree} using one of the structural collapse operations. Gerenarlly speaking, collapsing is the act of merging the populations of a subtree. Here we introduce two types of collapsing; 
+\item Then \textbf{collapse the subtree} using one of the structural collapse operations we introduce here. Generarlly speaking, collapsing is the act of merging the populations of a subtree. We describe two structural types of collapse operations; 
 
-Clade-Collapsing is the act of the merging all the populations of a subtree rooted at population $P$ into a single population. This new population contains the portion of the genealogies previously located inside the subtree. We denote the resulting merged population $clade(P)$ (Figure $(\ref{fig:clade_collapse_AB})$). 
+\textit{Clade-Collapse} is the operation of merging all the populations in a subtree rooted at $p$ into a single population denoted $clade(p)$. This new population contains the portion of the genealogies previously located inside the subtree (see figure $\ref{fig:clade_collapse_AB}$). 
 
-Similiarly, Comb-Collapsing is the act of the merging populations of a subtree, while perserving its leaves up to the comb-age. This will be described later.
+Similiarly, \textit{Comb-Collapse} is the operation of merging populations of a subtree, while perserving its leaves up to the comb-age. This operation will be detailed later.
 
 
 \item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$ to define the model pairing conditional $\Pref$ (see section \textcolor{red}{ASDF}).
@@ -193,7 +193,7 @@ Under this process, any part of the topology which is not transformed is mapped 
 \centering
 \includegraphics[width=0.8\textwidth]
 {clade_collapse_AB}
-\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing population $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we reuse statistics  calculated by \gp for $ABC$ and $C$, and need only recalculate genealogy likelihood inside $clade(AB)$. This saves valuable effort in calculation of $P(\G|\T,\Mref)$ \textcolor{red}{TODO - Color-code the populations s.t. the reused stats are emphasized (Maybe fadeout the reused pops?). Also, move the arrow exactly in between the hypotheses}}
+\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing population $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we reuse statistics  calculated by \gp for $ABC$ and $C$, and need only recalculate genealogy likelihood inside $clade(AB)$. This saves valuable effort in calculation of $P(\G|\T,\Mref)$}
 \label{fig:clade_collapse_AB}
 \end{figure}
 
@@ -318,7 +318,7 @@ We do this by embedding the local genealogies inside $p$ into $clade(p)$ and cal
 \caption{Embedding a local genealogy into a clade created by collapsing population $ABC$. In $clade(ABC)$, the genealogy induces a new set of intervals with different elapsed times and number of lineages. From this set we calculate $numCoals(\G,clade(ABC))$ and $coalStats(\G,clade(ABC))$ \textcolor{red}{TODO - make intervals legible}}
 \end{figure}
 
-Figure 1 illustrates embedding a single local genealogy into the null reference model. Note that the null reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
+Figure 1 illustrates embedding a single local genealogy into the a reference model. Note that the reference model has a distinct set of intervals with different elapsed times and numbers of lineages. Computing the sufficient stats based on these intervals in population $root$  in $\Mnull$ and plugging them into formula (my7+8) would yield the value of $P(\G| \T,\Mnull)$.
 
 To satisfy our second requirement, of supporting a wide variety of reference models, the proccess illustrated in Fig 1 must be implemented for a variety of topologies. We achieve this by clade-collapsing every subtree and caculating summary statistics over the resulting clade. This allows us to later compose a valid reference model using different pieces of topology and reuse of stats from the hypothesis model calculated by \gp.
 %
