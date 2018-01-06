@@ -193,12 +193,12 @@ Under this process, any part of the topology which is not transformed is mapped 
 \centering
 \includegraphics[width=0.8\textwidth]
 {clade_collapse_AB}
-\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing population $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we reuse statistics  calculated by \gp for $ABC$ and $C$, and need only recalculate genealogy likelihood inside $clade(AB)$. This saves valuable effort in calculation of $P(\G|\T,\Mref)$}
+\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing  the subtree rooted at $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we reuse statistics calculated by \gp for $ABC$ and $C$, and need only recalculate genealogy likelihood inside $clade(AB)$. This saves valuable effort in calculation of $P(\G|\T,\Mref)$}
 \label{fig:clade_collapse_AB}
 \end{figure}
 
 
-We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full run of MCMC.
+We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full MCMC run.
 %
 On the other hand, the RBF for every reference model can be computed in post-processing if the MCMC prints out the full hidden state $\GT$ in each iteration.
 %
@@ -216,14 +216,14 @@ This is done by identifying a collection of sufficient statistics for $\G$ that 
 \end{enumerate}
 %
 %
-\subsection{Efficient Sufficient Statistics for the Genealogy Likelihood $\mathbf{P(G|\Theta, \M)}$}
+\subsection{Sufficient Statistics for the Reference Genealogy Likelihood $\mathbf{P(G|\Theta, \Mref)}$}
 
 Sufficient statistics that satisfy these conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \M)$ under Kingman's coalescent, which we briefly recall here.
-First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\M)$ \textit{\# maybe put illustration of multiple loci?\#}.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
+First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\M)$.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
 \begin{itemize}
  \item $t(I)$ -- the elapsed time of the interval.
  \item $n(I)$ -- the number of lineages of $\G_l$ alive during that time in the target population.
- \item $isCoal(I)$ ~,~ $isInMig(I)$  -- binary values that indicate whether the event above the interval is a coalescent event or incoming migration event (respectively).
+ \item $isCoal(I)$ , $isInMig(I)$  -- binary values that indicate whether the event above the interval is a coalescent event or incoming migration event (respectively).
 \end{itemize}
 %
 %
@@ -303,9 +303,9 @@ Note that the four double sums in these expressions depend on the local genealog
 \end{figure}
 
 
-The summary statistics $\{numCoals(\G,p), coalStats(\G,p)\}_p$ and $\{numMigs(\G,b), migStats(\G,b)\}_b$ satisfy our first objective in that their number depends on the complexity of model the $\M$ but not on the size of the data.
+The summary statistics $\{numCoals(\G,p), coalStats(\G,p)\}_p$~ and ~$\{numMigs(\G,b), migStats(\G,b)\}_b$ satisfy our first objective in that their number depends on the complexity of the model $\M$ but not on the size of the data.
 %
-They also partly satisfy the second condition, because statistics computed for a given set of local genealogies, $\G$, and given values of divergence times enable computation of the likelihood $P(\G|\T,\M)$ for any set of values of the population size and migration rate parameters.
+They also partly satisfy the second condition, because statistics computed for a given set of local genealogies and given values of divergence times enable computation of the likelihood $P(\G|\T,\M)$ for any set of values of the population size and migration rate parameters.
 %
 
 \subsection{Sufficient Statistics Supporting Multiple Reference Models}
