@@ -298,7 +298,13 @@ Note that the four double sums in these expressions depend on the local genealog
 \centering
 \includegraphics[width=1.0\textwidth]
 {multiple_loci}
-\caption{\textcolor{red}{A two-locus figure with migration, illustrating what statistics need to be recorded}}
+\caption{The sufficient statistics, \textit{numCoals} \& \textit{coalStats}, are calculated per clade using the time intervals $\Ip$, and are accumulated across loci.\\
+%
+ALTERNATIVE: The contribution of $clade(AB)$ to $\ln \left( P(\G| \T,\Mref) \right)$ is the sum of it's contributions to the genealogy log-likelihood of all loci. These are calculated for loci $l_i$, using the set of intervals $\mathcal{I}(clade(AB),l_i)$.\\
+%
+ALTERNATIVE: The sufficient statistic $coalStat(G, clade(AB))$ is calculated by accumulating the Kingman Coalescent genealogy log-likelihod across loci. The contribution of each loci is calculated via the set of intervals $\mathcal{I}(clade(AB),l_i)$. The sufficient statistic $numCoals(G, clade(AB))$ is simply the sum across loci of the amount of coalescnece events inside $clade(AB)$.\\
+%
+\textcolor{red}{TODO - fix subscript in right genealogy. Also fix fading line above and below left genealogy. Also add another fading genealogy to the right, instead of the dot-dot-dot. Also maybe write somewhere the this is $clade(AB)$}}
 \label{fig:multiple_loci}
 \end{figure}
 
