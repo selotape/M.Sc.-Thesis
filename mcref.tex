@@ -17,7 +17,7 @@
 \usepackage{lscape}
 %\usepackage{cite}
 \usepackage{xr}
-\externaldocument{actual_thesis}
+%\externaldocument{poly-div-supp}
 
 
 \usepackage{hyperref}
@@ -43,8 +43,14 @@
 \renewcommand{\@biblabel}[1]{\quad#1.}
 \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
 
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
 
 
+\newcommand{\eqdef}{\stackrel{\Delta}{=}}		
+\DeclareMathOperator*{\argmin}{\arg\!\min}
 
 \newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
 \newcommand{\ld}{\mathcal{L}}
@@ -67,10 +73,17 @@
 %\newcommand{\hbf}{\text{BF}}
 \newcommand{\Om}{\Omega}
 
+\newcommand{\taus}{\vect\tau}
+\newcommand{\thetas}{\vect\theta}
+\newcommand{\migs}{\vect{m}}
+
 
 \newcommand{\GTref}{\widetilde{\GT}}
 \newcommand{\Gref}{\widetilde{\G}}
 \newcommand{\Tref}{\widetilde{\T}}
+\newcommand{\thref}{\widetilde{\thetas}}
+\newcommand{\taref}{\widetilde{\taus}}
+\newcommand{\migref}{\widetilde{\migs}}
 \newcommand{\Z}{\vect{Z}}
 \newcommand{\Zref}{\widetilde{\Z}}
 \newcommand{\Omref}{\widetilde{\Om}}
@@ -78,12 +91,16 @@
 \newcommand{\Fext}{F_{Z}}
 
 \newcommand{\troot}{\theta_{root}}
+\newcommand{\thcomb}{\theta_{comb}}
+\newcommand{\tacomb}{\tau_{comb}}
 
 \newcommand{\Gc}{\G_c}
 \newcommand{\Gm}{\G_m}
 
 \def\comb{\rotatebox[origin=c]{90}{$\exists$}}
 \newcommand{\Mcomb}{\M_{\comb}}
+\newcommand{\Gcomb}{\G_{\comb}}
+\newcommand{\Tcomb}{\T_{\comb}}
 \newcommand{\tmin}{\tau_{\text{min}}}
 
 % Two lines from genres
@@ -187,14 +204,14 @@ and apply it to simulated and real genomic data.
 A probabilistic demographic model $\M$ uses a parameterized demographic history to define a probability distribution over observed genomic data $\X$.
 %
 The structural components of $\M$, which we assume are fixed, consist of a population phylogeny $\Tr$ and a collection
-of migration bands $\B$ that indicate ordered pairs of populations between which gene flow is allowed.
+of migration bands $B$ that indicate ordered pairs of populations between which gene flow is allowed.
 %
-The free parameters of $\M$, denoted here by $\T$, consist of divergence times ($\tau$) for all internal nodes in $\Tr$,
-effective population sizes ($\theta$) for all branches of $\Tr$, and migration rates ($m$) for all migration bands in $\B$.
+The free parameters of $\M$, denoted here by $\T$, consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population of } \Tr\}$,
+effective population sizes, $\thetas=\{\theta_p: p \text{ is a population in } \Tr\}$, and migration rates, $\migs=\{m_b:b \in B\}$.
 %
 All model parameters are scaled by mutation rate.
 %
-The model $\M$ is thus defined by specifying the structural components $(\Tr,\B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
+The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
 The conditional probability distribution for the observed genomic data, $P(\X|\M,\T)$, is defined by standard models for
 molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
@@ -218,7 +235,7 @@ and the likelihood can be expressed as a product of three efficiently computable
 %
 
 This joint probability function may be used by a Markov chain Monte Carlo (MCMC) algorithm to generate a sample of the model parameters
-together with the genealogies according to a probability distribution approximating the posterior, $P(\G,\T|\X,\M)$.
+together with the genealogies according to a probability distribution approximating the posterior, $P(\G,\T|\M,\X)$.
 %
 Consequently, the sampled parameter values have high joint probability with the data.
 %
@@ -239,16 +256,17 @@ However, the framework we describe here is quite general and can be extended to 
 
 \subsection*{Estimating data likelihood via importance sampling}
 
-The Bayesian approach for demography inference is very powerful, but it does not produce reliable measures of
-model fit.
+A fundamental limitation of Bayesian demography inference methods is that they do not directly produce reliable measures of model fit.
 %
-In particular, the likelihood values recorded by the MCMC algorithm, $P(\X,\G,\T|\M)$, depend on the representation of hidden
-genealogies in the model and are thus not directly comparable across models.
+% In particular, the likelihood values recorded by the MCMC algorithm, $P(\X,\G,\T|\M)$, depend on the representation of hidden
+% genealogies in the model and are thus not directly comparable across models.
 %
-Model fit is best captured by the marginal likelihood of the data, $P(\X|\M)$, but computing the likelihood requires integrating over the space of $\T$ and $\G$
-(denoted jointly by $\GT$).
-In principle, this integral may be estimated via importance sampling from the posterior
-probability, $P(\GT|,\M,\X)$, by expressing the inverse of the likelihood as follows:
+Model fit is best captured by the marginal data likelihood, $P(\X|\M)$, whose computation involves integration over the space of unknown parameter values and genealogical relationships,
+denoted jointly by $\GT$.
+%
+This high-dimensional integral may be approximated via importance sampling using a collection of instances $\{\GT^{(i)}\}$ sampled via MCMC conditioned on $\X$ and $\M$.
+%
+The approximation is established by expressing the inverse of the likelihood as an expected value under the posterior distribution of $\GT$ given $\M$ and $\X$:
 %
 %
 \begin{small}
@@ -259,31 +277,21 @@ probability, $P(\GT|,\M,\X)$, by expressing the inverse of the likelihood as fol
 &=~~ \int \frac{P(\GT|\M)}{P(\X|\M)} \frac{P(\X,\GT|\M)}{P(\X,\GT|\M)}  d\GT \notag \\ %
 &=~~ \int \frac{P(\GT,\X |\M)}{P(\X|\M)} ~\bigg/ \frac{P(\X,\GT|\M)}{P(\GT|\M)}  d\GT \notag \\ %
 &=~~ \int \frac{P(\GT|\M,\X)}{P(\X|\M,\GT)} d\GT \notag \\ %
-&=~~ \int \frac{1}{P(\X|\G)}P(\GT|\M,\X) d\GT \notag \\ %
-&=~~ \E_{\GT|\M,\X } \left[\frac{1}{P(\X|\G)}\right] ~.\label{eq:is_harmonic}
+&=~~ \int \frac{1}{P(\X|\G)}P(\GT|\M,\X) d\GT  \notag \\ %
+&=~~ \E_{\GT|\M,\X } \left[\frac{1}{P(\X|\G)}\right] \notag\\  %~.\label{eq:is_harmonic}\\
+%\notag \\ %
+%\frac{1}{P(\X|\M)}
+&\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{1}{P(\X|\G^{(i)})} ~. \label{eq:harmonic}
 \end{align}
 \end{small}
 
-Thus, if we have a collection of instances $\{\G^{(i)}\}$ sampled via MCMC conditioned on $\X$ and $\M$, we may
-estimate the likelihood using the {harmonic mean} of $P(\X|\G^{(i)})$, as follows:
+This {\em harmonic mean estimator} is straightforward and can be applied in a very general setting, but its practical use is often limited due to very high variance
+of the inverse likelihood, $1/P(\X|\G)$.
 %
+This high variance means that only models with very different levels of fit may be compared reliably via harmonic mean estimators of $P(\X|\M)$.
 %
-\begin{equation}\label{eq:harmonic}
- \frac{1}{P(\X|\M)} ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{1}{P(\X|\G^{(i)})} ~.
-\end{equation}
+The main objective of the approach we propose next is to correlate the sensitivity of model comparison with the level of similarity between the models being compared.
 %
-%
-This {\em harmonic mean estimator} is straightforward to apply to any MCMC-based demography
-inference algorithm, but it has two key limitations.
-%
-The first problem is that robustly estimating the mean value of the inverse likelihood, $1/P(\X|\G)$,
-may require an unrealistic number of MCMC samples, because the inverse likelihood has an extremely high variance.
-%
-The second problem is that using this estimator in the context of model comparison does not make use of the
-similarities between the models.
-%
-Our objective is to develop a model comparison method based on estimates whose variance is inversely correlated with the
-similarity between the compared models.
 
 \subsection*{Relative Bayes factors}
 
@@ -292,76 +300,71 @@ reference model $\Mref$.
 %
 As before, assume a collection $\{\GT^{(i)}\}$ sampled via MCMC according to an approximate posterior probability distribution $P(\GT|\M,\X)$.
 %
-We wish to use these MCMC samples to estimate the {\em Bayes factor of $\M$ relative to $\Mref$}, which is simply the ratio $P(\X|\M) / P(\X|\Mref)$.
+We wish to use these MCMC samples to estimate the {\em Bayes factor of $\M$ relative to $\Mref$}, defined as the ratio $P(\X|\M) / P(\X|\Mref)$.
 %
-Note that for any reference model, the Bayes factor can be estimated obtaining a separate MCMC sample of
-$\GT$ conditioned on $\Mref$ and estimating $P(\X|\M)$ and $P(\X|\Mref)$ via the harmonic mean.
+The Bayes factor can be estimated by running an additional MCMC for $\Mref$ and taking the ratio of the two harmonc-mean estimates for $P(\X|\M)$ and $P(\X|\Mref)$.
 %
-However, for some reference models we can obtain a direct estimate by applying the following sequence of equations (and without running an additional MCMC):
+However, in some cases the relative Bayes factor may be estimated directly from $\{\GT^{(i)}\}$ without the need for an additional MCMC for $\Mref$.
+%
+This is done by connecting the models $\M$ and $\Mref$ via a conditional distribution over the the hidden variables of $\M$, $\Pref(\GT|\Mref)$,
+which satisfies the following two requirements:
+%
+%
+\begin{small}
+\begin{align}
+&P(\X|\Mref) ~~=~~ \int  \Pref(\GT|\Mref)\ P(\X|\G)\ d\GT \label{eq:pref_integral}\\
+&P(\GT|\M,\X)=0 ~~\Rightarrow~~ \Pref(\GT|\Mref)=0 \label{eq:pref_support}
+\end{align}
+\end{small}
+%
+%
+
+
+The \emph{model pairing conditional distribution}, $\Pref(\GT|\Mref)$, plays a key role in our estimator for the relative Bayes factor.
+%
+The special notation $\Pref$ indicates that this probability function is not naturally defined by either
+$\M$ or $\Mref$, and there will typically be some degree of freedom associated with its specification.
+%
+Given a model-pairing conditional distribution, the relative Bayes factor  may be expressed as an expected value under the posterior distribution of $\GT$ given $\M$ and $\X$,
+implying the following approximation:
 %
 %
 \begin{small}
 \begin{align}
 \frac{1}{\rbf(\M:\Mref|\X)} ~~~ \triangleq ~~ \frac{P(\X|\Mref)}{P(\X|\M)}
-&=~~ \frac{\int P(\X|\G) \Pref(\GT|\Mref)d\GT}{P(\X|\M)} \label{eq:pref} \\ %
-&=~~ \int \frac{P(\X|\G)\ \Pref(\GT|\Mref) }{P(\X|\M)} \ \frac{P(\GT|\M, \X)}{P(\GT|\M, \X)}  d\GT \label{eq:pref_nonzero} \\ %
-&=~~ \int \frac{P(\X|\G)\ \Pref(\GT|\Mref) }{P(\X,\GT|\M)} P(\GT|\M, \X)  d\GT \label{eq:needlabel} \\ %
+&=~~ \frac{\int  \Pref(\GT|\Mref)\ P(\X|\G)\ d\GT}{P(\X|\M)} \label{eq:pref1} \\ %
+&=~~ \int \frac{\Pref(\GT|\Mref)\ P(\X|\G) }{P(\X|\M)} \ \frac{P(\GT|\M, \X)}{P(\GT|\M, \X)}  d\GT \label{eq:pref2} \\ %
+&=~~ \int \frac{\Pref(\GT|\Mref)\ P(\X|\G)\ }{P(\X,\GT|\M)} P(\GT|\M, \X)  d\GT \notag \\ %
 &=~~ \int \frac{\Pref(\GT|\Mref) }{P(\GT|\M)} P(\GT|\M, \X)  d\GT  \label{eq:data_cancel}\\ %
-&=~~ \E_{\GT|\M,X } \left[\frac{\Pref(\GT|\Mref) }{P(\GT|\M)}\right]~.\label{eq:is_rbf}
+&=~~ \E_{\GT|\M,X } \left[\frac{\Pref(\GT|\Mref) }{P(\GT|\M)}\right]~.\notag \\
+&\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~.\label{eq:rbf}
 \end{align}
 \end{small}
-
-The key to this derivation is the conditional probability distribution $\Pref(\GT|\Mref)$,
-which we refer to as the {\em model pairing conditional}.
-%
-This distribution acts as a bridge between the model of interest and the reference model: it is defined over the the hidden variables of
-$\M$, but its integral produces the likelihood under $\Mref$
-(see Equation \ref{eq:pref} above).
-%
-The special notation $\Pref$ indicates that this probability function is not naturally defined by either
-model, and it requires explicit specification.
-%
-There will typically be some degree of freedom associated with the specification of $\Pref$, but  the following two conditions must be met
-by any model-pairing conditional distribution to ensure the sequence of equations above:
-%
-(1) $\int P(\X|\G) \Pref(\GT|\Mref)d\GT=P(\X|\Mref)$, and
-(2) there is no $\GT$ for which $\Pref(\GT|\Mref)>0$ and $P(\GT|\M,\X)=0$.
-%
-The first condition is directly implied by Equation \ref{eq:pref}, and the second condition is required to
-ensure that all ratios in Equation \ref{eq:pref_nonzero} are well-defined.
-%
-Assuming we established a model-pairing conditional $\Pref$ satisfying these conditions, the expression in
-Equation \ref{eq:is_rbf} implies that we can estimate the Bayes factor using the MCMC samples, $\{\GT^{(i)}\}$, as follows:
-%
-%
-\begin{equation}\label{eq:rbf}
- \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~.
-\end{equation}
 %
 %
 
-This estimate of the Bayes factor is similar in nature to the estimate for the likelihood given in Equation \ref{eq:harmonic},
-but it is
-distinct in two main ways. First, the estimator in Equation \ref{eq:rbf} is an average over values that are
-not a direct function of the data ($\X$). Note that the contribution of the data to the likelihood cancels out
-in Equation \ref{eq:data_cancel} because it is equal in both models. 
-The data thus influences the estimate of the Bayes factor only through its influence on the sampled instances $\{\GT^{(i)}\}$.
+Note that the condition of Equation \ref{eq:pref_integral} implies the equality in Equation \ref{eq:pref1},
+and the condition of Equation \ref{eq:pref_support} guarantees no division-by-zero in Equation \ref{eq:pref2}.
 %
-Second, the variance of the probability ratios in Equation \ref{eq:rbf} is potentially smaller than the variance of the
-inverse likelihoods used in Equation \ref{eq:harmonic}.
+Interestingly, the contribution of the data to the likelihood cancels out in Equation \ref{eq:data_cancel} (because it is equal in both models).
 %
-In particular, this variance depends on the definition of the model-pairing conditional, $\Pref$, and it will
+Thus the ratio used for estimation, ${\Pref(\GT|\Mref) }/{P(\GT|\M)}$, is not a direct function of the data ($\X$),
+and the data affects the estimate only through its influence the sampled instances $\{\GT^{(i)}\}$.
+%
+Importantly, the variance of this ratio, which we refer to as the {\em relative Bayes factor (RBF) ratio},
+%is potentially smaller than the variance of the inverse likelihoods used in Equation \ref{eq:harmonic}.
+%
+%In particular, this variance
+depends on the definition of the model-pairing conditional, $\Pref$, and it will
 typically decrease as $\M$ and $\Mref$ become more similar.
-For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and this ratio becomes
+For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and the RBF ratio becomes
 1 for all instances $\{\GT^{(i)}\}$.
 %
-This is the key advantage of direct estimation of the Bayes factor, when compared to
-estimation via the ratio of two likelihoods estimated by harmonic mean.
+This is the key advantage of direct estimation of the Bayes factor, when compared to estimation via harmonic mean, and
+realizing this advantage requires construction of an effective model-pairing conditional distribution for $\M$ and $\Mref$.
+%, and this is not possible for all pairs of models. 
 %
-However, to realize this potential we need to define a valid model-pairing conditional function for $\M$ and $\Mref$,
-and this is not possible for all pairs of models. 
-%
-The following sections present specific constructions of $\Pref$ in a series of cases.
+The following sections present specific constructions for $\Pref$ in a series of cases.
 
 
 \subsection*{The null reference model $\M_0$}
@@ -371,69 +374,50 @@ is the simplest possible model with a single population of constant size, $\thet
 %
 We refer to this simple one-parameter model as the {\em null reference model}, $\M_0$.
 %
-To define a model-pairing conditional probability function, we first identify a mapping $F$ from the space
-of hidden variables in $\M$ to the space of hidden variables in $\M_0$.
+% Construction of the model-pairing conditional is done in {three steps}.
 %
-Let us denote by $\Gref$ and $\Tref$ the hidden variables of $\M_0$.
+%\textbf
+{The first step} of constructing a model-pairing conditional for the two models is to identify a mapping $F$ from the space
+of hidden variables in $\M$ to the space of hidden variables in $\M_0$.
+%, allowing us to express the likelihood under $\M_0$ as an integral over hidden variables in $\M$.
+%
+In our case, denote by $\Gref$ and $\Tref$ the hidden variables of $\M_0$.
 %
 Because both $\M$ and $\M_0$ have no migration bands, then we may assume that the genealogical information used
-by both models is the same, implying a natural one-to-one mapping between $\G$ and $\Gref$ (see next section on discussion of migration).
+by both models is the same, implying a natural one-to-one mapping between $\G$ and $\Gref$ (the implications of migration are discussed in the next section).
 %
-However, while $\Tref=\{\theta_0\}$, $\T$ will typically consist of more parameters: $\T=\{\tau_p\}\cup\{\theta_p\}$.
+%However, while $\Tref=\{\theta_0\}$, $\T$ will typically consist of more parameters: $\T=\{\tau_p\}\cup\{\theta_p\}$.
 %
-A mapping between $\T$ and $\Tref$ can be defined by selecting one of the population size parameters in $\T$
+A mapping between $\T=(\taus,\thetas)$ and $\Tref=(\theta_0)$ can be defined by selecting one of the population size parameters in $\T$
 to be associated with $\theta_0$. This can be the size of the root population, $\troot$, or any other population
-that we expect to best represent the single population in $\M_0$. 
+that we expect to best represent the single population in $\M_0$.
 %
-Thus, %the mapping $F:\GT\rightarrow\Gref\Tref$ is defined as follows: $F(\GT)=(\Gref,\theta_0)$ iff $\Gref=\G$ and $\theta_0=\troot$.
-%
-%Consequently,
-the likelihood $P(\X|\M_0)$ can be expressed as follows:
-%
-%
-\begin{small}
-\begin{align}
-P(\X|\M_0)
-&=~~ \int P(\X|\Gref) P(\Gref|\Tref,\M_0) P(\Tref|\M_0)\ d\Gref d\Tref  \notag \\ %
-&=~~ \int P(\X|\G) P(\Gref=\G|\theta_0=\troot,\M_0) P(\theta_0=\troot|\M_0)\ d\G d\troot  ~. \notag
-%\label{eq:likelihood_null_1} %
-\end{align}
-\end{small}
-
-This simple transformation between integration parameters allows us to express the likelihood under $\M_0$
-using a subset of the hidden variables of $\M$.
-%
-To express the likelihood as an integral over the {\em complete} space, $\GT$, we need to define a
-conditional probability distribution over the remaining hidden variables in $\M$:
-$~ \Z=\T\setminus \{\troot\} = \{\tau_p\}\cup\{\theta_p\}_{p\neq root}$.
-%
-Given this conditional probability distribution, which we denote by $\Pref(\Z|\GT\setminus\Z)$, we define the
-complete conditional $\Pref(\GT|\Mref)$ as follows:
+The model pairing conditional is obtained by applying this mapping and extending it to the unmapped hidden variables, $~ \Z=(\taus,\thetas\setminus \{\troot\})$,
+%= \{\tau_p\}\cup\{\theta_p\}_{p\neq root}$,
+with the use of a conditional distribution, $\Pref(\Z|\GT\setminus\Z)$:
 %
 %
 \begin{small}
 \begin{equation}
  \Pref(\GT|\M_0)  ~~=~~
-% &=~~ P(\Gref\Tref = F(\GT)|\M_0)\ \Pref(\Z|\Gref\Tref = F(\GT),\M_0) \notag \\
-% &=~~ \Pref(\G,\troot,\Z|\M_0)
- \Pref(\Z|\G,\troot) P(\Gref=\G|\theta_0=\troot,\M_0) P(\theta_0=\troot|\M_0)\ ~ .\label{eq:pref_null}
+ P(\theta_0=\troot|\M_0)\ P(\Gref=\G|\M_0,\theta_0=\troot)\ \Pref(\Z|\G,\troot)   ~ .\label{eq:pref_null}
 \end{equation}
 \end{small}
 %
 %
-The main model-pairing condition (Equation \ref{eq:pref}) is thus satisfied:
+The model-pairing condition of Equation \ref{eq:pref_integral} is thus established, regardless of how $\Pref(\Z|\G,\troot)$ is defined:
 %
 %
 \begin{small}
 \begin{align}
 P(\X|\M_0)
-&=~~ \int P(\X|\Gref) P(\Gref|\Tref,\M_0) P(\Tref|\M_0)\ d\Gref d\Tref  \notag \\ %
-&=~~ \int P(\X|\G) P(\Gref=\G|\theta_0=\troot,\M_0) P(\theta_0=\troot|\M_0)\ d\G d\troot \notag \\ 
-&=~~ \int P(\X|\G) P(\Gref=\G|\theta_0=\troot,\M_0) P(\theta_0=\troot|\M_0)\ 
-\left( \int \Pref(\Z|\G,\troot)d\Z\right)d\G d\troot \notag \\ 
+&=~~ \int P(\Tref|\M_0)\ P(\Gref|\M_0,\Tref)\ P(\X|\Gref)\   d\Gref d\Tref  \notag \\ %
+&=~~ \int P(\theta_0=\troot|\M_0)\ P(\Gref=\G|\M_0,\theta_0=\troot)\ P(\X|\G)\  d\G d\troot \notag \\ 
+&=~~ \int P(\theta_0=\troot|\M_0)\ P(\Gref=\G|\M_0,\theta_0=\troot)\ P(\X|\G)\
+\left( \int \Pref(\Z|\G,\troot)\ d\Z \right) d\G d\troot \notag \\ 
 %
-&=~~ \int P(\X|\G)\ \Pref(\Z|\G,\troot) P(\Gref=\G|\theta_0=\troot,\M_0) P(\theta_0=\troot|\M_0)\ d\GT \notag \\ 
-&=~~ \int P(\X|\G) \Pref(\GT|\M_0)\ d\GT ~. \label{eq:likelihood_null} %
+&=~~ \int P(\theta_0=\troot|\M_0)\ P`(\Gref=\G|\M_0,\theta_0=\troot)\ \Pref(\Z|\G,\troot)\ P(\X|\G)\ d\GT \notag \\ 
+&=~~ \int \Pref(\GT|\M_0)\ P(\X|\G)\ d\GT ~. \label{eq:likelihood_null} %
 \end{align}
 \end{small}
 
@@ -443,82 +427,75 @@ P(\X|\M_0)
 % function with $\Pref$ to indicate that it is not strictly implied by any of the models of interest.
 
 %
-Note that this condition is satisfied regardless of how $\Pref(\Z|\G,\troot)$ is defined.
-%
-The conditional distribution $\Pref(\Z|\G,\troot)$ is thus designed to ensure the second condition,
-which requires that there is no $\GT$ for which $\Pref(\GT|\Mref)>0$ and $P(\GT|\M,\X)=0$.
-%
-Another design objective is to ensure that this conditional probability is similar to $P(\Z|\M)$,
-and by this reducing the variance of the ratio
-$\Pref(\GT|\Mref) / P(\GT|\M)$ used in the estimation of the Bayes factor (see Equation \ref{eq:rbf}).
-%
-In the case of the null reference model, the variable set $\Z$ consists of all divergence time parameters ($\{\tau_p\}$)
-and all population size parameters other than $\troot$ ~($\{\theta_p\}_{p\neq root}$).
-%
-We start by defining $\Pref(\{\theta_p\}_{p\neq root}|\GT\setminus\Z)$ based exactly on the the prior distribution
-assumed by $\M$:
-%
-%
-\begin{equation}
- \Pref(\Z|\G,\troot) ~~=~~ \Pref(\{\theta_p\}_{p\neq root},\{\tau_p\}|\G) ~~=~~ 
- \Pref(\{\tau_p\}|\G) \ \prod_{p\neq root} P(\theta_p|\M)\  ~.\label{eq:cond_tau}
-\end{equation}
+%The model pairing conditional is thus shaped based on how we .
 
-
-The remaining conditional distribution $\Pref(\{\tau_p\}|\G)$ cannot simply be defined using the
-prior under $\M$, because this may lead to conflicts with the genealogies in $\G$.
+We are left to construct $\Pref(\Z|\G,\troot)$ so that it ensures the model-pairing condition of Equation \ref{eq:pref_support},
+and we wish to use the remaining degree of freedom to minimize the variance of the RBF ratio.
 %
-Conflicts occur when there is a divergence time $\tau_p$, which is deeper than the most recent common ancestor
-in $\G$ of two individuals that are each a descendant of a different daughter population of population $p$.
+Equation \ref{eq:pref_support} is guaranteed by constricting $\Pref(\Z|\G,\troot)$ to have zero values whenever $P(\G,\troot,\Z|\M,\X)=0$.
 %
-Because such a conflict implies that $P(\GT|\M) = 0$, we must also guarantee that $\Pref(\GT|\M_0)=0$.
+Among the unmapped variables $\Z=(\taus,\thetas\setminus \{\troot\})$, the population size parameters $\thetas\setminus \{\troot\}$ do not 
+pose any restrictions on the mapped variables $\G,\troot$. This means that Equations \ref{eq:pref_support} is guaranteed regardless of how their marginal distribution is defined.
 %
-This guarantee is achieved by computing for each $\tau_p$ an upper bound based on the coalescent events in $\G$
-and defining $\Pref(\{\tau_p\}|\G)$ as a product of uniform distributions in the feasible ranges of $\{\tau_p\}$
+We thus define their conditional probability distribution according to their prior probability in $\M$, to cancel out terms in the RBF ratio and potentially reduce its variance.
 %
-(the complete derivation is given in Appendix \ref{ap:cond_nomig}).
 %
-Consequently, the ratio used in Equation \ref{eq:rbf} to estimate the Bayes factor of $\M$ relative to $\M_0$ is expressed as follows:
+%
+%\begin{equation}
+% \Pref(\Z|\G,\troot) ~~=~~ \Pref(\{\theta_p\}_{p\neq root},\{\tau_p\}|\G) ~~=~~ 
+% \Pref(\{\tau_p\}|\G) \ \prod_{p\neq root} P(\theta_p|\M)\  ~.\label{eq:cond_tau}
+%\end{equation}
 %
 %
 \begin{small}
 \begin{align}
 \frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
+&=~~ \frac{ P(\theta_0=\troot|\M_0) ~ P(\G|\M_0,\theta_0=\troot) ~ \Pref(\Z|\G,\troot)} {P(\GT|\M)} \notag \\
 &=~~ \frac{ P(\G|\M_0,\theta_0=\troot) }{ P(\G|\M,\T)}~ 
-     \frac{ P(\theta_0=\troot|\M_0)}{P(\troot|\M)}~
-     \frac{ \Pref(\Z|\G,\troot)}{P(\Z|\M)} \notag \\
+     \frac{ P(\theta_0=\troot|\M_0) \prod_{p\neq \troot}\Pref(\theta_p|\G,\troot) }{P(\troot|\M)\prod_{p\neq \troot}P(\theta_p|\M)}~
+     \frac{ \Pref(\taus|\G,\thetas)}{P(\taus|\M)} \notag \\
 &=~~ \frac{ P(\G|\M_0,\theta_0=\troot) }{ P(\G|\M,\T)}~ 
      \frac{ P(\theta_0=\troot|\M_0)}{P(\troot|\M)}\
-     \frac{ \Pref(\{\tau_p\}|\G)}{P(\{\tau_p\}|\M)} ~. \label{eq:rbf_null}
+     \frac{ \Pref(\taus|\G,\thetas)}{P(\taus|\M)} ~. \label{eq:rbf_null}
 \end{align}
 \end{small}
 
-Note that the terms relating to the prior probability of parameters $\{\theta_p\}_{p\neq root}$ cancel out int the third term,
-and  if we assume that $\M$ and $\M_0$ use the same prior distribution over population size parameters,
+Note that if we assume that $\M$ and $\M_0$ use the same prior distribution over $\theta_{root}$ and $\theta_0$ (resp.),
 then the middle term in Equation \ref{eq:rbf_null} also cancels out.
 %
-In summary, by appropriately defining the model-pairing probability function $\Pref$, this ratio
-becomes an adjusted version of the genealogy likelihoods $P(\G|\Mref,\Tref)/P(\G|\M,\T)$. 
-
+We cannot similarly define $\Pref(\taus|\G,\thetas)=P(\taus|\M)$, because this may lead to conflicts between divergence times and coalescence times in $\G$, which result in violation of
+the model-pairing condition of Equation \ref{eq:pref_support}.
+%
+Such conflicts occur when a divergence time $\tau_p$ is deeper than the most recent common ancestor
+in $\G$ of two individuals that are each a descendant of a different daughter population of population $p$.
+%
+% Because such a conflict implies that $P(\GT|\M) = 0$, we must also guarantee that $\Pref(\{\tau_p\}|\G)=0$.
+%
+Thus, the final step of constructing $\Pref(\GT|\Mref)$ is to construct $\Pref(\taus|\G,\thetas)=\Pref(\taus|\G)$ to have zero values whenever $P(\G|\M,\taus,\thetas)=0$.
+%
+This guarantee is achieved by computing for each $\tau_p$ an upper bound based on the coalescent events in $\G$
+and defining $\Pref(\taus|\G)$ as a product of uniform distributions in the feasible ranges of $\taus$
+%
+(see  Appendix \ref{ap:cond_nomig} for complete derivation and proof).
 
 
 \subsection*{Models with gene flow}
 
 Assume now that the reference model is still the null model, $\M_0$, but the model of interest, $\M$, has a non-empty
-set of migration bands, $B$, associated with migration rate parameters, $\{m_b\}$.
+set of migration bands, $B$, associated with migration rate parameters, $\migs=\{m_b:b\in B\}$.
 %
 Migration complicates the mapping between $\M$ and $\M_0$ because the genealogies in $\M$ hold information
 about migration events, but the genealogies in $\M_0$ do not.
 %
-For a sequence of locus-genealogies $\G$ in $\M$, let us denote by $\Gc$ the coalescent trees implied by $\G$
-and let us denote by $\Gm$ the information on migration events in $\G$ (locus, timing of event, branch in $\Gc$, source and target populations).
+For a sequence of local genealogies $\G$ in $\M$, denote by $\Gc$ the coalescent trees implied by $\G$
+and denote by $\Gm$ the information on migration events in $\G$ (locus, timing of event, branch in $\Gc$, source and target populations).
 %
-Because the genealogies $\Gref$ in $\M_0$ have no migration events, then there is a natural mapping between $\Gc$ and $\Gref$ and $P(\X|\G) = P(\X|\Gc)$.
-Thus, a mapping between the hidden variables of $\M$ and the hidden variables of $\M_0$ can be defined by
-mapping $\Gc$ to $\Gref$ and mapping a population size parameter $\troot$ in $\M$ to the single parameter $\theta_0$
-of $\M_0$.
+%Because the genealogies $\Gref$ in $\M_0$ have no migration events, then t
+%There is a natural mapping between $\Gc$ (of $\M$) and $\Gref$ (of $\M_0$) and $P(\X|\Gref) = P(\X|\Gc)$.
+Thus, a mapping between the hidden variables of $\M$ ($\Gc,\Gm,\T$) and the hidden variables of $\M_0$ ($\Gref,\theta_0$) can be defined by
+mapping $\Gc$ to $\Gref$ and mapping some $\troot\in\T$ to $\theta_0$.
 %
-Consequently, the set of unmapped hidden variables is $\Z~=~\GT\setminus(\Gc\cup\{\troot\})~=~ \Gm\cup\{\tau_p\}\cup\{m_b\}\cup\{\theta_p\}_{p\neq root}$.
+Consequently, the set of unmapped hidden variables is $\Z~=~ (\Gm,\taus,\migs,\thetas\setminus\{\troot\})$.
 %
 This implies a slight modification of the model-pairing conditional specified in Equation \ref{eq:pref_null}:
 %
@@ -528,168 +505,183 @@ This implies a slight modification of the model-pairing conditional specified in
  \Pref(\GT|\M_0)
  &=~~ 
  %\Pref(\Gc,\troot,\Z|\M_0) ~~=~~
- \Pref(\Z|\Gc,\troot) P(\Gref=\Gc|\theta_0=\troot,\M_0) P(\theta_0=\troot|\M_0)\ ~ .\label{eq:pref_mig}
+ P(\theta_0=\troot|\M_0)\  P(\Gref=\Gc|\M_0,\theta_0=\troot)\ \Pref(\Z|\Gc,\troot)  ~ .\label{eq:pref_mig}
 \end{align}
 \end{small}
 
-
-It is easy to confirm that such a model-pairing conditional probability function satisfies the model-pairing condition of
-Equation \ref{eq:pref} (by following the same set of equations as in Equation \ref{eq:likelihood_null}).
+The model-pairing condition of Equation \ref{eq:pref_integral} can be confirmed  by following a sequence of equalities similar to the ones we derived for 
+the scenario without migration (see Equation \ref{eq:likelihood_null}).
 %
 We are thus left to specify the conditional distribution $\Pref(\Z|\Gc,\troot)$ to ensure that all $\GT$ for which $P(\Gc,\troot,\Z|\M,\X)=0$
 also satisfy $\Pref(\Z|\Gc,\troot)=0$.
 %
 Since the genealogy trees $\Gc$ do not restrict the population size and migration rate parameters, we may define
-the conditional probability for these parameters based on their prior probability under $\M$:
-%
-%
-\begin{equation}
- \Pref(\Z|\GT\setminus\Z) ~~=~~ 
- \Pref(\{\tau_p\},\Gm|\Gc) \ \prod_{p\neq root} P(\theta_p|\M)\ \prod_b P(m_b|\M)\  ~.\label{eq:cond_tau_mig}
-\end{equation}
-%
-
-The construction of the conditional $\Pref(\{\tau_p\},\Gm|\Gc)$ is complicated by the fact that the divergence times $\{\tau_p\}$ and the migration events in $\Gm$
-are entangled in a complex dependency structure.
-%
-A migration event between populations $p_1$ and $p_2$ at time $t$ implies that the divergence times of all populations ancestral to $p_1$ and $p_2$ is at least $t$.
-%
-At the same time, this migration event may also relax the upper bound of these divergence times.
-%
-Thus, bounds on divergence times cannot be determined solely based on $\Gc$, and the conditional $\Pref(\{\tau_p\},\Gm|\Gc)$ cannot be factored into a product of
-two separate probability distributions for $\{\tau_p\}$ and $\Gm$.
-%
-In Appendix \ref{ap:cond_mig} we present a specification for the joint conditional distribution $\Pref(\{\tau_p\},\Gm|\Gc)$,
-which addresses this complex dependence and ensures that $\Pref(\{\tau_p\},\Gm|\Gc)=0$ whenever $P(\{\tau_p\},\Gm,\Gc|\M)=0$.
-%%
-Plugging in this conditional probability function, the ratio used in Equation \ref{eq:rbf} to estimate the Bayes factor of $\M$ relative to $\M_0$ is expressed as follows:
+the conditional probability for these parameters based on their prior probability under $\M$, so that their terms cancel out in the RBF ratio:
 %
 %
 \begin{small}
 \begin{align}
 \frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
+&=~~ \frac{ P(\theta_0=\troot|\M_0) ~  P(\Gref=\Gc|\M_0,\theta_0=\troot) ~ \Pref(\Z|\Gc,\troot) } {P(\GT|\M)} \notag \\
 &=~~ \frac{ P(\Gc|\M_0,\theta_0=\troot) }{ P(\Gc,\Gm|\M,\T)}~ 
-     \frac{ P(\theta_0=\troot|\M_0)}{P(\troot|\M)}~
-     \frac{ \Pref(\{\tau_p\},\Gm|\Gc)}{P(\{\tau_p\}|\M)} ~. \label{eq:rbf_mig}
+     \frac{ P(\theta_0=\troot|\M_0) \prod_{p\neq root}\Pref(\theta_p|\Gc,\troot)~\prod_{b}\Pref(m_b|\Gc,\troot) }{P(\troot|\M)\prod_{p\neq\troot}P(\theta_p|\M)~\prod_{b}P(m_b|\M)}~
+     \frac{ \Pref(\taus,\Gm|\Gc)}{P(\taus|\M)} \notag \\
+&=~~ \frac{ P(\Gc|\M_0,\theta_0=\troot) }{ P(\Gc,\Gm|\M,\T)}~ 
+     \frac{ P(\theta_0=\troot|\M_0)}{P(\troot|\M)}\
+     \frac{ \Pref(\taus,\Gm|\Gc)}{P(\taus|\M)} ~. \label{eq:rbf_mig}
 \end{align}
 \end{small}
 
-The construction of $\Pref(\{\tau_p\},\Gm|\Gc)$ given in Appendix \ref{ap:cond_mig} ensures that some of its terms cancel out with the genealogy likelihood
-$P(\Gc,\Gm|\M,\T)$, to reduce the variance of this ratio across our samples.
+As in the case without migration, we are left to define the conditional probability distribution over the restricting hidden variables, which are in this case the divergence times
+$\taus$ and the migration events $\Gm$.
+%
+The complex dependence between divergence times and migration events makes this particularly challenging.
+%
+For instance, a migration event between populations $p_1$ and $p_2$ at time $t$ implies that the divergence times of all populations ancestral to $p_1$ and $p_2$ is at least $t$,
+%
+but at the same time this migration event may also relax the upper bound of these divergence times.
+%
+Thus, bounds on divergence times cannot be determined solely based on $\Gc$, and the conditional $\Pref(\taus,\Gm|\Gc)$ cannot be factored into a product of
+two separate probability distributions for $\taus$ and $\Gm$.
+%
+In Appendix \ref{ap:cond_mig} we present a specification for the joint conditional distribution $\Pref(\taus,\Gm|\Gc)$,
+which addresses this complex dependence and ensures that $\Pref(\taus,\Gm|\Gc)=0$ whenever $P(\taus,\Gm,\Gc|\M)=0$.
+%%
+This construction results in additional terms canceling out with terms in  the genealogy likelihood
+$P(\Gc,\Gm|\M,\T)$, to further reduce the variance of the RBF ratio.
 
 
 \subsection*{The comb reference model}
 
-The null model is a useful reference, because it can be used as a point of comparison for every demographic model.
+
+The null model has the unique advantage of being a valid reference for the comparison of any two models.
+This advantage, however, comes at the cost of collapsing all population structure.
 %
-Two arbitrary models, $\M_1$ and $\M_2$, may be compared by taking the ratio between their Bayes factors estimated relative to $\Mref=\M_0$:
-$\rbf(\M_1:\M_2|\X) = \rbf(\M_1:\Mref|\X) / \rbf(\M_2:\Mref|\X)$.
+In many cases we know the population designation of the sampled individuals, and model uncertainty is restricted to the relationships between the sampled populations.
 %
-To improve the statistical robustness of this approach, we may select a reference model that is similar to $\M_1$ and $\M_2$.
-%
-In this sense, the null model has a clear disadvantage, because it contains none of the structural information of most demographic models.
-%
-In principle, we would like to use a reference model that has the shared structural components of all models we wish to compare.
-%
-For instance, if all compared models share the same set of sampled populations (leaves in the population phylogeny $\Tr$),
-then their common structure may be described using a population phylogeny with a single ancestral population ($root$) splitting instantaneously
-into all sampled populations.
-%
+To capture this simple structure we use a population phylogeny with a single ancestral population splitting simultaneously into all sampled populations.
 We refer to such models as {\em comb} models and denote them by $\Mcomb$,  due to the comb-like structure of the population phylogeny.
 %
-A comb model is defined by a star-like population phylogeny, as described above, and a set of  migration bands, $B_L$,
-between sampled populations.
+A comb model is defined by: (1) a set of sampled (leaf) populations, $L$; (2) an ancestral population, $comb$; and (3) a set of migration bands $B_L$ between populations in $L$.
 %
-We denote such a comb model by $\Mcomb(L,B_L)$ and associate it with the following set of $|B_L|+|L|+2$ parameters:
-%
-%
-\begin{small}
-\begin{equation*}
- \Tref ~=~ \{ \tau_{root},\theta_{root} \} \cup \{\theta_p:p\in L\}\cup \{m_b:b\in B_L\} ~.
-\end{equation*}
-\end{small}
-%
+The resulting demographic model, $\Mcomb(L,B_L)$, has $|B_L|+|L|+2$ parameters: $\Tref ~=~ (\tacomb, \widetilde{\thetas},\widetilde{\migs})$,
+where $\widetilde{\thetas}=\{\theta_p:p\in L\cup \{comb\}\}$ and $\widetilde{\migs} = \{m_b:b\in B_L\}$.
 %
 
-We will describe a model-pairing conditional distribution for $\Mcomb(L,B_L)$ together with any model $\M$ with sampled populations
-$L$ and whose set of migration bands between sampled populations is exactly $B_L$.
-%
-The key to this model-pairing is identifying the single divergence time parameter of the comb model, $tau_{root}$, with the
-smallest divergence time in $\M$, which we refer to as $\tmin$ ($\tmin$ does not necessarily correspond to a specific parameter in $\M$; see discussion below).
-%
-The model-pairing conditional distribution is based on the observation that the comb model, $\Mcomb(L,B_L)$, is identical to $\M$ below $\tmin$, and identical
-to the null model $\M_0$ above $\tmin$.
-%
-The model parameters of both models ($\M$ and $\Mcomb(L,B_L)$), which are relevant to the section below $\tmin$ are $\{\theta_l\}_{l\in L}$ and $\{m_b:b\in B_L\}$.
-%
-We can thus easily define a 1-1 mapping between the two sets of parameters.
-%
-Similarly, if we denote by $\G^{<\tmin}$ the portion of $\G$ below time $\tmin$, then $\G^{<\tmin}$ (of $\M$) and $\Gref^{<\tmin}$ (of $\Mcomb(L,B_L)$)
-can be mapped 1-1.
-%
-On the other hand. because above time $\tmin$ the comb model behaves like the null model, we use the mapping defined in the previous sections for the null model.
 
-Assume a given model of interest, $\M$, over a set of sampled populations, $L$. The appropriate comb model for $\M$ is 
-Next, we specify the model-pairing conditional $\Pref$ for an arbitrary model, $\M$, over sampled populations, $L$, and no migration bands
-between populations in $L$ ($\M$ may have migration bands involving ancestral populations). As with the null model discussed above, we start
-by mapping parameters of $\Mcomb(L)$ into a subset of parameters in $\M$. The population size parameters for sampled populations are mapped
-1-1, and the root population size in $\Mcomb(L)$ is mapped to the root population size in $\M$ (or some other appropriate population, as done
-with the null model. Importantly, the parameter $\tau_{root}$ in $\Mcomb(L)$ is mapped to the divergence time parameter with smallest value
-among all divergence time parameters in $\M$, which we denote by $\tmin$. This is to ensure that the genealogy can be mapped without violating any of the divergence time
-constraints. Note that unlike with the simple null model, the parameter mapping depends on parameter values. The genealogies, $\G$, are mapped
-as described for the null model. Note that because $\M$ does not have migration bands between sampled populations, then all migration events
-in $\G$ are necessarily timed ``above'' $\tmin$, and thus would be mapped to the root population in $\Mcomb(L)$.
+Consider a demographic model, $\M(\Tr,B)$, and its corresponding comb model, $\Mcomb(L,B_L)$, defined by $L=leaves(\Tr)$ and $B_L=B \cap (L \times L)$.
+%
+For brevity, we refer to $\Mcomb(L,B_L)$ simply as $\Mcomb$.
+%
+The model-pairing conditional distribution for $\M$ and $\Mcomb$ is constructed by first defining a mapping between the hidden variables of $\M$ ($\GT$) and the hidden variables of $\Mcomb$ ($\Gref\Tref$).
+%
+This mapping is derived from the requirement that below the comb divergence time ($\tacomb$) the comb model is identical to $\M$ and above it $\Mcomb$ is identical to the null model $\M_0$.
+%
+We thus set $\tacomb=\tmin\eqdef\min(\taus)$, to guarantee that all population divergence events in $\M$ map to the comb population in $\Mcomb$.
+%
+The migration rates of bands in $\B \cap (L \times L)$ and effective sizes of populations in $L$ are mapped into their counterparts in $\Tref$,
+%
+and following the mapping for the null model, a single ancestral population size parameter ($\troot$) is chosen to be mapped into $\thcomb$.
+%
+We denote the set of mapped migration rate and population size parameters of $\M$ collectively as $\Tcomb$.
+%
+Mapping between genealogies is obtained by {removing from $\G$ all migration events above time $\tmin$}.
+The resulting collection of local genealogies are denoted by $\Gcomb$ and are directly mapped to $\Gref$.
+%
+The remaining unmapped hidden variables ($\Z$) of $\M$ consist of the following components:
+\begin{enumerate}
+ \item Unmapped population size parameters: $\{\theta_p : p\notin L\cup \{root\}\ \}$.
+ \item Unmapped migration rate parameters:  $\{m_b: b\notin L \times L \}$.
+ \item The identity of the ancestral population in $\Tr$ with minimum divergence time: $minAncPop=\argmin(\taus)$. 
+   Note that this population may be \emph{any ancestral population with two leaf daughters}, and its identity is lost when mapping $\taus$ into $\tacomb$.
+ \item The divergence times of all other populations: $\{\tau_p:p\neq minAncPop\}$.
+ \item Information on all migration events in $\G$ above time $\tacomb$, which we denote by $\G_{m|>\tmin}$.
+\end{enumerate}
 
-A useful way to view this is that below $\tmin$, the reference model $\Mcomb(L)$ is identical to $\M$ (same populations and same embedding of
-genealogies in these populations), and above $\tmin$, $\Mcomb(L)$ is identical to $\M_0$.
-%
-Thus, the unmapped hidden variables of $\M$, which we denote collectively by $\Z$, all relate to sections of the model above $\tmin$:
-the migration events, $\Gm$, the $|L|-2$ unmapped $\theta$ parameters and $|L|-2$ unmapped $\tau$ parameters of $\M$.
-%
-Consequently, the conditional distribution $\Pref(\Z|\GT\setminus\Z)$ is defined the same way as define for the null model
-(see Equation \ref{eq:cond_tau_mig} and Appendix \ref{ap:cond_nomig}).
-%
-Formally, for a genealogy $\G$ of model $\M$, let us denote by $\G_{<\tmin}$ and $\G_{>\tmin}$ the parts of the genealogy below and above time $\tmin$,
-respectively, and we get:
-%
-% Because $\G_{<\tmin}$ is mapped from $\M$ to $\Mcomb(L)$ without any change, we get:
-\begin{small}
-\begin{align}
-P(\G_{<\tmin}|\Mcomb(L),\Tref) ~~&=~~ P(\G_{<\tmin}|\Mcomb(L),\{\theta_l\}_{l\in L}) ~~=~~ 
-P(\G_{<\tmin}|\M,\{\theta_l\}_{l\in L}) ~. \label{eq:comb_lt_tmin}\\
-%
-P(\G_{>\tmin}|\Mcomb(L),\Tref) ~~&=~~ P(\G_{>\tmin}|\Mcomb(L),\troot) ~~=~~ 
-P(\G_{>\tmin}|\M_0,\theta_0=\troot) ~. \label{eq:comb_gt_tmin}
-\end{align}
-\end{small}
 
-One small difference between our derivation for the null model and the comn model is that we have to add an additional hidden variable to $\Z$ that
-indicates the identity of the parameter in $\T$ corresponding to $\tmin$.
-This additional variable is uniformly distributed among all $\tau$ parameters corresponding to the divergence of two sister populations
-in $L$. Assuming the number of such parameters is $numSisters$, and that the priors for population size parameters are dentical
-in all models, the Bayes factor ratio of Equation \ref{eq:rbf} for $\M$ relative to $\Mcomb(L)$ is:
+A model-pairing conditional distribution for $\M$ and $\Mcomb$ is thus established by applying the mapping described above and
+specifying a conditional distribution over the unmapped parameters, $\Pref(\Z|\Gcomb,\Tcomb,\tmin)$. The proof of the condition in Equation \ref{eq:pref_integral} is given below:
 %
 %
 \begin{small}
 \begin{align}
-\frac{\Pref(\GT|\Mcomb(L)) }{P(\GT|\M)}
-&=~~ % \frac{ P(\G_{c,<\tmin}|\{\theta_l\}_{l\in L},\Mcomb) }{ P(\G_{c,<\tmin}|\{\theta_l\}_{l\in L},\M)}~
-     \frac{ P(\G_{c,>\tmin}|\theta_0=\troot,\M_0) }{ P(\G_{>\tmin}|\T,\M)} ~
-     \frac{ \Pref(\{\tau_p\},\G_{m,>\tmin}|\G_{c,>\tmin})}{P(\{\tau_p\}|\M)} ~
-     \times \frac{1}{numSisters}~. \label{eq:rbf_comb_nomig}
+ \Pref(\GT|\Mcomb)
+ &=
+ P(\Tref=(\Tcomb,\tmin)|\Mcomb)\ P(\Gref=\Gcomb|\Mcomb,\Tcomb,\tmin)\ \Pref(\Z|\Gcomb,\Tcomb,\tmin)  ~ .\label{eq:pref_comb}\\
+%\notag \\
+%\end{align}
+%\end{small}
+%
+%
+%\begin{small}
+%\begin{align}
+P(\X|\Mcomb)
+&= \int P(\Tref|\Mcomb)\ P(\Gref|\Mcomb,\Tref)\ P(\X|\Gref)\   d\Gref\Tref  \notag \\ %
+&= \int P(\Tref=(\Tcomb,\tmin)|\Mcomb)\ P(\Gref=\Gcomb|\Mcomb,\Tcomb,\tmin)\ P(\X|\Gcomb)\  ~ d\Gcomb\Tcomb\tmin \notag \\ 
+&= \int P(\Tref=(\Tcomb,\tmin)|\Mcomb)\ P(\Gref=\Gcomb|\Mcomb,\Tcomb,\tmin)\ P(\X|\Gcomb) \left( \int \Pref(\Z|\Gcomb,\Tcomb,\tmin) d\Z \right) d\Gcomb\Tcomb\tmin \notag \\ 
+&= \int P(\Tref=(\Tcomb,\tmin)|\Mcomb)\ P(\Gref=\Gcomb|\Mcomb,\Tcomb,\tmin)\ \Pref(\Z|\Gcomb,\Tcomb,\tmin)\ P(\X|\G)\   d\GT \notag \\ 
+&= \int \Pref(\GT|\M_0)\ P(\X|\G)\ d\GT ~. \label{eq:likelihood_comb} %\\
+%\notag \\
 \end{align}
 \end{small}
 
-Note that $G_{<\tmin}$ contains no migration events (thus, $G_{m,<\tmin}$ is empty), and Equation \ref{eq:comb_lt_tmin}
-implies that its contribution to $\Pref(\GT|\Mcomb(L))$ cancels out with its contribution to $P(\GT|\M)$.
+The conditional distribution $\Pref(\Z|\Gcomb,\Tcomb,\tmin)$ is defined similar to its specification in the null model.
+%
+The unmapped population size and migration rate parameters are distributed according to their prior probability under $\M$ to eliminate terms in the RBF ratio.
+%
+The identity of the minimal ancestral population, $minAncPop$, is distributed uniformly among all ancestral populations in $\Tr$ with two leaf daughters.
+%
+We denote the number of such populations in $\Tr$ by $\kappa(\Tr)$.
+%
+The only unmapped variables restricted by $\Gcomb$ and $\tmin$ are the unmapped divergence times and migration events above time $\tmin$. Their conditional distribution,
+$\Pref(\taus\setminus\{\tmin\},\G_{m|>\tmin}|\Gc)$, is defined using the process described for the null model (see Appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig}).
+%
+This specification thus guarantees the condition of Equation \ref{eq:pref_support}, as in the case of the null reference model.
+%
+The resulting RBF ratio is expressed as follows:
+%
+%
+\begin{small}
+\begin{align}
+\frac{\Pref(\GT|\Mcomb) }{P(\GT|\M)}
+&= \frac{ P(\Tref=(\Tcomb,\tmin)|\Mcomb) ~ P(\Gref=\Gcomb|\Mcomb,\Tcomb,\tmin) ~ \Pref(\Z|\Gcomb,\Tcomb,\tmin) } {P(\GT|\M)} \notag \\
+&= \frac{ P(\Gref=\Gcomb|\Mcomb,\Tcomb,\tmin) }{ P(\G|\M,\T)}~ 
+   \frac{ P(\Tref=(\Tcomb,\tmin)|\Mcomb) }{ P(\Tcomb|\M) }~
+   \frac{ \frac{1}{\kappa(\Tr)}\Pref(\taus\setminus\{\tmin\},\G_{m|>\tmin}|\Gc)}{P(\taus|\M)} ~. \label{eq:rbf_comb}
+\end{align}
+\end{small}
 
 
-Now, assume that all models of interest share the same set of migration bands between sampled populations
-(models may have different sets of migration bands involving ancestral populations).
+As in the case of the null reference model, the above RBF ratio has several terms canceling out. First, the conditional probabilities of the unmapped population size and
+migration rate parameters cancel out with their priors under $\M$. Second, if we assume identical priors in both models for the mapped parameters,
+then these cancel out as well in the second term of Equation \ref{eq:rbf_comb}.
+Terms in the genealogy likelihood contributed by migration events above time $\tmin$ also cancel out in the ratio (see Appendix \ref{ap:cond_mig}).
+Finally, the contribution of all events below time $\tmin$ (coalescence and migration) also cancel out.
+If we denote the portion of $\G$ below time $\tmin$ by $\G_{<\tmin}$, and the portion above it by $\G_{>\tmin}$, then the contribution of $\G_{<\tmin}$ 
+to the first term of the RBF ratio cancels out as follows:
 %
-Let us denote by $B_L$ the shared set of leaf migration bands.
 %
-~~.\ .\ .\ ---TBA---
+\begin{small}
+\begin{align}
+\frac{ P(\Gcomb|\Mcomb,\Tcomb,\tmin) }{ P(\G|\M,\T)}
+&=~~ \frac{ {P(\Gcomb}_{<\tmin}|\Mcomb,\Tcomb,\tmin) P({\Gcomb}_{>\tmin}|\Mcomb,\Tcomb,\tmin) }{ P(\G_{<\tmin}|\M,\T) P(\G_{>\tmin}|\M,\T)}   \notag \\
+&=~~ \frac{ {P(\G}_{<\tmin}|\Mcomb,\Tcomb,~\tacomb=\tmin)}{ P(\G_{<\tmin}|\M,\Tcomb,~\min(\taus)=\tmin)} ~\frac{ P({\G}_{c|>\tmin}|\Mcomb,\thcomb=\troot) }{ P(\G_{>\tmin}|\M,\T)}   \notag \\
+&=~~ \frac{ P({\G}_{c|>\tmin}|\M_0,\theta_0=\troot) }{ P(\G_{>\tmin}|\M,\T)} ~.  \label{eq:gen_ratio_comb}
+\end{align}
+\end{small}
+
+The RBF may thus be re-expressed as follows:
+%
+%
+\begin{small}
+\begin{align}
+\frac{\Pref(\GT|\Mcomb) }{P(\GT|\M)}
+&= \frac{1}{\kappa(\Tr)} ~
+   \frac{\Pref(\G_{>\tmin},\ \T\setminus\{\tmin\}\ |\ \M_0) }{P(\G_{>\tmin},\ \T\setminus\{\tmin\}\ |\ \M)} ~
+   \frac{ P(\Tref\setminus\{\thcomb\}=(\Tcomb\setminus\{\troot\},\tmin)|\Mcomb) }{ P(\Tcomb\setminus\{\troot\}|\M) }~. \label{eq:rbf_comb1}
+\end{align}
+\end{small}
+
 
 \subsection*{Collapsing clades}
 
@@ -902,12 +894,86 @@ expected at neutral and selected sites.
 
 
 \appendix
+\newcommand{\anc}{\geq_\Tr}
+\newcommand{\nanc}{\ngeq_\Tr}
+\section{\texorpdfstring{The conditional distribution $\Pref(\taus|\G)$ for models without migration}{Conditional distribution without migration}}\label{ap:cond_nomig}
 
-\section{\texorpdfstring{The conditional distribution $\Pref(\{\tau_p\}|\G)$ for models without migration}{Conditional distribution without migration}}\label{ap:cond_nomig}
+Recall that the model-pairing conditional distribution for the null model $\M_0$ with a model $\M$ with no migration bands is determined by specifying a conditional
+distribution for the divergence times given the genealogy, $\Pref(\taus|\G)$ (Equation \ref{eq:rbf_null}).
+%
+To guarantee the model-pairing condition of Equation \ref{eq:pref_support} we need to ensure that  $\Pref(\taus|\G)=0$ whenever $P(\G|\taus,\M)=0$.
+%
+This is done by determining when a given collection of genealogies is \emph{embeddable} in a population phylogeny.
+%
+Consider a population phylogeny $\Tr$ with given divergence times $\taus=\taus$ and a collection of local genealogies $\G$ whose leaves are mapped to
+leaves of $\Tr$.
+%
+Each vertex $v$ in a local genealogy corresponds to a coalescent event at time $t(v)$, and each vertex $p$ in the population phylogeny corresponds to a population
+whose life span is between $\tau(p)$ and $\tau(parent(p))$. (if $p$ is a leaf population then $\tau(p)=0$ and if $p$ is the root population then $\tau(parent(p))=\infty$.)
+%
+A valid embedding is defined as follows:
+%
+\begin{definition}\label{def:embed}
+ An embedding of a collection of local genealogies $\G$ in a timed population phylogeny $(\Tr,\taus)$ is a mapping, $pop:\G\rightarrow\Tr$,
+ which satisfies the following conditions for every coalescent event $v$ in $\G$:
+ \begin{enumerate}
+  \item $pop(v)$ is alive at time $t(v)$:~~ $\tau(pop(v)) ~<~ t(v) ~\leq~ \tau(parent(pop(v)))$~.\label{cond:time}
+  \item $pop(parent(v))$ is ancestral (or equal) to $pop(v)$:~~ $pop(parent(v)) \anc pop(v)$.\label{cond:anc}
+ \end{enumerate}
+\end{definition}
 
--- TBA --
+Note that condition \ref{cond:anc} can be extended to show that for every $u$ ancestral to $v$, we have $pop(u) \anc pop(v)$.
+%
+Another interesting observation about embeddings is that they are \textbf{unique given the population assignments to the leaves in} $\G$.
+%
+To prove this, consider an arbitrary coalescent event $v$ in $\G$, and let $l$ be some some leaf in the subtree rooted at $v$ (we denote this set by $leaves(v)$).
+%
+Condition \ref{cond:anc} implies that $pop(v) \anc pop(l)$, and there is exactly one population ancestral to $pop(l)$ that also satisfies condition \ref{cond:time} (i.e. alive at time $t(v)$).
+%
+This argument can also be used to establish a sufficient and necessary condition for the existence of an embedding.
+%
+\begin{definition}[$mrcaPop$]\label{def:tmrca_pop}
+ Given a coalescent event $v$ in a local genealogy whose leaves are assigned to the leaves of a population phylogeny $\Tr$,
+ let ${mrcaPop(v)}$ denote the most recent population ancestral to all populations in $\{pop(l):l\in leaves(v)\}$.
+\end{definition}
 
-\section{\texorpdfstring{The conditional distribution  $\Pref(\{\tau_p\},\Gm|\Gc)$ for models with migration}{Conditional distribution with migration}}\label{ap:cond_mig}
+\begin{lemma}\label{lem:embed}
+ A collection of local genealogies $\G$ has an embedding in a timed population phylogeny $(\Tr,\taus)$ iff every coalescent event $v$ in $\G$ satisfies $t(v) > \tau(mrcaPop(v))$.
+\end{lemma}
+\begin{proof}
+ ~\\
+ $\Rightarrow$:~~ Consider an embedding $pop:\G\rightarrow\Tr$, and let $v$ be an arbitrary coalescent event in $\G$.
+ Condition \ref{cond:anc} implies that $pop(v)\anc pop(l)$ for all $l\in leaves(v)$, and thus $pop(v)\anc mrcaPop(v)$.
+ By condition \ref{cond:time}, we get $t(v) > \tau(pop(v)) \geq \tau(mrcaPop(v))$.\\
+ $\Leftarrow$:~~ Let $v$ be an arbitrary coalescent event in $\G$, and assume that $t(v) > \tau(mrcaPop(v))$. This means that there is a (unique) population, $p^*$,
+ ancestral to $mrcaPop(v)$ that is also alive at time $t(v)$ (i.e., $\tau(p^*) ~<~ t(v)$\\
+ $\leq~ \tau(parent(p^*))$). Define the embedding $pop$ by mapping $v$ to population $p^*$.
+ Condition \ref{cond:time} is guaranteed by construction. 
+ Condition \ref{cond:anc} is proved by considering an arbitrary coalescent event $v$ and its parent $u=parent(v)$.
+ By construction we get that $pop(u),pop(v) \anc mrcaPop(v)$ (because $mrcaPop(u)\anc mrcaPop(v)$).
+ Thus either $pop(v)\anc pop(u)$ or $pop(u)\anc pop(v)$.
+ Condition 1  implies that $pop(v)$ cannot be strictly ancestral to $pop(u)$ via the following sequence of inequalities:
+ %
+ $$\tau(parent(pop(u)) ~\geq~ t(u) ~\geq~ t(v) ~>~ \tau(pop(v))~.$$
+ %
+ Hence, $pop(u)\anc pop(v)$, establishing condition \ref{cond:anc}.
+\end{proof}
+
+Lemma \ref{lem:embed} can be used to establish the feasible range of every divergence time $\tau_p$ by noting that a given divergence time
+is feasible (i.e., $P(\G|\tau_p=\tau,\M)>0$) if and only if the values of the other divergence times can be set to allow the embedding of $\G$ in $(\Tr,\taus)$.
+
+\begin{corollary}\label{cor:tau_bound}
+ Let $\G$ be a  collection of local genealogies whose leaves are mapped to leaves of a population phylogeny $\Tr$. Then for every population $p$ in $\Tr$, we have:
+ %
+ $$P(\G|\tau_p=\tau,\M)>0 \textbf{~~iff~~}  0\leq \tau < \min \{t(v):mrcaPop(v)\anc p\} ~.$$
+\end{corollary}
+
+Given $\G$, we may compute $divBound(p|G) \eqdef \min \{t(v):mrcaPop(v)\anc p\}$ for every population $p$ in $\Tr$, and then define $\Pref(\taus|\G)$ as a uniform distribution over the
+multi-dimensional rectangle defined by $\tau_p \in [0,divBound(p|G))$.
+
+\textbf{TBA: explicit description of procedure for computing $divBound(p|G)$.}
+
+\section{\texorpdfstring{The conditional distribution  $\Pref(\taus,\Gm|\Gc)$ for models with migration}{Conditional distribution with migration}}\label{ap:cond_mig}
 
 -- TBA --
 
