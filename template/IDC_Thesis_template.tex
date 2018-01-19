@@ -1,9 +1,22 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+
+
+\usepackage{mathptmx}
+%\setmainfont{Times New Roman}
+
+
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+\DefineBibliographyStrings{english}{%
+	references = {Bibliography}
+}
+\addbibresource{bibliography.bib}
+
+
 \begin{document}
 \begin{titlepage}
 	\centering
@@ -31,4 +44,37 @@
 	{\large MONTH YEAR\par}
 	
 \end{titlepage}
+
+\newpage
+
+This work was carried out under the supervision of Prof./Dr. XXXX from the Efi Arazi School of Computer Science, The	Interdiciplinary Center, Herzliya.
+
+\newpage
+
+\section*{Abstract}
+Abstract-goes-here	
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+...
+
+\section{Previous Works}
+...
+
+\section{Main Body of Work...}
+... cite original works \cite{Original}
+
+
+\newpage
+
+\printbibliography[heading=bibintoc]
+
+\newpage
+
 \end{document}
