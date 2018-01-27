@@ -371,23 +371,22 @@ def recursive_coal_stats(pop):
 
 \subsection{Calculating Comb Reference Model Genealogy Likelihood}
 
-Formula \ref{eq:gen_ratio_comb} shows how, for a comb reference model, contribution of the genealogy-likelihood to the model-pairing conditional is reduced to contribution of the portion of genealogies above $\tmin$ - 
+Formula \ref{eq:gen_ratio_comb} shows how for a reference model created by comb-collapsing the root population, contribution of the genealogy-likelihood to the model-pairing conditional is reduced to contribution of the portion of genealogies above $\tmin$ - 
 \[\frac{ P({\G}_{c|>\tmin}|\M_0,\theta_0=\troot) }{ P(\G_{>\tmin}|\M,\T)} ~ .\]
 
-The same canceling-out of terms applies equaly when the reference model is built using a comb-collapse operation on some ancestral population $p$, The difference being that here matter only the portion of genealogies inside the subtree under $p$ and above $\tmin$. We denote this reference model $\M_{\comb p}$ and get the following contribution - 
-\[\frac{ P(\G_{c|\in\comb p}|\M_{\comb p},\T_{\comb p},\tmin) }{ P(\G_{\in \comb p}|\M,\T)} \]
-As in the case for clade reference models, we wish to calculate statistics which will enable us to calculate the above fraction for all viable comb reference model after only one MCMC chain.
-%
-To calculated sufficient statistics for all possible combs, $ \{~numCoals(\G,comb(p)),~~ coalStats(\G,comb(p))~\}_p$,~ a recursive technique is applied down the population phylogeny of $M$, similiar to the one defined for clades, the difference being that for combs the function \pythoninline{calculate_coal_stats} takes into account only intervals above $\tmin$.
+When the comb-collapse is applied to a subtree and not the entire tree, we apply the same idea to the portion of the genealogy contained in that subtree. Figure 3 Illustrates the intervals relevant for genealigy-likelihood in the hypothesis and reference models. 
 
-The denominator, as opposed to the enumerator, does not depend on the reference parameter mapping, rather only on the chosen comb. We calculate this for each ancestral population $p$ by summing the genealogy likelihoods of all populations in the subtree of $p$, and subtracting the genealogy likelihood of  $\G_{<\tmin}$ in the leaves under $p$ (see figure \ref{fig:calculate_hyp_stats_above_tmin}).
+
+As in the case for clade reference models, we wish to calculate statistics for all viable comb reference models after only one MCMC chain. We do this by storing for every ancestral population $p$ the log of the denominator and the two stats involved in the calculation of the enumerator ($\{~numCoals(\G,comb(p)),~~ coalStats(\G,comb(p))~\}_p$). 
+%
+This is again calculated recursively down the population phylogeny of $M$, but the function \pythoninline{calculate_coal_stats} now takes into account only intervals above $\tmin$.
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]
-{calculate_hyp_stats_above_tmin}
-\caption{Somehow illustrate what $P(\G|\M,\T)$ above $\tmin$ means....}
+\includegraphics[width=1.0\textwidth]
+{hyp_and_comb_intervals}
+\caption{In comb reference models, genealogy-likelihood need only be calculated strictly within the bounds of the comb population $comb(p)$. Outside this area of the topology, genealogy-likelihood of the reference and hypothesis models cancels out in the Model-Pairing Conditional. \textcolor{red}{TODO - color the model branches}}
 \label{fig:calculate_hyp_stats_above_tmin}
 \end{figure}
 
