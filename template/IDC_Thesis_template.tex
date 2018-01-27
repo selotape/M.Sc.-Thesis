@@ -5,20 +5,27 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 
-\usepackage{polyglossia}
-\setmainlanguage{english}
+
+\usepackage{datetime}
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH], \THEYEAR}
+
+
+%\usepackage{polyglossia}
+%\setmainlanguage{english}
 %\setotherlanguage{hebrew}
+
 
 
 \usepackage{mathptmx}
 %\setmainfont{Times New Roman}
 
-
-\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
-\DefineBibliographyStrings{english}{%
-	references = {Bibliography}
-}
-\addbibresource{bibliography.bib}
+%% WIP %%
+%\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+%\DefineBibliographyStrings{english}{%
+%	references = {Bibliography}
+%}
+%\addbibresource{bibliography.bib}
 
 
 \begin{document}
@@ -45,7 +52,7 @@
 	\vfill
 	
 	% Bottom of the page
-	{\large MONTH YEAR\par}
+	{\large \monthyeardate\today \par}
 	
 \end{titlepage}
 
@@ -77,7 +84,8 @@ Abstract-goes-here
 
 \newpage
 
-\printbibliography[heading=bibintoc]
+Here should go Bibliography
+%\printbibliography[heading=bibintoc]
 
 \newpage
 
