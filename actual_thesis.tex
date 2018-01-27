@@ -1,7 +1,7 @@
  %
 \documentclass[11pt]{article}
 
-\usepackage{times}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -16,9 +16,19 @@
 \usepackage{lscape}
 %\usepackage{cite}
 \usepackage{xr}
-\externaldocument{mcref}
 \usepackage{bbm}
+\usepackage[normalem]{ulem}
+\usepackage{newtxtext}
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage[linesnumbered,lined,boxed,commentsnumbered,noend,ruled,vlined]{algorithm2e}
 
+\usepackage{datetime}
+\newdateformat{monthyeardate}{%
+  \monthname[\THEMONTH], \THEYEAR}
+
+
+\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
 
 \usepackage{hyperref}
 \urlstyle{rm}
@@ -36,7 +46,8 @@
 \textwidth 6.5in
 \textheight 9in
 
-\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
+\externaldocument{mcref}
+
 
 % Remove brackets from numbering in List of References
 \makeatletter
@@ -86,22 +97,7 @@
 \def\@cite#1#2{(#1\if@tempswa , #2\fi)}
 \def\@biblabel#1{}
 
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage[normalem]{ulem}
-\usepackage{color}
-\usepackage{amsfonts}
-\usepackage{listings}
-\usepackage{amssymb}
-\usepackage{amsmath}% http://ctan.org/pkg/amsmath
-\usepackage[normalem]{ulem}
-\usepackage{graphicx}
-\usepackage[linesnumbered,lined,boxed,commentsnumbered,noend,ruled,vlined]{algorithm2e}
 
-
-
-
-\usepackage[utf8]{inputenc}
 
 % Default fixed font does not support bold face
 \DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
@@ -148,13 +144,55 @@ showstringspaces=false            %
 
 
 \graphicspath{ {images/} }
+
 \author{Ron Visbord}
 % \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
-\title{Thesis!}
 
 \begin{document}
 
-\maketitle
+
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.4\textwidth]{IDC_logo}\par\vspace{2cm}
+	{\huge The Interdiciplinary Center, Herzliya \par}
+	{\Large Efi Arazi School of Computer Science \par}
+	{\Large M.Sc. Program - Research Track \par}
+	
+	\vspace{1cm}
+	
+	\vspace{1.5cm}
+	{\Huge Title of Thesis\par}
+	\vspace{3cm}
+	{\large by\par}
+	{\large\bfseries Visbord Ron\par}
+	
+	\vspace{2cm}
+	{M.Sc. dissertation, submitted in partial fulfillment of the requirements\par}
+	{for the M.Sc. degree, research track, School of Computer Science\par}
+	{The Interdisciplinary Center, Herzliya}
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \monthyeardate\today \par}
+	
+\end{titlepage}
+
+\newpage
+
+This work was carried out under the supervision of Dr. Ilan Gronau from the Efi Arazi School of Computer Science, The Interdiciplinary Center, Herzliya.
+
+\newpage
+
+\section*{Abstract}
+Abstract-goes-here	
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
 
 
 \section{Calculations Schema}
