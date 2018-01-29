@@ -185,7 +185,7 @@ This work was carried out under the supervision of Dr. Ilan Gronau from the Efi 
 \newpage
 
 \section*{Abstract}
-High throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses.
+High throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses. 
 
 
 \newpage
@@ -194,13 +194,35 @@ High throughput sequencing has greatly improved our ability to investigate the e
 
 \newpage
 
+
 \section{Introduction}
 
 
+\section{Background}
+
+
 Demography inference methods typically take in sequence data $X$ from a collection of individuals originating from closely related populations and a parameterized demographic model $\M$, and they infer
-values of parameters $\T$ in that model. Bayesian methods achieve this by assuming some prior distribution on the model parameters $P(\T|\M)$ and sampling parameter values from an approximate posterior distribution $P(\T|\M, X)$. Because the joint probability distribution $P(X, \T|\M)$ cannot be efficiently computed, this task is often done by introducing local genealogies $G$ to the model, such that the probability $P(X , G, \T|\M)$ can be efficiently and accurately computed, and employing a Monte-Carlo Markov-Chain 1 (MCMC) sampling algorithm for $G$ and $\T$, e.g. IMa 2 , BP\&P 3 , and G-PhoCS4. 
+values of parameters $\T$ in that model. Bayesian methods achieve this by assuming some prior distribution on the model parameters $P(\T|\M)$ and sampling parameter values from an approximate posterior distribution $P(\T|\M, X)$. Because the joint probability distribution $P(X, \T|\M)$ cannot be efficiently computed, this task is often done by introducing local genealogies $G$ to the model, such that the probability $P(X , G, \T|\M)$ can be efficiently and accurately computed, and employing a Monte-Carlo Markov-Chain 1 (MCMC) sampling algorithm for $G$ and $\T$, e.g. IMa 2 , BP\&P 3 , and \gp 4. 
 %
 Sampling by MCMC guarantees that $\T$ \& $G$ will be sampled from a probability distribution approximating the posterior - $P(\T, G|X , \M)$. From this distribution one can extract approximate posterior means and credible intervals for all demographic parameters.
+
+\gp is one such Bayesian demography inference method. Given sequence data, i.e. a small collection of unphased genomes at tens of thousands of short unlinked neutrally evolving loci , and given a population phylogeny model, \gp infers parameters $\T$ such as population divergence times $\tau$, ancestral population sizes $\theta$ and rates of post-divergence gene flow $m$. This is accomplished using MCMC sampling of local genealogies jointly with model parameters according to an approximate posterior distribution for full Bayesian inference.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{multiple_loci_across_sequence}
+\caption{CAPTION CAPTION CAPTION}
+\label{fig:clade_collapse_AB}
+\end{figure}
+
+In each iteration \gp proposes a new instace of $G, \T$ and decides whether to accept or reject the new proposal based on the ratio between likelihoods of the current instance and proposed instance. \gp assumes no recombination events within a locus, therefore the likelihood is a product across loci. Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp
+%
+\begin{equation}\label{eq:likelihood}
+ P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
+\end{equation}
+
+Where $P(\T|\M)$ is the prior probability of model parameters to take current values, $P(\G_l|\M,\T)$ is the probability of logal genealogy $G_l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local dna data likelihood given locus $G_l$.
 
 \section{Preliminaries: demographic models and Bayesian inference}
 
@@ -505,6 +527,11 @@ Multiple debug plots are also emitted by mcref. Their goal is to help the resear
 
 
 \section{Results}
-Here-Go-Results
+Results-go-here
+
+\newpage
+
+\section{References}
+Bibliography-goes-here
 
 \end{document}
