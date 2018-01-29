@@ -185,7 +185,7 @@ This work was carried out under the supervision of Dr. Ilan Gronau from the Efi 
 \newpage
 
 \section*{Abstract}
-Abstract-goes-here	
+High throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses.
 
 
 \newpage
@@ -195,6 +195,12 @@ Abstract-goes-here
 \newpage
 
 \section{Introduction}
+
+
+Demography inference methods typically take in sequence data $X$ from a collection of individuals originating from closely related populations and a parameterized demographic model $\M$, and they infer
+values of parameters $\T$ in that model. Bayesian methods achieve this by assuming some prior distribution on the model parameters $P(\T|\M)$ and sampling parameter values from an approximate posterior distribution $P(\T|\M, X)$. Because the joint probability distribution $P(X, \T|\M)$ cannot be efficiently computed, this task is often done by introducing local genealogies $G$ to the model, such that the probability $P(X , G, \T|\M)$ can be efficiently and accurately computed, and employing a Monte-Carlo Markov-Chain 1 (MCMC) sampling algorithm for $G$ and $\T$, e.g. IMa 2 , BP\&P 3 , and G-PhoCS4. 
+%
+Sampling by MCMC guarantees that $\T$ \& $G$ will be sampled from a probability distribution approximating the posterior - $P(\T, G|X , \M)$. From this distribution one can extract approximate posterior means and credible intervals for all demographic parameters.
 
 \section{Preliminaries: demographic models and Bayesian inference}
 
