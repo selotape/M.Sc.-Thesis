@@ -240,15 +240,50 @@ relative populations, which of the candidate phylogenetic topologies $\M$ best f
 \centering
 \includegraphics[width=0.8\textwidth]
 {model_A__OR__model_b}
-\caption{CAPTION CAPTION CAPTION}
+\caption{CAPTION CAPTION!}
 \label{fig:model_A__OR__model_b}
 \end{figure}
 
 The Model Comparison Problem makes a distinction between structural components of model $\M$ (tree topology, migration bands, parameter priors) and parameter values $\T$ (specific migration rates, divergence times and population sizes). Model Comparison aims to compare different ‘model structures’.
 %
-Existing demography inference methods, as described in the introduction, don’t directly calculate likelihood - $P(X|\M)$, with or without parameters $\T$. The consequence is that researchers are unable to efficiently test many model hypotheses to explain the sample DNA data and tackle Model Comparison.
+Existing demography inference methods, such as \textcolor{red}{ Research 1, Paper 2 and Implementation 3}, don’t directly calculate likelihood - $P(X|\M)$, with or without parameters $\T$. The consequence is that researchers are unable to efficiently test many model hypotheses to explain the sample DNA data and tackle Model Comparison.
 %
 In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-comparison scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
+
+We bear in mind that in most cases researchers are interested only in qualitative claims about the structure
+of the model and not in qualitative claims about specific parameter values. To keep our method as
+general as possible, the comparison algorithm we present receives no parameters $\T$ and will thus
+output a result pertaining only to the topology of the model. This will allow us to test \textit{structural
+hypotheses} by integrating over parameter values.
+
+\subsection{An attempt – Standard Harmonic Mean}
+One approach to model-comparison is to directly estimate the likelihood of the two candidate models, $P(X|\M_1)$  and  $P(X|\M_2)$. This is hard to analytically compute as $X$ and $M$ are only remotely related ,via $G$ and $\T$. One approach around this is the standard harmonic method. Defining $G\T$ as a joint random-variable of the genealogies and model parameters, we have - 
+
+\begin{small}
+\begin{align}
+\mathbf{ HM(\M) ~:=~ \frac{1}{P(X|\M)} } ~&=~ \int \frac{P(G\T|\M)}{P(X|\M)} dG\T ~=~ \int \frac{P(G\T|\M)P(X,G\T|\M)}{P(X,G\T|\M)P(X|\M)}   dG\T \notag \\ 
+%
+&=~ \int \frac{P(G\T|X,\M)}{P(X|G\T)} dG\T ~=~ \mathbf{\E_{G\T|X,\M}\bigg[\frac{1}{P(X|G)}\bigg]} ~. 
+\label{eq:harmonic_mean_estimator}
+\end{align}
+\end{small}
+
+The last expression of equation \ref{eq:harmonic_mean_estimator} can be approximated using n MCMC samples of $\frac{1}{P(X|G)}$ from the posterior distribution $[G \T|X, \M]$ and calculating their mean. This approach fits naturally within the existing \gp framework for demography inference. However, since $\frac{1}{P(X|G)}$ is a random variable with very high variance (potentially unbounded when $G$ is distributed according to- $[G\T|X, \M]$ ), calculating its expectation is difficult and likely requires too large a number of samples.
+
+
+\subsection{Our suggestion – Relative Bayes Factors}
+...Explain McRef in high level terms and promise further explanation in main body...
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{A_vs_B_via_ref}
+\caption{To caption, or not to caption?}
+\label{fig:model_A__OR__model_b}
+\end{figure}
+
+
 
 \newpage
 
