@@ -141,7 +141,13 @@ showstringspaces=false            %
 % Python for inline
 \newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
 
-
+\newenvironment{tightcenter}{%
+  \setlength\topsep{0pt}
+  \setlength\parskip{0pt}
+  \begin{center}
+}{%
+  \end{center}
+}
 
 \graphicspath{ {images/} }
 
@@ -223,6 +229,29 @@ In each iteration \gp proposes a new instace of $G, \T$ and decides whether to a
 \end{equation}
 
 Where $P(\T|\M)$ is the prior probability of model parameters to take current values, $P(\G_l|\M,\T)$ is the probability of logal genealogy $G_l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local dna data likelihood given locus $G_l$.
+
+\subsection{The Model Comparison problem}
+More fundamental in the field of computational biology is the model comparison problem. \textbf{The model comparison problem aims to compare the fit to sequence data between a collection of structural models}. Models in this case are phylogenetic topologies, also known as population or demographic models. An example Model-Comparison question would be –\\
+% 
+\begin{tightcenter}{\textit{“Given sequence data $X$ of samples from
+relative populations, which of the candidate phylogenetic topologies $\M$ best fits the data?“}}
+\end{tightcenter}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{model_A__OR__model_b}
+\caption{CAPTION CAPTION CAPTION}
+\label{fig:model_A__OR__model_b}
+\end{figure}
+
+The Model Comparison Problem makes a distinction between structural components of model $\M$ (tree topology, migration bands, parameter priors) and parameter values $\T$ (specific migration rates, divergence times and population sizes). Model Comparison aims to compare different ‘model structures’.
+%
+Existing demography inference methods, as described in the introduction, don’t directly calculate likelihood - $P(X|\M)$, with or without parameters $\T$. The consequence is that researchers are unable to efficiently test many model hypotheses to explain the sample DNA data and tackle Model Comparison.
+%
+In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-comparison scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
+
+\newpage
+
 
 \section{Preliminaries: demographic models and Bayesian inference}
 
