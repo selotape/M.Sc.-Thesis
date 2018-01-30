@@ -220,30 +220,25 @@ High throughput sequencing has greatly improved our ability to investigate the e
 
 \section{Introduction II}
 
-The field of evolution tries to explain the process of speciation - the formation of species and populations in nature.
+In recent years, advances in high throughput DNA sequencing has made cheaply available a large amount of genomes of individuals from closely related species. This enabled the use of data-intensive computational methods and statistical models, allowing evolutionary biologists to better understand the evolution of recently diverged species.
 %
-In recent years,  high throughput DNA sequencing has made available a large amount of genomes of multiple individuals from closely related species, enabling the use of data-intensive computational methods and statistical models, allowing evolutionary biologists to better understand the evolution of recently diverged species.
+Typically, an evolutionary biologist, having obtained multiple aligned genome sequences from relative species or populations, would like to recreate the evolutional history of the sequenced individuals. This evolutional history, also referred to as the \textbf{phylogenetic model}, includes population ancestry and divergences, population size changes and population migration rates.
 %
-Typically, a genetic evolution researcher obtains several aligned genome sequences from recently diverged species or populations and would like to accurately recreate their evolutional history. This history, often refered to as the phylogenetic or \textbf{population model}, includes ancestor population divergences, population size changes and migration rates.
+The job of retracing the evolutional history may be viewed as two seperate tasks; First, one must find the phylogenetic model \textbf{structure}. This is the tree-like structure which represents the ancestry relation between all relevant populations, as well as any migration bands between two populations. Then, one must find the model \textbf{parameters}. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates.
 %
-Many existing popular methods try to infer model parameters by assuming the evolutional structure  and performing bayesian inference on model parameters. These methods however are not capable to effectively assess the fit of the data to the assumed model structure.
+Many existing popular methods try to infer model parameters by assuming the evolutional structure  and performing bayesian inference on model parameters [1, 2 \& 3]. These methods are effective because [TODO - figure out why these methods are effective]. However, they cannot effectively assess the fit of the sequence data to the assumed model structure.
 %
 (TODO - rewrite following sentence about alternative methods) Alternative methods for directly assessing the fit of data to model exist (harmonic mean...) but these are known to have high variance or be too cpu-intensive.
 %
-This leaves us with no tools to select the model which best describes the evolutional history based of the gene data.
+This leaves us with no robust tools for selecting the model structure which best fits the sequence data.
 %
 The goal of our research is thus to take the existing robust and efficient methods for parameter inference and utilize them in the more basic problem of model selection.
 %
 
 
-
-
-
 \subsection{Other Relevant Work}
 
-...Do-We-Need-This?
-
-Maybe discuss structure+parameter inference methods here
+Discuss structure+parameter inference methods here - 
 
 \begin{itemize}
 \item general methods (non bayesian)for history reconstruction. what are the drawbacks in "likelihood-based" approaches?
