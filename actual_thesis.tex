@@ -201,13 +201,85 @@ High throughput sequencing has greatly improved our ability to investigate the e
 \newpage
 
 
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% HERE STARTETH THE PAPER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{Introduction II}
+
+The field of evolution tries to explain the process of speciation - the formation of species and populations in nature.
+%
+In recent years,  high throughput DNA sequencing has made available a large amount of genomes of multiple individuals from closely related species, enabling the use of data-intensive computational methods and statistical models, allowing evolutionary biologists to better understand the evolution of recently diverged species.
+%
+Typically, a genetic evolution researcher obtains several aligned genome sequences from recently diverged species or populations and would like to accurately recreate their evolutional history. This history, often refered to as the phylogenetic or \textbf{population model}, includes ancestor population divergences, population size changes and migration rates.
+%
+Many existing popular methods try to infer model parameters by assuming the evolutional structure  and performing bayesian inference on model parameters. These methods however are not capable to effectively assess the fit of the data to the assumed model structure.
+%
+(TODO - rewrite following sentence about alternative methods) Alternative methods for directly assessing the fit of data to model exist (harmonic mean...) but these are known to have high variance or be too cpu-intensive.
+%
+This leaves us with no tools to select the model which best describes the evolutional history based of the gene data.
+%
+The goal of our research is thus to take the existing robust and efficient methods for parameter inference and utilize them in the more basic problem of model selection.
+%
+
+
+
+
+
+\subsection{Other Relevant Work}
+
+...Do-We-Need-This?
+
+Maybe discuss structure+parameter inference methods here
+
+\begin{itemize}
+\item general methods (non bayesian)for history reconstruction. what are the drawbacks in "likelihood-based" approaches?
+
+\item importance-sampling based
+
+\item thermodynamic stuff for improving harmonic-mean (hopefully these methhods can also be applied on mcref)
+
+\end{itemize}
+
 \section{Introduction}
+
+
+The field of evolution tries to explain the process of speciation - the formation of species and populations in nature. In recent years,  development of high throughput DNA sequencing methods has made available a large amount of genomes of multiple individuals from closely related species. This propogated the use of data-intensive computational methods and statistical models, allowing evolutionary biologists to better understand the evolution of recently diverged species.
+
+Two basic problems of this domain are demography \textbf{structure} inference (also known as phylogenetic model selection) and demography \textbf{parameter} inference. 
+Structure inference is all about choosing the evolutionary model which best fits the genom data. ...sometimes from scratch by searching the model/tree space (reference - https://www.nature.com/articles/nmeth.4285) and sometimes by discriminating candidates (newton-raftery, Lartillot N \& Philippe). --reference-STRUCTURE-right-here etc. maybe say that an evolutionary tree may contain gene-flow and thus isn't a tree--.
+
+overview of model-selection: www.webpages.uidaho.edu\/\~jacks\/Sullivan\&Joyce2005.pdf
+
+
+Parameter inference is all about choosing the evolutionary model parameters i.e. divergence times, ancestral population sizes, and amount of gene flow. --...sometimes we wish to choose parameters which maximize genomic data likelihood (??) and sometimes we wish to estimate distribution (G-PhoCS etc[?]). 
+
+These two problems are often approached simultaneously (refrence-would-be-nice-here).
+
+...claim that historically most scientific oomph went towards parameter inference (--lotso-references--)
+
+...claim that parameter inference has made great leaps but structure inference not so much, so our goal is to utilize recent advances in parameter-inference to accomplish structure inference. 
+
+...Introduce G-PhoCS. State our goal: Introduce a framework for model-comparison, develop it using G-PhoCS and validate it using experimentation
 
 
 \section{Background}
 
 
-Demography inference methods typically take in sequence data $X$ from a collection of individuals originating from closely related populations and a parameterized demographic model $\M$, and they infer
+Demography inference methods typically take in aligned sequence data $X$ from a collection of individuals originating from closely related populations and a parameterized demographic model $\M$, and they infer
 values of parameters $\T$ in that model. Bayesian methods achieve this by assuming some prior distribution on the model parameters $P(\T|\M)$ and sampling parameter values from an approximate posterior distribution $P(\T|\M, X)$. Because the joint probability distribution $P(X, \T|\M)$ cannot be efficiently computed, this task is often done by introducing local genealogies $G$ to the model, such that the probability $P(X , G, \T|\M)$ can be efficiently and accurately computed, and employing a Monte-Carlo Markov-Chain 1 (MCMC) sampling algorithm for $G$ and $\T$, e.g. IMa 2 , BP\&P 3 , and \gp 4. 
 %
 Sampling by MCMC guarantees that $\T$ \& $G$ will be sampled from a probability distribution approximating the posterior - $P(\T, G|X , \M)$. From this distribution one can extract approximate posterior means and credible intervals for all demographic parameters.
