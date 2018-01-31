@@ -97,6 +97,30 @@
 \def\@cite#1#2{(#1\if@tempswa , #2\fi)}
 \def\@biblabel#1{}
 
+\newtheorem{claim}{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+
+\newcommand{\eqdef}{\stackrel{\Delta}{=}}		
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+\newcommand{\taus}{\vect\tau}
+\newcommand{\thetas}{\vect\theta}
+\newcommand{\migs}{\vect{m}}
+
+
+\newcommand{\thref}{\widetilde{\thetas}}
+\newcommand{\taref}{\widetilde{\taus}}
+\newcommand{\migref}{\widetilde{\migs}}
+
+\newcommand{\thcomb}{\theta_{comb}}
+\newcommand{\tacomb}{\tau_{comb}}
+
+\def\comb{\rotatebox[origin=c]{90}{$\exists$}}
+
+
 
 
 % Default fixed font does not support bold face
@@ -226,33 +250,37 @@ High throughput sequencing has greatly improved our ability to investigate the e
 
 \section{Introduction}
 
-In recent years, advances in high throughput DNA sequencing have made it easy to sequence large amounts of genomes of individuals from closely related species. This allows evolutionary biologists to examine the evolution of recently diverged species, by employing data-intensive computational methods and statistical models.
+In recent years, advances in high throughput DNA sequencing have made it easy to sequence many genomes of individuals from closely related species. This allows evolutionary biologists to examine the evolution of recently diverged species, by employing data-intensive computational methods and statistical models.
 %
-Typically, an evolutionary biologist, having obtained multiple aligned genome sequences from relative species or populations, would like to recreate the evolutionary history of the sequenced individuals. This evolutionary history includes a series of population splits, population ancestry and divergences, population size changes and post-divergence gene flow.\\
+Typically, an evolutionary biologist, having obtained and aligned genome sequences of individuals from relative species or populations, would like to recreate the evolutionary history of the sequenced individuals. This evolutionary history includes a series of population splits, population ancestry and divergences, population size changes and post-divergence gene flow.\\
 %
-The job of retracing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.\\
+The job of retracing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.\\
 %
-One recent successful approach for parameter inference has been to assume the model structure $\M$ is given, then to explicitly represent the genealogy of the sampled individuals at unlinked short loci, and use these local genealogies along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm, to produce Bayesian estimates of the target parameters. [TODO - reference said methods]
+One recent successful approach for parameter inference has been to assume the model structure $\M$, and then to explicitly represent the genealogy of the sequenced individuals at short unlinked loci, and use these local genealogies along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm, effectively integrating out
+the information on genealogical relationships between individuals and producing Bayesian estimates of the target parameters. [TODO - reference said methods]
 %
-These methods are advantageous over methods which do not explicitly represent the genealogical relationship between individuals for several reasons; At their core is a full probabilistic generative model of the data. This allows use of more complex model structures. Also, These models effectively integrate out the information on genealogical relationships between individuals, and they produce approximate posterior distributions on model parameters, which quantify the uncertainty of their estimations.\\
+These methods are advantageous over methods which do not explicitly represent the genealogical relationship between individuals for several reasons; The full probabilistic generative model of the data at their core allows modeling more complex evolutionary structures, with more free parameters. Also, these models produce approximate posterior distributions on model parameters, which quantify the uncertainty of their estimations.
 %
-However, exactly because of these methods conditioning on a given model structure $\M$, there is no straightforward way to use their posterior distribution on parameters to evaluate the assumed model fit.
+However, exactly due to the conditioning on a given model structure $\M$, there is no straightforward way to use their inferred posterior distribution on parameters to evaluate the assumed model fit.
 %
-In pronciple, measuring of model fit can be approximated by using importance sampling on the approximated posterior distribution, but standard methods for doing this are statistically inefficient [TODO - reference].
+In principle, measuring of model fit can be approximated by using importance sampling on the approximated posterior distribution, but standard methods for doing this are statistically inefficient [TODO - reference].
 %
 This leaves us with no robust tools for selecting the model structure which best fits the sequence data.\\
 %
+\\
 The goal of our research is thus to \textbf{utilize bayesian parameter inference methods to perform robust model selection}.
 %
 We accomplish this by introducing the concept of \textbf{Reference Models}, which are generic/base-line/bridging phylogenetic models used to asses model fit to data within a specific context, allowing us to choose between competing model candidates.
 %
-We will start by overviewing existing work in the field and laying down the background of common notations for phylogenetic models and parameter inference.
+We will start by overviewing existing work in the field and laying down the background and common notations for phylogenetic models and parameter inference.
 %
-We will then formally develop from scratch the concept of reference models, how the relate to phylogenetic population models, how they are used for model comparison criteria, and [maybe] why they are advantagous over existing methods. 
+We will then formally develop from scratch the concept of reference models, how the relate to phylogenetic population models, how they are used as model comparison criteria, and why they are advantageous over existing methods for model selection. 
 %
-We will then explain in detail our implementation of reference-model-based model selection, nicknamed \textbf{McRef}, based on the \gp parameter-inference framework.
+We will then explain in detail our implementation of reference-model-based model selection based on the \gp parameter-inference framework, nicknamed \textbf{McRef} due to it's employment of reference models in the MCMC process.
 %
 Finally we will share empirical results from our model-comparison experiments, showcasing the advantages and limitations of our implementation.
+
+\newpage
 
 \subsection{Other Relevant Work}
 
@@ -361,6 +389,63 @@ The last expression of equation \ref{eq:harmonic_mean_estimator} can be approxim
 
 
 \section{Preliminaries: demographic models and Bayesian inference}
+
+
+A probabilistic demographic model $\M$ uses a parameterized demographic history to define a probability distribution over observed genomic data $\X$.
+%
+The structural components of $\M$, which we assume are fixed, consist of a population phylogeny $\Tr$ and a collection
+of migration bands $B$ that indicate ordered pairs of populations between which gene flow is allowed.
+%
+The free parameters of $\M$, denoted here by $\T$, consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population of } \Tr\}$,
+effective population sizes, $\thetas=\{\theta_p: p \text{ is a population in } \Tr\}$, and migration rates, $\migs=\{m_b:b \in B\}$.
+%
+All model parameters are scaled by mutation rate.
+%
+The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
+%
+The conditional probability distribution for the observed genomic data, $P(\X|\M,\T)$, is defined by standard models for
+molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
+%
+The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
+$P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
+
+%
+Because the conditional probability $P(\X|\M,\T)$ does not typically have a closed-form expression, an increasingly popular approach for
+inference is to introduce additional hidden variables $\G$, which represent genealogical relationships
+between the sampled individuals.
+%
+The benefit of this is that given the genealogical information, the data $\X$ becomes independent of the model $\M$ and parameters $\T$,
+and the likelihood can be expressed as a product of three efficiently computable terms:
+%
+%
+\begin{equation}\label{eq:likelihood}
+ P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G)~.
+\end{equation}
+%
+%
+
+This joint probability function may be used by a Markov chain Monte Carlo (MCMC) algorithm to generate a sample of the model parameters
+together with the genealogies according to a probability distribution approximating the posterior, $P(\G,\T|\M,\X)$.
+%
+Consequently, the sampled parameter values have high joint probability with the data.
+%
+A major advantage of this approach to inference is that it is extremely flexible and can be applied to a wide range of demographic models and
+different types of genomic data.
+%
+For simplicity, we will consider here a model for sequence data at  short unlinked loci, in which case 
+$\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
+%
+However, the framework we describe here is quite general and can be extended to other types of data and more complex demographic models.
+
+%The data, $\X$, may consist of long contigs, in which case the genealogical information in $\G$ explicitly represent genetic recombination 
+%along the analyzed sequence (see, e.g., \cite{RASMETAL14}).
+%
+
+
+
+
+
+
 
 \section{Methods}
 
