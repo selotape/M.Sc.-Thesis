@@ -210,31 +210,45 @@ High throughput sequencing has greatly improved our ability to investigate the e
 
 
 
+
+
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% HERE STARTETH THE PAPER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
+\section{Introduction}
 
-
-\section{Introduction II}
-
-In recent years, advances in high throughput DNA sequencing has made cheaply available a large amount of genomes of individuals from closely related species. This enabled the use of data-intensive computational methods and statistical models, allowing evolutionary biologists to better understand the evolution of recently diverged species.
+In recent years, advances in high throughput DNA sequencing have made it easy to sequence large amounts of genomes of individuals from closely related species. This allows evolutionary biologists to examine the evolution of recently diverged species by employing data-intensive computational methods and statistical models.
 %
-Typically, an evolutionary biologist, having obtained multiple aligned genome sequences from relative species or populations, would like to recreate the evolutional history of the sequenced individuals. This evolutional history, also referred to as the \textbf{phylogenetic model}, includes population ancestry and divergences, population size changes and population migration rates.
+Typically, an evolutionary biologist, having obtained multiple aligned genome sequences from relative species or populations, would like to recreate the evolutionary history of the sequenced individuals. This evolutionary history includes a series of population splits, population ancestry and divergences, population size changes and post-divergence gene flow.\\
 %
-The job of retracing the evolutional history may be viewed as two seperate tasks; First, one must find the phylogenetic model \textbf{structure}. This is the tree-like structure which represents the ancestry relation between all relevant populations, as well as any migration bands between two populations. Then, one must find the model \textbf{parameters}. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates.
+The job of retracing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.\\
 %
-Many existing popular methods try to infer model parameters by assuming the evolutional structure  and performing bayesian inference on model parameters [1, 2 \& 3]. These methods are effective because [TODO - figure out why these methods are effective]. However, they cannot effectively assess the fit of the sequence data to the assumed model structure.
+Many existing popular methods perform parameters inference (task II) by assuming the evolutionary structure and performing bayesian inference on model parameters [TODO - reference methods]. These methods are effective because ??? [TODO - succintly explain why these methods are effective]. However, they cannot effectively assess the fit of the sequence data to the assumed model structure because ??? [TODO - explain this claim].
 %
-(TODO - rewrite following sentence about alternative methods) Alternative methods for directly assessing the fit of data to model exist (harmonic mean...) but these are known to have high variance or be too cpu-intensive.
+Alternative methods for directly assessing the fit of sequence data to some phylogenetic model exist [TODO - reference methods s.a. harmonic mean...] but these are known to have high variance or be too cpu-intensive [TODO - rewrite previous sentence with proper explanation].
 %
-This leaves us with no robust tools for selecting the model structure which best fits the sequence data.
+This leaves us with no robust tools for selecting the model structure which best fits the sequence data.\\
 %
-The goal of our research is thus to take the existing robust and efficient methods for parameter inference and utilize them in the more basic problem of model selection.
+The goal of our research is thus to \textbf{utilize bayesian parameter inference methods to perform robust model selection}.
 %
-
+We accomplish this by introducing the concept of \textbf{Reference Models}, which are generic/base-line/bridging phylogenetic models used to asses model fit to data within a specific context, allowing us to choose between competing model candidates.
+%
+We will start by overviewing existing work in the field and laying down the background of common notations for phylogenetic models and parameter inference.
+%
+We will then formally develop from scratch the concept of reference models, how the relate to phylogenetic population models, how they are used for model comparison criteria, and [maybe] why they are advantagous over existing methods. 
+%
+We will then explain in detail our implementation of reference-model-based model selection, nicknamed \textbf{McRef}, based on the \gp parameter-inference framework.
+%
+Finally we will share empirical results from our model-comparison experiments, showcasing the advantages and limitations of our implementation.
 
 \subsection{Other Relevant Work}
 
@@ -249,26 +263,13 @@ Discuss structure+parameter inference methods here -
 
 \end{itemize}
 
-\section{Introduction}
+\subsection{Unused leftovers from previous introduction}
 
+\begin{itemize}
+\item  Structure inference is all about choosing the evolutionary model which best fits the genom data. ...sometimes from scratch by searching the model/tree space (reference - https://www.nature.com/articles/nmeth.4285) and sometimes by discriminating candidates (newton-raftery, Lartillot N \& Philippe)
+\item  overview of model-selection: www.webpages.uidaho.edu\/\~jacks\/Sullivan\&Joyce2005.pdf
 
-The field of evolution tries to explain the process of speciation - the formation of species and populations in nature. In recent years,  development of high throughput DNA sequencing methods has made available a large amount of genomes of multiple individuals from closely related species. This propogated the use of data-intensive computational methods and statistical models, allowing evolutionary biologists to better understand the evolution of recently diverged species.
-
-Two basic problems of this domain are demography \textbf{structure} inference (also known as phylogenetic model selection) and demography \textbf{parameter} inference. 
-Structure inference is all about choosing the evolutionary model which best fits the genom data. ...sometimes from scratch by searching the model/tree space (reference - https://www.nature.com/articles/nmeth.4285) and sometimes by discriminating candidates (newton-raftery, Lartillot N \& Philippe). --reference-STRUCTURE-right-here etc. maybe say that an evolutionary tree may contain gene-flow and thus isn't a tree--.
-
-overview of model-selection: www.webpages.uidaho.edu\/\~jacks\/Sullivan\&Joyce2005.pdf
-
-
-Parameter inference is all about choosing the evolutionary model parameters i.e. divergence times, ancestral population sizes, and amount of gene flow. --...sometimes we wish to choose parameters which maximize genomic data likelihood (??) and sometimes we wish to estimate distribution (G-PhoCS etc[?]). 
-
-These two problems are often approached simultaneously (refrence-would-be-nice-here).
-
-...claim that historically most scientific oomph went towards parameter inference (--lotso-references--)
-
-...claim that parameter inference has made great leaps but structure inference not so much, so our goal is to utilize recent advances in parameter-inference to accomplish structure inference. 
-
-...Introduce G-PhoCS. State our goal: Introduce a framework for model-comparison, develop it using G-PhoCS and validate it using experimentation
+\end{itemize}
 
 
 \section{Background}
