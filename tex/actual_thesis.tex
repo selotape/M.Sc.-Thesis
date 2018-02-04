@@ -172,7 +172,7 @@ showstringspaces=false            %
   \end{center}
 }
 
-\graphicspath{ {images/} }
+\graphicspath{ {../images/} }
 
 \author{Ron Visbord}
 % \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
@@ -294,14 +294,6 @@ Discuss structure+parameter inference methods here -
 
 \end{itemize}
 
-\subsection{Unused leftovers from previous introduction}
-
-\begin{itemize}
-\item  Structure inference is all about choosing the evolutionary model which best fits the genom data. ...sometimes from scratch by searching the model/tree space (reference - https://www.nature.com/articles/nmeth.4285) and sometimes by discriminating candidates (newton-raftery, Lartillot N \& Philippe)
-\item  overview of model-selection: www.webpages.uidaho.edu\/\~jacks\/Sullivan\&Joyce2005.pdf
-
-\end{itemize}
-
 
 \section{Background}
 
@@ -405,8 +397,7 @@ All model parameters are scaled by mutation rate.
 %
 The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
-The conditional probability distribution for the observed genomic data, $P(\X|\M,\T)$, is defined by standard models for
-molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
+The conditional probability distribution for the observed genomic data, $P(\X|\M,\T)$, is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}) [TODO - fix references].
 %
 The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
 $P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
