@@ -880,15 +880,13 @@ In general describe, a reference model $\Mref$ for hypothesis model $\M$ may be 
 \begin{enumerate}
 \item First, \textbf{choose a subtree} of the population phylogeny of $\M$. The subtree is associated with the population $p$ at its root. 
 
-\item Then \textbf{collapse the subtree} using one of the structural collapse operations we introduce here. Generarlly speaking, \textit{collapsing} is the act of merging the populations of a subtree into a unified population. We describe two structural types of collapse operations; 
+\item Then \textbf{collapse the subtree structure} into either a clade structure, i.e. a single population $p_{clade}$ (figure (\ref{fig:clade_collapse_AB})), or a comb structure, i.e. an ancestral population $p_{comb}$ [TODO - use good comb annotation] and a set of leaf populations and migration bands $L, B_L$. 
 
-\textit{Clade-Collapse} is the operation of merging all the populations in a subtree rooted at $p$ into a single population denoted $clade(p)$. This new population will contain the portion of the genealogies previously located inside the subtree rooted at $p$ (see figure $\ref{fig:clade_collapse_AB}$). 
-
-Similiarly, \textit{Comb-Collapse} is the operation of merging populations of a subtree, while perserving its leaves up to the comb-age. This operation will be detailed later.
-
-
-\item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$, defining the model-pairing conditional distribution $\Pref$ s.t. conditions (\ref{eq:pref_integral}) and (\ref{eq:pref_support}) are met. This mapping should cancel-out as many terms of the RBF ratio as possible (equations (\ref{eq:rbf_mig}) (\ref{eq:rbf_comb})) .
+\item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$, defining the model-pairing conditional distribution $\Pref$ s.t. conditions (\ref{eq:pref_integral}) and (\ref{eq:pref_support}) are met. This mapping should cancel-out as many terms of the RBF ratio as possible (equations (\ref{eq:rbf_mig}) \& (\ref{eq:rbf_comb1})).
 \end{enumerate}
+
+Identically mapping all structure and parameters outside the subtree of $p$ during step 3 leads to canceling-out of all corresponding terms in the RBF of $\M$ relative to $\Mref$.
+
 %
 \begin{figure}[h]
 \centering
@@ -896,17 +894,14 @@ Similiarly, \textit{Comb-Collapse} is the operation of merging populations of a 
 {clade_collapse_AB}
 
 \captionsetup{width=.8\textwidth}
-\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing  the subtree rooted at $AB$ and identically mapping the rest of the hypothesis. When calculating genealogy likelihood over the reference model, we reuse statistics calculated by \gp for $ABC$ and $C$, and need only recalculate genealogy likelihood inside $clade(AB)$. This saves valuable effort in calculation of $P(\G|\T,\Mref)$ [TODO - colorcode the populations that get collapsed]}
+\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing  the subtree rooted at $AB$ and identically mapping the rest of the hypothesis. Genealogy and paramter likelihoods pertaining to populations $ABC$ and $C$ will cancel-out in the RBF formula. [TODO - color the populations that get collapsed] [TODO - move arrow to middle between models. increase font size of taus]}
 \label{fig:clade_collapse_AB}
 \end{figure}
 
 
-
-
-\newpage
-
 \section{Calculations Schema}
-Having formulated the RBF and defined reference models and their use, we now move on to expain in detail how the values are calculated. [TODO - rewrite previous sentence into a proper transition to the calculations schema]
+
+Having formulated the RBF and defined reference models and their use, we now move on to expain in detail how the model-comparison criteria are calculated.
 
 \subsection{The Computational Objective}
 
@@ -915,9 +910,10 @@ Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ re
 %
 \begin{equation}
  \frac{1}{\rbf(\M:\Mref|\X)} ~~\triangleq~~ ...  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
+ \notag
 \end{equation}
 
-Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. This is composed of hidden variable likelihoods and the genealogy likelihood over the reference model. See equations $(\ref{eq:pref_null})$, $(\ref{eq:pref_mig})$ and $(\ref{eq:rbf_comb_nomig})$ for examples of realizations of this formula for different reference models. The following chapter addresses efficiently calculating the \textbf{genealogy likelihood}, as it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
+Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. The following chapter addresses efficient calculation of the genealogy likelihood, since it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
 
 
 \subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
