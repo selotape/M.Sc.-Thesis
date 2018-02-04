@@ -279,14 +279,12 @@ We will then explain in detail our implementation of reference-model-based model
 %
 Finally we will share empirical results from our model-comparison experiments, showcasing the advantages and limitations of our implementation.
 
-\newpage
-
 \subsection{Other Relevant Work}
 
 Discuss structure+parameter inference methods here - 
 
 \begin{itemize}
-\item general methods (non bayesian)for history reconstruction. what are the drawbacks in "likelihood-based" approaches?
+\item general methods (non bayesian) for history reconstruction. what are the drawbacks in "likelihood-based" approaches?
 
 \item importance-sampling based
 
@@ -294,95 +292,10 @@ Discuss structure+parameter inference methods here -
 
 \end{itemize}
 
-
-\section{Background}
-
-
-Demography inference methods typically take in aligned sequence data $X$ from a collection of individuals originating from closely related populations and a parameterized demographic model $\M$, and they infer
-values of parameters $\T$ in that model. Bayesian methods achieve this by assuming some prior distribution on the model parameters $P(\T|\M)$ and sampling parameter values from an approximate posterior distribution $P(\T|\M, X)$. Because the joint probability distribution $P(X, \T|\M)$ cannot be efficiently computed, this task is often done by introducing local genealogies $G$ to the model, such that the probability $P(X , G, \T|\M)$ can be efficiently and accurately computed, and employing a Monte-Carlo Markov-Chain 1 (MCMC) sampling algorithm for $G$ and $\T$, e.g. IMa 2 , BP\&P 3 , and \gp 4. 
-%
-Sampling by MCMC guarantees that $\T$ \& $G$ will be sampled from a probability distribution approximating the posterior - $P(\T, G|X , \M)$. From this distribution one can extract approximate posterior means and credible intervals for all demographic parameters.
-
-\gp is one such Bayesian demography inference method. Given sequence data, i.e. a small collection of unphased genomes at tens of thousands of short unlinked neutrally evolving loci , and given a population phylogeny model, \gp infers parameters $\T$ such as population divergence times $\tau$, ancestral population sizes $\theta$ and rates of post-divergence gene flow $m$. This is accomplished using MCMC sampling of local genealogies jointly with model parameters according to an approximate posterior distribution for full Bayesian inference.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]
-{multiple_loci_across_sequence}
-\captionsetup{width=.8\textwidth}
-\caption{CAPTION CAPTION CAPTION}
-\label{fig:clade_collapse_AB}
-\end{figure}
-
-In each iteration \gp proposes a new instace of $G, \T$ and decides whether to accept or reject the new proposal based on the ratio between likelihoods of the current instance and proposed instance. \gp assumes no recombination events within a locus, therefore the likelihood is a product across loci. Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp
-%
-\begin{equation}\label{eq:likelihood}
- P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
-\end{equation}
-
-Where $P(\T|\M)$ is the prior probability of model parameters to take current values, $P(\G_l|\M,\T)$ is the probability of logal genealogy $G_l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local dna data likelihood given locus $G_l$.
-
-\subsection{The Model Comparison problem}
-More fundamental in the field of computational biology is the model comparison problem. \textbf{The model comparison problem aims to compare the fit to sequence data between a collection of structural models}. Models in this case are phylogenetic topologies, also known as population or demographic models. An example Model-Comparison question would be –\\
-% 
-\begin{tightcenter}{\textit{“Given sequence data $X$ of samples from
-relative populations, which of the candidate phylogenetic topologies $\M$ best fits the data?“}}
-\end{tightcenter}
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]
-{model_A__OR__model_b}
-\captionsetup{width=.8\textwidth}
-\caption{CAPTION CAPTION!}
-\label{fig:model_A__OR__model_b}
-\end{figure}
-
-The Model Comparison Problem makes a distinction between structural components of model $\M$ (tree topology, migration bands, parameter priors) and parameter values $\T$ (specific migration rates, divergence times and population sizes). Model Comparison aims to compare different ‘model structures’.
-%
-Existing demography inference methods, such as \textcolor{red}{ Research 1, Paper 2 and Implementation 3}, don’t directly calculate likelihood - $P(X|\M)$, with or without parameters $\T$. The consequence is that researchers are unable to efficiently test many model hypotheses to explain the sample DNA data and tackle Model Comparison.
-%
-In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-comparison scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
-
-We bear in mind that in most cases researchers are interested only in qualitative claims about the structure
-of the model and not in qualitative claims about specific parameter values. To keep our method as
-general as possible, the comparison algorithm we present receives no parameters $\T$ and will thus
-output a result pertaining only to the topology of the model. This will allow us to test \textit{structural
-hypotheses} by integrating over parameter values.
-
-\subsection{An attempt – Standard Harmonic Mean}
-One approach to model-comparison is to directly estimate the likelihood of the two candidate models, $P(X|\M_1)$  and  $P(X|\M_2)$. This is hard to analytically compute as $X$ and $M$ are only remotely related ,via $G$ and $\T$. One approach around this is the standard harmonic method. Defining $G\T$ as a joint random-variable of the genealogies and model parameters, we have - 
-
-\begin{small}
-\begin{align}
-\mathbf{ HM(\M) ~:=~ \frac{1}{P(X|\M)} } ~&=~ \int \frac{P(G\T|\M)}{P(X|\M)} dG\T ~=~ \int \frac{P(G\T|\M)P(X,G\T|\M)}{P(X,G\T|\M)P(X|\M)}   dG\T \notag \\ 
-%
-&=~ \int \frac{P(G\T|X,\M)}{P(X|G\T)} dG\T ~=~ \mathbf{\E_{G\T|X,\M}\bigg[\frac{1}{P(X|G)}\bigg]} ~. 
-\label{eq:harmonic_mean_estimator}
-\end{align}
-\end{small}
-
-The last expression of equation \ref{eq:harmonic_mean_estimator} can be approximated using n MCMC samples of $\frac{1}{P(X|G)}$ from the posterior distribution $[G \T|X, \M]$ and calculating their mean. This approach fits naturally within the existing \gp framework for demography inference. However, since $\frac{1}{P(X|G)}$ is a random variable with very high variance (potentially unbounded when $G$ is distributed according to- $[G\T|X, \M]$ ), calculating its expectation is difficult and likely requires too large a number of samples.
+\section{Preliminaries}
+\subsection{Demographic models and Bayesian inference}
 
 
-\subsection{Our suggestion – Relative Bayes Factors}
-...Explain McRef in high level terms and promise further explanation in main body...
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]
-{A_vs_B_via_ref}
-\captionsetup{width=.8\textwidth}
-\caption{To caption, or not to caption?}
-\label{fig:model_A__OR__model_b}
-\end{figure}
-
-
-
-\newpage
-
-
-\section{Preliminaries: demographic models and Bayesian inference}
 
 
 A probabilistic demographic model $\M$ uses a parameterized demographic history to define a probability distribution over observed genomic data $\X$.
@@ -425,10 +338,56 @@ Consequently, the sampled parameter values have high joint probability with the 
 A major advantage of this approach to inference is that it is extremely flexible and can be applied to a wide range of demographic models and
 different types of genomic data.
 %
-For simplicity, we will consider here a model for sequence data at  short unlinked loci, in which case 
-$\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
+
+
+
+
+\subsection{\gp}
+
+\gp is one such Bayesian demography inference method. It considers a model for sequence data at short unlinked loci, in which case 
+$\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}) [TODO - fix references]. In each MCMC iteration \gp proposes a new instace of $\G, \T$ and decides if to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance. Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp
 %
-However, the framework we describe here is quite general and can be extended to other types of data and more complex demographic models.
+\begin{equation}\label{eq:likelihood}
+ P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
+\end{equation}
+
+Where $P(\T|\M)$ is the prior probability of model parameters to take current values, $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local dna data likelihood given genealogy $G_l$.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{multiple_loci_across_sequence}
+\captionsetup{width=.8\textwidth}
+\caption{Given a small collection
+of unphased genomes at tens of thousands of short unlinked neutrally evolving loci, and a population phylogeny model, \gp infers parameters $\T$ - population divergence times $\tau$ , ancestral population sizes $\theta$ and rates of post-divergence gene flow $m$. This is accomplished using MCMC sampling of local
+genealogies jointly with model parameters according to an approximate posterior distribution for full Bayesian inference.}
+\label{fig:multiple_loci_across_sequence}
+\end{figure}
+
+
+\subsection{The Model Comparison problem}
+We introduce here an adaptation of demography inference methods such as \gp to the problem of model-selection, and more specifically model comparison. The Model Comparison Problem aims to \textbf{compare the fit of candidate structural models to sequence data}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{model_A__OR__model_b}
+\captionsetup{width=.8\textwidth}
+\caption{The model Comparison problem: \textit{“Given sequence data $X$ of samples from
+relative populations, which of the candidate phylogenetic topologies $\M$ best fits the data?“}}
+\label{fig:model_A__OR__model_b}
+\end{figure}
+
+
+The Model Comparison problem makes a distinction between structural components of model $\M$ ($\Tr$ and $B$) and parameter values $\T$. Model Comparison aims to compare different model structures.
+%
+In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-comparison scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
+%
+We bear in mind that in most cases researchers are interested only in qualitative claims about the structure
+of the model and not in qualitative claims about specific parameter values. To keep our method as
+general as possible, the comparison algorithm we present receives no parameters $\T$ and will thus
+output a result pertaining only to the topology of the model. This will allow us to test \textit{structural
+hypotheses} by integrating over parameter values.
 
 
 \section{Methods}
@@ -539,9 +498,23 @@ For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mre
 %
 This is the key advantage of direct estimation of the Bayes factor, when compared to estimation via harmonic mean, and
 realizing this advantage requires construction of an effective model-pairing conditional distribution for $\M$ and $\Mref$.
-%, and this is not possible for all pairs of models. 
 %
 The following sections present specific constructions for $\Pref$ in a series of cases.
+
+
+\subsection{Using relative Bayes factors for model comparison}
+
+[TODO - explicitly state how RBFs are used to compare models.]
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{A_vs_B_via_ref}
+\captionsetup{width=.8\textwidth}
+\caption{[TODO - explicitly illustrate how RBFs are used to compare models.]}
+\label{fig:model_A__OR__model_b}
+\end{figure}
+
 
 
 \subsection{The null reference model $\M_0$}
