@@ -388,23 +388,24 @@ times across all genealogies by a multiplicative factor sampled close to 1.
 
 
 \subsection{The Model Selection problem}
-We introduce here an adaptation of demography inference methods such as \gp to the problem of model-selection, and more specifically Model Selection Problem, which aims to compare the fit of candidate structural models to sequence data.
+
+The model selection problem takes a sequence data set and a series of phylogeny models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$). [TODO - extend figure with more examples (see caption)]
+
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {model_A__OR__model_b}
 \captionsetup{width=.8\textwidth}
-\caption{The Model Selection Problem: \textit{“Given sequence data $X$ of samples from
-relative populations, which of the candidate phylogenetic topologies $\M$ best fits the data?“}}
+\caption{An example problem of selecting between three model with different structures. In model 1 populations $A$ and $B$ are siblings. In model 2 populations $B$ and $C$ are siblings and there exists a gene-flow from $A$ to $B$, and in model 3 only to leaf populations exist - $AB$ and $C$. }
 \label{fig:model_A__OR__model_b}
 \end{figure}
 
 
-The model selection problem makes a distinction between structural components of model $\M$ ($\Tr$ and $B$) and parameter values $\T$ and tries to only compare different model structures.
 %
-In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
+In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method for comparing models and their fit to the data, this without analytically calculating $P(X|\M_i)$.
 %
-We bear in mind that in most cases evolutionary researchers are interested only in qualitative claims about the structure of the model and not in qualitative claims about specific parameter values. To keep our method as general as possible, the comparison algorithm we present receives no parameters $\T$ and will thus output a result pertaining only to the topology of the model. This will allow us to test structural hypotheses by integrating over parameter values.
+To keep our method as general as possible, our selection algorithm receives no parameters $\T$ and outputs a result pertaining only to the topology of the model.
 
 
 \section{Methods}
@@ -1074,7 +1075,7 @@ def recursive_coal_stats(pop):
 Formula \ref{eq:gen_ratio_comb} shows how for a reference model created by comb-collapsing the root population, contribution of the genealogy-likelihood to the model-pairing conditional is reduced to contribution of the portion of genealogies above $\tmin$ - 
 \[\frac{ P({\G}_{c|>\tmin}|\M_0,\theta_0=\troot) }{ P(\G_{>\tmin}|\M,\T)} ~ .\]
 
-When comb-collapse is applied to a subtree, we apply the same idea to the portion of the genealogy contained in that subtree. Figure 3 Illustrates the intervals relevant for genealogy-likelihood calculation in the hypothesis and reference models. 
+When comb-collapse is applied to a subtree, we apply the same idea to the portion of the genealogy contained in that subtree. Figure \ref{fig:calculate_hyp_stats_above_tmin} illustrates the intervals relevant for genealogy-likelihood calculation in the hypothesis and reference models. 
 
 
 As in the case for clade reference models, we wish to calculate statistics for all viable comb reference models after only one MCMC chain. We do this by storing for every ancestral population $p$ the log of the denominator $~ln(P(\G_{>\tmin}|\M,\T))~$ and the two sufficient statistics involved in the calculation of the enumerator - ($\{~numCoals(\G,comb(p)),~~ coalStats(\G,comb(p))~\}_p$). 
