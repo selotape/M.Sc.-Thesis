@@ -343,28 +343,46 @@ different types of genomic data.
 %
 
 
-
-
 \subsection{\gp}
 
-\gp is one such Bayesian demography inference method. It considers a model for sequence data at short unlinked loci, in which case 
-$\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}) [TODO - fix references]. In each MCMC iteration \gp proposes a new instace of $\G, \T$ and decides if to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance. Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp
+\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
+Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp.
 %
 \begin{equation}\label{eq:likelihood}
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
 \end{equation}
 
-Where $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local dna data likelihood given genealogy $G_l$.
+In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}).
+%
+In each MCMC update step \gp proposes a new instace of $\G, \T$ and decides if to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance. 
+[TODO - add 3 sentences explaining gphocs update steps]
 
+Each \gp update step is divided into a series of
+Metropolis-Hastings updates of subsets of variables. The update steps are:
+\begin{enumerate}
+\item Update coalescent times: For each individual coalescent event in each population, perturb the time of the event without changing the topology of the genealogy or any other coalescent time. 
+
+\item Update genealogy structure: For each subtree of each genealogy, alter the subtree using a subtree-pruneand-regraft operation. 
+
+\item Update $\theta_p$: For each population $p$, slightly perturb $\theta_p$.
+
+\item Update $\tau_p$: For each population $p$, slightly perturb $\tau_p$. If nescessary, also “stretch” or "squeeze" each genealogy $G_i$ as needed to accommodate the proposed change in $\tau_p$. 
+%
+
+\item Rescaling: Slightly perturb all model parameters ${\theta_p}$, ${\tau_p}$ and all coalescent
+times across all genealogies by a multiplicative factor sampled close to 1.
+
+\end{enumerate}
+
+
+% 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {multiple_loci_across_sequence}
 \captionsetup{width=.8\textwidth}
-\caption{Given a small collection
-of unphased genomes at tens of thousands of short unlinked neutrally evolving loci, and a population phylogeny model, \gp infers parameters $\T$ - population divergence times $\tau$ , ancestral population sizes $\theta$ and rates of post-divergence gene flow $m$. This is accomplished using MCMC sampling of local
-genealogies jointly with model parameters according to an approximate posterior distribution for full Bayesian inference.}
+\caption{\gp uses distinct independant loci, chosen to be far away from genes to reduce the influence of selection. Over each loci a local genealogy is represented and embedded in the population phylogeny.}
 \label{fig:multiple_loci_across_sequence}
 \end{figure}
 
@@ -882,7 +900,7 @@ Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the M
 \subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
 
 
-We note that there exists a natural trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full MCMC run.
+We note that there exists a clear trade-off between the flexibility in choice of reference model and the amount of data the MCMC sampling algorithm is required to emit. For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula (9) can be calculated during MCMC iteration and only the final RBF value need be emitted. However, calculating (9) on any other reference model would require another full MCMC run.
 %
 On the other hand, the RBF for every reference model can be computed in post-processing if the MCMC prints out the full hidden state $\GT$ in each iteration.
 %
