@@ -268,16 +268,19 @@ This leaves us with no robust method for comparing the fit of different structur
 \\
 The goal of our research is thus to \textbf{utilize bayesian parameter inference methods to perform robust model selection}.
 %
-We accomplish this by introducing the concept of \textbf{Reference Models}, which are base-line phylogenetic structures used to asses model fit to data within a specific context, allowing us to choose between competing model candidates. [TODO - maybe borrow the phrasing "evaluate the fit of model M by estimating its likelihood relative to
-the reference model". maybe also mention Relative Bayes Factors]
+We accomplish this by estimating model fit relative to some \textbf{Reference Model}. Reference models are base-line phylogenetic structures used to asses model fit to data within a specific context, allowing us to select between competing model candidates.
 %
-We will start by overviewing existing work in the field and laying down the background and common notations for phylogenetic models and parameter inference.
+We will start by overviewing existing work in the field in subsection 1.1.
 %
-We will then formally develop from scratch the concept of reference models, how the relate to phylogenetic population models, how they are used as model comparison criteria, and why they are advantageous over existing methods for model selection. 
+Section 2 presents the relevant background and common notations for phylogenetic models and parameter inference.
 %
-We will then explain in detail our implementation of reference-model-based model selection based on the \gp parameter-inference framework, nicknamed \textbf{McRef} due to it's employment of reference models in the MCMC process.
+Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind relative Bayes factors, which are our model selection criteria. 
 %
-Finally we will share empirical results from our model-comparison experiments, showcasing the advantages and limitations of our implementation.
+Section 4 explains in detail our implementation of \textbf{McRef}, our model selection algorithm which uses the \gp parameter-inference framework, nicknamed so due to it's employment of reference models in the MCMC process.
+%
+Section 5 is TBD (TODO - explain section 5).
+%
+Finally, in section 6 we share empirical results from our model-selection experiments, showcasing the advantages and limitations of our implementation.
 
 \subsection{Other Relevant Work}
 
@@ -298,12 +301,12 @@ Discuss structure+parameter inference methods here -
 
 
 
-A probabilistic demographic model $\M$ uses a parameterized demographic history to define a probability distribution over observed genomic data $\X$.
+A probabilistic demographic model $\M$ is a parameterized demographic history which induces a probability distribution over observed genomic data $\X$.
 %
 The structural components of $\M$, which we assume are fixed, consist of a population phylogeny $\Tr$ and a collection
 of migration bands $B$ that indicate ordered pairs of populations between which gene flow is allowed.
 %
-The free parameters of $\M$, denoted here by $\T$, consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population of } \Tr\}$,
+The free parameters of $\M$, denoted by $\T$, consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population in } \Tr\}$,
 effective population sizes, $\thetas=\{\theta_p: p \text{ is a population in } \Tr\}$, and migration rates, $\migs=\{m_b:b \in B\}$.
 %
 All model parameters are scaled by mutation rate.
@@ -351,7 +354,7 @@ $\G$ contains the information on the local tree in each locus, and distinct loci
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
 \end{equation}
 
-Where $P(\T|\M)$ is the prior probability of model parameters to take current values, $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local dna data likelihood given genealogy $G_l$.
+Where $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local dna data likelihood given genealogy $G_l$.
 
 
 \begin{figure}[h]
@@ -366,28 +369,24 @@ genealogies jointly with model parameters according to an approximate posterior 
 \end{figure}
 
 
-\subsection{The Model Comparison problem}
-We introduce here an adaptation of demography inference methods such as \gp to the problem of model-selection, and more specifically model comparison. The Model Comparison Problem aims to \textbf{compare the fit of candidate structural models to sequence data}.
+\subsection{The Model Selection problem}
+We introduce here an adaptation of demography inference methods such as \gp to the problem of model-selection, and more specifically Model Selection Problem, which aims to compare the fit of candidate structural models to sequence data.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {model_A__OR__model_b}
 \captionsetup{width=.8\textwidth}
-\caption{The model Comparison problem: \textit{“Given sequence data $X$ of samples from
+\caption{The Model Selection Problem: \textit{“Given sequence data $X$ of samples from
 relative populations, which of the candidate phylogenetic topologies $\M$ best fits the data?“}}
 \label{fig:model_A__OR__model_b}
 \end{figure}
 
 
-The Model Comparison problem makes a distinction between structural components of model $\M$ ($\Tr$ and $B$) and parameter values $\T$. Model Comparison aims to compare different model structures.
+The model selection problem makes a distinction between structural components of model $\M$ ($\Tr$ and $B$) and parameter values $\T$ and tries to only compare different model structures.
 %
-In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-comparison scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
+In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method to compare multiple models and their fit to the data, this without analytically calculating $P(X|\M)$.
 %
-We bear in mind that in most cases researchers are interested only in qualitative claims about the structure
-of the model and not in qualitative claims about specific parameter values. To keep our method as
-general as possible, the comparison algorithm we present receives no parameters $\T$ and will thus
-output a result pertaining only to the topology of the model. This will allow us to test \textit{structural
-hypotheses} by integrating over parameter values.
+We bear in mind that in most cases evolutionary researchers are interested only in qualitative claims about the structure of the model and not in qualitative claims about specific parameter values. To keep our method as general as possible, the comparison algorithm we present receives no parameters $\T$ and will thus output a result pertaining only to the topology of the model. This will allow us to test structural hypotheses by integrating over parameter values.
 
 
 \section{Methods}
@@ -1140,8 +1139,6 @@ Multiple debug plots are also emitted by mcref. Their goal is to help the resear
 
 \section{Results}
 Results-go-here
-
-\section{Discussion}
 
 \newpage
 
