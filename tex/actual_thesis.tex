@@ -1,4 +1,4 @@
- %
+	 %
 \documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc}
@@ -506,9 +506,9 @@ Thus the ratio used for estimation, ${\Pref(\GT|\Mref) }/{P(\GT|\M)}$, is not a 
 and the data affects the estimate only through its influence the sampled instances $\{\GT^{(i)}\}$.
 %
 Importantly, the variance of this ratio, which we refer to as the {\em relative Bayes factor (RBF) ratio},
-%is potentially smaller than the variance of the inverse likelihoods used in Equation \ref{eq:harmonic}.
+
 %
-%In particular, this variance
+
 depends on the definition of the model-pairing conditional, $\Pref$, and it will
 typically decrease as $\M$ and $\Mref$ become more similar.
 For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and the RBF ratio becomes
@@ -544,16 +544,15 @@ We refer to this simple one-parameter model as the {\em null reference model} (f
 %
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.3\textwidth]
-{null_model_single_genealogy}
+\includegraphics[width=0.8\textwidth]
+{null_reference_model}
 \captionsetup{width=.8\textwidth}
-\caption{A single local genealogy mapped into the null reference model. The null reference model consists of a single population $p_0$ with $\theta_o := \theta_{root}$. The rest of the free parameters in $\M$ are mapped onto $\M0$ s.t. as many terms as possible terms will cancel-out in the RBF, while meeting conditions (\ref{eq:pref_integral}) \& (\ref{eq:pref_support})n.}
-\label{fig:null_model_single_genealogy}
+\caption{A mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$, as well as the migration rate $\{mb_{b🡐c}\}$ are mapped according to their prior probability in $\M$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix A. }
+\label{fig:null_reference_model}
 \end{figure}
 %
-{The first step} of constructing a model-pairing conditional for the two models is to identify a mapping $F$ from the space
+The first step of constructing a model-pairing conditional for the two models is to identify a mapping $F$ from the space
 of hidden variables in $\M$ to the space of hidden variables in $\M_0$.
-%, allowing us to express the likelihood under $\M_0$ as an integral over hidden variables in $\M$.
 %
 In our case, denote by $\Gref$ and $\Tref$ the hidden variables of $\M_0$.
 %
@@ -564,9 +563,7 @@ A mapping between $\T=(\taus,\thetas)$ and $\Tref=(\theta_0)$ can be defined by 
 to be associated with $\theta_0$. This can be the size of the root population, $\troot$, or any other population
 that we expect to best represent the single population in $\M_0$.
 %
-The model pairing conditional is obtained by applying this mapping and extending it to the unmapped hidden variables, $~ \Z=(\taus,\thetas\setminus \{\troot\})$,
-%= \{\tau_p\}\cup\{\theta_p\}_{p\neq root}$,
-with the use of a conditional distribution, $\Pref(\Z|\GT\setminus\Z)$:
+The model pairing conditional is obtained by applying this mapping and extending it to the unmapped hidden variables, $~ \Z=(\taus,\thetas\setminus \{\troot\})$, with the use of a conditional distribution, $\Pref(\Z|\GT\setminus\Z)$:
 %
 %
 \begin{small}
@@ -881,21 +878,16 @@ Identically mapping all structure and parameters outside the subtree of $p$ duri
 \end{figure}
 
 
-\section{Calculations Schema}
+\section{Computation Scheme}
 
-Having formulated the RBF and defined reference models and their use, we now move on to expain in detail how the model-comparison criteria are calculated.
-
-\subsection{The Computational Objective}
-
-Consider formula (\ref{eq:rbf}) for calculating the Bayes Factor of model $M$ relative to $\Mref$:
-%
+Having formulated the RBF and defined reference models and their use, We now describe the computational scheme we developed to implement the estimation of the relative Bayes factor:
 %
 \begin{equation}
- \frac{1}{\rbf(\M:\Mref|\X)} ~~\triangleq~~ ...  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
+ \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
  \notag
 \end{equation}
 
-Since the denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for mcref to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. The following chapter addresses efficient calculation of the genealogy likelihood, since it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
+Since the right hand denominator $P(\GT^{(i)}|\M)$ is constantly calculated by \gp in the MCMC process, what remains for McRef to calculate in order to estimate the Bayes Factor is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. The following chapter addresses efficient calculation of genealogy likelihood in the reference model, since it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.\\
 
 
 \subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
