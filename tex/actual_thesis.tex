@@ -704,7 +704,7 @@ This construction results in additional terms canceling out with terms in  the g
 $P(\Gc,\Gm|\M,\T)$, to further reduce the variance of the RBF ratio.
 
 
-\subsection{The comb reference model}
+\subsection{The root comb reference model}
 
 
 The null model has the unique advantage of being a valid reference for the comparison of any two models.
@@ -723,10 +723,10 @@ where $\widetilde{\thetas}=\{\theta_p:p\in L\cup \{comb\}\}$ and $\widetilde{\mi
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]
+\includegraphics[width=0.8\textwidth]
 {comb_model_single_genealogy}
 \captionsetup{width=.8\textwidth}
-\caption{A single local genealogy mapped into the comb reference model. The comb model consists of a single ancestral population $p_{comb}$ [TODO - use $p$ with the comb symbol instead of $p_{comb}$ ] which splits simultaneously into leaves $L$.}
+\caption{A single local genealogy mapped into the comb reference model. The comb model consists of a single ancestral population $p_{comb}$ [TODO - use $p$ with the comb symbol instead of $p_{comb}$ ] which splits simultaneously into leaves $L$. [TODO - rewrite similiarly to figure \ref{fig:null_reference_model}]}
 \label{fig:comb_model_single_genealogy}
 \end{figure}
 
@@ -849,12 +849,13 @@ The RBF may thus be re-expressed as follows:
 
 \subsection{Constructing a Reference Model}  \label{Constructing a Reference Model}
 
-In many cases of interest, the modeling uncertainty is restricted to a certain subtree in the population phylogeny.
+Subsections 3.4-3.6 described two examples of reference models - the null reference model and the root comb reference model. During construction of both these models, the entire hypothesis model is mapped and transformed, starting from the root.
 %
-In such cases, we wish to consider a reference model where only a subset of the sampled populations $P$ is collapsed into a single clade population, or a comb model. The null and comb models discussed above are special cases where
-$P$ is the entire set of sampled populations.\\
+However, in many cases of interest the modeling uncertainty is restricted to a certain subtree in the population phylogeny.
 %
-In general describe, a reference model $\Mref$ for hypothesis model $\M$ may be obtained by applying the following three-step process:
+In such cases, we wish to consider a reference model where only a subset of the sampled populations $P$ is collapsed into a single clade population, or a comb submodel. The null and comb models discussed in sections 3.4-3.6 are thus special cases where $P$ is the entire set of sampled populations.\\
+%
+In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained by applying the following three-step process:
 
 \begin{enumerate}
 \item First, \textbf{choose a subtree} of the population phylogeny of $\M$. The subtree is associated with the population $p$ at its root. 
@@ -878,7 +879,7 @@ Identically mapping all structure and parameters outside the subtree of $p$ duri
 \end{figure}
 
 
-\section{Computation Scheme}
+\section{Computational Scheme}
 
 Having formulated the RBF and defined reference models and their use, We now describe the computational scheme we developed to implement the estimation of the relative Bayes factor:
 %
