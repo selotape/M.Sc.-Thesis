@@ -891,52 +891,50 @@ Having defined reference models and formulated their relative Bayes factors, we 
 
 The right hand denominator of formula \ref{eq:computational_scheme}, $P(\GT^{(i)}|\M)$, is constantly calculated by \gp in the MCMC process. What remains for McRef to calculate in order to estimate RBF is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. In the following section we address efficient calculation of genealogy likelihood in the reference model, since it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.
 
-\subsection{Phases of computation}
+\subsection{Maximizing algorithm flexibility}
 
-We perform the RBF calculation in two phases, so as to optimize the balance between execution time and algorithm flexibility. 
+A main objective of our computational scheme is allowing maximal flexibility in choice of reference model, without degregading algorithm run time or space usage.
 %
-Phase 1 computes summary statistics which aggregate most genealogy statistics required to calculate genealogy likelihood in the reference model - $P(G|\Theta, \M_{ref})$.
+Since the most time consuming step is the MCMC sampling algorithm, we assume and require only a single MCMC chain per hypothesis.
 %
-This postpones choice of mapping of free parameters to a later phase. Subsection \ref{Sufficient Statistics for Reference Model Genealogy Likelihood} explains how this is achieved and why.
+With this in mind, we note that there exists a clear trade-off between flexibility in choice of reference model and amount of data the MCMC process is required to emit. 
 %
-This phase is performed jointly with the MCMC sampling process.
+For example, if the reference model is predetermined before MCMC execution (i.e. no flexibility is required), formula \ref{eq:rbf} can be calculated during MCMC iteration and only the final RBF estimation need be emitted.
 %
-The output of this phase allows calculation of RBF for every viable reference model. This postpones choice of reference model structure to a later phase. Subsections \ref{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models} and \ref{Calculating Comb Reference Model Genealogy Likelihood} explain how this is efficiently performed.
+Unfortunately, this approach would require another full MCMC execution in order to estimate RBF of any other reference model.
 %
-Phase 2 finalizes the RBF calculation. Given a directive of reference model and  mapping of it's free-parameters, it plugs in the appropriate parameter priors and emits the final estimate of $ \frac{1}{\rbf(\M:\Mref|\X)}$. Subsection 4.5 explains how this is performed.
-%
-By executing phases 1 \& 2 for each competing hypotheses, with the same choice of reference model in phase 2, we get comparable estimates of relative Bayes factors, indicating which hypothesis has the best fit.
-
-\subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
-\label{Sufficient Statistics for Reference Model Genealogy Likelihood}
-
-One objective of our computational scheme is to allow maximal flexibility in choice of reference model, without degregading algorithm run time or space usage.
-%
-Since the most time consuming step is the MCMC sampling algorithm, we assume and require only a single MCMC chain per hypothesis model.
-%
-Assuming this, we note that there exists a clear trade-off between the flexibility in choice of reference model and the amount of data the MCMC process is required to emit. 
-%
-For example, if no flexibility is required and the reference model is predetermined before MCMC execution, formula \ref{eq:rbf} can be calculated during MCMC iteration and only the final RBF estimation need be emitted. 
-%
-Unfortunately, calculating \ref{eq:rbf} on another reference model would require another full MCMC run.
-%
-On the other hand, the RBF for every reference model can be computed in post-processing if the MCMC prints out the full hidden state $\GT$ in each iteration.
+On the other hand, the RBF for every reference model could be computed in post-processing if the MCMC would print out the full hidden state $\GT$ in each iteration.
 %
 This however would yield an unreasonable amount of traced information - in proportion to the size of the model and to the number of loci.
 
 
-Our computational scheme aims to find a reasonable middle ground between these two extreme options.
-Our objective was to maximize the number of reference models we could consider after running a single MCMC sampling chain without blowing up the output trace.
-This is done by identifying a collection of sufficient statistics for $\G$ that satisfy two conditions:
+Our computational scheme aims to find a reasonable middle ground between these two extremes.
 %
+Our objective is to maximize the number of reference models we can consider using a single MCMC sampling chain without blowing up the output trace.
+%
+This is accomplished by identifying a collection of sufficient statistics for $\G$ that satisfy three conditions:
 %
 \begin{enumerate}
+ \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference model structures, i.e. for any model structure obtained by applying a comb or clade collapse operation on an ancestral population
+ \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the remaining unmapped model parameters (namely, migration rates and population sizes).
  \item The number of sufficient statistics depends on the complexity of the target model, $\Mref$, but not on the size of the data (i.e. the number of individuals and the number of loci).
- \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference models and values of model parameters (namely, migration rates and population sizes).
 \end{enumerate}
 %
 
-Sufficient statistics that satisfy these conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \Mref)$ under Kingman's coalescent, which we briefly recall here.
+We then perform the RBF calculation in two phases. 
+%
+Phase 1, which is performed jointly with the MCMC sampling process, emits intermediate summary statistics which meet the above three conditions. Phase 2 is then given a directive of specific reference model structure and mapping of free parameters. This phase assembles the relevant statistics, plugs in the appropriate parameter priors and emits the final estimate of $ \frac{1}{\rbf(\M:\Mref|\X)}$. Phase 2 is performed in post-processing and can be rerun for any reference model, using the same sufficient statistics emitted by phase 1.
+%
+Subsection \ref{Sufficient Statistics for Reference Model Genealogy Likelihood} explains how conditions 2 \& 3 are achieved for a single model structure.
+%
+Subsections \ref{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models} and \ref{Calculating Comb Reference Model Genealogy Likelihood} explain how this is efficiently extended to multiple reference model structure.
+%
+Subsection \ref{Finalizing the RBF calculation for a chosen reference models} explains how the intermediate sufficient statistics are finalized into an RBF of a specific reference model.
+
+\subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
+\label{Sufficient Statistics for Reference Model Genealogy Likelihood}
+
+Sufficient statistics that satisfy conditions 2 \& 3 conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \Mref)$ under Kingman's coalescent, which we briefly recall here.
 First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\Mref)$.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
 \begin{itemize}
  \item $t(I)$ -- the elapsed time of the interval.
@@ -1025,21 +1023,17 @@ Note that the four double sums in these expressions depend on the local genealog
 \end{figure}
 
 
-The summary statistics $\{~numCoals(\G,p),~~ coalStats(\G,p)~\}_p$~ and ~$\{~numMigs(\G,b),~~ migStats(\G,b)~\}_b$ satisfy our first objective in that their number depends on the complexity of the reference model $\Mref$ but not on the size of the data.
+The summary statistics $\{~numCoals(\G,p),~~ coalStats(\G,p)~\}_p$~ and ~$\{~numMigs(\G,b),~~ migStats(\G,b)~\}_b$ satisfy condition 3 in that their number depends on the complexity of the reference model $\Mref$ but not on the size of the data.
 %
-They also partly satisfy the second condition, because statistics computed for a given set of local genealogies and given values of divergence times enable computation of the likelihood $P(\G|\T,\Mref)$ for any set of values of the population size and migration rate parameters.
-%
-
+They also satisfy the second condition, because statistics computed for a given set of local genealogies and given values of divergence times enable computation of the likelihood $P(\G|\T,\Mref)$ for any set of values of the population size and migration rate parameters.
 
 
 \subsection{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models}
 \label{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models}
 
-To support all valid reference models generated by the reference construction process (subsection \ref{Constructing a Reference Model}) we must calculate all summary statistics for every population in every valid reference model.
-%
-Fortunately, we note that any part of the topology of $\Mref$ which was not transformed during the reference model creation process has the exact same statistics in the $\M$ and in $\Mref$. This allows us to reuse statistics already gathered by \gp for many populations of the reference model. What remain to be calculated are sufficient statistics for all possible clades-  \[\{~numCoals(\G,clade(p)),~~ coalStats(\G,clade(p))~\}_{p\in P_{ref}}\]
+To support all valid reference model structures generated by the reference construction process (subsection \ref{Constructing a Reference Model}) we must calculate the sufficient statistics for every population and migration band in every valid reference model -  \[\{~numCoals(\G,clade(p)),~~ coalStats(\G,clade(p))~\}_{p\in P_{ref}}\]
 
-To achieve this in an efficient manner, calculation of $numCoals$ and $coalStats$ is done recursively down the population phylogeny of $M$ (see pseudo-python code below). This is done using a function for computing $coalStats$ given a sorted list of intervals (\pythoninline{calculate_coal_stats}), as well as accessors to data from \gp (\pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
+To efficiently achieve this, calculation of $numCoals$ and $coalStats$ is done recursively down the population phylogeny of $M$ (see pseudo-python code below). This is done using a function for computing $coalStats$ given a sorted list of intervals (\pythoninline{calculate_coal_stats}), as well as accessors to data from \gp (\pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
 %
 
 \begin{python}
@@ -1110,6 +1104,7 @@ This is again calculated recursively down the population phylogeny of $\M$, but 
 
 
 \subsection{Finalizing the RBF calculation for a chosen reference models}
+\label{Finalizing the RBF calculation for a chosen reference models}
 
 TODO - write how McRef finalizes the RBF calculation.
 
