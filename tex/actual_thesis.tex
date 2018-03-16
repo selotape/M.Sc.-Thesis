@@ -528,7 +528,7 @@ We refer to this simple one-parameter model as the {\em null reference model} $\
 \includegraphics[width=0.8\textwidth]
 {null_reference_model_no_migration}
 \captionsetup{width=.8\textwidth}
-\caption{A clade mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The  hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_{p_0}$ so as to minimize the RBF ratio.}
+\caption{A clade mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The  hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_0$ so as to minimize RBF variance.}
 \label{fig:null_reference_model_no_migration}
 \end{figure}
 %
@@ -833,7 +833,7 @@ Subsections 3.4-3.6 described two examples of reference models - the null refere
 %
 However, in many cases of interest the modeling uncertainty is restricted to a certain subtree in the population phylogeny.
 %
-In such cases, we wish to consider a reference model where only a subset of the sampled populations $P$ is collapsed into a single clade population, or a comb submodel. The null and comb models discussed in sections 3.4-3.6 are thus special cases where $P$ is the entire set of sampled populations.\\
+In such cases, we wish to consider a reference model where only a subset of the sampled populations is collapsed into a clade or a comb submodel.\\
 %
 In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained by applying the following three-step process:
 
@@ -847,21 +847,9 @@ In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained 
 
 Identically mapping all structure and parameters outside the subtree of $p$ during step 3 leads to canceling-out of all corresponding terms in the RBF of $\M$ relative to $\Mref$.
 
-%
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]
-{clade_collapse_AB}
-
-\captionsetup{width=.8\textwidth}
-\caption{\textbf{Construction of a reference model via clade-collapse - } The reference model  $\Mref$ is created by clade-collapsing  the subtree rooted at $AB$ and identically mapping the rest of the hypothesis. Genealogy and paramter likelihoods pertaining to populations $ABC$ and $C$ will cancel-out in the RBF formula. [TODO - color the populations that get collapsed] [TODO - move arrow to middle between models. increase font size of taus]}
-\label{fig:clade_collapse_AB}
-\end{figure}
-
-
 \section{RBF Computational Scheme}
 
-Having defined reference models and formulated their relative Bayes factors, we now describe the computational scheme we use to estimate relative Bayes factors as derived in subsection \ref{Relative Bayes factors}:
+Having defined the concept of Reference Models and formulated their relative Bayes factors, we now describe the computational scheme we use to estimate RBFs as derived in subsection \ref{Relative Bayes factors}:
 %
 \begin{equation}
 \label{eq:computational_scheme}
