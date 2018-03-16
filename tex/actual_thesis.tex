@@ -294,6 +294,9 @@ Discuss structure+parameter inference methods here -
 \end{itemize}
 
 \section{Preliminaries}
+
+
+
 \subsection{Demographic models and Bayesian inference}
 
 
@@ -311,7 +314,7 @@ All model parameters are scaled by mutation rate.
 %
 The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
-The conditional probability distribution for the observed genomic data, $P(\X|\M,\T)$, is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}) [TODO - fix references].
+The conditional probability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}) [TODO - reference].
 %
 The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
 $P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
@@ -322,7 +325,7 @@ inference is to introduce additional hidden variables $\G$, which represent gene
 between the sampled individuals.
 %
 The benefit of this is that given the genealogical information, the data $\X$ becomes independent of the model $\M$ and parameters $\T$,
-and the likelihood can be expressed as a product of three efficiently computable terms:
+and the likelihood can be expressed as a product of three tractable terms:
 %
 %
 \begin{equation}\label{eq:likelihood}
@@ -331,43 +334,42 @@ and the likelihood can be expressed as a product of three efficiently computable
 %
 %
 
-This joint probability function may be used by a Markov chain Monte Carlo (MCMC) algorithm to generate a sample of the model parameters
-together with the genealogies according to a probability distribution approximating the posterior, $P(\G,\T|\M,\X)$.
+This joint probability function may be used by a Markov chain Monte Carlo (MCMC) algorithm to generate a sample of model parameters
+together with genealogies according to a probability distribution approximating the posterior, $P(\G,\T|\M,\X)$.
 %
 Consequently, the sampled parameter values have high joint probability with the data.
 %
-A major advantage of this approach to inference is that it is extremely flexible and can be applied to a wide range of demographic models and
-different types of genomic data.
+A major advantage of this approach to parameter inference is that it is extremely flexible and can be applied to a wide range of demographic models and different types of genomic data.
 %
 
 
 \subsection{\gp}
 
-\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
+\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}) [TODO - reference].
 Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp.
 %
 \begin{equation}\label{eq:likelihood}
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
 \end{equation}
 
-In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters, calculated under the Kingman Coalescent model, with special regard to migration events, and $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}).
+In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}) [TODO - cite].
 %
-In each MCMC update step \gp proposes a new instace of $\G, \T$ and decides if to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance. 
-[TODO - add 3 sentences explaining gphocs update steps]
-
+In each MCMC update step \gp proposes a new instace of $\G \& \T$. It then decides whether to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance.
+%
 Each \gp update step is divided into a series of
 Metropolis-Hastings updates of subsets of variables. The update steps are:
+
 \begin{enumerate}
 \item Update coalescent times: For each individual coalescent event in each population, perturb the time of the event without changing the topology of the genealogy or any other coalescent time. 
 
-\item Update genealogy structure: For each subtree of each genealogy, alter the subtree using a subtree-pruneand-regraft operation. 
+\item Update genealogy structure: For each subtree of each genealogy, alter the subtree using a subtree prune-and-regraft operation. 
 
 \item Update $\theta_p$: For each population $p$, slightly perturb $\theta_p$.
 
 \item Update $\tau_p$: For each population $p$, slightly perturb $\tau_p$. If nescessary, also “stretch” or "squeeze" each genealogy $G_i$ as needed to accommodate the proposed change in $\tau_p$. 
 %
 
-\item Rescaling: Slightly perturb all model parameters ${\theta_p}$, ${\tau_p}$ and all coalescent
+\item Rescale all parameters: Slightly perturb all model parameters ${\theta_p}$, ${\tau_p}$, ${m_b}$ and all coalescent
 times across all genealogies by a multiplicative factor sampled close to 1.
 
 \end{enumerate}
@@ -380,14 +382,14 @@ times across all genealogies by a multiplicative factor sampled close to 1.
 \includegraphics[width=0.8\textwidth]
 {multiple_loci_across_sequence}
 \captionsetup{width=.8\textwidth}
-\caption{\gp uses distinct independant loci, chosen to be far away from genes to reduce the influence of selection. Over each loci a local genealogy is represented and embedded in the population phylogeny.}
+\caption{\gp uses distinct independant loci, chosen to be far away from genes to reduce the influence of selection. A local genealogy is represented over each loci and embedded in the population phylogeny.}
 \label{fig:multiple_loci_across_sequence}
 \end{figure}
 
 
-\subsection{The Model Selection problem}
+\subsection{Definition of the Model Selection Problem}
 
-The model selection problem takes a sequence data set and a series of phylogeny models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$). [TODO - extend figure with more examples (see caption)]
+The model selection problem takes sequence data and a series of phylogeny models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$).
 
 
 \begin{figure}[h]
@@ -395,7 +397,7 @@ The model selection problem takes a sequence data set and a series of phylogeny 
 \includegraphics[width=0.8\textwidth]
 {model_A__OR__model_b}
 \captionsetup{width=.8\textwidth}
-\caption{An example problem of selecting between three model with different structures. In model 1 populations $A$ and $B$ are siblings. In model 2 populations $B$ and $C$ are siblings and there exists a gene-flow from $A$ to $B$, and in model 3 only to leaf populations exist - $AB$ and $C$. }
+\caption{An example problem of selecting between three model with different structures. In model 1 populations $A$ and $B$ are siblings. In model 2 populations $B$ and $C$ are siblings and there exists a gene-flow from $A$ to $B$, and in model 3 only to leaf populations exist - $AB$ and $C$. [TODO - extend figure with more examples (see caption)]}
 \label{fig:model_A__OR__model_b}
 \end{figure}
 
@@ -403,7 +405,7 @@ The model selection problem takes a sequence data set and a series of phylogeny 
 %
 In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method for comparing models and their fit to the data, this without analytically calculating $P(X|\M_i)$.
 %
-To keep our method as general as possible, our selection algorithm receives no parameters $\T$ and outputs a result pertaining only to the topology of the model.
+%To keep our method as general as possible, our selection algorithm receives no parameters $\T$ and outputs a result pertaining only to the topology of the model.
 
 
 \section{Methods}
@@ -504,51 +506,30 @@ Interestingly, the contribution of the data to the likelihood cancels out in Equ
 Thus the ratio used for estimation, ${\Pref(\GT|\Mref) }/{P(\GT|\M)}$, is not a direct function of the data ($\X$),
 and the data affects the estimate only through its influence the sampled instances $\{\GT^{(i)}\}$.
 %
-Importantly, the variance of this ratio, which we refer to as the {\em relative Bayes factor (RBF) ratio},
-
+We refer to the ratio in Equation \ref{eq:pref1} as the {\em relative Bayes factor (RBF) ratio}, and employ it as a model selection criteria by comparing RBFs of competing hypothesis models, calculated using the same reference model - 
+\[ \frac{1}{\rbf(\M_i:\Mref|\X)} >  \frac{1}{\rbf(\M_j:\Mref|\X)} \Rightarrow P(\X|\M_j) >  P(\X|\M_i)\]
 %
-
-depends on the definition of the model-pairing conditional, $\Pref$, and it will
-typically decrease as $\M$ and $\Mref$ become more similar.
-For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and the RBF ratio becomes
-1 for all instances $\{\GT^{(i)}\}$.
+Importantly, the variance of the RBF depends on the definition of the model-pairing conditional, $\Pref$, and it will typically decrease as $\M$ and $\Mref$ become more similar.
 %
-This is the key advantage of direct estimation of the Bayes factor, when compared to estimation via harmonic mean, and
-realizing this advantage requires construction of an effective model-pairing conditional distribution for $\M$ and $\Mref$.
+For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and the RBF ratio becomes 1 for all instances $\{\GT^{(i)}\}$.
+%
+This is the key advantage of direct estimation of the Bayes factor, when compared to estimation via harmonic mean, and realizing this advantage requires construction of an effective model-pairing conditional distribution for $\M$ and $\Mref$.
 %
 The following sections present specific constructions for $\Pref$ in a series of cases.
 
-
-\subsection{Using relative Bayes factors for model comparison}
-
-[TODO - explicitly state how RBFs are used to compare models.]
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]
-{A_vs_B_via_ref}
-\captionsetup{width=.8\textwidth}
-\caption{[TODO - explicitly illustrate how RBFs are used to compare models.]}
-\label{fig:model_A__OR__model_b}
-\end{figure}
-
-
-
 \subsection{The null reference model $\M_0$}
 
-We start by considering a simple case where $\M$ is a demographic model with no migration bands and $\Mref$
-is the simplest possible model with a single population of constant size, $\theta_0$.
+We start by considering a simple case where $\M$ is a demographic model with no migration bands and $\Mref$ is the simplest possible model with a single population $p_0$ of constant size $\theta_0$.
 %
-We refer to this simple one-parameter model as the {\em null reference model} (figure \ref{fig:null_model_single_genealogy}). $\M_0$.
+We refer to this simple one-parameter model as the {\em null reference model} $\M_0$ (figure \ref{fig:null_reference_model_no_migration}).
 %
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
-{null_reference_model}
+{null_reference_model_no_migration}
 \captionsetup{width=.8\textwidth}
-\caption{A mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$, as well as the migration rate $\{mb_{b\leftarrow c}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_mig}. The remaining parameter $\theta_{root}$ can be freely mapped. The remaining parameter $\theta_{root}$ can be freely mapped onto $\theta_{p_0}$ so as to minimize the RBF ratio. [TODO - redraw the migrating lineage so as to differentiate between the migration and coalescence events.]}
-\label{fig:null_reference_model}
+\caption{A clade mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The  hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_{p_0}$ so as to minimize the RBF ratio.}
+\label{fig:null_reference_model_no_migration}
 \end{figure}
 %
 The first step of constructing a model-pairing conditional for the two models is to identify a mapping $F$ from the space
@@ -637,7 +618,7 @@ and defining $\Pref(\taus|\G)$ as a product of uniform distributions in the feas
 Assume now that the reference model is still the null model, $\M_0$, but the model of interest, $\M$, has a non-empty
 set of migration bands, $B$, associated with migration rate parameters, $\migs=\{m_b:b\in B\}$.
 %
-Migration complicates the mapping between $\M$ and $\M_0$ because the genealogies in $\M$ hold information
+Migrations complicate the mapping between $\M$ and $\M_0$ because the genealogies in $\M$ hold information
 about migration events, but the genealogies in $\M_0$ do not.
 %
 For a sequence of local genealogies $\G$ in $\M$, denote by $\Gc$ the coalescent trees implied by $\G$
@@ -712,7 +693,7 @@ This advantage, however, comes at the cost of collapsing all population structur
 In many cases we know the population designation of the sampled individuals, and model uncertainty is restricted to the relationships between the sampled populations.
 %
 To capture this simple structure we use a population phylogeny with a single ancestral population splitting simultaneously into all sampled populations.
-We refer to such models as {\em comb} models and denote them by $\Mcomb$,  due to the comb-like structure of the population phylogeny.
+We refer to such reference models as {\em comb} models and denote them by $\Mcomb$,  due to the comb-like structure of the population phylogeny.
 %
 A comb model is defined by: (1) a set of sampled (leaf) populations, $L$; (2) an ancestral population, $comb$; and (3) a set of migration bands $B_L$ between populations in $L$.
 %
@@ -723,10 +704,10 @@ where $\widetilde{\thetas}=\{\theta_p:p\in L\cup \{comb\}\}$ and $\widetilde{\mi
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
-{comb_model_single_genealogy}
+{comb_model_with_migration_single_genealogy}
 \captionsetup{width=.8\textwidth}
-\caption{A single local genealogy mapped into the comb reference model. The comb model consists of a single ancestral population $p_{comb}$ [TODO - use $p$ with the comb symbol instead of $p_{comb}$ ] which splits simultaneously into leaves $L$. [TODO - rewrite similiarly to figure \ref{fig:null_reference_model}]}
-\label{fig:comb_model_single_genealogy}
+\caption{A comb mapping from a hypothesis model with a migration band $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ and migration rate $m_{b<-C}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper and lower bounds calculated as described in appendix \ref{ap:cond_mig}. The remaining hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_{p_0}$ so as to minimize the RBF ratio.}
+\label{fig:comb_model_with_migration_single_genealogy}
 \end{figure}
 
 

@@ -256,9 +256,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.58597801"
-     inkscape:cx="-2011.1541"
-     inkscape:cy="289.01848"
+     inkscape:zoom="1.5440975"
+     inkscape:cx="-2911.7242"
+     inkscape:cy="919.20325"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -2018,22 +2018,22 @@
        id="path6669-40-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
        x="-2666.5095"
-       y="30.420103"
+       y="46.182823"
        id="text9177-2"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"><tspan
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"><tspan
          sodipodi:role="line"
          id="tspan9175-2"
          x="-2666.5095"
-         y="30.420103"
+         y="46.182823"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64.99999762%;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub"
    id="tspan3136">0</tspan></tspan></text>
@@ -2042,7 +2042,7 @@
        d="m -2775,316.42471 v 9.375 -4.6875 h 267.1875 v -4.6875 9.375"
        id="path3157"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <text
@@ -2051,7 +2051,7 @@
        x="-2768.7388"
        y="331.27405"
        id="text3141-5"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
@@ -2229,302 +2229,38 @@
        inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
-    <path
-       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m -3098.4375,301.95167 h 56.25 l 23.4375,-56.25 28.125,56.25 h 56.25 l -11.25,-23.02696 h 46.875 l 11.25,23.02696 h 56.25 l -107.8125,-210.9375 v -32.8125 h -70.3125 v 32.8125 z"
-       id="path258-8"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccccccccccc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-3097.3975"
-       y="246.25932"
+       x="-3076.7725"
+       y="248.13432"
        id="text642-6-9"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
          id="tspan640-2-0"
-         x="-3097.3975"
-         y="246.25932"
+         x="-3076.7725"
+         y="248.13432"
          style="font-size:11.25px;stroke-width:0.9375">τ<tspan
    style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
    id="tspan644-5-8">ab</tspan></tspan></text>
-    <path
-       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937525, 0.70312509;stroke-dashoffset:0;stroke-opacity:1"
-       d="m -2915.625,137.88917 h -113.4375"
-       id="path4910-5-8-6-0-6-9-1-3-5-3-39"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937512, 0.70312506;stroke-dashoffset:0;stroke-opacity:1"
-       d="M -2961.5625,245.70167 H -3075"
-       id="path4910-5-8-6-0-6-9-1-3-1-4"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-3059.9246"
-       y="137.18074"
+       x="-3039.2996"
+       y="139.05574"
        id="text642-1"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
          id="tspan640-29"
-         x="-3059.9246"
-         y="137.18074"
+         x="-3039.2996"
+         y="139.05574"
          style="font-size:11.25px;stroke-width:0.9375">τ<tspan
    style="font-size:11.25px;baseline-shift:sub"
    id="tspan644-3">root</tspan></tspan></text>
-    <path
-       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669845;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009503, 1.54669836;stroke-dashoffset:0;stroke-opacity:1"
-       d="m -2915.625,137.88917 h -112.5"
-       id="path4910-5-8-6-0-8"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="display:inline;fill:none;stroke:#000000;stroke-width:1.546875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062501, 1.546875;stroke-dashoffset:0;stroke-opacity:1"
-       d="M -2962.5,245.70167 H -3075"
-       id="path4910-5-8-6-0-6-9-5"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928021"
-       rx="2.9879999"
-       cy="302.19485"
-       cx="2883.2554"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse310-4-4-0"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928021"
-       rx="2.9879999"
-       cy="302.19485"
-       cx="2954.9675"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse312-3-8-9"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928021"
-       rx="2.9879999"
-       cy="302.19485"
-       cx="2974.8875"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse314-0-1-6"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928021"
-       rx="2.9879999"
-       cy="301.90817"
-       cx="3061.0303"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse316-3-2-3"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928021"
-       rx="2.9879999"
-       cy="302.19485"
-       cx="3082.4553"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse318-0-8-8"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928024"
-       rx="2.9880002"
-       cy="302.42245"
-       cx="2841.2388"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse308-6-5-3-5"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2854.6875,278.51416 -4.6875,23.43751"
-       id="path322-2-3-6"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2892.1875,269.54969 8.6187,32.58849"
-       id="path326-4-8-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -3014.0625,222.26418 38.8057,79.13041"
-       id="path334-4-0-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -3014.0625,222.26418 -46.875,79.6875"
-       id="path336-6-5-59"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -3018.75,198.82667 -62.7525,101.22095"
-       id="path338-9-1-8"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -3018.75,198.82667 4.6875,23.43749"
-       id="path340-2-1-4"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -3018.75,198.82667 46.875,-93.75"
-       id="path342-2-0-8"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2934.375,151.95167 -37.5,-46.87501"
-       id="path344-4-8-10"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2971.875,105.07667 v -46.875"
-       id="path342-2-0-5-3"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -3004.6875,170.70167 51.5625,131.25002"
-       id="path338-9-1-4-0"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2868.75,255.07668 -65.625,-103.12501"
-       id="path344-4-8-1-44"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928021"
-       rx="2.9879999"
-       cy="301.99213"
-       cx="2859.6865"
-       style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse308-6-5-4"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2868.75,255.07667 28.125,46.875"
-       id="path322-2-3-0-4"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <ellipse
-       ry="2.9928024"
-       rx="2.9880002"
-       cy="301.99213"
-       cx="2873.749"
-       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse308-6-5-1-7"
-       transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2895.9375,211.95166 23.4375,90.00001"
-       id="path322-2-3-5-6"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2967.1876,264.8622 75,4.6875"
-       id="path326-4-8-1-2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m -2990.625,185.17471 18.75,-46.875 60.9375,117.1875 h -46.875 l -32.8125,-70.3125"
-       id="path6514"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
     <ellipse
        ry="2.9928021"
        rx="2.9879999"
@@ -2533,7 +2269,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse310-4-4-0-8"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2544,7 +2280,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse312-3-8-9-3"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2555,7 +2291,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse314-0-1-6-8"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2566,7 +2302,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse316-3-2-3-3"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2577,7 +2313,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse318-0-8-8-3"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2588,7 +2324,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse308-6-5-3-5-3"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2597,16 +2333,7 @@
        id="path322-2-3-6-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2571.5566,269.55562 8.6187,32.58849"
-       id="path326-4-8-1-0"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2615,7 +2342,7 @@
        id="path334-4-0-1-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2624,7 +2351,7 @@
        id="path336-6-5-59-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2633,7 +2360,7 @@
        id="path338-9-1-8-6"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2642,7 +2369,7 @@
        id="path340-2-1-4-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2651,7 +2378,7 @@
        id="path342-2-0-8-9"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2660,7 +2387,7 @@
        id="path344-4-8-10-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2669,7 +2396,7 @@
        id="path342-2-0-5-3-6"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2678,7 +2405,7 @@
        id="path338-9-1-4-0-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2687,7 +2414,7 @@
        id="path344-4-8-1-44-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2698,7 +2425,7 @@
        style="fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse308-6-5-4-90"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2707,7 +2434,7 @@
        id="path322-2-3-0-4-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <ellipse
@@ -2718,7 +2445,7 @@
        style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="ellipse308-6-5-1-7-3"
        transform="scale(-1,1)"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <path
@@ -2727,81 +2454,69 @@
        id="path322-2-3-5-6-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136" />
-    <path
-       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -2646.5567,264.86813 75,4.6875"
-       id="path326-4-8-1-2-7"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-3075.835"
-       y="309.07184"
+       x="-3055.21"
+       y="312.82184"
        id="text642-6-9-2"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
          id="tspan640-2-0-6"
-         x="-3075.835"
-         y="309.07184"
+         x="-3055.21"
+         y="312.82184"
          style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
-   style="font-size:;baseline-shift:baseline"
    id="tspan7654">a</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-2863.9058"
-       y="308.11066"
+       x="-2843.2808"
+       y="311.86066"
        id="text642-6-9-2-5"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
          id="tspan640-2-0-6-8"
-         x="-2863.9058"
-         y="308.11066"
+         x="-2843.2808"
+         y="311.86066"
          style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
-   style="font-size:;baseline-shift:baseline"
    id="tspan7658">c</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-3018.1038"
-       y="40.735283"
+       x="-2997.4788"
+       y="43.820297"
        id="text9177-2-7"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"><tspan
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"><tspan
          sodipodi:role="line"
          id="tspan9175-2-9"
-         x="-3018.1038"
-         y="40.735283"
+         x="-2997.4788"
+         y="43.820297"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
    id="tspan3136-6">hyp</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-3084.2725"
-       y="177.82184"
+       x="-3063.6475"
+       y="179.69684"
        id="text642-6-9-2-0"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
-         x="-3084.2725"
-         y="177.82184"
+         x="-3063.6475"
+         y="179.69684"
          style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
          id="tspan6809">p<tspan
-   style="font-size:;baseline-shift:baseline"
    id="tspan7660">ab</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -2817,15 +2532,15 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-3056.9189"
-       y="78.740898"
+       x="-3036.2939"
+       y="80.615898"
        id="text642-6-9-2-0-1"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
-         x="-3056.9189"
-         y="78.740898"
+         x="-3036.2939"
+         y="80.615898"
          style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
          id="tspan6809-0">p<tspan
    id="tspan7662">root</tspan></tspan></text>
@@ -2836,36 +2551,21 @@
        inkscape:connector-curvature="0"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png" />
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-2949.2183"
-       y="244.50769"
-       id="text642-6-9-2-5-9"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
-       inkscape:export-xdpi="760.39136"
-       inkscape:export-ydpi="760.39136"><tspan
-         sodipodi:role="line"
-         id="tspan640-2-0-6-8-9"
-         x="-2949.2183"
-         y="244.50769"
-         style="font-size:12.5px;baseline-shift:sub;stroke-width:0.9375">b🡐c</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
-       x="-2968.9058"
-       y="308.11066"
+       x="-2948.2808"
+       y="311.86066"
        id="text642-6-9-2-5-1"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
          id="tspan640-2-0-6-8-0"
-         x="-2968.9058"
-         y="308.11066"
+         x="-2948.2808"
+         y="311.86066"
          style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
-   style="font-size:;baseline-shift:baseline"
    id="tspan7656">b</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -2873,7 +2573,7 @@
        x="-2758.7939"
        y="75.928375"
        id="text642-6-9-2-0-1-8"
-       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
        inkscape:export-xdpi="760.39136"
        inkscape:export-ydpi="760.39136"><tspan
          sodipodi:role="line"
@@ -9551,5 +9251,575 @@
              id="rect3445" /></flowRegion><flowPara
            style="font-size:90px;line-height:1.25"
            id="flowPara3447">⇒</flowPara></flowRoot>    </g>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -3077.8125,304.2372 h 56.25 l 23.4375,-56.25 28.125,56.25 h 56.25 l -56.25,-117.18751 18.75,-46.87499 84.375,164.0625 h 56.25 L -2918.4375,93.29969 v -32.8125 h -70.3125 v 32.8125 z"
+       id="path258-0-2-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009518, 1.54669842;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -2895,140.1747 h -112.5"
+       id="path4910-5-8-6-0-6-4-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54687512;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062517, 1.54687505;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -2941.875,247.9872 h -112.5"
+       id="path4910-5-8-6-0-6-9-9-8-0"
+       inkscape:connector-curvature="0" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="304.48041"
+       cx="2862.6304"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-1-7-6"
+       transform="scale(-1,1)" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="304.48041"
+       cx="2934.3425"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-0-1-4"
+       transform="scale(-1,1)" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="304.48041"
+       cx="2954.2625"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-4-7-6"
+       transform="scale(-1,1)" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="304.1937"
+       cx="3040.4053"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-2-2-2"
+       transform="scale(-1,1)" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="304.48041"
+       cx="3061.8306"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-7-7-5"
+       transform="scale(-1,1)" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="304.70801"
+       cx="2820.6135"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-4-2-8"
+       transform="scale(-1,1)" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2834.0625,280.79969 -4.6875,23.43751"
+       id="path322-2-3-03-2-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2913.75,154.23719 50.8062,150.18653"
+       id="path326-4-8-2-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2993.4375,224.54971 38.8057,79.13041"
+       id="path334-4-0-8-1-84"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2993.4375,224.54971 -46.875,79.6875"
+       id="path336-6-5-0-0-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2998.125,201.11219 -62.7525,101.22096"
+       id="path338-9-1-3-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2998.125,201.11219 4.6875,23.43749"
+       id="path340-2-1-7-1-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2998.125,201.11219 46.875,-93.74999"
+       id="path342-2-0-00-5-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2913.75,154.23719 -37.5,-46.875"
+       id="path344-4-8-3-9-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -2951.25,107.3622 V 60.48719"
+       id="path342-2-0-5-4-4-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -2984.0625,172.98719 -2932.5,304.23722"
+       id="path338-9-1-4-9-9-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -2848.125,257.36221 -2913.75,154.23719"
+       id="path344-4-8-1-27-0-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="304.27768"
+       cx="2839.0615"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-9-0"
+       transform="scale(-1,1)" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2848.125,257.3622 28.125,46.875"
+       id="path322-2-3-0-25-1-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="304.27768"
+       cx="2853.124"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-2-7-1"
+       transform="scale(-1,1)" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2875.3125,214.23718 23.4375,90.00002"
+       id="path322-2-3-5-44-7-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -3717.1875,320.70172 h 56.25 l 23.4375,-56.25 28.125,56.25 h 56.25 l -11.25,-23.02696 h 46.875 l 11.25,23.02696 h 56.25 l -107.8125,-210.93751 v -32.8125 h -70.3125 v 32.8125 z"
+       id="path258-8-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3716.1475"
+       y="265.00937"
+       id="text642-6-9-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-0"
+         x="-3716.1475"
+         y="265.00937"
+         style="font-size:11.25px;stroke-width:0.9375">τ<tspan
+   style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan644-5-8-34">ab</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937532, 0.70312511;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -3534.375,156.63921 h -113.4375"
+       id="path4910-5-8-6-0-6-9-1-3-5-3-39-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937519, 0.70312509;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -3580.3125,264.45172 H -3693.75"
+       id="path4910-5-8-6-0-6-9-1-3-1-4-39"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3678.6746"
+       y="155.93079"
+       id="text642-1-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-29-9"
+         x="-3678.6746"
+         y="155.93079"
+         style="font-size:11.25px;stroke-width:0.9375">τ<tspan
+   style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan644-3-6">root</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009518, 1.54669842;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -3534.375,156.63921 h -112.5"
+       id="path4910-5-8-6-0-8-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54687512;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062517, 1.54687505;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -3581.25,264.45172 h -112.5"
+       id="path4910-5-8-6-0-6-9-5-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="320.94492"
+       cx="3502.0054"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-0-3"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="320.94492"
+       cx="3573.7175"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-9-8"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="320.94492"
+       cx="3593.6375"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-6-0"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="320.6582"
+       cx="3679.7803"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-3-5"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="320.94492"
+       cx="3701.2053"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-8-66"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="321.17252"
+       cx="3459.9888"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-5-40"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3473.4375,297.26421 -4.6875,23.43751"
+       id="path322-2-3-6-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3510.9375,288.29973 8.6187,32.5885"
+       id="path326-4-8-1-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3632.8125,241.01423 38.8057,79.13041"
+       id="path334-4-0-1-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3632.8125,241.01423 -46.875,79.6875"
+       id="path336-6-5-59-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3637.5,217.57671 -62.7525,101.22096"
+       id="path338-9-1-8-67"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3637.5,217.57671 4.6875,23.43749"
+       id="path340-2-1-4-56"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3637.5,217.57671 46.875,-93.75"
+       id="path342-2-0-8-98"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3553.125,170.70171 -37.5,-46.87501"
+       id="path344-4-8-10-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3590.625,123.82671 v -46.875"
+       id="path342-2-0-5-3-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3623.4375,189.45171 51.5625,131.25003"
+       id="path338-9-1-4-0-82"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3487.5,273.82673 -65.625,-103.12502"
+       id="path344-4-8-1-44-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="320.74219"
+       cx="3478.4365"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-96"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3487.5,273.82672 28.125,46.875"
+       id="path322-2-3-0-4-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="320.74219"
+       cx="3492.499"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-7-2"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3514.6875,230.7017 23.4375,90.00002"
+       id="path322-2-3-5-6-76"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -3585.9376,283.61224 75,4.68751"
+       id="path326-4-8-1-2-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -3609.375,203.92475 18.75,-46.875 60.9375,117.18751 h -46.875 l -32.8125,-70.31251"
+       id="path6514-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3694.585"
+       y="327.8219"
+       id="text642-6-9-2-2"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-15"
+         x="-3694.585"
+         y="327.8219"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7654-9">a</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3482.6558"
+       y="326.86072"
+       id="text642-6-9-2-5-91"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-4"
+         x="-3482.6558"
+         y="326.86072"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7658-9">c</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3636.8538"
+       y="59.485321"
+       id="text9177-2-7-1"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"><tspan
+         sodipodi:role="line"
+         id="tspan9175-2-9-07"
+         x="-3636.8538"
+         y="59.485321"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3136-6-5">hyp</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3703.0225"
+       y="196.57188"
+       id="text642-6-9-2-0-8"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         x="-3703.0225"
+         y="196.57188"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
+         id="tspan6809-7">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7660-0">ab</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3675.6689"
+       y="97.490936"
+       id="text642-6-9-2-0-1-4"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         x="-3675.6689"
+         y="97.490936"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
+         id="tspan6809-0-80">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7662-4">root</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3567.9683"
+       y="263.25775"
+       id="text642-6-9-2-5-9-2"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-9-9"
+         x="-3567.9683"
+         y="263.25775"
+         style="font-size:12.50000095px;baseline-shift:sub;stroke-width:0.9375">b🡐c</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-3587.6558"
+       y="326.86072"
+       id="text642-6-9-2-5-1-61"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-0-0"
+         x="-3587.6558"
+         y="326.86072"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7656-4">b</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -2611.875,154.23719 50.8062,150.18654"
+       id="path326-4-8-2-6-2-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
