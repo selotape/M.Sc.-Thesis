@@ -214,7 +214,7 @@ This work was carried out under the supervision of Dr. Ilan Gronau from the Efi 
 \newpage
 
 \section*{Abstract}
-High throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses. 
+The advent of high throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses. 
 
 
 \newpage
@@ -253,34 +253,32 @@ In recent years, advances in high throughput DNA sequencing have made it easy to
 %
 Typically, an evolutionary biologist, having obtained and aligned genome sequences of individuals from relative species or populations, would like to reconstruct the evolutionary history of the sequenced individuals. This evolutionary history includes a series of population splits, population size changes and post-divergence gene flow.\\
 %
-The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}. [TODO - rephrase to focus on the components of the evolutionary history, not the reconstruction process]\\
+The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.\\
 %
-One successful approach for parameter inference has been to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm, effectively integrating out the information on genealogical relationships between individuals and producing Bayesian estimates of the target parameters [TODO - shorten sentence] [TODO - reference said methods] .
+One successful approach for parameter inference has been to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters [TODO - reference said methods].
 %
-These methods have two key advantages: 1) The full probabilistic generative model of the data at their core allows modeling more complex evolutionary history, with more free parameters; 2) The parameter values sampled by MCMC provide means to assess the uncertainty in the resulting estimates.
+These methods have two key advantages: 1) The full probabilistic generative model of the data at their core allows modeling of 	more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
-However, because these methods condition on a given model structure $\M$, they provide no straightfprward solution to the model selection problem.
+However, because these methods condition on a given model structure $\M$, they provide no straightforward solution to the model selection problem.
 %
 In principle, measuring of model fit can be approximated by using importance sampling on the approximated posterior distribution, but standard methods for doing this are statistically inefficient [TODO - reference].
 %
-This leaves us with no robust method for comparing the fit of different structures pf evolutionary history to a given genomic data set.\\
+This leaves us with no robust method for comparing the fit of different structures of evolutionary history to a given genomic data set.\\
 %
 \\
 The goal of our research is thus to \textbf{utilize bayesian parameter inference methods to perform robust model selection}.
 %
 We accomplish this by estimating model fit relative to some \textbf{Reference Model}. Reference models are base-line phylogenetic structures used to asses model fit to data within a specific context, allowing us to select between competing model candidates.
 %
-We will start by overviewing existing work in the field in subsection 1.1.
+We will start in subsection 1.1 by overviewing existing work in the field.
 %
 Section 2 presents the relevant background and common notations for phylogenetic models and parameter inference.
 %
-Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind relative Bayes factors, which are our model selection criteria. 
+Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and how they are used as model selection criteria. 
 %
 Section 4 explains in detail our implementation of \textbf{McRef}, our model selection algorithm which uses the \gp parameter-inference framework, nicknamed so due to it's employment of reference models in the MCMC process.
 %
-Section 5 is TBD (TODO - explain section 5).
-%
-Finally, in section 6 we share empirical results from our model-selection experiments, showcasing the advantages and limitations of our implementation.
+Finally, in section 5 we share empirical results from our model-selection experiments, showcasing the advantages and limitations of our method.
 
 \subsection{Other Relevant Work}
 
