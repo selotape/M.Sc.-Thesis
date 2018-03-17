@@ -1,5 +1,5 @@
-# M.Sc.-Thesis
+# Phylogenetic Population Model Selection Using MCMC and Relative Bayes Factors
 
-<!--![Favorite figure](./images/split_interval_on_comb_age.png | width=80)-->
+Enjoy my favorite figure:
 
 <img src="./images/split_interval_on_comb_age.png" width="80%" height="80%">

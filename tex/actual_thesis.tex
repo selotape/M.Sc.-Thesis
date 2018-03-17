@@ -856,7 +856,32 @@ Having defined the concept of Reference Models and formulated their relative Bay
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-The right hand denominator of formula \ref{eq:computational_scheme}, $P(\GT^{(i)}|\M)$, is constantly calculated by \gp in the MCMC process. What remains for McRef to calculate in order to estimate RBF is the model pairing conditional $\Pref(\GT^{(i)}|\Mref)$. In the following section we address efficient calculation of genealogy likelihood in the reference model, since it is the main component making up the model pairing conditional and represents the bulk of our computational challenge.
+This RBF is further derived for clade and comb reference models in equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1}. As previously stated, in cases where the clade or comb is constricted to a subtree of the model, the RBF cancels out s.t. only portions inside the subtree are relevant. In the following section we disregard this distinction since equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1} can be easily refitted for a subtree reference model.
+
+We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation in equation \ref{eq:rbf_mig} - 
+\[ 
+	\frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
+	~~\approx~~ 
+	\frac{ P(\Gc|\M_0,\theta_0=\troot) }{ P(\Gc,\Gm|\M,\T)} 
+	\frac{ P(\theta_0=\troot|\M_0)}{P(\troot|\M)}
+	\frac{ \Pref(\taus,\Gm|\Gc)}{P(\taus|\M)}
+\]
+
+The two denominators $P(\Gc,\Gm|\M,\T)$ and $P(\taus|\M)$ are calculated as part of the \gp flow.
+%
+These values are taken as-is from \gp and utilized as explained in subsection \ref{Finalizing the RBF calculation for a chosen reference models}.
+%
+%
+The parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ usually share the same distribution so calcel out. 
+%
+otherwise, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0=\troot|\M_0)$ is calculated as described in subsection \ref{Finalizing the RBF calculation for a chosen reference models}.
+%
+%
+The divergence times condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig}.
+%
+Lastly, the genealogy likelihood in the reference model $P(\Gc|\M_0,\theta_0=\troot)$ is calculated from scratch under Kingman's coalescent. 
+%
+We consider this the main component making up the model pairing conditional, as it represents the bulk of our computational challenge. Sections 4.1 through 4.4 detail it's calculation in an efficient manner.
 
 \subsection{Maximizing algorithm flexibility}
 
