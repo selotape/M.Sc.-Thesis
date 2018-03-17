@@ -859,9 +859,9 @@ Having defined the concept of Reference Models and formulated their relative Bay
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-This RBF is further derived for clade and comb reference models in equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1}. As previously stated, in cases where the clade or comb is constricted to a subtree of the model, the RBF cancels out s.t. only portions inside the subtree are relevant. In the following section we disregard this distinction since equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1} can be easily refitted for a subtree reference model.
+This RBF is further derived for clade and comb reference models in equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1}. As previously stated, in cases where the clade or comb is constricted to a subtree of the model, the RBF cancels out s.t. only statistics inside the subtree are relevant. In the following section we disregard this distinction as equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1} can be easily refitted to apply for the subtree reference model.
 
-We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation in equation \ref{eq:rbf_mig} - 
+We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation for a root clade reference model in equation \ref{eq:rbf_mig} - 
 \[ 
 	\frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
 	~~\approx~~ 
@@ -872,23 +872,23 @@ We now focus our attention on the components making up the model pairing conditi
 
 The two denominators $P(\Gc,\Gm|\M,\T)$ and $P(\taus|\M)$ are calculated as part of the \gp flow.
 %
-These values are taken as-is from \gp and utilized as explained in section \ref{sec:Finalizing the RBF computation}.
+During RBF estimation these values are taken as-is from \gp and utilized as explained in section \ref{sec:Finalizing the RBF computation}.
 %
 %
-The parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ usually share the same distribution so calcel out. 
+The parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ usually share the same distribution and cancel out. 
 %
-otherwise, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0=\troot|\M_0)$ is calculated as described in subsection \ref{sec:Finalizing the RBF computation}.
+Otherwise, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0=\troot|\M_0)$ is easily calculated as described in section \ref{sec:Finalizing the RBF computation}.
 %
 %
-The divergence times condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig}.
+The divergence times condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig} and utilized as described in section \ref{sec:Finalizing the RBF computation}.
 %
 Lastly, the genealogy likelihood in the reference model $P(\Gc|\M_0,\theta_0=\troot)$ is calculated from scratch under Kingman's coalescent. 
 %
-We consider this the main component making up the model pairing conditional, as it represents the bulk of our computational challenge. The rest of section \ref{sec:RBF Computational Scheme} details it's calculation in an efficient manner.
+We consider this the main component of the model pairing conditional, as it represents the bulk of our computational challenge. The rest of section \ref{sec:RBF Computational Scheme} details it's calculation in an efficient manner.
 
 \subsection{Maximizing algorithm flexibility}
 
-A main objective of our computational scheme is allowing maximal flexibility in choice of reference model, without degregading algorithm run time or space usage.
+A main objective of our computational scheme is allowing maximal flexibility in choice of reference model, while attaining reasonable algorithm run time and space usage.
 %
 Since the most time consuming step is the MCMC sampling algorithm, we assume and require only a single MCMC chain per hypothesis.
 %
@@ -918,16 +918,20 @@ This is accomplished by identifying a collection of sufficient statistics for $\
 
 We then perform the RBF calculation in two phases. 
 %
-Phase 1, which is performed jointly with the MCMC sampling process, emits intermediate summary statistics which meet the above three conditions. Phase 2 is then given a directive of specific reference model structure and mapping of free parameters. This phase assembles the relevant statistics, plugs in the appropriate parameter priors and emits the final estimate of $ \frac{1}{\rbf(\M:\Mref|\X)}$. Phase 2 is performed in post-processing and can be rerun for any reference model, using the same sufficient statistics emitted by phase 1.
+Phase 1, which is performed jointly with the MCMC sampling process, emits intermediate summary statistics which meet the above three conditions. 
 %
-Subsection \ref{Sufficient Statistics for Reference Model Genealogy Likelihood} explains how conditions 2 \& 3 are achieved for a single model structure.
+Phase 2 is then given a directive of specific reference model structure and mapping of free reference parameters. This phase assembles the relevant statistics, plugs in the appropriate parameter priors and emits the final estimate of $ \frac{1}{\rbf(\M:\Mref|\X)}$. 
 %
-Subsections \ref{sec:Recursive Sufficient Statistics for All Clade Models} and \ref{sec:Recursive Sufficient Statistics for All Comb Models} explain how this is efficiently extended to multiple reference model structure.
+Phase 2 can be repeatedly rerun with any reference model, utilizing the same sufficient statistics emitted by phase 1, thus calculating RBFs of different reference models.
+
+Subsection \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood} explains to calculate sufficient statistics which meet conditions 2 \& 3 for a single model structure.
 %
-Section \ref{sec:Finalizing the RBF computation} then explains how the intermediate sufficient statistics are finalized into an RBF of a specific reference model.
+Subsections \ref{sec:Recursive Sufficient Statistics for All Clade Models} and \ref{sec:Recursive Sufficient Statistics for All Comb Models} attain condition 1 by efficiently extending these statistics to all comb and clade reference models.
+%
+Later, section \ref{sec:Finalizing the RBF computation} explains how the intermediate sufficient statistics are combined with other statistics into an RBF estimate for a specific reference model.
 
 \subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
-\label{Sufficient Statistics for Reference Model Genealogy Likelihood}
+\label{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
 
 Sufficient statistics that satisfy conditions 2 \& 3 conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \Mref)$ under Kingman's coalescent, which we briefly recall here.
 First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\Mref)$.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
@@ -1024,11 +1028,11 @@ They also satisfy the second condition, because statistics computed for a given 
 
 
 \subsection{Recursive Sufficient Statistics for All Clade Models}
-\label{Recursive Sufficient Statistics for All Clade Models}
+\label{sec:Recursive Sufficient Statistics for All Clade Models}
 
 To support all valid reference model structures generated by the reference construction process (subsection \ref{Constructing a Reference Model}) we must calculate the sufficient statistics for every population and migration band in every valid reference model -  \[\{~numCoals(\G,clade(p)),~~ coalStats(\G,clade(p))~\}_{p\in P_{ref}}\]
 
-To efficiently achieve this, calculation of $numCoals$ and $coalStats$ is done recursively down the population phylogeny of $M$ (see pseudo-python code below). This is done using a function for computing $coalStats$ given a sorted list of intervals (\pythoninline{calculate_coal_stats}), as well as accessors to data from \gp (\pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
+To efficiently achieve this, calculation of $numCoals$ and $coalStats$ is done recursively down the population phylogeny of $M$ as implemented in the pseudo-python code below. This implementation uses a function for computing $coalStats$ given a sorted list of intervals (function \pythoninline{calculate_coal_stats}), as well as accessors to data from \gp (functions \pythoninline{num_coals_from_gphocs} \& \pythoninline{sorted_intervals_from_gphocs}):
 %
 
 \begin{python}
@@ -1093,7 +1097,7 @@ This is again calculated recursively down the population phylogeny of $\M$, but 
 \includegraphics[width=1.0\textwidth]
 {hyp_and_comb_intervals}
 \captionsetup{width=.8\textwidth}
-\caption{In comb reference models, genealogy-likelihood need only be calculated strictly within the bounds of the comb population $comb(p)$. Outside this area of the topology, genealogy-likelihood of the reference and hypothesis models cancels out in the Model-Pairing Conditional. \textcolor{red}{TODO - color the model branches}}
+\caption{In comb reference models, genealogy-likelihood need only be calculated strictly within the bounds of the comb population $comb(p)$. Outside this area of the topology, genealogy-likelihood of the reference and hypothesis models cancels out in the Model-Pairing Conditional.}
 \label{fig:calculate_hyp_stats_above_tmin}
 \end{figure}
 
