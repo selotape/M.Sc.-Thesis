@@ -508,7 +508,9 @@ and the data affects the estimate only through its influence the sampled instanc
 %
 We refer to the ratio in Equation \ref{eq:pref1} as the {\em relative Bayes factor (RBF) ratio}, and employ it as a model selection criteria by comparing RBFs of competing hypothesis models, calculated using the same reference model - 
 \[ \frac{1}{\rbf(\M_i:\Mref|\X)} >  \frac{1}{\rbf(\M_j:\Mref|\X)} \Rightarrow P(\X|\M_j) >  P(\X|\M_i)\]
-%
+
+[TODO - consider adding a figure where competing hypotheses are compared using the same reference moddel]
+
 Importantly, the variance of the RBF depends on the definition of the model-pairing conditional, $\Pref$, and it will typically decrease as $\M$ and $\Mref$ become more similar.
 %
 For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and the RBF ratio becomes 1 for all instances $\{\GT^{(i)}\}$.
@@ -848,6 +850,7 @@ In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained 
 Identically mapping all structure and parameters outside the subtree of $p$ during step 3 leads to canceling-out of all corresponding terms in the RBF of $\M$ relative to $\Mref$.
 
 \section{RBF Computational Scheme}
+\label{sec:RBF Computational Scheme}
 
 Having defined the concept of Reference Models and formulated their relative Bayes factors, we now describe the computational scheme we use to estimate RBFs as derived in subsection \ref{Relative Bayes factors}:
 %
@@ -869,19 +872,19 @@ We now focus our attention on the components making up the model pairing conditi
 
 The two denominators $P(\Gc,\Gm|\M,\T)$ and $P(\taus|\M)$ are calculated as part of the \gp flow.
 %
-These values are taken as-is from \gp and utilized as explained in subsection \ref{Finalizing the RBF calculation for a chosen reference models}.
+These values are taken as-is from \gp and utilized as explained in section \ref{sec:Finalizing the RBF computation}.
 %
 %
 The parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ usually share the same distribution so calcel out. 
 %
-otherwise, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0=\troot|\M_0)$ is calculated as described in subsection \ref{Finalizing the RBF calculation for a chosen reference models}.
+otherwise, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0=\troot|\M_0)$ is calculated as described in subsection \ref{sec:Finalizing the RBF computation}.
 %
 %
 The divergence times condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig}.
 %
 Lastly, the genealogy likelihood in the reference model $P(\Gc|\M_0,\theta_0=\troot)$ is calculated from scratch under Kingman's coalescent. 
 %
-We consider this the main component making up the model pairing conditional, as it represents the bulk of our computational challenge. Sections 4.1 through 4.4 detail it's calculation in an efficient manner.
+We consider this the main component making up the model pairing conditional, as it represents the bulk of our computational challenge. The rest of section \ref{sec:RBF Computational Scheme} details it's calculation in an efficient manner.
 
 \subsection{Maximizing algorithm flexibility}
 
@@ -919,9 +922,9 @@ Phase 1, which is performed jointly with the MCMC sampling process, emits interm
 %
 Subsection \ref{Sufficient Statistics for Reference Model Genealogy Likelihood} explains how conditions 2 \& 3 are achieved for a single model structure.
 %
-Subsections \ref{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models} and \ref{Calculating Comb Reference Model Genealogy Likelihood} explain how this is efficiently extended to multiple reference model structure.
+Subsections \ref{sec:Recursive Sufficient Statistics for All Clade Models} and \ref{sec:Recursive Sufficient Statistics for All Comb Models} explain how this is efficiently extended to multiple reference model structure.
 %
-Subsection \ref{Finalizing the RBF calculation for a chosen reference models} explains how the intermediate sufficient statistics are finalized into an RBF of a specific reference model.
+Section \ref{sec:Finalizing the RBF computation} then explains how the intermediate sufficient statistics are finalized into an RBF of a specific reference model.
 
 \subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
 \label{Sufficient Statistics for Reference Model Genealogy Likelihood}
@@ -1020,8 +1023,8 @@ The summary statistics $\{~numCoals(\G,p),~~ coalStats(\G,p)~\}_p$~ and ~$\{~num
 They also satisfy the second condition, because statistics computed for a given set of local genealogies and given values of divergence times enable computation of the likelihood $P(\G|\T,\Mref)$ for any set of values of the population size and migration rate parameters.
 
 
-\subsection{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models}
-\label{Recursive Calculation of Sufficient Statistics for Multiple Clade Reference Models}
+\subsection{Recursive Sufficient Statistics for All Clade Models}
+\label{Recursive Sufficient Statistics for All Clade Models}
 
 To support all valid reference model structures generated by the reference construction process (subsection \ref{Constructing a Reference Model}) we must calculate the sufficient statistics for every population and migration band in every valid reference model -  \[\{~numCoals(\G,clade(p)),~~ coalStats(\G,clade(p))~\}_{p\in P_{ref}}\]
 
@@ -1071,11 +1074,11 @@ def recursive_coal_stats(pop):
 
 \end{python}
 
-\subsection{Calculating Comb Reference Model Genealogy Likelihood}
-\label{Calculating Comb Reference Model Genealogy Likelihood}
+\subsection{Recursive Sufficient Statistics for All Comb Models}
+\label{sec:Recursive Sufficient Statistics for All Comb Models}
 
 Formula \ref{eq:gen_ratio_comb} shows how for a reference model created by comb-collapsing the root population, contribution of the genealogy-likelihood to the model-pairing conditional is reduced to contribution of the portion of genealogies above $\tmin$ - 
-\[\frac{ P({\G}_{c|>\tmin}|\M_0,\theta_0=\troot) }{ P(\G_{>\tmin}|\M,\T)} ~ .\]
+\[\frac{ P({\G}_{c|>\tmin}|\M_0,\theta_0=\troot) }{ P(\G_{>\tmin}|\M,\T)}\]
 
 When comb-collapse is applied to a subtree, we apply the same idea to the portion of the genealogy contained in that subtree. Figure \ref{fig:calculate_hyp_stats_above_tmin} illustrates the intervals relevant for genealogy-likelihood calculation in the hypothesis and reference models. 
 
@@ -1095,15 +1098,12 @@ This is again calculated recursively down the population phylogeny of $\M$, but 
 \end{figure}
 
 
-\subsection{Finalizing the RBF calculation for a chosen reference models}
-\label{Finalizing the RBF calculation for a chosen reference models}
+\section{Finalizing the RBF computation}
+\label{sec:Finalizing the RBF computation}
 
-TODO - write how McRef finalizes the RBF calculation.
+TODO - write how McRef finalizes the RBF calculation. Also fulfill all previous promises about this section (usage of parameter priors and tau bounds).
 
-\newpage
-
-\section{Technicalities and Code}
-
+TODO - Completely rewrite the following section, removing the nitty-gritty details.
 
 \subsection{Debugging results}
 
