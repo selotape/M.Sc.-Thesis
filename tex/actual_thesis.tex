@@ -1102,75 +1102,42 @@ This is again calculated recursively down the population phylogeny of $\M$, but 
 \end{figure}
 
 
-\section{Finalizing the RBF computation}
+\subsection{Finalizing the RBF computation}
 \label{sec:Finalizing the RBF computation}
+After the MCMC process is completed, we are left with sufficient statistics per iteration for each clade and comb reference model. We can now use this, along with .
 
 TODO - write how McRef finalizes the RBF calculation. Also fulfill all previous promises about this section (usage of parameter priors and tau bounds).
 
 TODO - Completely rewrite the following section, removing the nitty-gritty details.
 
-\subsection{Debugging results}
-
-When examining results of \gp calculations for mcref we were faced with the challenge of validating our results. \#explanation-on-why-this-was-needed. We wished to double-check every statistic emitted, with the simple goal of predictably and reliably reaching our intended calculation.
-
-This was accomplished using a variaty of techniques, restricted by the target statistic and reference model and by the tools at our disposal. 
-
-
-\begin{itemize}
-
-\item \underline{in comb: compare leaves when comb-age:=inf. Compare root comb when comb-age:=0}
-
-To validate our comb coal-stats calculations we permanantly set the comb-age to various values, allowing us to predict results. When setting a high comb-age (essentially infinite), we asserted That the coal-stats of comb-leaves is equal to the leaf population stats calculated by \gp. When setting comb-age to zero (thus reducing the comb to a clade), we asserted that the coal-stats of the root-comb is equal those of the null reference model (calculated independently by the clade algorithm and by a preexisting \gp implementation).
-
-
-
-\item \underline{in clade: compare "leaf clade" with leaf. Compare root-clade with \gp -calculated root-clade}
-To assert clade coal-stats, we applied techniques similiar to those used for the comb algorithm. Leaf-rooted clades were compared with leaf stat calculated by \gp and the root-clade (aka the null reference modle) was compared with independantly calculated stats for the null reference model. 
-
-\item \underline{In tau bounds: monotonouty up pop tree. Assert diff(bound, tau) neg correlated with \#loci}
-
-We expected each tau bound to decrease towards its corresponding population tau as the number of loci increases. This due to an increase in the number of coalescence events, leading to an increase in chance of some coalescence event occurring closer to the population tau. We ran a simple set of \gp experiments using the same sequence data, changing only the number of loci in-use. We observed a negative correlation between the number of loci and the tau bound, as expected.
-
-Another simple validation we performed was asserting that bounds are monotonously decreasing down the population tree.
-
-\end{itemize}
-
-\subsection{McRef Code}
-
-\begin{itemize}
-\item \underline{configuration}
-
-When setting up mcref, several parameters are configured. The parameters pertain to standard I/O (e.g. where the trace data files are stored and where to store output), to the phylogenic population models (i.e. the structure of the reference and hypothesis models), to \gp configuration (e.g. what alpha \& beta to use for gamma priora, what print multipliers were applied to trace data when emitted by gphocs etc.), to statistical calculations (e.g. how many bootstrap iterations to run during confidence calculation and how much burn-in and sample-skip to use in genealogy likelihood calculation) and to debugging (e.g. what debug calculations to run and visualizations to emit). 
-
-\item \underline{calculating kingman coalescence and kingman migration for the reference model}
-
-Calculating the reference model genealogy likelihood was done using the standard kingman coalescence model, in the same manner implemented in gphocs. The theta of the actual comb/clade population was set to that of the population at the top of the comb/clade and plugged into \#gen\_ld\_ln-formula. 
-
-\item \underline{calculating tau priors for hypothesis and reference models}
-tau priors for the hypothesis model were calculated using the same gamma-distribution used by gphocs, based on taus emitted during the \gp run. tau priors for the reference model were calculated using a uniform distribution based on tau-bounds, as described in the chapter about tau bounds.
-
-\item \underline{estimating variance using bootstrap}
-
-In an attempt to estimate the variability of the genealogy likelihood calculation, bootstrap estimations of the rbf were repeatedly sampled from the trace data. 
-
-
-\item \underline{optimizing runtime (lazily caching trace files, multiprocess concurrently running comparisons, )}
-
-With the goal of optimizing the practical run-time and usability of mcref, several techniques were employed; trace data files, which are repeatedly read and used, are lazily loaded and cached in each mcref process. Multiple mcref experiments are launched using a single command and are cocurrently run in multiple processes, eventually aggregating summary results to a single log file. 
-
-\item \underline{visualizing results}
-
-To clarify results and to help in the understanding and debugging of mcref runs, several visual outputs were developed. each mcref run emits plots of the genealogy-log-likelihood of the reference model and of the hypothesis model, as well as a plot of the rbf calculation across \gp iterations and a plot of the harmonic mean of likelihood of the hypothesis model.
-
-\item \underline{debugging visualizations}
-
-Multiple debug plots are also emitted by mcref. Their goal is to help the researcher assert the experiment was executed as planned. These plots contain the kingman coalescence and kingman migration of every population and migration in both the hypothesis and reference models. They also contain the aggregate coal-stats of the hypothesis and reference model, allowing us to assert that coal-stats of a reference model always exceed those of it's hypothesis \#here-goes-an-explanation-of-the-previous-sentence. 
-\end{itemize}
-
-
+\newpage
 
 \section{Results}
-Results-go-here
+
+
+We designed a series of experiments in order to test the selection power of our algorithm, and to assess the certainty/confidence of a single McRef test. 
+%
+The Selection power is reflected in both the type of scenarios in which McRef clearly picks the correct hypothesis, and in the sensitivity of the algorithm, e.g. when parameters converge. 
+%
+We generated data sets under different demographic scenarios, using the following setup constant - 3 leaf populations ($A$, $B$ and $C$ ), 4 haploid sequences in each population and 5000 loci of length 1000 in each sequence. 
+%
+For each demographic scenario we generated two independent data sets to examine replication. 
+%
+To further assess replication we ran 2 independent MCMC runs in each following G-PhoCS setting we examined for each data set.
+
+
+In each comparison instance we compared two hypothesis models $\M_1$ and $\M_2$ on a given data set. 
+%
+Comparison was done using both the harmonic mean ($HM$) and relative Bayes factors with some reference model $\M_{ref}$ ($[reference]\_RBF$). 
+%
+On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding four potential differences between the relevant McRef stats (e.g., $HM(\M_{\mathbf{1}}, data) - HM(\M_{\mathbf{2}},data)$, $RBF(\M_{\mathbf{1}}, \M_{null}, data) - RBF(\M_{\mathbf{2}}, \M_{null}, data)$). 
+%
+The differences represent McRefs final "choice" between $\M_1$ and $\M_2$, i.e. which model has higher data likelihood relative to the reference model. 
+
+We used the emitted differences to plot confidence intervals in the following manner.
+% 
+For each comparison we recorded the maximum and minimum of the 4 differences with their standard error margins (which McRef computes via bootstrap). For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these ste's correspond to the difference between two values, we took the sqrt of the sum of the two appropriate ste's. As a result, for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model), We attained 4 values that together capture our uncertainty in the comparison. To this we add the fact that each data set has a "sister" set generated with identical model parameters, providing additional indication for noise.
+
 
 \newpage
 
@@ -1516,6 +1483,71 @@ Thus the residual difference, $migStats(\G,b)-\widetilde{migStats}(\G,b)$, is co
 For instance, if $b$ is a migration band between two sampled populations, then its life span in $\M$ and in the protocol starts at $t=0$, and the residual is computed by 
 determining which branches of $\G$ are mapped to population $target(p)$ in the time interval between $t=\min(\tau(parent(source(b))),\tau(parent(target(b))))$ and
 $t=\min(ubound(parent(source(b))|\G),ubound(parent(target(b))|\G))$.
+
+
+
+
+
+\section{Development of McRef}
+[TODO - properly write this section]
+
+\subsection{Debugging results}
+
+When examining results of \gp calculations for mcref we were faced with the challenge of validating our results. \#explanation-on-why-this-was-needed. We wished to double-check every statistic emitted, with the simple goal of predictably and reliably reaching our intended calculation.
+
+This was accomplished using a variaty of techniques, restricted by the target statistic and reference model and by the tools at our disposal. 
+
+
+\begin{itemize}
+
+\item \underline{in comb: compare leaves when comb-age:=inf. Compare root comb when comb-age:=0}
+
+To validate our comb coal-stats calculations we permanantly set the comb-age to various values, allowing us to predict results. When setting a high comb-age (essentially infinite), we asserted That the coal-stats of comb-leaves is equal to the leaf population stats calculated by \gp. When setting comb-age to zero (thus reducing the comb to a clade), we asserted that the coal-stats of the root-comb is equal those of the null reference model (calculated independently by the clade algorithm and by a preexisting \gp implementation).
+
+
+
+\item \underline{in clade: compare "leaf clade" with leaf. Compare root-clade with \gp -calculated root-clade}
+To assert clade coal-stats, we applied techniques similiar to those used for the comb algorithm. Leaf-rooted clades were compared with leaf stat calculated by \gp and the root-clade (aka the null reference modle) was compared with independantly calculated stats for the null reference model. 
+
+\item \underline{In tau bounds: monotonouty up pop tree. Assert diff(bound, tau) neg correlated with \#loci}
+
+We expected each tau bound to decrease towards its corresponding population tau as the number of loci increases. This due to an increase in the number of coalescence events, leading to an increase in chance of some coalescence event occurring closer to the population tau. We ran a simple set of \gp experiments using the same sequence data, changing only the number of loci in-use. We observed a negative correlation between the number of loci and the tau bound, as expected.
+
+Another simple validation we performed was asserting that bounds are monotonously decreasing down the population tree.
+
+\end{itemize}
+
+\subsection{McRef Code}
+
+\begin{itemize}
+\item \underline{configuration}
+
+When setting up mcref, several parameters are configured. The parameters pertain to standard I/O (e.g. where the trace data files are stored and where to store output), to the phylogenic population models (i.e. the structure of the reference and hypothesis models), to \gp configuration (e.g. what alpha \& beta to use for gamma priora, what print multipliers were applied to trace data when emitted by gphocs etc.), to statistical calculations (e.g. how many bootstrap iterations to run during confidence calculation and how much burn-in and sample-skip to use in genealogy likelihood calculation) and to debugging (e.g. what debug calculations to run and visualizations to emit). 
+
+\item \underline{calculating kingman coalescence and kingman migration for the reference model}
+
+Calculating the reference model genealogy likelihood was done using the standard kingman coalescence model, in the same manner implemented in gphocs. The theta of the actual comb/clade population was set to that of the population at the top of the comb/clade and plugged into \#gen\_ld\_ln-formula. 
+
+\item \underline{calculating tau priors for hypothesis and reference models}
+tau priors for the hypothesis model were calculated using the same gamma-distribution used by gphocs, based on taus emitted during the \gp run. tau priors for the reference model were calculated using a uniform distribution based on tau-bounds, as described in the chapter about tau bounds.
+
+\item \underline{estimating variance using bootstrap}
+
+In an attempt to estimate the variability of the genealogy likelihood calculation, bootstrap estimations of the rbf were repeatedly sampled from the trace data. 
+
+
+\item \underline{optimizing runtime (lazily caching trace files, multiprocess concurrently running comparisons, )}
+
+With the goal of optimizing the practical run-time and usability of mcref, several techniques were employed; trace data files, which are repeatedly read and used, are lazily loaded and cached in each mcref process. Multiple mcref experiments are launched using a single command and are cocurrently run in multiple processes, eventually aggregating summary results to a single log file. 
+
+\item \underline{visualizing results}
+
+To clarify results and to help in the understanding and debugging of mcref runs, several visual outputs were developed. each mcref run emits plots of the genealogy-log-likelihood of the reference model and of the hypothesis model, as well as a plot of the rbf calculation across \gp iterations and a plot of the harmonic mean of likelihood of the hypothesis model.
+
+\item \underline{debugging visualizations}
+
+Multiple debug plots are also emitted by mcref. Their goal is to help the researcher assert the experiment was executed as planned. These plots contain the kingman coalescence and kingman migration of every population and migration in both the hypothesis and reference models. They also contain the aggregate coal-stats of the hypothesis and reference model, allowing us to assert that coal-stats of a reference model always exceed those of it's hypothesis \#here-goes-an-explanation-of-the-previous-sentence. 
+\end{itemize}
 
 
 
