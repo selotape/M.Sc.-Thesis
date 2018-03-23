@@ -1110,16 +1110,16 @@ TODO - write how McRef finalizes the RBF calculation. Also fulfill all previous 
 
 TODO - Completely rewrite the following section, removing the nitty-gritty details.
 
-\newpage
-
 \section{Results}
 
 
 We designed a series of experiments in order to test the selection power of our algorithm, and to assess the certainty/confidence of a single McRef test. 
 %
 The Selection power is reflected in both the type of scenarios in which McRef clearly picks the correct hypothesis, and in the sensitivity of the algorithm, e.g. when parameters converge. 
+
+\subsection{General Setup}
 %
-We generated data sets under different demographic scenarios, using the following setup constant - 3 leaf populations ($A$, $B$ and $C$ ), 4 haploid sequences in each population and 5000 loci of length 1000 in each sequence. 
+We generated data sets under different demographic scenarios, using the following setup constant - 3 leaf populations $A$, $B$ and $C$, an ancestor populations $AB$ and a root ancestor $ABC$. 4 haploid sequences in each leaf population and 5000 loci of length 1000 in each sequence. 
 %
 For each demographic scenario we generated two independent data sets to examine replication. 
 %
@@ -1128,15 +1128,31 @@ To further assess replication we ran 2 independent MCMC runs in each following G
 
 In each comparison instance we compared two hypothesis models $\M_1$ and $\M_2$ on a given data set. 
 %
-Comparison was done using both the harmonic mean ($HM$) and relative Bayes factors with some reference model $\M_{ref}$ ($[reference]\_RBF$). 
+Comparison was done using both the harmonic mean and relative Bayes factors with some reference model $\M_{ref}$. 
 %
 On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding four potential differences between the relevant McRef stats (e.g., $HM(\M_{\mathbf{1}}, data) - HM(\M_{\mathbf{2}},data)$, $RBF(\M_{\mathbf{1}}, \M_{null}, data) - RBF(\M_{\mathbf{2}}, \M_{null}, data)$). 
 %
 The differences represent McRefs final "choice" between $\M_1$ and $\M_2$, i.e. which model has higher data likelihood relative to the reference model. 
 
+
 We used the emitted differences to plot confidence intervals in the following manner.
 % 
-For each comparison we recorded the maximum and minimum of the 4 differences with their standard error margins (which McRef computes via bootstrap). For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these ste's correspond to the difference between two values, we took the sqrt of the sum of the two appropriate ste's. As a result, for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model), We attained 4 values that together capture our uncertainty in the comparison. To this we add the fact that each data set has a "sister" set generated with identical model parameters, providing additional indication for noise.
+For each comparison we recorded the maximum and minimum of the 4 differences with their standard error margins (which McRef computes via bootstrap). 
+%
+For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these ste's correspond to the difference between two values, we took the sqrt of the sum of the two appropriate ste's. 
+%
+As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model). To this we add the fact that each data set has a "sister" set generated with identical model parameters, providing additional indication for noise.
+
+
+\subsection{Experiment - Population Separation}
+In this experiment we generated sets where population $ABC$s divergence (the divergence time between $C$ and the $AB$) is fixed to 0.003, and perturbed $AB$s divergence time ( the divergence time between $A$ and $B$) between 0 to 0.00050. No migration was allowed between any population.
+
+We considered 2 hypotheses:
+\begin{enumerate}
+\item $\M_{3pops}$ - A model with 3 leaf populations $A$, $B$ and $C$ (the true model used to generate the sequence data)
+\item $\M_{2pops}$ - A model with 2 leaf populations $AB$ and $C$, where the sequenced individuals of $A$ and $B$ are grouped in a single population (the true model only when $tau_AB:=0$)
+\end{enumerate}
+ 
 
 
 \newpage
