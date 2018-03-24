@@ -176,7 +176,7 @@ showstringspaces=false            %
 
 \newcommand{\figuretitle}[1]{
 	\centering
-	\textbf{#1}
+	\underline{\textbf{#1}}
 	\par
 	\medskip
 }
@@ -1172,26 +1172,25 @@ and compared these two models using each of three techniques:
 \end{enumerate}
 
 
-We usedthese three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})})}$) with each variant of the data set. Figure \ref{fig:results-divAB} shows for each comparison instance the 4 values associated with it for each comparison method.
+We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})})}$) with each variant of the data set. Figure \ref{fig:results-divAB} shows for each comparison instance the 4 values associated with it for each comparison method.
 
 
 
 \begin{figure}[h]
 
-
-\figuretitle{A comparison between $\M_{3pops}$ and $\M_{2pops}$}
+\figuretitle{Selecting between $\M_{3pops}$ vs $\M_{2pops}$ using RBF and HM}
 
 
 \includegraphics[scale=0.5]{results/results-divAB-select}
 \captionsetup{width=0.8\textwidth}
 \caption{
-Data sets are marked on the X-axis by $divXX-a$, where $XX := \tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+Data sets are marked on the X-axis by $divXX-a$, where the value of $XX$ stands for $\tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
 %
-The divergence time of $AB$ increases between comparisons (left to right).
+The divergence time of $AB$ used in the generation of the data set increases between comparisons (left to right).
 %
-Each bar's height is the value of the comparison metric $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})}}$.
+The bars heights are the values of the comparison metric $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})}}$.
 %
-Each experiment was repeated twice to assess reproducability. We see that for $\tau_{AB} \leq 0.00020$ the harmonic mean does not confidently prefer the true hypothesis $\M_{3pops}$ over the competing hypothesis $\M_{2pops}$.
+Each experiment was repeated twice to assess reproducability. We see in the graph that for $\tau_{AB} \leq 0.00020$ the harmonic mean does not confidently prefer the true hypothesis $\M_{3pops}$ over the competing hypothesis $\M_{2pops}$.
 %
 RBFs however prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardless of the chosen reference model.
 %
@@ -1202,59 +1201,69 @@ RBFs however prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardl
 
 
 \subsubsection{Observations}
-Following is a series of direct observations about figure \ref{fig:results-divAB} - 
+Following is a series of observations drawn from figure \ref{fig:results-divAB} - 
 
 \begin{itemize}
-\item We get values near 0 ($<1e^{-6}$) when  computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$, because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
+\item When computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$ we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
 
 \item We notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values).
 
 \item In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
 
-\item When we use $\Mref = clade(AB)$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
+\item When we use $\Mref = \M_{clade(AB)}$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
 %
 Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
 
 \end{itemize}
 
+To summarize, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
 
 
 
 \subsection{Experiment II - Varying Gene Flow}
 \subsubsection{Setup}
-In this experiment we generated data sets where the divergence times are fixed to $\tau_{ABC} = 0.00300$, and $\tau_{AB} = 0.00150$ and simulated migration from population $C$ to population $B$ in different rates.
+In this experiment we generated data sets where the divergence times are fixed to $\tau_{ABC} = 0.00300$, and $\tau_{AB} = 0.00150$ and simulated different migration rates from population $C$ to population $B$.
 %
-We considered four hypothesis models ($\Mhyp$):
+We considered four hypotheses:
 \begin{enumerate}
 
-\item $\M_{nomig}$ - A model with no migration bands
 \item $\M_{migCB}$ - A model with a migration band from $C$ to $B$ (the true model)
-\item $\M_{migALL}$ - A model with migration bands between all pairs of sampled populations (6 mig bands total)
+
+\item $\M_{nomig}$ - A model with no migration bands
+
+\item $\M_{migALL}$ - A model with migration bands between all pairs of sampled populations (6 migration bands total)
+
 \item $\M_{migBC}$ - A model with migration band from $B$ to $C$
 
 \end{enumerate}
 %
 and examined two ways to compare these 4 models:
 \begin{enumerate}
-\item Using the harmonic mean (HM)
+\item Using the harmonic mean estimator (HM)
 \item Using RBF where $\Mref = \M_{null}$
 
 \end{enumerate}
 
-To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). Data sets are marked by $mig-X-a$, where $X$ indicates percentage of admixture in population $B$ and $a$ indicates the data replicate (1 or 2).
+To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). Data sets are marked by $migXX-a$, where $XX$ stands for the migration rate from population $C$ to $B$ and $a$ indicates the data replicate (1 or 2). Figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2} contain the results of all these comparisons.
 
 
 
 \begin{figure}[h]
+
+\figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using RBF with the null reference model}
+
+
 \includegraphics[width=1.4\textwidth]{results/results-migCB-select-1}
 \captionsetup{width=1.0\textwidth}
 \caption{[TODO - figure out how to center figure]}
 \label{fig:results-migCB-1}
 \end{figure}
 
-new line 
 
 \begin{figure}[h]
+
+\figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using HM}
+
 \includegraphics[width=1.4\textwidth]{results/results-migCB-select-2}
 \captionsetup{width=1.0\textwidth}
 \caption{[TODO - figure out how to center figure]}
@@ -1265,12 +1274,12 @@ new line
 
 
 \subsubsection{Observations}
-Following is a series of direct observations about figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2} - 
+Following is a series of observations drawn from figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2} - 
 
 
 \begin{itemize}
 
-\item We see that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$. In mig10-2 it even significantly prefers the model with no migration.
+\item We see in figure \ref{fig:results-migCB-2} that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$.
 
 \item RBF consistently scores $\M_{migCB}$ and $\M_{migAL}$ higher than $\M_{nomig}$ in the 4 data sets with migration. The preference is correlated to the simulated migration rate. 
 
@@ -1279,6 +1288,8 @@ Following is a series of direct observations about figures \ref{fig:results-migC
 \item There doesn't seem to be a significant difference between the scores of $\M_{migCB}$ and $\M_{migALL}$. In principle, we would've liked to give a higher score to the most "compact" model, but this is not attained.
 
 \end{itemize}
+
+In summary, we see RBFs have more discrimination power then the harmonic mean estimator when comparing models with different migration patterns. The success of the algorithm is correlated with migration rate but it's estimations are not of high certainty, neither did it succeed in choosing the more parsimonious hypothesis, meaning there is room for improvement.
 
 
 \newpage
