@@ -1143,15 +1143,11 @@ On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding fo
 The differences represent the algorithms final "choice" between $\M_1$ and $\M_2$, i.e. which model has higher estimated data likelihood relative to the reference model.
 
 
-We used the emitted differences to plot confidence intervals in the following manner.
-% 
 For each comparison we recorded the maximum and minimum of the 4 differences with their standard error margins (which McRef computes via bootstrap). 
 %
 For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these errors correspond to the difference between two values, we took the square root of the sum of the two appropriate errors. 
 %
-As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). To this we add the fact that each data set has a "sister" set generated with identical model parameters, providing additional indication for noise.
-%
-[TODO - finish explanation about confidence intervals.]
+As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). We used these values to plot the confidence intervals seen in the following figures.
 
 
 \subsection{Experiment I - Varying Population Separation}
@@ -1178,13 +1174,13 @@ We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (
 
 \begin{figure}[h]
 
-\figuretitle{Selecting between $\M_{3pops}$ vs $\M_{2pops}$ using RBF and HM}
+\figuretitle{Selecting between $\M_{3pops}$ vs $\M_{2pops}$ using RBFs or HM}
 
 
 \includegraphics[scale=0.5]{results/results-divAB-select}
 \captionsetup{width=0.8\textwidth}
 \caption{
-Data sets are marked on the X-axis by $divXX-a$, where the value of $XX$ stands for $\tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+Data sets are marked on the X-axis by divXX-a, where the value of $XX$ stands for $\tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
 %
 The divergence time of $AB$ used in the generation of the data set increases between comparisons (left to right).
 %
@@ -1244,20 +1240,8 @@ and examined two ways to compare these 4 models:
 
 \end{enumerate}
 
-To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). Data sets are marked by $migXX-a$, where $XX$ stands for the migration rate from population $C$ to $B$ and $a$ indicates the data replicate (1 or 2). Figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2} contain the results of all these comparisons.
+To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). 
 
-
-
-\begin{figure}[h]
-
-\figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using RBF with the null reference model}
-
-
-\includegraphics[width=1.4\textwidth]{results/results-migCB-select-1}
-\captionsetup{width=1.0\textwidth}
-\caption{[TODO - figure out how to center figure]}
-\label{fig:results-migCB-1}
-\end{figure}
 
 
 \begin{figure}[h]
@@ -1266,8 +1250,38 @@ To present the results, we conducted a comparison between each of the three mode
 
 \includegraphics[width=1.4\textwidth]{results/results-migCB-select-2}
 \captionsetup{width=1.0\textwidth}
-\caption{[TODO - figure out how to center figure]}
+\caption{
+Data sets are marked by $migXX-a$, where $XX$ stands for the migration rate from population $C$ to $B$ and $a$ indicates the data replicate (1 or 2).
+%
+The migration rate from $C$ to $B$ used in the generation of the data set increases between comparisons (left to right).
+%
+The bars heights are the values of the comparison metric against $\M_{nomig}$ , e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$.
+%
+Each experiment was repeated twice to assess reproducability.
+%
+We see in the graph that the harmonic mean does not consistently prefer any model over another.
+%
+(TODO - center the figure)}
 \label{fig:results-migCB-2}
+\end{figure}
+
+
+
+\begin{figure}[h]
+
+\figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using RBF with $\M_{null}$}
+
+
+\includegraphics[width=1.4\textwidth]{results/results-migCB-select-1}
+\captionsetup{width=1.0\textwidth}
+\caption{
+As opposed to in figure \ref{fig:results-migCB-2}, we see that the RBF prefers models with migration to the migration-less base model. 
+%
+This preference is correlated with migration rate. 
+%
+We also see that RBF using a comb reference model produces estimates with higher confidence.
+}
+\label{fig:results-migCB-1}
 \end{figure}
 
 
