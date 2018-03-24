@@ -174,6 +174,13 @@ showstringspaces=false            %
 
 \graphicspath{ {../images/} }
 
+\newcommand{\figuretitle}[1]{
+	\centering
+	\textbf{#1}
+	\par
+	\medskip
+}
+
 \author{Ron Visbord}
 % \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
 
@@ -1112,64 +1119,84 @@ TODO - Completely rewrite the following section, removing the nitty-gritty detai
 
 \section{Results}
 
-We designed a series of experiments in order to test the selection power of our algorithm, and to assess the certainty of an McRef test. 
+In order to assess the selection power of our algorithm we designed a series of experiments which measure it's ability and limits. 
 %
-The selection power is embodied in both the type of scenarios in which McRef clearly picks the correct hypothesis, and in the sensitivity of the algorithm, e.g. when parameters converge.
+The selection power we'd like to assess is embodied in both the type of scenarios in which RBFs clearly pick the correct hypothesis and in the algorithm's sensitivity to parameter changes.
 %
-A minor goal of the experiment design is to learn how best to employ McRef and how to choose a reference model for a given set of hypotheses.
+A secondary goal of the experiment design was to learn how best to employ RBFs and how to choose a reference model for a given set of hypotheses.
 
 \subsection{General Setup}
 %
-We generated data sets under different demographic scenarios, using the following setup constant - 3 leaf populations $A$, $B$ and $C$, an ancestor populations $AB$ and a root ancestor $ABC$. 4 haploid sequences in each leaf population and 5000 loci of length 1000 in each sequence. 
+We generated data sets under different demographic scenarios, using the following constant setup. The generative populations model (the "true" model) had 3 leaf populations $A$, $B$ and $C$, an ancestral population $AB$ and a root ancestral population $ABC$. Four haploid sequences were generated for each leaf population. Each sequence was comprised of 5000 loci of length 1000. 
 %
-For each demographic scenario we generated two independent data sets to examine replication. 
+For each demographic scenario we generated two independent data sets (using the same generative hypothesis) to examine replication of results. 
 %
 To further assess replication we ran 2 independent MCMC runs in each following G-PhoCS setting we examined for each data set.
 
 
 In each comparison instance we compared two hypothesis models $\M_1$ and $\M_2$ on a given data set. 
 %
-Comparison was done using both the harmonic mean and relative Bayes factors with some reference model $\M_{ref}$. 
+Depending on the specific test, comparison was done using relative Bayes factors with a differing reference model $\M_{ref}$ and using the harmonic mean for as a benchmark comparison. 
 %
-On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding four potential differences between the relevant McRef stats (e.g., $HM(\M_{\mathbf{1}}, data) - HM(\M_{\mathbf{2}},data)$, $RBF(\M_{\mathbf{1}}, \M_{null}, data) - RBF(\M_{\mathbf{2}}, \M_{null}, data)$). 
+On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding four potential differences between the relevant stats (e.g., $HM(\M_{\mathbf{1}}, data) - HM(\M_{\mathbf{2}},data)$, $RBF(\M_{\mathbf{1}}, \M_{null}, data) - RBF(\M_{\mathbf{2}}, \M_{null}, data)$). 
 %
-The differences represent McRefs final "choice" between $\M_1$ and $\M_2$, i.e. which model has higher data likelihood relative to the reference model. 
+The differences represent the algorithms final "choice" between $\M_1$ and $\M_2$, i.e. which model has higher estimated data likelihood relative to the reference model.
 
 
 We used the emitted differences to plot confidence intervals in the following manner.
 % 
 For each comparison we recorded the maximum and minimum of the 4 differences with their standard error margins (which McRef computes via bootstrap). 
 %
-For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these ste's correspond to the difference between two values, we took the sqrt of the sum of the two appropriate ste's. 
+For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these errors correspond to the difference between two values, we took the square root of the sum of the two appropriate errors. 
 %
-As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model). To this we add the fact that each data set has a "sister" set generated with identical model parameters, providing additional indication for noise.
+As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). To this we add the fact that each data set has a "sister" set generated with identical model parameters, providing additional indication for noise.
+%
+[TODO - finish explanation about confidence intervals.]
 
 
 \subsection{Experiment I - Varying Population Separation}
 \subsubsection{Setup}
-In this experiment we generated sets where population $ABC$s divergence (the divergence time between $C$ and the $AB$) is fixed to 0.003, and perturbed $AB$s divergence time ( the divergence time between $A$ and $B$) between 0 to 0.00050. No migration was allowed between any population. We considered 2 hypotheses:
+In this experiment we generated data sets for which population $ABC$s divergence time is fixed to 0.00300, and perturbed $AB$s divergence time from 0 up to 0.00050. No migration was allowed between any population. We considered 2 hypotheses:
 %
 \begin{enumerate}
-\item $\M_{3pops}$ - A model with 3 leaf populations $A$, $B$ and $C$ (the true model used to generate the sequence data)
-\item $\M_{2pops}$ - A model with 2 leaf populations $AB$ and $C$, where the sequenced individuals of $A$ and $B$ are grouped in a single population (the true model in the data set where $\tau_{AB}:=0$)
+\item $\M_{3pops}$ - A model with 3 leaf populations $A$, $B$ and $C$. This is the true model used to generate the sequence data
+\item $\M_{2pops}$ - A model with 2 leaf populations $AB$ and $C$, where the sequenced individuals of the original $A$ and $B$ populations are grouped into a single leaf population $AB$. This model coincides with the true model in the data set with $\tau_{AB}:=0$
 \end{enumerate}
 %
-and compared these two models using each of three options:
+and compared these two models using each of three techniques:
 %
 \begin{enumerate}
 \item The harmonic mean
-\item Relative Bayes factors where the reference model is $\M_{null}$
-\item Relative Bayes factors where the reference model is $\M_{clade(AB)}$ (a clade rooted at population $AB$). Note that when $\Mhyp = \M_{2pops}$ we get $\Mref=\Mhyp$.
+\item Relative Bayes factors with a reference model of $\M_{null}$
+\item Relative Bayes factors with a reference model of $\M_{clade(AB)}$ (the original model with a clade rooted at population $AB$). Note that when $\Mhyp := \M_{2pops}$ we get $\Mref=\Mhyp$
 \end{enumerate}
 
-We conducted a comparison between $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})}])}$ using the three ways mentioned above. Figure \ref{fig:results-divAB} shows for each comparison the 4 values associated with it for each comparison method. Data sets are marked by $div-X-a$, where $X := \tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+
+We usedthese three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})})}$) with each variant of the data set. Figure \ref{fig:results-divAB} shows for each comparison instance the 4 values associated with it for each comparison method.
 
 
 
 \begin{figure}[h]
+
+
+\figuretitle{A comparison between $\M_{3pops}$ and $\M_{2pops}$}
+
+
 \includegraphics[scale=0.5]{results/results-divAB-select}
-\captionsetup{width=1.0\textwidth}
-\caption{[TODO - figure out how to center figure]}
+\captionsetup{width=0.8\textwidth}
+\caption{
+Data sets are marked on the X-axis by $divXX-a$, where $XX := \tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+%
+The divergence time of $AB$ increases between comparisons (left to right).
+%
+Each bar's height is the value of the comparison metric $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})}}$.
+%
+Each experiment was repeated twice to assess reproducability. We see that for $\tau_{AB} \leq 0.00020$ the harmonic mean does not confidently prefer the true hypothesis $\M_{3pops}$ over the competing hypothesis $\M_{2pops}$.
+%
+RBFs however prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardless of the chosen reference model.
+%
+(TODO - center the figure)
+}
 \label{fig:results-divAB}
 \end{figure}
 
@@ -1178,7 +1205,7 @@ We conducted a comparison between $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\fr
 Following is a series of direct observations about figure \ref{fig:results-divAB} - 
 
 \begin{itemize}
-\item We get values near 0 ($<1e^{-6}$) when  I computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$, because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
+\item We get values near 0 ($<1e^{-6}$) when  computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$, because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
 
 \item We notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values).
 
@@ -1214,7 +1241,7 @@ and examined two ways to compare these 4 models:
 
 \end{enumerate}
 
-To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and HM (Figure \ref{fig:results-migCB-2}). Data sets are marked by $mig-X-a$, where $X$ indicates percentage of admixture in population $B$ and $a$ indicates the data replicate (1 or 2).
+To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). Data sets are marked by $mig-X-a$, where $X$ indicates percentage of admixture in population $B$ and $a$ indicates the data replicate (1 or 2).
 
 
 
@@ -1252,9 +1279,6 @@ Following is a series of direct observations about figures \ref{fig:results-migC
 \item There doesn't seem to be a significant difference between the scores of $\M_{migCB}$ and $\M_{migALL}$. In principle, we would've liked to give a higher score to the most "compact" model, but this is not attained.
 
 \end{itemize}
-
-
-
 
 
 \newpage
