@@ -1260,7 +1260,7 @@ Data sets are marked on the X-axis by $divAB\_XX-a$, where the value of $XX$ sta
 %
 The true gap between divergence times $\tau(ABC)$ and $\tau(AB)$ starts from zero on the left (where $\tau(ABC) = 0.00300 = \tau(AB)$) and increases between comparisons (left to right).
 %
-We clearly see from figures \ref{fig:results-M4-divAB-comb_ABC} through 12 that the more specialized reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable. }
+We clearly see from figures \ref{fig:results-M4-divAB-comb_ABC} through 12 that the more specialized reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable. [TODO - conjoin the two Comb experiment charts. Also conjoin the two clade experiment charts]}
 \label{fig:results-M4-divAB-comb_ABC}
 \end{figure}
 
@@ -1290,24 +1290,20 @@ We clearly see from figures \ref{fig:results-M4-divAB-comb_ABC} through 12 that 
 
 
 \subsubsection{Observations}
-Following is a series of observations drawn from figure \ref{fig:results-divAB} - 
+Following is a series of observations drawn from figures \ref{fig:results-M4-divAB-comb_ABC} through \ref{fig:results-M4-divAB-HM} - 
 
 \begin{itemize}
-\item When computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$ we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
+\item The two comb reference methods clearly and confidently choose the true hypothesis model.
 
-\item We notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values).
+\item When using the $Clade(ABC)$ reference model we see a gentle upward trend in results, but no reproducable clear selection. In the remaining two experiments - using the $Clade(ROOT)$ reference model and the harmonic mean, we see absolutely no selection and a high uncertainty.
 
-\item In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
+\item The comb reference methods also correctly showed no preference to any model when the hypotheses were eqivalent. This is not true for the other methods.
 
-\item When we use $\Mref = \M_{clade(AB)}$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
-%
-Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
+\item Amongst the two comb reference methods, the more localized $Comb(ABC)$ provided a stronger and more confident signal.
 
 \end{itemize}
 
-To summarize, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
-
-
+To summarize, we demonstrate that the choice of reference model has a great impact on algorithm performance. The more the reference model was localized to the disputed hypothesis region, the better the algorithm performed.
 
 
 \subsection{Experiment II - Varying Gene Flow}
