@@ -1127,11 +1127,17 @@ A secondary goal of the experiment design was to learn how best to employ RBFs a
 
 \subsection{General Setup}
 %
-We generated data sets under different demographic scenarios, using the following constant setup. The generative populations model (the "true" model) had 3 leaf populations $A$, $B$ and $C$, an ancestral population $AB$ and a root ancestral population $ABC$. Four haploid sequences were generated for each leaf population. Each sequence was comprised of 5000 loci of length 1000. 
+We generated data sets under different demographic scenarios, using the following constant setup. 
+%
+In experiments I and III, the generative populations model (the "true" model) had 3 leaf populations $A$, $B$ and $C$, an ancestral population $AB$ and a root ancestral population $ABC$. 
+%
+In experiment II the true model had another ancestor population $ROOT$ which split to $ABC$ and an outgroup leaf population $O$. 
+%
+Four haploid sequences were generated for each leaf population. Each sequence was comprised of 5000 loci of length 1000. 
 %
 For each demographic scenario we generated two independent data sets (using the same generative hypothesis) to examine replication of results. 
 %
-To further assess replication we ran 2 independent MCMC runs in each following G-PhoCS setting we examined for each data set.
+To further assess replication we ran 2 independent MCMC runs in each G-PhoCS setting.
 
 
 In each comparison instance we compared two hypothesis models $\M_1$ and $\M_2$ on a given data set. 
@@ -1213,6 +1219,94 @@ Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, 
 \end{itemize}
 
 To summarize, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
+
+
+
+\subsection{Experiment II - Comb vs Clade vs HM}
+\subsubsection{Setup}
+In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to $O$ and $ABC$ was set to an ancient 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
+%
+\begin{enumerate}
+\item $\M_{AB\_C}$ - A model with four leaf populations $A$, $B$ and $C$ and $O$ where $A$ and $B$ are siblings. This is the true model used to generate the sequence data
+\item $\M_{A\_BC}$ - A similiar model but in which $B$ and $C$ are siblings
+\item $\M_{AC\_B}$ - A similiar model but in which $A$ and $C$ are siblings
+\end{enumerate}
+%
+Note that when $\theta(AB) = 0.00300 = \theta(ABC)$, the three hypotheses converge so we expect them to be indistinguishable. We compared these models using each of five techniques:
+%
+\begin{enumerate}
+\item The harmonic mean
+\item Relative Bayes factors with a reference model of $\M_{Clade(ROOT)} = \M_{null}$
+\item Relative Bayes factors with a reference model of $\M_{Clade(ABC)}$
+\item Relative Bayes factors with a reference model of $\M_{Comb(ROOT)}$
+\item Relative Bayes factors with a reference model of $\M_{Comb(ABC)}$
+\end{enumerate}
+
+
+Similiarly to experiment I, we used these techniques to compare the true model $\M_{AB_C}$ against the alternatives $\M_{A\_BC}$ and $\M_{AC\_B}$. Figures \ref{fig:results-M4-divAB-comb_ABC} through \ref{fig:results-M4-divAB-HM} show the results of the comparisons.
+
+
+
+\begin{figure}[h]
+
+\figuretitle{Comparing performance of multiple reference models and HM}
+
+
+\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-comb_ABC}
+
+\captionsetup{width=0.8\textwidth}
+\caption{ 
+Data sets are marked on the X-axis by $divAB\_XX-a$, where the value of $XX$ stands for $\tau(AB) \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+%
+The true gap between divergence times $\tau(ABC)$ and $\tau(AB)$ starts from zero on the left (where $\tau(ABC) = 0.00300 = \tau(AB)$) and increases between comparisons (left to right).
+%
+We clearly see from figures \ref{fig:results-M4-divAB-comb_ABC} through 12 that the more specialized reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable. }
+\label{fig:results-M4-divAB-comb_ABC}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-comb_ROOT}
+\caption{ }
+\label{fig:results-M4-divAB-comb_ROOT}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-clade_ABC}
+\caption{ }
+\label{fig:results-M4-divAB-clade_ABC}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-clade_ROOT}
+\caption{ }
+\label{fig:results-M4-divAB-clade_ROOT}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-HM}
+\caption{ }
+\label{fig:results-M4-divAB-HM}
+\end{figure}
+
+
+\subsubsection{Observations}
+Following is a series of observations drawn from figure \ref{fig:results-divAB} - 
+
+\begin{itemize}
+\item When computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$ we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
+
+\item We notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values).
+
+\item In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
+
+\item When we use $\Mref = \M_{clade(AB)}$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
+%
+Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
+
+\end{itemize}
+
+To summarize, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
+
 
 
 
