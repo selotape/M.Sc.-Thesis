@@ -1,0 +1,170 @@
+McRef with Comb(ABC) as reference model -  	
+
+simulation                                                               rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ------------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_12345  -1611.17           12.6938     1.45392e+06        21.5406
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_54321  -1601.25           14.4798     1.45388e+06         2.15855
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_12345     -1.45018         0.0745426  1.45391e+06         6.11137
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_54321     -1.23567         0.157835   1.45391e+06         4.95761
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_12345     -0.962936        0.0813412  1.45391e+06         5.35342
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_54321     -1.11813         0.0983109  1.45392e+06         5.13496
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_12345  -1310.6             7.1063     1.45394e+06         6.34931
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_54321  -1254.58           13.4373     1.45397e+06        11.0923
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_12345     -1.85507         0.0570507  1.45394e+06         4.15699
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_54321     -1.6701          0.0630205  1.45398e+06        14.7936
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_12345     -0.279517        0.736691   1.45395e+06         2.01231
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_54321     -1.6662          0.168934   1.45396e+06         2.19782
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_12345   -253.948           9.01537    1.45472e+06         4.55309
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_54321   -294.303           3.48369    1.45475e+06        23.6376
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_12345     -1.76607         0.159003   1.45474e+06         7.0159
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_54321     -1.06971         0.0609435  1.45474e+06         8.71138
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_12345     -1.82828         0.11876    1.45471e+06         2.49487
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_54321     -1.83627         0.10178    1.45473e+06        12.034
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_12345   -292.29            7.34103    1.45599e+06        12.5954
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_54321   -196.832           6.04627    1.456e+06          13.2324
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_12345     -2.16152         0.10936    1.45602e+06        27.6154
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_54321     -2.14413         0.0504056  1.45598e+06         4.6316
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_12345     -1.10751         0.92885    1.456e+06          20.4425
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_54321     -2.88504         0.0593031  1.456e+06          13.7558
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_12345     -3.74823         0.150234   1.45669e+06        10.4603
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_54321     -3.75325         0.857294   1.45669e+06        11.9498
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_12345     -5.21199         0.162724   1.45669e+06         5.06754
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_54321     -1.15446         0.511076   1.45671e+06        29.0009
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_12345     -5.5248          0.409602   1.45667e+06         8.44409
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_54321    -14.7543          0.416751   1.45668e+06         9.82232
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_12345     -6.61444         0.317569   1.45634e+06         7.45287
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_54321     -3.03698         0.230045   1.45636e+06         9.65551
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_12345     -2.98374         0.329018   1.45638e+06        31.6586
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_54321     -3.01226         0.178243   1.45636e+06        18.1953
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_12345     -6.79482         0.545152   1.45635e+06         5.48066
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_54321    -12.6504          0.711695   1.45635e+06         8.69671
+
+
+
+
+McRef with Comb(ROOT) as reference model - 
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_12345    -8077.08         30.6143   1.45392e+06        22.1546
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_54321    -8018.19         51.0516   1.45388e+06         2.23847
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_12345    -4807            22.2222   1.45391e+06         5.80638
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_54321    -4714.13         18.7827   1.45391e+06         5.1016
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_12345    -4878.46          3.99227  1.45391e+06         5.23868
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_54321    -4714.17         13.6553   1.45392e+06         5.8306
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_12345    -6897.24         26.0455   1.45394e+06         6.33825
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_54321    -6964.19         51.3519   1.45397e+06        10.9159
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_12345    -4488.9          28.3015   1.45394e+06         4.41228
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_54321    -4535.52         47.2434   1.45398e+06        13.5797
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_12345    -4616.21         10.0903   1.45395e+06         2.28695
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_54321    -4375.08         76.073    1.45396e+06         2.35815
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_12345    -5370.21         69.7993   1.45472e+06         4.1249
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_54321    -5385.3          16.4095   1.45475e+06        23.4953
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_12345    -4448.48         91.2285   1.45474e+06         6.78669
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_54321    -4406.93         94.7207   1.45474e+06         7.46326
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_12345    -4690.81         30.7014   1.45471e+06         2.44688
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_54321    -4652.35         57.8846   1.45473e+06        12.3546
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_12345    -4977.09         33.522    1.45599e+06        12.9275
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_54321    -4980.36         20.2172   1.456e+06          13.4576
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_12345    -4302.48         26.6682   1.45602e+06        28.0862
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_54321    -4333.68         46.4177   1.45598e+06         4.70685
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_12345    -4440.42         15.5194   1.456e+06          20.4439
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_54321    -4381.31         18.0375   1.456e+06          13.2419
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_12345    -3547.71         75.3423   1.45669e+06        10.9436
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_54321    -3619.81         12.0234   1.45669e+06        12.4707
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_12345    -3529.66         19.7163   1.45669e+06         5.08632
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_54321    -3491.33         65.1552   1.45671e+06        29.0412
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_12345    -3634.63         26.4231   1.45667e+06         7.99953
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_54321    -3644.79          4.01459  1.45668e+06         9.82366
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_12345    -4384.11         42.5009   1.45634e+06         7.5119
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_54321    -4371.22         18.2469   1.45636e+06         9.63255
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_12345    -4363.59         40.7581   1.45638e+06        30.4673
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_54321    -4361.36         67.0319   1.45636e+06        17.6129
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_12345    -4516.68         15.4019   1.45635e+06         5.34876
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_54321    -4293.72         26.0636   1.45635e+06         8.66747
+
+
+
+
+McRef with Clade(ABC) as reference model - 
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_12345   -10362.1           47.963   1.45392e+06        23.1541
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_54321   -10435.6          112.263   1.45388e+06         2.29779
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_12345    -9573.79         158.415   1.45391e+06         5.61961
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_54321   -10096.2           79.1859  1.45391e+06         5.01474
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_12345   -10129.8           90.7179  1.45391e+06         5.22438
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_54321    -9682.85         186.763   1.45392e+06         5.61717
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_12345   -10750.5          148.806   1.45394e+06         6.17427
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_54321   -10665.8           82.2021  1.45397e+06        11.3589
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_12345   -10631.7           57.1128  1.45394e+06         4.33573
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_54321   -10907.4           49.9461  1.45398e+06        13.5343
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_12345   -10571.8           96.3082  1.45395e+06         2.44957
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_54321   -10309             36.565   1.45396e+06         2.3843
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_12345   -10105.4           40.9202  1.45472e+06         4.14779
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_54321   -10276.9           21.8584  1.45475e+06        22.889
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_12345    -9973.75          68.4882  1.45474e+06         7.49853
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_54321    -9741.52          79.7449  1.45474e+06         8.64454
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_12345    -9742.54          42.4335  1.45471e+06         2.25815
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_54321    -9893.08          24.0417  1.45473e+06        12.036
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_12345   -11781.9          136.595   1.45599e+06        12.3217
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_54321   -11812.2           79.4129  1.456e+06          12.317
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_12345   -11489.7          269.077   1.45602e+06        28.9826
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_54321   -12020.5           87.7343  1.45598e+06         4.83322
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_12345   -11635.6          114.118   1.456e+06          21.5772
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_54321   -11835.1           84.1004  1.456e+06          13.1064
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_12345   -12349.1           75.4063  1.45669e+06        10.9626
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_54321   -12154.4          114.344   1.45669e+06        12.1962
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_12345   -12227.6           69.0728  1.45669e+06         5.16219
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_54321   -12024.4           45.8085  1.45671e+06        29.507
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_12345   -12177            159.209   1.45667e+06         8.17282
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_54321   -12365.4           36.3805  1.45668e+06         9.90225
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_12345   -10683.8          115.441   1.45634e+06         7.43615
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_54321   -10458.1          153.541   1.45636e+06         9.54463
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_12345   -10789.8          118.474   1.45638e+06        31.6144
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_54321   -10972.3           61.1582  1.45636e+06        18.5001
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_12345   -11032             32.4336  1.45635e+06         5.00808
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_54321   -10833.2           36.7035  1.45635e+06         8.09644
+
+
+
+McRef with Clade(ROOT) as reference model - 
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_12345    -21884.5          90.9701  1.45392e+06        21.4108
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AB_C_O/seed_54321    -21838.5         223.755   1.45388e+06         2.28804
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_12345    -22401.6          72.4646  1.45391e+06         5.89153
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/A_BC_O/seed_54321    -21789.6         109.394   1.45391e+06         4.77712
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_12345    -22237           168.419   1.45391e+06         5.50386
+/home/ron/Desktop/data_sets/M4.divAB_18-1/results/AC_B_O/seed_54321    -22560.4          95.5682  1.45392e+06         6.02888
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_12345    -21176.1         271.503   1.45394e+06         6.33962
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AB_C_O/seed_54321    -21227.5         289.123   1.45397e+06        11.479
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_12345    -21805.5         227.25    1.45394e+06         4.25291
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/A_BC_O/seed_54321    -21950.6         145.517   1.45398e+06        14.0721
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_12345    -21746.9          99.342   1.45395e+06         2.2366
+/home/ron/Desktop/data_sets/M4.divAB_18-2/results/AC_B_O/seed_54321    -21459.4         226.004   1.45396e+06         2.55424
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_12345    -23543.8         138.729   1.45472e+06         4.27843
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AB_C_O/seed_54321    -23464.7          88.8522  1.45475e+06        24.2248
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_12345    -22717.5         212.377   1.45474e+06         7.65687
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/A_BC_O/seed_54321    -22380.2         283.105   1.45474e+06         8.25365
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_12345    -22776            97.4109  1.45471e+06         2.36835
+/home/ron/Desktop/data_sets/M4.divAB_24-1/results/AC_B_O/seed_54321    -22880.5          39.7628  1.45473e+06        12.0446
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_12345    -24466.9         132.678   1.45599e+06        12.9174
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AB_C_O/seed_54321    -24707.9         122.495   1.456e+06          12.8193
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_12345    -23787           509.899   1.45602e+06        28.8011
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/A_BC_O/seed_54321    -23993.4         361.933   1.45598e+06         4.68044
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_12345    -23933.8         323.283   1.456e+06          21.6768
+/home/ron/Desktop/data_sets/M4.divAB_24-2/results/AC_B_O/seed_54321    -24300.2         274.417   1.456e+06          13.9708
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_12345    -21078.4         111.358   1.45669e+06        10.9062
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AB_C_O/seed_54321    -21264.8         127.327   1.45669e+06        11.8927
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_12345    -21209.4         104.24    1.45669e+06         5.69603
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/A_BC_O/seed_54321    -20668.9         237.875   1.45671e+06        29.0086
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_12345    -21566.5          94.7834  1.45667e+06         8.21301
+/home/ron/Desktop/data_sets/M4.divAB_30-1/results/AC_B_O/seed_54321    -21529.5          75.8764  1.45668e+06         9.78521
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_12345    -23430           157.252   1.45634e+06         7.68349
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AB_C_O/seed_54321    -23139.5         246.836   1.45636e+06         9.77012
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_12345    -23304.7          89.8709  1.45638e+06        31.2543
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/A_BC_O/seed_54321    -22897.6         307.447   1.45636e+06        17.9214
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_12345    -23596.5          98.8236  1.45635e+06         5.31452
+/home/ron/Desktop/data_sets/M4.divAB_30-2/results/AC_B_O/seed_54321    -22679.9         472.838   1.45635e+06         8.88562
+
+
