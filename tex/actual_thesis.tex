@@ -2,6 +2,7 @@
 \documentclass[11pt]{article}
 
 \usepackage[utf8]{inputenc}
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -1109,13 +1110,33 @@ This is again calculated recursively down the population phylogeny of $\M$, but 
 \end{figure}
 
 
-\subsection{Finalizing the RBF computation}
+\subsection{Finalizing the RBF computation using McRef}
 \label{sec:Finalizing the RBF computation}
-After the MCMC process is completed, we are left with sufficient statistics per iteration for each clade and comb reference model. We can now use this, along with .
+After the MCMC process is completed, we are left with sufficient statistics and parameter priors per iteration for each clade and comb reference model. These are stored in multiple trace files (see example trace snippets in appendix \ref{ap:scripts}).
+%
+The only remaining step is to calculate the estimated relative model fit $P(X|\Mref)/P(X|\Mhyp)$ for a chosen reference model (or several). For this purpose we developed the McRef utility.
 
-TODO - write how McRef finalizes the RBF calculation. Also fulfill all previous promises about this section (usage of parameter priors and tau bounds).
+When setting up McRef, several parameters are configured. 
+%
+Chief among the configurations is the choice of reference model. This is specified by simply stating on what hypothesis population to perform a comb/clade collapse operation.
+%
+The remaining configuration options pertain to standard I/O (e.g. where the trace data files are stored and where to store output), to \gp configuration (e.g. what alpha \& beta to use for gamma priora, what print multipliers were applied to trace data when emitted by gphocs etc.), to internal statistical calculations (e.g. number of bootstrap iterations for confidence calculation and burn-in and sample-dilution in genealogy likelihood calculation) and to debugging (e.g. what debug calculations to run and visualizations to emit). 
+%
+See appendix \ref{ap:scripts} for an example configuration file.
 
-TODO - Completely rewrite the following section, removing the nitty-gritty details.
+McRef finishes calculating \ref{eqn:ld-final} by plugging in the chosen parameters for each configured reference population. In our current implementation, theta of the comb/clade population in the reference model is set to the value of theta of the population at the root of the comb/clade in the hypothesis, but this can be easily adjusted if ever we decide to consider other theta mappings. 
+
+With the goal of optimizing the practical run-time and usability of McRef, several techniques were employed; trace data files, which are repeatedly read and used, are lazily loaded and cached in each mcref process. Multiple McRef computations are launched using a single command-line tool and are cocurrently run in different processes, eventually aggregating summary results to a single log file. See appendix \ref{ap:scripts} for an example output.
+%
+To clarify results and to help in the understanding and debugging of mcref runs, several visualizations are emitted. Each mcref run emits plots of the genealogy-log-likelihood of the reference model and of the hypothesis model, as well as a plot of the rbf calculation across \gp iterations and a plot of the harmonic mean of likelihood of the hypothesis model. 
+%
+Multiple debug plots are also emitted by mcref. Their goal is to help the researcher assert the experiment was executed as planned. These plots contain the kingman coalescence and kingman migration of every population and migration in both the hypothesis and reference models. They also contain the aggregate coal-stats of the hypothesis and reference model. See appendix \ref{ap:scripts} for example debug graphs.
+
+
+
+
+
+
 
 \section{Results}
 
@@ -1322,7 +1343,7 @@ Unfortunately due to lack of time, the conditional distribution we used in calcu
 
 \figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using HM}
 
-\includegraphics[width=1.4\textwidth]{results/results-migCB-select-2}
+\includegraphics[width=1.0\textwidth]{results/results-migCB-select-2}
 \captionsetup{width=1.0\textwidth}
 \caption{
 Data sets are marked by $migXX-a$, where $XX$ stands for the migration rate from population $C$ to $B$ and $a$ indicates the data replicate (1 or 2).
@@ -1464,10 +1485,6 @@ Lemma \ref{lem:embed} directly implies a feasible range of every divergence time
 \end{claim}
 
 We thus define $\Pref(\taus|\G)$ as a product of uniform distributions for $\taus$ in their feasible ranges, as defined by Claim \ref{claim:tau_bound_nomig}.
-
-\subsection*{Computing $\Pref(\taus|\G)$}
-
-\textbf{TBA: explicit description of procedure for computing $ubound(p|G)$.}
 
 \section{\texorpdfstring{The conditional distribution  $\Pref(\taus,\Gm|\Gc,\migs)$ for models with migration}{Conditional distribution with migration}}\label{ap:cond_mig}
 
@@ -1696,7 +1713,7 @@ As in a standard model of migration at constant rate, this probability can be ex
 Consequently, the contribution of migration band $b$ to $\Pref(\Gm|\Gc,\migs)$ is very similar to its contribution to $P(\G|\T,\M)$, and the ratio
 between these contributions is defined by the difference between $migStats(\G,b)$ and $\widetilde{migStats}(\G,b)$.
 Both migration statistics are defined as sum across time intervals in population $target(b)$ across the life span of the migration band.
-In model $\M$, the life span starts at $t=\max(\tau(source(b)),\tau(target(b)))$ and ends at $t=\min(\tau(parent(source(b))),\tau(parent(target(b))))$.
+In model $\M$, the life span starts at $t=\max(\tau(source(b)),\tau(target(b)))$ and ends at \\ $t=\min(\tau(parent(source(b))),\tau(parent(target(b))))$.
 In the sampling protocol the life span starts at time $t=0$ and ends at $t=\min(ubound(parent(source(b))|\G),ubound(parent(target(b))|\G))$.
 Note that the life span in $\M$ is contained in the protocol life span, and in this time the lineages mapped to population $target(b)$ are the same in both cases.
 Thus the residual difference, $migStats(\G,b)-\widetilde{migStats}(\G,b)$, is computed by considering intervals mapped to $target(b)$ in the protocol and not in $\M$.
@@ -1707,73 +1724,7 @@ $t=\min(ubound(parent(source(b))|\G),ubound(parent(target(b))|\G))$.
 
 
 
-
-\section{Development of McRef}
-[TODO - properly write this section]
-
-\subsection{Debugging results}
-
-When examining results of \gp calculations for mcref we were faced with the challenge of validating our results. \#explanation-on-why-this-was-needed. We wished to double-check every statistic emitted, with the simple goal of predictably and reliably reaching our intended calculation.
-
-This was accomplished using a variaty of techniques, restricted by the target statistic and reference model and by the tools at our disposal. 
-
-
-\begin{itemize}
-
-\item \underline{in comb: compare leaves when comb-age:=inf. Compare root comb when comb-age:=0}
-
-To validate our comb coal-stats calculations we permanantly set the comb-age to various values, allowing us to predict results. When setting a high comb-age (essentially infinite), we asserted That the coal-stats of comb-leaves is equal to the leaf population stats calculated by \gp. When setting comb-age to zero (thus reducing the comb to a clade), we asserted that the coal-stats of the root-comb is equal those of the null reference model (calculated independently by the clade algorithm and by a preexisting \gp implementation).
-
-
-
-\item \underline{in clade: compare "leaf clade" with leaf. Compare root-clade with \gp -calculated root-clade}
-To assert clade coal-stats, we applied techniques similiar to those used for the comb algorithm. Leaf-rooted clades were compared with leaf stat calculated by \gp and the root-clade (aka the null reference modle) was compared with independantly calculated stats for the null reference model. 
-
-\item \underline{In tau bounds: monotonouty up pop tree. Assert diff(bound, tau) neg correlated with \#loci}
-
-We expected each tau bound to decrease towards its corresponding population tau as the number of loci increases. This due to an increase in the number of coalescence events, leading to an increase in chance of some coalescence event occurring closer to the population tau. We ran a simple set of \gp experiments using the same sequence data, changing only the number of loci in-use. We observed a negative correlation between the number of loci and the tau bound, as expected.
-
-Another simple validation we performed was asserting that bounds are monotonously decreasing down the population tree.
-
-\end{itemize}
-
-\subsection{McRef Code}
-
-\begin{itemize}
-\item \underline{configuration}
-
-When setting up mcref, several parameters are configured. The parameters pertain to standard I/O (e.g. where the trace data files are stored and where to store output), to the phylogenic population models (i.e. the structure of the reference and hypothesis models), to \gp configuration (e.g. what alpha \& beta to use for gamma priora, what print multipliers were applied to trace data when emitted by gphocs etc.), to statistical calculations (e.g. how many bootstrap iterations to run during confidence calculation and how much burn-in and sample-skip to use in genealogy likelihood calculation) and to debugging (e.g. what debug calculations to run and visualizations to emit). 
-
-\item \underline{calculating kingman coalescence and kingman migration for the reference model}
-
-Calculating the reference model genealogy likelihood was done using the standard kingman coalescence model, in the same manner implemented in gphocs. The theta of the actual comb/clade population was set to that of the population at the top of the comb/clade and plugged into \#gen\_ld\_ln-formula. 
-
-\item \underline{calculating tau priors for hypothesis and reference models}
-tau priors for the hypothesis model were calculated using the same gamma-distribution used by gphocs, based on taus emitted during the \gp run. tau priors for the reference model were calculated using a uniform distribution based on tau-bounds, as described in the chapter about tau bounds.
-
-\item \underline{estimating variance using bootstrap}
-
-In an attempt to estimate the variability of the genealogy likelihood calculation, bootstrap estimations of the rbf were repeatedly sampled from the trace data. 
-
-
-\item \underline{optimizing runtime (lazily caching trace files, multiprocess concurrently running comparisons, )}
-
-With the goal of optimizing the practical run-time and usability of mcref, several techniques were employed; trace data files, which are repeatedly read and used, are lazily loaded and cached in each mcref process. Multiple mcref experiments are launched using a single command and are cocurrently run in multiple processes, eventually aggregating summary results to a single log file. 
-
-\item \underline{visualizing results}
-
-To clarify results and to help in the understanding and debugging of mcref runs, several visual outputs were developed. each mcref run emits plots of the genealogy-log-likelihood of the reference model and of the hypothesis model, as well as a plot of the rbf calculation across \gp iterations and a plot of the harmonic mean of likelihood of the hypothesis model.
-
-\item \underline{debugging visualizations}
-
-Multiple debug plots are also emitted by mcref. Their goal is to help the researcher assert the experiment was executed as planned. These plots contain the kingman coalescence and kingman migration of every population and migration in both the hypothesis and reference models. They also contain the aggregate coal-stats of the hypothesis and reference model, allowing us to assert that coal-stats of a reference model always exceed those of it's hypothesis \#here-goes-an-explanation-of-the-previous-sentence. 
-\end{itemize}
-
-
-
-
-
-\section{Scripts}\label{ap:scripts}
+\section{Pipeline examples}\label{ap:scripts}
 
 \begin{lstlisting}[language=bash,caption={\textit{ms} script used to generate data-sets in experiment III}]
 #!/bin/bash
@@ -1789,5 +1740,37 @@ ms     26       5000   -T   -r 0.000001   1000         -I 4 8 8 8 2
     -ej 100   4 1  -en 100 1 100
 
 \end{lstlisting}
+
+\noindent\rule{16cm}{0.4pt}
+
+\begin{figure}[H]
+\figuretitle{Sample \gp traces of sufficient stats}
+\includegraphics[width=1.0\textwidth]{appendix/sample_gphocs_sufficient_stats_trace}
+\label{fig:sample_McRef_output}
+\end{figure}
+
+\noindent\rule{16cm}{0.4pt}
+
+\begin{figure}[H]
+\figuretitle{Sample McRef \textit{config.ini} for a comb reference model from experiment II}
+\includegraphics[width=0.5\textwidth]{appendix/sample_McRef_configuration}
+\label{fig:sample_McRef_output}
+\end{figure}
+
+\noindent\rule{16cm}{0.4pt}
+
+\begin{figure}[H]
+\figuretitle{Sample McRef Output from experiment II}
+\includegraphics[width=1.0\textwidth]{appendix/sample_McRef_output}
+\label{fig:sample_McRef_output}
+\end{figure}
+
+\noindent\rule{16cm}{0.4pt}
+
+\begin{figure}[H]
+\figuretitle{Sample McRef debug plot of reference population genealogy likelihoods}
+\includegraphics[width=0.9\textwidth]{appendix/hyp_ln_ld_line}
+\label{fig:sample_McRef_output}
+\end{figure}
 
 \end{document}
