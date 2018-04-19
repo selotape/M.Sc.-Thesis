@@ -321,7 +321,7 @@ All model parameters are scaled by mutation rate.
 %
 The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
-The conditional probability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}) [TODO - reference].
+The conditional prxobability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}) [TODO - reference].
 %
 The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
 $P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
@@ -394,7 +394,7 @@ times across all genealogies by a multiplicative factor sampled close to 1.
 \end{figure}
 
 
-\subsection{Definition of the Model Selection Problem}
+\subsection{The Model Selection Problem}
 
 The model selection problem takes sequence data and a series of phylogeny models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$).
 
@@ -1133,7 +1133,7 @@ In experiments I and III, the generative populations model (the "true" model) ha
 %
 In experiment II the true model had another ancestor population $ROOT$ which split to $ABC$ and an outgroup leaf population $O$. 
 %
-Four haploid sequences were generated for each leaf population. Each sequence was comprised of 5000 loci of length 1000. 
+Four haploid sequences were generated using the coalescent software \textit{ms} for each leaf population. Each sequence was comprised of 5000 loci of length 1000 bases. See appendix C for a sample file.
 %
 For each demographic scenario we generated two independent data sets (using the same generative hypothesis) to examine replication of results. 
 %
@@ -1156,8 +1156,7 @@ For the max value we recorded $max+ste$ and for the min value we recorded $min-s
 As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). We used these values to plot the confidence intervals seen in the following figures.
 
 
-\subsection{Experiment I - Varying Population Separation}
-\subsubsection{Setup}
+\subsection{Experiment I - Identifying Population Separation}
 In this experiment we generated data sets for which population $ABC$s divergence time is fixed to 0.00300, and perturbed $AB$s divergence time from 0 up to 0.00050. No migration was allowed between any population. We considered 2 hypotheses:
 %
 \begin{enumerate}
@@ -1202,28 +1201,22 @@ RBFs however prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardl
 \end{figure}
 
 
-\subsubsection{Observations}
-Following is a series of observations drawn from figure \ref{fig:results-divAB} - 
-
-\begin{itemize}
-\item When computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$ we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation.
-
-\item We notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values).
-
-\item In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
-
-\item When we use $\Mref = \M_{clade(AB)}$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
+Following are our observations drawn from figure \ref{fig:results-divAB}; When computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$ we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation. 
+%
+We also notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values). 
+%
+In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
+%
+Lastly, when we use $\Mref = \M_{clade(AB)}$, we see that the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
 %
 Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
 
-\end{itemize}
 
-To summarize, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
-
+In summary, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
 
 
-\subsection{Experiment II - Comb vs Clade vs HM}
-\subsubsection{Setup}
+
+\subsection{Experiment II - Determining model topology}
 In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to $O$ and $ABC$ was set to an ancient 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
 %
 \begin{enumerate}
@@ -1280,25 +1273,21 @@ We clearly see from figures \ref{fig:results-M4-divAB-comb} through 10 that the 
 \end{figure}
 
 
-\subsubsection{Observations}
-Following is a series of observations drawn from figures \ref{fig:results-M4-divAB-comb} through \ref{fig:results-M4-divAB-HM} - 
-
-\begin{itemize}
-\item The two comb reference methods clearly and confidently choose the true hypothesis model, $\M_{AB_C}$.
-
-\item When using the $Clade(ABC)$ reference model we see a gentle upward trend in results, but no reproducable clear selection. In the remaining two experiments ($Clade(ROOT)$ and HM) we see no selection and a high degree of uncertainty.
-
-\item The comb reference methods also correctly show no preference to any model when the hypotheses were eqivalent. This is not true for the other methods.
-
-\item Amongst the two comb reference methods, the more localized $Comb(ABC)$ provided a stronger and more confident signal.
-
-\end{itemize}
-
-To summarize, this experiment demonstrates that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the more localized the reference model is to the disputed hypothesis region, the better the algorithm performed.
+Following are our observations drawn from figures \ref{fig:results-M4-divAB-comb} through \ref{fig:results-M4-divAB-HM}; As seen in figure \ref{fig:results-M4-divAB-comb}, the two comb reference methods clearly and confidently choose the true hypothesis model, $\M_{AB_C}$.
+%
+The comb reference methods also correctly show no preference to any model when the hypotheses were eqivalent. This is not true for the other methods.
+%
+Amongst the two comb reference methods, the more localized $Comb(ABC)$ provided a stronger and more confident signal.
+%
+However, when using the $Clade(ABC)$ reference model (top of figure \ref{fig:results-M4-divAB-clade}) we see at most a gentle upward trend in results, but no reproducable clear selection. 
+%
+In the remaining two experiments ,$Clade(ROOT)$ and HM (figures \ref{fig:results-M4-divAB-clade} and \ref{fig:results-M4-divAB-HM}) we see no selection and a high degree of uncertainty.
 
 
-\subsection{Experiment III - Varying Gene Flow}
-\subsubsection{Setup}
+In summary, this experiment demonstrates that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the more localized the reference model is to the disputed hypothesis region, the better the algorithm performed.
+
+
+\subsection{Experiment III - Determining direction of gene flow}
 In this experiment we generated data sets where the divergence times are fixed to $\tau_{ABC} = 0.00300$, and $\tau_{AB} = 0.00150$ and simulated different migration rates from population $C$ to population $B$.
 %
 We considered four hypotheses:
@@ -1321,7 +1310,11 @@ and examined two ways to compare these 4 models:
 
 \end{enumerate}
 
-To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). 
+To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). 
+%
+We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). 
+%
+Unfortunately due to lack of time, the conditional distribution we used in calculation of RBFs did not handle reference model priors as described in appendix \ref{ap:cond_mig}. We plan on soon correcting this implementation detail and are nontheless confident in our results since we've empirically seen that model priors have little effect on results.
 
 
 
@@ -1367,22 +1360,16 @@ We also see that RBF using a comb reference model produces estimates with higher
 
 
 
+Following are our observations drawn from figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2};
+%
+In figure \ref{fig:results-migCB-2} we see that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$.
+%
+RBFs however consistently score $\M_{migCB}$ and $\M_{migAL}$ higher than $\M_{nomig}$ in the 4 data sets with migration. The preference is correlated to the simulated migration rate. 
+%
+RBFs also score $\M_{migCB}$ and $\M_{migALL}$ higher than $\M_{migBC}$. This shows that they are able to identify the direction of migration ($C\rightarrow B$ instead of $B \rightarrow C$).
+%
+There doesn't seem to be a significant difference between the scores of $\M_{migCB}$ and $\M_{migALL}$. In principle, we would've liked to give a higher score to the most "compact" model, but this is not attained.
 
-\subsubsection{Observations}
-Following is a series of observations drawn from figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2} - 
-
-
-\begin{itemize}
-
-\item We see in figure \ref{fig:results-migCB-2} that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$.
-
-\item RBF consistently scores $\M_{migCB}$ and $\M_{migAL}$ higher than $\M_{nomig}$ in the 4 data sets with migration. The preference is correlated to the simulated migration rate. 
-
-\item RBF also scores $\M_{migCB}$ and $\M_{migALL}$ higher than $\M_{migBC}$. This shows it is able to identify the direction of migration ($C\rightarrow B$ instead of $B \rightarrow C$).
-
-\item There doesn't seem to be a significant difference between the scores of $\M_{migCB}$ and $\M_{migALL}$. In principle, we would've liked to give a higher score to the most "compact" model, but this is not attained.
-
-\end{itemize}
 
 In summary, we see RBFs have more discrimination power then the harmonic mean estimator when comparing models with different migration patterns. The success of the algorithm is correlated with migration rate but it's estimations are not of high certainty, neither did it succeed in choosing the more parsimonious hypothesis, meaning there is room for improvement.
 
@@ -1496,7 +1483,6 @@ The first issue is addressed by examining \emph{migration-free} trees, obtained 
 We associate each migration event  $w\in\Gm$ with the branch in $\Gc$ on which it is placed, a specific time along that branch, a source population for migration, and a target population for migration.
 %
 Thus, each migration event, $w\in\Gm$, is a root of one migration-free tree mapped to population $target(w)$ and a leaf of another tree mapped to population $source(w)$.
-~~[MAYBE ADD ILLUSTRATION OF THIS?]~~
 %
 In each migration-free tree, leaves are mapped to populations in $\Tr$ and branches move from a population to its parent, as assumed in condition \ref{cond:anc} of Definition \ref{def:embed}.
 Hence, we can extend the operator $mrcaPop(v)$ of Definition \ref{def:tmrca_pop} as the MRCA of all populations to which the leaves of the migration-free subtree rooted at $v$ are mapped.
@@ -1569,8 +1555,7 @@ where $\Pref(\taus|\G)$ is the product of uniform distributions for $\taus$ in t
 and $\Pref(\Gm|\Gc,\migs)$ is defined using a probabilistic protocol for sampling migration events.
 %
 This protocol mimics the true migration model of $\M$ as much as possible without knowing the divergence times.
-% while ensuring that the resulting collection of genealogies, $\G$, is embeddable in some timed version of the population phylogeny (i.e., there exist $\taus$ s.t. $P(\G|\taus,\migs,\M)>0$).
-%
+% 
 Migration events are sampled backward in time by holding for each branch $(u,v)\in\Gc$ the set of populations it may be embedded in (those ancestral to $mrcaPop(v)$),
 and allowing the branch to migrate back along any migration band whose target population is one of those populations.
 %
@@ -1607,12 +1592,6 @@ By doing this, the protocol ensures that the resulting $\G$ will be embeddable i
     \item \label{step:mig_branch} Select a branch for migration $e\in E_{live}$ uniformly at random among the $n[target(b)]$ branches mapped to the target population of the selected migration band.
     \item Add a new migration event $w$ to $\Gm$ on branch $e$ from population $source(b)$ to population $target(b)$ at time $t$.
     \item \label{step:mig_mapping} Update the population mapping of edge $e$: $pops(e)\leftarrow\{p:p\anc source(b)\}$.
-    %\item Update all $n[p]$ and $\lambda[b]$ values affected by the change of population mapping for $l$.
-    %, and update the effective migration rates of all migration bands in $B_{live}$ whose target population was affected by this change.
-    % \item \label{step:lb} Ensure that the parents of $source(b)$ and $target(b)$ do not diverge below the sampled migration band by updating lower bounds:
-    %  $lBound(\tau_{parent(source(b))}), lBound(\tau_{parent(target(b))}) \leftarrow t$.
-    % \item \label{step:ub_mig} Ensure that $source(b)$ and $target(b)$ diverge below the sampled migration event, by
-    %   setting $uBound(\tau_{source(b)}),uBound(\tau_{source(b)})\leftarrow t$ (if it has not already been set), and removing
     \item  \label{step:ub_mig} Remove from $B_{live}$ all migration bands whose source or target population is a strict descendant of either $source(b)$ or $target(p)$.
     Formally, remove band $b'$ iff there is $p'\in\{source(b'),target(b')\}$ and $p\in\{source(b),target(b)\}$  s.t. $p\anc parent(p')$.
    
@@ -1630,11 +1609,6 @@ By doing this, the protocol ensures that the resulting $\G$ will be embeddable i
     \item Set $t\leftarrow t(v)$ and go to Step \ref{step:interval}.
   \end{enumerate}
   
-  % \item \label{step:sample-taus}  \textbf{Sample divergence time parameters:}
-  % \begin{enumerate}
-  %   \item Propagate lower bounds for divergence times up $\Tr$, such that $lBound(\tau_p)\leq lBound(\tau_{parent(p)})$.
-  %  \item Sample a value for $\tau_p$ uniformly at random in the interval $[lBound(\tau_{parent(p)}),uBound(\tau_{parent(p)})]$.
-  % \end{enumerate}
 \end{enumerate}
 
 The following claim establishes the validity and completeness of the above protocol for $\Pref(\Gm|\Gc,\migs)$:
@@ -1707,8 +1681,6 @@ The following claim establishes the validity and completeness of the above proto
 
 \subsection*{Computing the conditional probability}
 
-NEED TO TIGHTEN DESCRIPTION HERE AND ADD DETAILS.\\
-
 Now that we have fully defined the conditional probability distribution $\Pref(\Gm,\taus|\G,\migs)$, we turn to describe how to compute it for given values of $(\G,\taus,\migs)$.
 The divergence time conditionals, $\Pref(\taus|\G)$, are defined as a product of uniform distributions in the feasible space of every parameter, as defined by Claim \ref{claim:tau_bound_mig}.
 The bounds $lbound$ and $ubound_2$ are easy to compute by traversing all migration events in $\Gm$, and the bound $ubound_1$ can be computed by recursively computing $mrcaPop$ for all coalescent
@@ -1716,7 +1688,7 @@ events in $\Gc$, as described in the previous section. This is done by consideri
 %
 The conditional probability for the migration events, $\Pref(\Gm|\Gc,\migs)$ is computed according to the sampling protocol described above.
 %
-As in a standard model of migration at constant rate, this probability can be expressed as a product of contributions across migration bands [ADD REF TO RELEVANT EQUATION?]:
+As in a standard model of migration at constant rate, this probability can be expressed as a product of contributions across migration bands:
 \begin{equation}\label{eq:pref-m}
  \ln \left( \Pref(\Gm|\Gc,\migs) \right) ~=~ \sum_b \left( \ln( m_b) \cdot numMigs(\Gm,b)^{m_b} -m_b \cdot \widetilde{migStats}(\G,b) \right) ~.
 \end{equation}
@@ -1798,5 +1770,24 @@ Multiple debug plots are also emitted by mcref. Their goal is to help the resear
 \end{itemize}
 
 
+
+
+
+\section{Scripts}\label{ap:scripts}
+
+\begin{lstlisting}[language=bash,caption={\textit{ms} script used to generate data-sets in experiment III}]
+#!/bin/bash
+
+# M4 - four population model with 26 individuals (8 per pop + 2 in outgroup),
+# theta = 0.001, tau_AB = TAU, tau_ABC=0.0003, tau_ABCD=0.001, mig C-->A (M_CA) 
+# and mig A-->C (M_AC)
+ms     26       5000   -T   -r 0.000001   1000         -I 4 8 8 8 2
+    -n 1 100  -n 2 100  -n 3 100 -n 4 100
+    -m 1 3 M_CA -m 3 1 M_AC
+    -ej TAU    2 1  -en TAU 1 100 -em TAU 1 3 0.0 -em TAU 3 1 0.0
+    -ej 30    3 1  -en 30  1 100
+    -ej 100   4 1  -en 100 1 100
+
+\end{lstlisting}
 
 \end{document}
