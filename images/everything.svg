@@ -15,7 +15,7 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg5987"
    version="1.1"
-   inkscape:version="0.92.2 (unknown)"
+   inkscape:version="0.92.3 (unknown)"
    sodipodi:docname="everything.svg">
   <defs
      id="defs5989">
@@ -256,16 +256,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5440975"
-     inkscape:cx="-2911.7242"
-     inkscape:cy="837.02544"
+     inkscape:zoom="1.438544"
+     inkscape:cx="-1137.0657"
+     inkscape:cy="-1089.0033"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:window-width="1920"
      inkscape:window-height="1056"
      inkscape:window-x="0"
-     inkscape:window-y="144"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      showguides="false"
      inkscape:snap-text-baseline="false"
@@ -2177,7 +2177,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3842"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"><flowRegion
          id="flowRegion3844"><rect
            id="rect3846"
            width="375"
@@ -3321,12 +3321,432 @@
          x="-2539.7227"
          y="-697.73566"
          style="font-size:22.5px;stroke-width:0.9375">ABC</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1097.8125,2186.3267 h 56.25 l 23.4375,-56.25 28.125,56.25 h 56.25005 l -11.25,-23.0269 h 46.875 l 11.25,23.0269 h 56.25 l -107.8125,-210.9375 v -32.8125 H -1008.75 v 32.8125 z"
+       id="path258-8-8-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937539, 0.70312513;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -914.99995,2022.2642 H -1028.4375"
+       id="path4910-5-8-6-0-6-9-1-3-5-3-39-3-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937526, 0.70312511;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -960.93745,2130.0767 H -1074.375"
+       id="path4910-5-8-6-0-6-9-1-3-1-4-3-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009533, 1.54669847;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -914.99995,2022.2642 H -1027.5"
+       id="path4910-5-8-6-0-8-4-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54687524;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062533, 1.5468751;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -961.87495,2130.0767 H -1074.375"
+       id="path4910-5-8-6-0-6-9-5-8-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -990,2069.5498 18.75005,-46.875 60.9375,117.1875 h -46.875 L -990,2069.5498"
+       id="path6514-4-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1017.4788"
+       y="1925.1104"
+       id="text9177-2-7-8-2"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"><tspan
+         sodipodi:role="line"
+         id="tspan9175-2-9-0-8"
+         x="-1017.4788"
+         y="1925.1104"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3136-6-2-9">hyp</tspan></tspan></text>
+    <g
+       id="g6760"
+       transform="translate(28.082822,14.989114)">
+      <text
+         inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+         inkscape:export-ydpi="760.39136"
+         inkscape:export-xdpi="760.39136"
+         id="text9177-2-7-8-2-0"
+         y="2014.3175"
+         x="-1452.9865"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375"
+           y="2014.3175"
+           x="-1452.9865"
+           id="tspan9175-2-9-0-8-8"
+           sodipodi:role="line">M </tspan></text>
+      <text
+         id="text6724"
+         y="2014.4592"
+         x="-1405.5574"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.9375"
+           y="2014.4592"
+           x="-1405.5574"
+           id="tspan6722"
+           sodipodi:role="line">=(T, B, Θ)</tspan></text>
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6748"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="scale(0.9375)"><flowRegion
+         id="flowRegion6750"><rect
+           id="rect6752"
+           width="350"
+           height="190"
+           x="-1590"
+           y="2052.5198" /></flowRegion><flowPara
+         id="flowPara6754"></flowPara></flowRoot>    <g
+       id="g6818"
+       transform="translate(1.3824658)">
+      <text
+         id="text6764"
+         y="2077.9873"
+         x="-1413.75"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.9375"
+           y="2077.9873"
+           x="-1413.75"
+           id="tspan6762"
+           sodipodi:role="line">Τ = {             }</tspan></text>
+      <text
+         id="text6770"
+         y="2073.5381"
+         x="-1317.9648"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="font-size:18.75px;stroke-width:0.9375"
+           y="2073.5381"
+           x="-1317.9648"
+           id="tspan6768"
+           sodipodi:role="line">ROOT, AB, A, B, C</tspan></text>
+    </g>
+    <g
+       id="g6828"
+       transform="translate(2.5267008)">
+      <text
+         id="text6764-1"
+         y="2115.4873"
+         x="-1417.5403"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.9375"
+           y="2115.4873"
+           x="-1417.5403"
+           id="tspan6762-6"
+           sodipodi:role="line">B = {    }</tspan></text>
+      <text
+         id="text6770-6"
+         y="2111.0381"
+         x="-1308.5898"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="font-size:18.75px;stroke-width:0.9375"
+           y="2111.0381"
+           x="-1308.5898"
+           id="tspan6768-2"
+           sodipodi:role="line">B🡐C</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1418.7312"
+       y="2153.3381"
+       id="text6764-1-9"><tspan
+         sodipodi:role="line"
+         id="tspan6762-6-6"
+         x="-1418.7312"
+         y="2153.3381"
+         style="stroke-width:0.9375">Θ =      </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1328.0132"
+       y="2151.4956"
+       id="text6770-6-4"><tspan
+         sodipodi:role="line"
+         id="tspan6768-2-8"
+         x="-1328.0132"
+         y="2151.4956"
+         style="font-size:27.5px;stroke-width:0.9375">τ <tspan
+   style="font-size:22.5px"
+   id="tspan6861">U</tspan> θ <tspan
+   style="font-size:22.5px"
+   id="tspan6863">U</tspan> m </tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="model params"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1108.293"
+       y="2132.4778"
+       id="text642-6-9-9-9"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-64-6"
+         x="-1108.293"
+         y="2132.4778"
+         style="font-size:11.25px;stroke-width:0.9375"><tspan
+           style="font-size:17.5px"
+           id="tspan6657">τ</tspan><tspan
+           style="font-size:10px;baseline-shift:sub"
+           id="tspan6531">AB</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1075.4917"
+       y="2024.4159"
+       id="text642-1-8-3"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan640-29-6-8"
+         x="-1075.4917"
+         y="2024.4159"
+         style="font-size:11.25px;stroke-width:0.9375"><tspan
+           style="font-size:17.5px"
+           id="tspan6655">τ</tspan><tspan
+           style="font-size:10px;baseline-shift:sub"
+           id="tspan6533">ROOT</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.93750006px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1098.7501,2192.7067 v 9.375 -4.6875 h 57.1876 v -4.6875 9.375"
+       id="path3157-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1120.5472"
+       y="2194.1511"
+       id="text3141-5-3"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan3139-5-7"
+         x="-1120.5472"
+         y="2194.1511"
+         style="font-size:15px;baseline-shift:sub;stroke-width:0.9375">θ<tspan
+   style="font-size:9.75000095px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3190-1">A</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.93750012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -990.4927,2192.7067 v 9.375 -4.6875 h 57.18764 v -4.6875 9.375"
+       id="path3157-4-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1012.2894"
+       y="2194.1511"
+       id="text3141-5-3-2"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan3139-5-7-1"
+         x="-1012.2894"
+         y="2194.1511"
+         style="font-size:15px;baseline-shift:sub;stroke-width:0.9375">θ<tspan
+   style="font-size:9.75000191px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3190-1-7">B</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.93750012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -886.95789,2192.7067 v 9.375 -4.6875 h 57.1876 v -4.6875 9.375"
+       id="path3157-4-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-908.75531"
+       y="2194.082"
+       id="text3141-5-3-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan3139-5-7-7"
+         x="-908.75531"
+         y="2194.082"
+         style="font-size:15px;baseline-shift:sub;stroke-width:0.9375">θ<tspan
+   style="font-size:9.75000191px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3190-1-4">C</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-975.72693"
+       y="2147.2761"
+       id="text3141-5-3-2-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_reference_model_no_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan3139-5-7-1-7"
+         x="0"
+         y="0"
+         style="font-size:15px;baseline-shift:sub;stroke-width:0.9375"><tspan
+           style="font-size:9.75000191px;baseline-shift:sub;stroke-width:0.9375"
+           id="tspan3190-1-7-1" /></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-947.40234"
+       y="2146.5767"
+       id="text3141-5-3-2-11"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan3139-5-7-1-70"
+         x="-947.40234"
+         y="2146.5767"
+         style="font-size:15px;baseline-shift:sub;stroke-width:0.9375">m<tspan
+   style="font-size:9.75000191px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3190-1-7-4">B🡐C</tspan></tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="pop labels"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:18.75px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1066.9469"
+       y="2164.6367"
+       id="text642-6-9-2-8-7"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-1-7"
+         x="-1066.9469"
+         y="2164.6367"
+         style="font-size:18.75px;baseline-shift:sub;stroke-width:0.9375">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:18.75px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-873.8479"
+       y="2164.6274"
+       id="text642-6-9-2-5-8-4"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-93-8"
+         x="-873.8479"
+         y="2164.6274"
+         style="font-size:18.75px;baseline-shift:sub;stroke-width:0.9375">C</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:18.75px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-1031.4795"
+       y="2079.3108"
+       id="text642-6-9-2-0-10-3"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         x="-1031.4795"
+         y="2079.3108"
+         style="font-size:18.75px;baseline-shift:sub;stroke-width:0.9375"
+         id="tspan6476">AB</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:16.25px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-995.2901"
+       y="1983.6627"
+       id="text642-6-9-2-0-1-1-0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         x="-995.2901"
+         y="1983.6627"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
+         id="tspan6809-0-0-2">ROOT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-942.63422"
+       y="2148.2373"
+       id="text642-6-9-2-5-9-5-0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-9-0-5"
+         x="-942.63422"
+         y="2148.2373"
+         style="font-size:12.50000191px;baseline-shift:sub;stroke-width:0.9375">B🡐C</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-979.34802"
+       y="2160.8867"
+       id="text642-6-9-2-5-1-6-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-0-4-1"
+         x="-979.34802"
+         y="2160.8867"
+         style="font-size:18.75px;baseline-shift:sub;stroke-width:0.9375">B</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="genelogy"
-     style="display:inline">
+     style="display:none">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.9375"
@@ -4014,6 +4434,229 @@
        sodipodi:nodetypes="cc"
        inkscape:export-xdpi="746.93994"
        inkscape:export-ydpi="746.93994" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -854.06245,2162.8892 -4.6875,23.4375"
+       id="path322-2-3-6-3-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1013.4375,2106.6392 38.80575,79.1305"
+       id="path334-4-0-1-0-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1013.4375,2106.6392 -46.875,79.6875"
+       id="path336-6-5-59-9-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1018.125,2083.2017 -62.7525,101.221"
+       id="path338-9-1-8-2-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1018.125,2083.2017 4.6875,23.4375"
+       id="path340-2-1-4-5-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1018.125,2083.2017 46.87505,-93.75"
+       id="path342-2-0-8-4-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -933.74995,2036.3267 -37.5,-46.875"
+       id="path344-4-8-10-05-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -971.24995,1989.4517 v -46.875"
+       id="path342-2-0-5-3-9-40"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -1004.0624,2055.0767 45.93745,131.6605"
+       id="path338-9-1-4-0-4-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -868.12495,2139.4517 28.125,46.875"
+       id="path322-2-3-0-4-2-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -895.31245,2096.3267 23.4375,90"
+       id="path322-2-3-5-6-7-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00031257;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.00187473, 2.00062492;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -956.24995,2153.9247 64.6874,10e-5"
+       id="path326-4-8-1-2-75-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="2186.5701"
+       cx="958.09247"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-9-9-8"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="2186.5701"
+       cx="974.26239"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-6-7-9"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="2186.2832"
+       cx="1060.4053"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-3-7-7"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="2186.5701"
+       cx="1081.8303"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-8-6-7"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="2186.7976"
+       cx="840.61371"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-5-4-6"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -891.56245,2153.9247 8.6187,32.5885"
+       id="path326-4-8-1-03-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -868.12495,2139.4517 -65.625,-103.125"
+       id="path344-4-8-1-44-6-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="2186.3672"
+       cx="859.06146"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-92-4"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="2186.3672"
+       cx="873.12396"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-7-4-9"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -974.06245,2139.8622 17.8123,14.0625"
+       id="path326-4-8-1-03-2-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="2186.5701"
+       cx="882.63031"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-0-88-88"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/for_slides/what_is_a_model_parameters.png"
+       inkscape:export-xdpi="1549.4906"
+       inkscape:export-ydpi="1549.4906" />
   </g>
   <g
      inkscape:groupmode="layer"
