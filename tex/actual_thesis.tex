@@ -263,7 +263,7 @@ Typically, an evolutionary biologist, having obtained and aligned genome sequenc
 %
 The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.\\
 %
-One successful approach for parameter inference has been to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters [TODO - reference said methods].
+One successful approach for parameter inference has been to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters [TODO - reference].
 %
 These methods have two key advantages: 1) The full probabilistic generative model of the data at their core allows modeling of 	more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
@@ -360,7 +360,7 @@ Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp.
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
 \end{equation}
 
-In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}) [TODO - cite].
+In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}) [TODO - reference].
 %
 In each MCMC update step \gp proposes a new instace of $\G \& \T$. It then decides whether to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance.
 %
@@ -402,10 +402,10 @@ The model selection problem takes sequence data and a series of phylogeny models
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]
-{by_ilan/model_A__OR__model_b}
+\includegraphics[width=0.6\textwidth]
+{by_ilan/probgen_model_selection}
 \captionsetup{width=.8\textwidth}
-\caption{An example problem of selecting between three model with different structures. In model 1 populations $A$ and $B$ are siblings. In model 2 populations $B$ and $C$ are siblings and there exists a gene-flow from $A$ to $B$, and in model 3 only to leaf populations exist - $AB$ and $C$. [TODO - extend figure with more examples (see caption)]}
+\caption{An example problem of selecting between three model with different structures. Given aligned sequence data and a set of structural hypotheses, we wish to choose which structural model best fits the data.}
 \label{fig:model_A__OR__model_b}
 \end{figure}
 
@@ -517,7 +517,6 @@ and the data affects the estimate only through its influence the sampled instanc
 We refer to the ratio in Equation \ref{eq:pref1} as the {\em relative Bayes factor (RBF) ratio}, and employ it as a model selection criteria by comparing RBFs of competing hypothesis models, calculated using the same reference model - 
 \[ \frac{1}{\rbf(\M_i:\Mref|\X)} >  \frac{1}{\rbf(\M_j:\Mref|\X)} \Rightarrow P(\X|\M_j) >  P(\X|\M_i)\]
 
-[TODO - consider adding a figure where competing hypotheses are compared using the same reference moddel]
 
 Importantly, the variance of the RBF depends on the definition of the model-pairing conditional, $\Pref$, and it will typically decrease as $\M$ and $\Mref$ become more similar.
 %
@@ -695,7 +694,7 @@ This construction results in additional terms canceling out with terms in  the g
 $P(\Gc,\Gm|\M,\T)$, to further reduce the variance of the RBF ratio.
 
 
-\subsection{The root comb reference model} % TODO - ask Ilan why $\Mcomb$ breaks latex
+\subsection{The root comb reference model} 
 
 The null model has the unique advantage of being a valid reference for the comparison of any two models.
 This advantage, however, comes at the cost of collapsing all population structure.
@@ -850,7 +849,7 @@ In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained 
 \begin{enumerate}
 \item First, \textbf{choose a subtree} of the population phylogeny of $\M$. The subtree is associated with the population $p$ at its root. 
 
-\item Then \textbf{collapse the subtree structure} into either a clade structure, i.e. a single population $p_{clade}$ (figure (\ref{fig:clade_collapse_AB})), or a comb structure, i.e. an ancestral population $p_{comb}$ [TODO - use good comb annotation] and a set of leaf populations and migration bands $L, B_L$. 
+\item Then \textbf{collapse the subtree structure} into either a clade structure, i.e. a single population $p_{clade}$ (figure (\ref{fig:clade_collapse_AB})), or a comb structure, i.e. an ancestral population $p_{comb}$ and a set of leaf populations and migration bands $L, B_L$. 
 
 \item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$, defining the model-pairing conditional distribution $\Pref$ s.t. conditions (\ref{eq:pref_integral}) and (\ref{eq:pref_support}) are met. This mapping should cancel-out as many terms of the RBF ratio as possible (equations (\ref{eq:rbf_mig}) \& (\ref{eq:rbf_comb1})).
 \end{enumerate}
@@ -883,9 +882,11 @@ The two denominators $P(\Gc,\Gm|\M,\T)$ and $P(\taus|\M)$ are calculated as part
 During RBF estimation these values are taken as-is from \gp and utilized as explained in section \ref{sec:Finalizing the RBF computation}.
 %
 %
-The parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ usually share the same distribution and cancel out. 
+In the derivation the parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ share the same distribution and cancel out.
 %
-Otherwise, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0=\troot|\M_0)$ is easily calculated as described in section \ref{sec:Finalizing the RBF computation}.
+However in theory and practice, any parameter prior or constant value can be used as $P(\theta_0|\M_0)$.
+%
+In such a case, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0|\M_0)$ is plugged into the calculation in section \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}.
 %
 %
 The divergence times condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig} and utilized as described in section \ref{sec:Finalizing the RBF computation}.
@@ -919,7 +920,7 @@ This is accomplished by identifying a collection of sufficient statistics for $\
 %
 \begin{enumerate}
  \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference model structures, i.e. for any model structure obtained by applying a comb or clade collapse operation on an ancestral population
- \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the remaining unmapped model parameters (namely, migration rates and population sizes).
+ \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the remaining unmapped model parameters (namely, migration rates and population size of the new collapsed population).
  \item The number of sufficient statistics depends on the complexity of the target model, $\Mref$, but not on the size of the data (i.e. the number of individuals and the number of loci).
 \end{enumerate}
 %
@@ -932,7 +933,7 @@ Phase 2 is then given a directive of specific reference model structure and mapp
 %
 Phase 2 can be repeatedly rerun with any reference model, utilizing the same sufficient statistics emitted by phase 1, thus calculating RBFs of different reference models.
 
-Subsection \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood} explains to calculate sufficient statistics which meet conditions 2 \& 3 for a single model structure.
+Subsection \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood} explains how to calculate sufficient statistics which meet conditions 2 \& 3 for a single model structure.
 %
 Subsections \ref{sec:Recursive Sufficient Statistics for All Clade Models} and \ref{sec:Recursive Sufficient Statistics for All Comb Models} attain condition 1 by efficiently extending these statistics to all comb and clade reference models.
 %
@@ -1024,8 +1025,7 @@ Note that the four double sums in these expressions depend on the local genealog
 {multiple_loci}
 \captionsetup{width=.8\textwidth}
 \caption{The sufficient statistic $coalStat(G, clade(AB))$ is calculated by accumulating the Kingman Coalescent genealogy log-likelihod across loci. The contribution of each loci is calculated via the set of intervals $\mathcal{I}(clade(AB),l_i)$. The sufficient statistic $numCoals(G, clade(AB))$ is simply the sum across loci of the amount of coalescnece events inside $clade(AB)$.
-%
-[TODO - fix subscript in right genealogy. Also fix fading line above and below left genealogy. Also add another fading genealogy to the right, instead of the dot-dot-dot. Also maybe write somewhere the this is $clade(AB)$][TODO - draw the turns in lineages round instead of sharp (where there's no coalescence).]}
+}
 \label{fig:multiple_loci}
 \end{figure}
 
@@ -1216,7 +1216,6 @@ Each experiment was repeated twice to assess reproducability. We see in the grap
 %
 RBFs however prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardless of the chosen reference model.
 %
-(TODO - center the figure)
 }
 \label{fig:results-divAB}
 \end{figure}
@@ -1276,7 +1275,7 @@ Data sets are marked on the X-axis by $divAB\_XX-a$, where the value of $XX$ sta
 %
 The true gap between divergence times $\tau(ABC)$ and $\tau(AB)$ starts from zero on the left (where $\tau(ABC) = 0.00300 = \tau(AB)$) and increases between comparisons (left to right).
 %
-We clearly see from figures \ref{fig:results-M4-divAB-comb} through 10 that the more specialized reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable. [TODO - conjoin the two Comb experiment charts. Also conjoin the two clade experiment charts]}
+We clearly see from figures \ref{fig:results-M4-divAB-comb} through 10 that the more specialized reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable.}
 \label{fig:results-M4-divAB-comb}
 \end{figure}
 
@@ -1355,8 +1354,7 @@ The bars heights are the values of the comparison metric against $\M_{nomig}$ , 
 Each experiment was repeated twice to assess reproducability.
 %
 We see in the graph that the harmonic mean does not consistently prefer any model over another.
-%
-(TODO - center the figure)}
+}
 \label{fig:results-migCB-2}
 \end{figure}
 
@@ -1368,7 +1366,7 @@ We see in the graph that the harmonic mean does not consistently prefer any mode
 
 
 \includegraphics[width=1.4\textwidth]{results/results-migCB-select-1}
-\captionsetup{width=1.0\textwidth}
+\captionsetup{width=0.5\textwidth}
 \caption{
 As opposed to in figure \ref{fig:results-migCB-2}, we see that the RBF prefers models with migration to the migration-less base model. 
 %
