@@ -183,7 +183,6 @@ showstringspaces=false            %
 }
 
 \author{Ron Visbord}
-% \newcommand{\smallCom}[1]{\marginpar{\tiny{#1}}}
 
 \begin{document}
 
@@ -261,45 +260,78 @@ In recent years, advances in high throughput DNA sequencing have made it easy to
 %
 Typically, an evolutionary biologist, having obtained and aligned genome sequences of individuals from relative species or populations, would like to reconstruct the evolutionary history of the sequenced individuals. This evolutionary history includes a series of population splits, population size changes and post-divergence gene flow.\\
 %
-The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.\\
+The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.
 %
-One successful approach for parameter inference has been to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters [TODO - reference].
+One successful approach to parameter inference is to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters.
 %
 These methods have two key advantages: 1) The full probabilistic generative model of the data at their core allows modeling of 	more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
 However, because these methods condition on a given model structure $\M$, they provide no straightforward solution to the model selection problem.
 %
-In principle, measuring of model fit can be approximated by using importance sampling on the approximated posterior distribution, but standard methods for doing this are statistically inefficient [TODO - reference].
+In principle, measuring of model fit $P(X|\M)$ can be approximated by using importance sampling on the approximated posterior distribution, and this could be used to compare model hypotheses.
 %
-This leaves us with no robust method for comparing the fit of different structures of evolutionary history to a given genomic data set.\\
+However, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is. 
 %
-\\
-The goal of our research is thus to \textbf{utilize bayesian parameter inference methods to perform robust model selection}.
+There have been several methods suggested to improve the accuracy of importance sampling estimation by sampling from ``hybrid'' models.
 %
-We accomplish this by estimating model fit relative to some \textbf{Reference Model}. Reference models are base-line phylogenetic structures used to asses model fit to data within a specific context, allowing us to select between competing model candidates.
+These methods are very effective, but they require an order of magnitude more sampling iterations (~10x) compared to the number of iterations required for the MCMC of parameter estimation. So they are not very practical in our setting.
+
+
+This leaves us with no robust method for comparing the fit of different structures of evolutionary history to a given genomic data set.
 %
+The goal of our research is thus to \textbf{improve on existing importance-sampling approaces to model selection, without incurring significant additional computational cost}.
+%
+We accomplish this by estimating model fit relative to some \textbf{Reference Model $\Mref$}. Reference models are base-line phylogenetic structures used to asses model fit within a specific context, allowing us to select between competing model candidates.
+%
+We implement the model-selection algorithm based on the parameter-inference framework \gp, but our theory and approach can be applied to all importance-sampling based methods.
+
 We will start in subsection 1.1 by overviewing existing work in the field.
 %
 Section 2 presents the relevant background and common notations for phylogenetic models and parameter inference.
 %
-Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and how they are used as model selection criteria. 
+Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and explains how they are used as model selection criteria. 
 %
-Section 4 explains in detail our implementation of \textbf{McRef}, our model selection algorithm which uses the \gp parameter-inference framework, nicknamed so due to it's employment of reference models in the MCMC process.
+Section 4 explains in depth our implementation of \textbf{McRef}, our model selection algorithm which uses the \gp parameter-inference framework, nicknamed so due to it's employment of reference models in the MCMC process.
 %
 Finally, in section 5 we share empirical results from our model-selection experiments, showcasing the advantages and limitations of our method.
 
-\subsection{Other Relevant Work}
+\subsection{Related work}
 
-Discuss structure+parameter inference methods here - 
+For demography inference, several approaches exist. 
+%
+Likelihood-based models associate each model $\M$ with the most likely parameter values $\T$.
+%
+The joint likelihood $P(\X|\M,\T)$ is then approximated by making additional simplifying assumptions on the population genetic model, or the data.
+%
+There are methods which assume that all sites are independent (free recombination between sites) and use a combination of analytic calculations and simulations to estimate $P(\X|\M,\T)$ \citep{GUTEETAL09,KAMMETAL17,KAMMETAL18}. 
+%
+Other methods use summary statistics extracted from the data, such as the lengths of shared haplotypes \citep{HARRNIEL13,BROWBROW15}. 
+%
+The key disadvantages of these methods is that: (1) they make many simplifying assumptions, and more importantly, (2) they associate a model with its most likely parameter values. 
+%
+This means they give an advantage to models which imply high confidence in the parameter values (steep likelihood function) compared to models where the likelihood is more spread out across the parameter space.
 
-\begin{itemize}
-\item general methods (non bayesian) for history reconstruction. what are the drawbacks in "likelihood-based" approaches?
+Bayesian model-based methods, such as IM \citep{NIELWAKE01} (most updated version IMa2p \citep{HEYNIEL07,SETHHEY16}), MCMCcoal \cite{RANNYANG03} (most updated version BPP \citep{YANG15}), and \gp \citep{GRONETAL11} all explicitly model genealogies coalescing in a population phylogeny, and differ mostly on additional modeling assumptions and software design.
+%
+BPP does not model gene flow between populations and is thus mostly used for relatively diverged species. 
+%
+IM was originally developed for analyzing data from two populations (single divergence event + post-divergence gene flow). 
+%
+It has since been extended for larger population phylogenies, but its design limits its use for relatively small data sets
+(few populations and up to 1,000 loci). 
+%
+Importantly, all methods use MCMC to generate samples of the model parameters, and the model selection methods we develop here are can be applied to all of them.
 
-\item importance-sampling based
+Regarding estimation of Bayes factors, the basic idea to use importance sampling (IS) to estimate $P(\X|\M)$ in a Bayesian setting was suggested by \cite{NEWTRAFT94}. 
+%
+This idea has since become the standard way to estimate model fit in a Bayesian setting, but experience has shown it to be very noisy and biased toward more complex models \citep{XIEETAL11}.
+%
+In particular, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is. 
+%
+Several methods have suggested ways to improve the accuracy of HM estimation by sampling from ``hybrid'' models, which combine the prior $P(\T|\M)$ times some power of the conditional $P(\X,\G|\M,T)$ \citep{LARTPHIL06,XIEETAL11}.
+%
+Unfortunately, as stated, though these methods are effective, they require an order of magnitude more sampling iterations (~10x) compared to the number of iterations required for the MCMC of parameter estimation.
 
-\item thermodynamic stuff for improving harmonic-mean (hopefully these methhods can also be applied on mcref)
-
-\end{itemize}
 
 \section{Preliminaries}
 
@@ -1203,7 +1235,7 @@ We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (
 \figuretitle{Selecting between $\M_{3pops}$ vs $\M_{2pops}$ using RBFs or HM}
 
 
-\includegraphics[scale=0.5]{results/results-divAB-select}
+\includegraphics[scale=0.4]{results/results-divAB-select}
 \captionsetup{width=0.8\textwidth}
 \caption{
 Data sets are marked on the X-axis by divXX-a, where the value of $XX$ stands for $\tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
@@ -1260,10 +1292,9 @@ Similiarly to experiment I, we used these techniques to compare the true model $
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 
 \figuretitle{Comparing performance of multiple reference models and HM}
-
 
 \includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-comb_ABC}
 
@@ -1279,14 +1310,14 @@ We clearly see from figures \ref{fig:results-M4-divAB-comb} through 10 that the 
 \label{fig:results-M4-divAB-comb}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-clade_ABC}
 \includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-clade_ROOT}
 \caption{ }
 \label{fig:results-M4-divAB-clade}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=1.0\textwidth]{results/results-M4-divAB/results-M4-divAB-HM}
 \caption{ }
 \label{fig:results-M4-divAB-HM}
@@ -1338,7 +1369,7 @@ Unfortunately due to lack of time, the conditional distribution we used in calcu
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 
 \figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using HM}
 
@@ -1360,13 +1391,13 @@ We see in the graph that the harmonic mean does not consistently prefer any mode
 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 
 \figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using RBF with $\M_{null}$}
 
 
-\includegraphics[width=1.4\textwidth]{results/results-migCB-select-1}
-\captionsetup{width=0.5\textwidth}
+\includegraphics[width=1.0\textwidth]{results/results-migCB-select-1}
+\captionsetup{width=1.0\textwidth}
 \caption{
 As opposed to in figure \ref{fig:results-migCB-2}, we see that the RBF prefers models with migration to the migration-less base model. 
 %
@@ -1395,8 +1426,13 @@ In summary, we see RBFs have more discrimination power then the harmonic mean es
 
 \newpage
 
+\newpage
+
 \section{References}
-Bibliography-goes-here
+\renewcommand*{\refname}{ }
+\bibliographystyle{mbe}
+\bibliography{compbio}
+
 
 
 \newpage
