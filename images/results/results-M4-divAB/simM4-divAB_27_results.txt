@@ -1,0 +1,70 @@
+=== Running McRef with ABC_COMB reference model ===
+
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_12345   -10.0817         2.50851    1.45589e+06        15.0648
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_54321    -2.78738        1.40354    1.45588e+06         9.47754
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_12345    10.1644         0.825708   1.4559e+06         11.7767
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_54321     9.12157        0.267239   1.45588e+06        11.2037
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_12345     8.63883        0.0519335  1.45587e+06         6.27961
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_54321     8.56702        0.0579291  1.4559e+06         27.666
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_12345   -42.1318         9.18059    1.45444e+06         9.0855
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_54321   -58.193          6.1636     1.45446e+06         6.59015
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_12345     8.1272         0.0757436  1.45445e+06         4.89147
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_54321     8.21768        0.0578315  1.45444e+06         2.18551
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_12345     8.0825         0.0506387  1.45447e+06        20.6067
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_54321     8.28306        0.0564213  1.45446e+06        11.581
+
+
+=== Running McRef with ROOT_COMB reference model ===
+
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_12345    -4145.99         43.4422   1.45589e+06        15.035
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_54321    -4072.9          83.6211   1.45588e+06         9.22754
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_12345    -3975.48          7.54433  1.4559e+06         11.3223
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_54321    -3952.66          5.98174  1.45588e+06        11.5973
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_12345    -3932.05         38.3747   1.45587e+06         6.5078
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_54321    -3889.31         49.6685   1.4559e+06         27.6773
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_12345    -4084.9          28.9785   1.45444e+06         8.89473
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_54321    -4140.79         12.9927   1.45446e+06         6.47999
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_12345    -3865.87          6.5536   1.45445e+06         4.41801
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_54321    -3720.64         27.0959   1.45444e+06         2.36236
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_12345    -3804.49         20.1599   1.45447e+06        19.9996
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_54321    -3817.48         18.1828   1.45446e+06        11.5583
+
+
+=== Running McRef with ABC_CLADE reference model ===
+
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_12345    -11820           236.936   1.45589e+06        14.3281
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_54321    -12231.3          35.501   1.45588e+06         9.52651
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_12345    -11599.8          95.6767  1.4559e+06         12.6162
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_54321    -11931.8         181.427   1.45588e+06        11.9641
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_12345    -11838.1         154.958   1.45587e+06         6.54869
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_54321    -12107.2          54.9716  1.4559e+06         27.3444
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_12345    -12769.3         145.011   1.45444e+06         9.03682
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_54321    -12684.1          55.1972  1.45446e+06         6.57412
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_12345    -12416           129.695   1.45445e+06         4.95918
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_54321    -12497.9          44.5122  1.45444e+06         2.27734
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_12345    -12565.6          67.3157  1.45447e+06        19.3201
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_54321    -12598.8         100.201   1.45446e+06        11.9124
+
+
+=== Running McRef with ROOT_CLADE reference model ===
+
+simulation                                                             rbf_mean    rbf_bootstrap      hm_mean    hm_bootstrap
+-------------------------------------------------------------------  ----------  ---------------  -----------  --------------
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_12345    -22743.2          61.2081  1.45589e+06        14.5861
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AB_C_O/seed_54321    -22837.3         109.877   1.45588e+06         8.96786
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_12345    -22154.3         199.14    1.4559e+06         12.012
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/A_BC_O/seed_54321    -22189.7         128.739   1.45588e+06        11.8686
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_12345    -22228.7         120.243   1.45587e+06         6.35191
+/home/ron/Desktop/data_sets/M4.divAB_27-1/results/AC_B_O/seed_54321    -22096.2         389.796   1.4559e+06         27.0005
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_12345    -22697.9         245.717   1.45444e+06         9.17373
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AB_C_O/seed_54321    -22375.3          85.9673  1.45446e+06         6.84
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_12345    -22396.1         132.837   1.45445e+06         4.58387
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/A_BC_O/seed_54321    -21692.3         501.278   1.45444e+06         2.47945
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_12345    -22275.5         242.317   1.45447e+06        19.977
+/home/ron/Desktop/data_sets/M4.divAB_27-2/results/AC_B_O/seed_54321    -22397.5         149.117   1.45446e+06        11.8115
