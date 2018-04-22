@@ -256,13 +256,13 @@ The advent of high throughput sequencing has greatly improved our ability to inv
 
 \section{Introduction}
 
-In recent years, advances in high throughput DNA sequencing have made it easy to sequence many genomes of individuals from closely related species. This allows evolutionary biologists to examine the evolution of recently diverged species by employing data-intensive computational methods and statistical models.
+In recent years, advances in high throughput DNA sequencing have made it easy to sequence many genomes of individuals from closely related species. This allows evolutionary biologists to examine the evolution of recently diverged species by employing sophisticated computational methods and statistical models.
 %
-Typically, an evolutionary biologist, having obtained and aligned genome sequences of individuals from relative species or populations, would like to reconstruct the evolutionary history of the sequenced individuals. This evolutionary history includes a series of population splits, population size changes and post-divergence gene flow.\\
+Typically, an evolutionary biologist, having obtained and aligned genome sequences of individuals from closely related species or populations, would like to reconstruct the evolutionary history of these populations. This evolutionary history includes a series of population splits, population size changes and post-divergence gene flow.\\
 %
-The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relation between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the phylogenetic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.
+The job of reconstructing this evolutionary history may be viewed as two seperate tasks; First, one must find the phylogenetic model structure $\M$. This is a tree-like graph which represents the ancestral relationship between all relevant populations, as well as any migration bands between populations. This task is often referred to as \textbf{Model selection}. Second, having obtained the model structure, one must find the demographic model parameters. These are the specific parameter values or distributions of the model, such as population divergence times, population sizes and migration rates. This is the task of \textbf{Parameter Inference}.
 %
-One successful approach to parameter inference is to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These local genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters.
+One successful approach to parameter inference is to assume the model structure $\M$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci. These genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters.
 %
 These methods have two key advantages: 1) The full probabilistic generative model of the data at their core allows modeling of 	more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
@@ -277,27 +277,25 @@ There have been several methods suggested to improve the accuracy of importance 
 These methods are very effective, but they require an order of magnitude more sampling iterations (~10x) compared to the number of iterations required for the MCMC of parameter estimation. So they are not very practical in our setting.
 
 
-This leaves us with no robust method for comparing the fit of different structures of evolutionary history to a given genomic data set.
-%
 The goal of our research is thus to \textbf{improve on existing importance-sampling approaces to model selection, without incurring significant additional computational cost}.
 %
 We accomplish this by estimating model fit relative to some \textbf{Reference Model $\Mref$}. Reference models are base-line phylogenetic structures used to asses model fit within a specific context, allowing us to select between competing model candidates.
 %
-We implement the model-selection algorithm based on the parameter-inference framework \gp, but our theory and approach can be applied to all importance-sampling based methods.
+We implement the model-selection algorithm based on the parameter-inference framework \gp, but our theory and approach can be applied to all bayesian demography inference methods.
 
-We will start in subsection 1.1 by overviewing existing work in the field.
+We will start in subsection 1.1 by overviewing relevant work in the field.
 %
-Section 2 presents the relevant background and common notations for phylogenetic models and parameter inference.
+Section 2 presents the some background on the demography inference problem.
 %
 Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and explains how they are used as model selection criteria. 
 %
-Section 4 explains in depth our implementation of \textbf{McRef}, our model selection algorithm which uses the \gp parameter-inference framework, nicknamed so due to it's employment of reference models in the MCMC process.
+Section 4 explains in depth our implementation of \textbf{McRef}, our model selection algorithm which uses the \gp parameter-inference framework. McRef earned it's nickname due to it's employment of reference models in the MCMC process.
 %
-Finally, in section 5 we share empirical results from our model-selection experiments, showcasing the advantages and limitations of our method.
+Finally, in section 5 we share empirical results from our model-selection experiments on simulated data, showcasing the advantages and limitations of our method.
 
 \subsection{Related work}
 
-For demography inference, several approaches exist. 
+There are several common approaches for demography inference. 
 %
 Likelihood-based models associate each model $\M$ with the most likely parameter values $\T$.
 %
@@ -354,7 +352,7 @@ All model parameters are scaled by mutation rate.
 %
 The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
-The conditional prxobability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}) [TODO - reference].
+The conditional prxobability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
 %
 The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
 $P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
@@ -385,14 +383,14 @@ A major advantage of this approach to parameter inference is that it is extremel
 
 \subsection{\gp}
 
-\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and distinct loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}) [TODO - reference].
+\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
 Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp.
 %
 \begin{equation}\label{eq:likelihood}
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
 \end{equation}
 
-In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}) [TODO - reference].
+In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}).
 %
 In each MCMC update step \gp proposes a new instace of $\G \& \T$. It then decides whether to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance.
 %
@@ -422,39 +420,36 @@ times across all genealogies by a multiplicative factor sampled close to 1.
 \includegraphics[width=0.8\textwidth]
 {multiple_loci_across_sequence}
 \captionsetup{width=.8\textwidth}
-\caption{\gp uses distinct independant loci, chosen to be far away from genes to reduce the influence of selection. A local genealogy is represented over each loci and embedded in the population phylogeny.}
+\caption{\gp uses independant loci, chosen to be far away from genes and from each other to reduce the influence of selection and accomodate the assumption of independence. A local genealogy is represented over each locus and embedded in the population phylogeny.}
 \label{fig:multiple_loci_across_sequence}
 \end{figure}
 
 
 \subsection{The Model Selection Problem}
 
-The model selection problem takes sequence data and a series of phylogeny models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$).
+The model selection problem takes sequence data and a series of models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$).
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]
-{by_ilan/probgen_model_selection}
+{by_ilan/probgen_3_model_selection}
 \captionsetup{width=.8\textwidth}
-\caption{An example problem of selecting between model hypotheses with different topological structures. Given aligned sequence data and a set of structural hypotheses, we wish to choose which structural model best fits the data.}
+\caption{An example problem of selecting between three models with different topological structures. Mdoel $\M_1$ has three leaf populations and no migration. Model $\M_2$ has the same phylogeny as $\M_1$ but with an additional migration band. In model $\M_3$ the relationship between leaves is different. 
+%
+Given aligned sequence data and a set of structural hypotheses, we wish to choose which structural model best fits the data.}
 \label{fig:model_A__OR__model_b}
 \end{figure}
 
 
 %
 In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method for comparing models and their fit to the data, this without analytically calculating $P(X|\M_i)$.
-%
-%To keep our method as general as possible, our selection algorithm receives no parameters $\T$ and outputs a result pertaining only to the topology of the model.
-
 
 \section{Methods}
 
 
 \subsection{Estimating data likelihood via importance sampling}
 
-A fundamental limitation of Bayesian demography inference methods is that they do not directly produce reliable measures of model fit.
-%
 Model fit is best captured by the marginal data likelihood, $P(\X|\M)$, whose computation involves integration over the space of unknown parameter values and genealogical relationships,
 denoted jointly by $\GT$.
 %
@@ -559,7 +554,7 @@ This is the key advantage of direct estimation of the Bayes factor, when compare
 The following sections present specific constructions for $\Pref$ in a series of cases.
 
 \subsection{The null reference model $\M_0$}
-
+\label{The null reference model}
 We start by considering a simple case where $\M$ is a demographic model with no migration bands and $\Mref$ is the simplest possible model with a single population $p_0$ of constant size $\theta_0$.
 %
 We refer to this simple one-parameter model as the {\em null reference model} $\M_0$ (figure \ref{fig:null_reference_model_no_migration}).
@@ -569,7 +564,7 @@ We refer to this simple one-parameter model as the {\em null reference model} $\
 \includegraphics[width=0.8\textwidth]
 {null_reference_model_no_migration}
 \captionsetup{width=.8\textwidth}
-\caption{A clade mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The  hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_0$ so as to minimize RBF variance.}
+\caption{A mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The  hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_0$ to minimize RBF variance.}
 \label{fig:null_reference_model_no_migration}
 \end{figure}
 %
@@ -726,7 +721,8 @@ This construction results in additional terms canceling out with terms in  the g
 $P(\Gc,\Gm|\M,\T)$, to further reduce the variance of the RBF ratio.
 
 
-\subsection{The root comb reference model} 
+\subsection{The comb reference model} \label{The comb reference model} 
+
 
 The null model has the unique advantage of being a valid reference for the comparison of any two models.
 This advantage, however, comes at the cost of collapsing all population structure.
@@ -747,7 +743,8 @@ where $\widetilde{\thetas}=\{\theta_p:p\in L\cup \{comb\}\}$ and $\widetilde{\mi
 \includegraphics[width=0.8\textwidth]
 {comb_model_with_migration_single_genealogy}
 \captionsetup{width=.8\textwidth}
-\caption{A comb mapping from a hypothesis model with a migration band $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ and migration rate $m_{b<-C}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper and lower bounds calculated as described in appendix \ref{ap:cond_mig}. The remaining hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_{p_0}$ so as to minimize the RBF ratio.}
+\caption{A mapping from a hypothesis model with a migration band $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ and migration rate $m_{B->C}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper and lower bounds calculated as described in appendix \ref{ap:cond_mig}. The remaining hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_{p_0}$ so as to minimize the RBF ratio.
+}
 \label{fig:comb_model_with_migration_single_genealogy}
 \end{figure}
 
@@ -870,7 +867,9 @@ The RBF may thus be re-expressed as follows:
 
 \subsection{Constructing a Reference Model}  \label{Constructing a Reference Model}
 
-Subsections 3.4-3.6 described two examples of reference models - the null reference model and the root comb reference model. During construction of both these models, the entire hypothesis model is mapped and transformed, starting from the root.
+Subsections \ref{The null reference model}-\ref{The comb reference model} described two examples of reference models - the null reference model and the root comb reference model. 
+%
+During construction of both these reference models, the structure of the entire phylogeny (sans a portion of the leaves for the comb) is collapsed into a single population, and a mapping is derived from this.
 %
 However, in many cases of interest the modeling uncertainty is restricted to a certain subtree in the population phylogeny.
 %
@@ -881,7 +880,7 @@ In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained 
 \begin{enumerate}
 \item First, \textbf{choose a subtree} of the population phylogeny of $\M$. The subtree is associated with the population $p$ at its root. 
 
-\item Then \textbf{collapse the subtree structure} into either a clade structure, i.e. a single population $p_{clade}$ (figure (\ref{fig:clade_collapse_AB})), or a comb structure, i.e. an ancestral population $p_{comb}$ and a set of leaf populations and migration bands $L, B_L$. 
+\item Then \textbf{collapse the subtree structure} into either a clade structure, i.e. a single population $p_{clade}$, or a comb structure, i.e. an ancestral population $p_{comb}$ and a set of leaf populations and migration bands $L, B_L$. 
 
 \item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$, defining the model-pairing conditional distribution $\Pref$ s.t. conditions (\ref{eq:pref_integral}) and (\ref{eq:pref_support}) are met. This mapping should cancel-out as many terms of the RBF ratio as possible (equations (\ref{eq:rbf_mig}) \& (\ref{eq:rbf_comb1})).
 \end{enumerate}
@@ -891,15 +890,15 @@ Identically mapping all structure and parameters outside the subtree of $p$ duri
 \section{RBF Computational Scheme}
 \label{sec:RBF Computational Scheme}
 
-Having defined the concept of Reference Models and formulated their relative Bayes factors, we now describe the computational scheme we use to estimate RBFs as derived in subsection \ref{Relative Bayes factors}:
+Having defined the concept of reference models and formulated their relative Bayes factors, we now describe the computational scheme we use to estimate RBFs as derived in subsection \ref{Relative Bayes factors}:
 %
 \begin{equation}
 \label{eq:computational_scheme}
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-This RBF is further derived for clade and comb reference models in equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1}. As previously stated, in cases where the clade or comb is constricted to a subtree of the model, the RBF cancels out s.t. only statistics inside the subtree are relevant. In the following section we disregard this distinction as equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1} can be easily refitted to apply for the subtree reference model.
-
+This RBF is further derived for clade and comb reference models in equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1}. 
+%
 We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation for a root clade reference model in equation \ref{eq:rbf_mig} - 
 \[ 
 	\frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
@@ -931,17 +930,17 @@ We consider this the main component of the model pairing conditional, as it repr
 
 A main objective of our computational scheme is allowing maximal flexibility in choice of reference model, while attaining reasonable algorithm run time and space usage.
 %
-Since the most time consuming step is the MCMC sampling algorithm, we assume and require only a single MCMC chain per hypothesis.
+Since the most time consuming step is the MCMC sampling algorithm, we assume only a single MCMC chain per hypothesis.
 %
 With this in mind, we note that there exists a clear trade-off between flexibility in choice of reference model and amount of data the MCMC process is required to emit. 
 %
-For example, if the reference model is predetermined before MCMC execution (i.e. no flexibility is required), formula \ref{eq:rbf} can be calculated during MCMC iteration and only the final RBF estimation need be emitted.
+For example, if the reference model is predetermined before MCMC execution (i.e. no flexibility is required), the RBF ratio can be calculated during MCMC iteration and only the final RBF estimation need be emitted.
 %
 Unfortunately, this approach would require another full MCMC execution in order to estimate RBF of any other reference model.
 %
 On the other hand, the RBF for every reference model could be computed in post-processing if the MCMC would print out the full hidden state $\GT$ in each iteration.
 %
-This however would yield an unreasonable amount of traced information - in proportion to the size of the model and to the number of loci.
+This, however, would yield an unreasonable amount of traced information - in proportion to the size of the model and to the number of loci.
 
 
 Our computational scheme aims to find a reasonable middle ground between these two extremes.
@@ -951,9 +950,9 @@ Our objective is to maximize the number of reference models we can consider usin
 This is accomplished by identifying a collection of sufficient statistics for $\G$ that satisfy three conditions:
 %
 \begin{enumerate}
- \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference model structures, i.e. for any model structure obtained by applying a comb or clade collapse operation on an ancestral population
- \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the remaining unmapped model parameters (namely, migration rates and population size of the new collapsed population).
- \item The number of sufficient statistics depends on the complexity of the target model, $\Mref$, but not on the size of the data (i.e. the number of individuals and the number of loci).
+ \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference model structures, i.e. for any model structure obtained by applying a comb or clade collapse operation on an ancestral population.
+ \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the unmapped parameter $\theta_{root}$.
+ \item The number of sufficient statistics depends on the complexity of the hypothesis model $\Mhyp$, but not on the size of the data (i.e. the number of individuals and the number of loci).
 \end{enumerate}
 %
 
@@ -961,9 +960,9 @@ We then perform the RBF calculation in two phases.
 %
 Phase 1, which is performed jointly with the MCMC sampling process, emits intermediate summary statistics which meet the above three conditions. 
 %
-Phase 2 is then given a directive of specific reference model structure and mapping of free reference parameters. This phase assembles the relevant statistics, plugs in the appropriate parameter priors and emits the final estimate of $ \frac{1}{\rbf(\M:\Mref|\X)}$. 
+Phase 2 is then given a definition of specific reference model structure and mapping of free reference parameters. This phase assembles the relevant statistics, plugs in the appropriate parameter priors and emits the final estimate of $ \frac{1}{\rbf(\M:\Mref|\X)}$. 
 %
-Phase 2 can be repeatedly rerun with any reference model, utilizing the same sufficient statistics emitted by phase 1, thus calculating RBFs of different reference models.
+Phase 2 can be repeatedly rerun with different reference models, utilizing the same sufficient statistics emitted by phase 1, thus calculating RBFs of different reference models.
 
 Subsection \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood} explains how to calculate sufficient statistics which meet conditions 2 \& 3 for a single model structure.
 %
@@ -974,7 +973,7 @@ Later, section \ref{sec:Finalizing the RBF computation} explains how the interme
 \subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
 \label{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
 
-Sufficient statistics that satisfy conditions 2 \& 3 conditions are derived from the expression for the genealogy likelihood $P(\G|\T, \Mref)$ under Kingman's coalescent, which we briefly recall here.
+Sufficient statistics that satisfy conditions 2 \& 3 are derived from the expression for the genealogy likelihood $P(\G|\T, \Mref)$ under Kingman's coalescent, which we briefly recall here.
 First, because the loci are assumed to be freely recombining, then the local genealogies $\G=(G_1,...G_L)$ are conditionally independent given the model parameters and the likelihood may be expressed as a product of locus-specific likelihoods, $P(G_l|\T,\Mref)$.  Each locus-specific likelihood is a product of exponentially distributed waiting times for coalescent and migration events. The rates of these exponential distributions depend on the model parameters (population sizes and migration rates) as well as the number of lineages considered for coalescence and migration. We thus identify for each population the set of coalescent and migration events that change the number of lineages modeled in that population in $G_l$. Each time interval $I$ between two consecutive events is associated with the following properties:
 \begin{itemize}
  \item $t(I)$ -- the elapsed time of the interval.
@@ -1056,7 +1055,7 @@ Note that the four double sums in these expressions depend on the local genealog
 \includegraphics[width=1.0\textwidth]
 {multiple_loci}
 \captionsetup{width=.8\textwidth}
-\caption{The sufficient statistic $coalStat(G, clade(AB))$ is calculated by accumulating the Kingman Coalescent genealogy log-likelihod across loci. The contribution of each loci is calculated via the set of intervals $\mathcal{I}(clade(AB),l_i)$. The sufficient statistic $numCoals(G, clade(AB))$ is simply the sum across loci of the amount of coalescnece events inside $clade(AB)$.
+\caption{The sufficient statistic $coalStat(G, clade(AB))$ is calculated by accumulating the Kingman Coalescent genealogy log-likelihod across loci. The contribution of each locus is calculated via the set of intervals $\mathcal{I}(clade(AB),l_i)$. The sufficient statistic $numCoals(G, clade(AB))$ is simply the sum across loci of the amount of coalescnece events inside $clade(AB)$.
 }
 \label{fig:multiple_loci}
 \end{figure}
@@ -1121,7 +1120,7 @@ def recursive_coal_stats(pop):
 \subsection{Recursive Sufficient Statistics for All Comb Models}
 \label{sec:Recursive Sufficient Statistics for All Comb Models}
 
-Formula \ref{eq:gen_ratio_comb} shows how for a reference model created by comb-collapsing the root population, contribution of the genealogy-likelihood to the model-pairing conditional is reduced to contribution of the portion of genealogies above $\tmin$ - 
+Equation \ref{eq:gen_ratio_comb} shows how for a reference model created by comb-collapsing the root population, contribution of the genealogy-likelihood to the model-pairing conditional is reduced to contribution of the portion of genealogies above $\tmin$ - 
 \[\frac{ P({\G}_{c|>\tmin}|\M_0,\theta_0=\troot) }{ P(\G_{>\tmin}|\M,\T)}\]
 
 When comb-collapse is applied to a subtree, we apply the same idea to the portion of the genealogy contained in that subtree. Figure \ref{fig:calculate_hyp_stats_above_tmin} illustrates the intervals relevant for genealogy-likelihood calculation in the hypothesis and reference models. 
@@ -1156,7 +1155,7 @@ The remaining configuration options pertain to standard I/O (e.g. where the trac
 %
 See appendix \ref{ap:scripts} for an example configuration file.
 
-McRef finishes calculating \ref{eqn:ld-final} by plugging in the chosen parameters for each configured reference population. In our current implementation, theta of the comb/clade population in the reference model is set to the value of theta of the population at the root of the comb/clade in the hypothesis, but this can be easily adjusted if ever we decide to consider other theta mappings. 
+McRef finishes calculating Equation \ref{eqn:ld-final} by plugging in the chosen parameters for each configured reference population. In our current implementation, $\theta_{root}$ of the comb/clade population in the reference model is set to the value of theta of the population at the root of the comb/clade in the hypothesis, but this can be easily adjusted if ever we decide to consider other theta mappings. 
 
 With the goal of optimizing the practical run-time and usability of McRef, several techniques were employed; trace data files, which are repeatedly read and used, are lazily loaded and cached in each mcref process. Multiple McRef computations are launched using a single command-line tool and are cocurrently run in different processes, eventually aggregating summary results to a single log file. See appendix \ref{ap:scripts} for an example output.
 %
@@ -1166,31 +1165,31 @@ Multiple debug plots are also emitted by mcref. Their goal is to help the resear
 
 
 
-
-
-
-
 \section{Results}
 
-In order to assess the selection power of our algorithm we designed a series of experiments which measure it's ability and limits. 
+In order to evaluate our new method we designed a series of experiments which measure it's strengths and weaknesses. 
 %
-The selection power we'd like to assess is embodied in both the type of scenarios in which RBFs clearly pick the correct hypothesis and in the algorithm's sensitivity to parameter changes.
+The experiments were set up to try to distinguish between different hypothesis structures. 
 %
-A secondary goal of the experiment design was to learn how best to employ RBFs and how to choose a reference model for a given set of hypotheses.
+Experiment 1 tries to decide whether a divergence did or did not occur. Experiment 2 tries to decide the ancestral relationship between three leaf populations and an out-group, and experiment 3 tries to identify the true migration pattern between leaf populations. 
+%
+We expect the RBF values to correlate with the degree of separation between different hypotheses.
+%
+A secondary goal of the experiment design is to learn how best to employ RBFs and how to choose a reference model for a given set of hypotheses.
 
 \subsection{General Setup}
 %
 We generated data sets under different demographic scenarios, using the following constant setup. 
 %
-In experiments I and III, the generative populations model (the "true" model) had 3 leaf populations $A$, $B$ and $C$, an ancestral population $AB$ and a root ancestral population $ABC$. 
+In experiments I and III, the generative population models (the "true" models) have 3 leaf populations $A$, $B$ and $C$, an ancestral population $AB$ and a root ancestral population $ABC$. 
 %
-In experiment II the true model had another ancestor population $ROOT$ which split to $ABC$ and an outgroup leaf population $O$. 
+In experiment II the true model has another ancestor population $ROOT$ which splits to $ABC$ and an outgroup leaf population $O$. 
 %
-Four haploid sequences were generated using the coalescent software \textit{ms} for each leaf population. Each sequence was comprised of 5000 loci of length 1000 bases. See appendix C for a sample file.
+We use the coalescent software \textit{ms} to generate four haploid sequences per leaf population. Sequence are comprised of 5000 loci of length 1000 bases. See appendix C for a sample file.
 %
 For each demographic scenario we generated two independent data sets (using the same generative hypothesis) to examine replication of results. 
 %
-To further assess replication we ran 2 independent MCMC runs in each G-PhoCS setting.
+To further assess replication we ran 2 independent MCMC runs in each G-PhoCS setting. See appendix \ref{ap:scripts} for an example \gp MCMC configuration file.
 
 
 In each comparison instance we compared two hypothesis models $\M_1$ and $\M_2$ on a given data set. 
@@ -1226,7 +1225,7 @@ and compared these two models using each of three techniques:
 \end{enumerate}
 
 
-We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})})}$) with each variant of the data set. Figure \ref{fig:results-divAB} shows for each comparison instance the 4 values associated with it for each comparison method.
+We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (i.e., $\log{\frac{P(X|\M_{3pops})}{P(X|\M_{2pops})})}$) with each variant of the data set.
 
 
 
@@ -1246,14 +1245,14 @@ The bars heights are the values of the comparison metric $\log{\frac{P(X|\M_{3po
 %
 Each experiment was repeated twice to assess reproducability. We see in the graph that for $\tau_{AB} \leq 0.00020$ the harmonic mean does not confidently prefer the true hypothesis $\M_{3pops}$ over the competing hypothesis $\M_{2pops}$.
 %
-RBFs however prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardless of the chosen reference model.
+RBFs, however, prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regardless of the chosen reference model.
 %
 }
 \label{fig:results-divAB}
 \end{figure}
 
 
-Following are our observations drawn from figure \ref{fig:results-divAB}; When computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$ we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation. 
+First, we observe that when computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$, we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation. 
 %
 We also notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values). 
 %
@@ -1269,7 +1268,7 @@ In summary, we see that model selection using relative Bayes factors significant
 
 
 \subsection{Experiment II - Determining model topology}
-In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to $O$ and $ABC$ was set to an ancient 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
+In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to $O$ and $ABC$ was set to 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
 %
 \begin{enumerate}
 \item $\M_{AB\_C}$ - A model with four leaf populations $A$, $B$ and $C$ and $O$ where $A$ and $B$ are siblings. This is the true model used to generate the sequence data
@@ -1277,7 +1276,7 @@ In this experiment the true model contained an additional outgroup leaf populati
 \item $\M_{AC\_B}$ - A similiar model but in which $A$ and $C$ are siblings
 \end{enumerate}
 %
-Note that when $\theta(AB) = 0.00300 = \theta(ABC)$, the three hypotheses converge so we expect them to be indistinguishable. We compared these models using each of five techniques:
+Note that when $\tau(AB) = 0.00300 = \tau(ABC)$, the simulated model is one in which  the three populations instantaneously diverge, so we expect the three hypothesis models to have similiar fit to data. We compared these models using each of five techniques:
 %
 \begin{enumerate}
 \item The harmonic mean
@@ -1288,7 +1287,7 @@ Note that when $\theta(AB) = 0.00300 = \theta(ABC)$, the three hypotheses conver
 \end{enumerate}
 
 
-Similiarly to experiment I, we used these techniques to compare the true model $\M_{AB_C}$ against the alternatives $\M_{A\_BC}$ and $\M_{AC\_B}$. Figures \ref{fig:results-M4-divAB-comb} through \ref{fig:results-M4-divAB-HM} show the results of the comparisons.
+Similiarly to experiment I, we used these techniques to compare the true model $\M_{AB\_C}$ against the alternatives $\M_{A\_BC}$ and $\M_{AC\_B}$. Figures \ref{fig:results-M4-divAB-comb}-\ref{fig:results-M4-divAB-HM} show the results of the comparisons.
 
 
 
@@ -1323,8 +1322,7 @@ We clearly see from figures \ref{fig:results-M4-divAB-comb} through 10 that the 
 \label{fig:results-M4-divAB-HM}
 \end{figure}
 
-
-Following are our observations drawn from figures \ref{fig:results-M4-divAB-comb} through \ref{fig:results-M4-divAB-HM}; As seen in figure \ref{fig:results-M4-divAB-comb}, the two comb reference methods clearly and confidently choose the true hypothesis model, $\M_{AB_C}$.
+As seen in figure \ref{fig:results-M4-divAB-comb}, the two comb reference methods clearly and confidently choose the true hypothesis model, $\M_{AB_C}$.
 %
 The comb reference methods also correctly show no preference to any model when the hypotheses were eqivalent. This is not true for the other methods.
 %
@@ -1776,6 +1774,17 @@ ms     26       5000   -T   -r 0.000001   1000         -I 4 8 8 8 2
 \end{lstlisting}
 
 \noindent\rule{16cm}{0.4pt}
+
+
+\begin{figure}[H]
+\figuretitle{Sample \gp MCMC configuration}
+\includegraphics[width=0.8\textwidth]{appendix/general_info}
+\includegraphics[width=0.8\textwidth]{appendix/current_pops}
+\includegraphics[width=0.8\textwidth]{appendix/ancestral_pops}
+\label{fig:sample_McRef_output}
+\end{figure}
+
+\noindent\rule{16cm}{0.4pt	
 
 \begin{figure}[H]
 \figuretitle{Sample \gp traces of sufficient stats}

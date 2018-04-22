@@ -1,0 +1,45 @@
+1) abstract - 1st paragraph describes the background and objectives. Add paragraph summarizing what you actually did. Devote a sentence or two to each section (but don't explicitly mention section numbers).
+
+2) In the 2nd paragraph of the intro, avoid describing inference as two separate tasks. Say that the population history has two main components (structure + parameter values), then describe inference of parameters, and end with model selection.
+
+3) You mention local genelogies and analysis of unliked loci in the introduction, but this is not necessary. I suggest to keep genealogies abstract here and leave the details of unlinked loci to section 1.1 and 2.1.
+
+4) Second paragraph in Introduction is a bit long. Maybe split where you start discussing harmonic mean.
+
+5) Discussion on harminc mean in introduction. I suggest moving more details about harmonic mean from section 1.1 to main introduction section, including statements on statistical stability. On the other hand, you can settle for a brief statement on methods for improving accuracy by sampling from a series of hybrid models.
+
+6) In section 1.1, you should do another round of editing to make the text more your own. It's important so that you 100% understand every statement there, and some of my initial wording is not optimal.
+
+7) You use notations in section 1.1 (M,X,\Theta) before they are defined. Either find a way to make your point without notations, or move the relevant notations to this section. You don't need to get into the details of the model or likelihood function, but the concepts of X,M,\Theta have to be defined if you're going to extensively use them.
+
+8) In the paragraph on Bayesian demography inference methods in section 1.1, start with a general description (unlinked loci, coalescent models, etc.). And mention the actual references when you list the specific characteristics of each separate method.
+
+9) In the last part of section 1.1, it would be nice to give a bit more details about the method that use "hybrid models". I'm attaching a paper that contains relevant details.
+
+10) More minor local comments on section 1.
+
+11) I reviewed the figures and captions. See my specific comments. These are extra important, because they will actually be read. Also, make sure to reference each figure in the first appropriate place in the text.
+
+12) Section 4, intro part (before 4.1). I think you dive into too many unnecessary details here and it makes for an unclear exposition to section 4. I suggest extensive editing of this part to shorten and focus on the key point you're trying to make. Recall that the main point is that the main challenge is in computing P(G|Mref).
+For instance,  I would avoid explicitly distinguishing between clade and comb or discussing cancelation of terms for collapses of subphylogenies.
+Also explicitly quoting equation 14 is a bit too much. All these are not very relevant here and they distract from the main point. All you need to establish here is that the RBF ratio requires computing a few key values:
+- P(G|M)
+- P(G|Mref)
+- prior probabilities of model aprameters under M and Mref
+- conditional probabilities for divergence times (and migration events) under Mref.
+[ I think that this is it ]
+It makes sense to list these components and just say that they are shared by equations 12,14,19. Then conclude by saying that P(G|Mref) is the most complicated to compute, and you focus on this in the sections 4.2-4.4. In section 4.5 you describe the remaining components and describe how they are combined to compute RBF.
+
+13) In section 4.1 (and later), emphasize the fact that we'd like to leave the mapping of theta_root flexible for user definition. This is because we don't always a-priori know what the most natural mapping is. For other parameters this is often clearly defined.
+
+14) sections 4.2-4 and arguing for conditions 1-3 in section 4.1. Section 4.2 only establishes suff stats for a single Mref, so it really only established condition 2. To establish conditions 1,3 you need to say something about the collection of all suff stats required to compute P(G|Mref) for ALL ref models. The problem is that you never really address this explicitly. The place to d othis is at the top of section 4.3. So I suggest to end section 4.2 by establishing condition 2 (you can plug values of pop sizes and mig rates after the MCMC). Then you start section 4.3 by outlining the suff stats required for a single Mref (what you have in an equation) and noting that only one of these stats is not shared with Mhyp. This is the place where you will explicitly argue that the contribution of populations outside the collapsed subphylogeny is identical in Mref and Mhyp. So to accommodate all ref models you need to output the suff stats for all pops in Mhyp + the suff stats of the collapsed subphylogney in each ref model. This gives you an order of 2n ref models with O(n) stats (for Mhyp with n sampled populations). This issue is worth devoting a few sentences to before you dive into the recursive calculations. 
+
+15) Section 4.5. There are quite a few details missing here.
+- caluclation of conditional P(Gm,\tau|\Gc). This is something that you actually compute during MCMC. So maybe you wish to devote a separate subsection for this. Just stick to the key points (you can say that you're computing a bound for each tau, etc.), and explicitly say that for now we only implemented computations for models without gene flow.
+- calculation of bootstrap-based CIs. This deseves a paragraph, because you want to motivate the need to have some measure of noise.
+
+16) The sample file outputs are a very nice addition. In the sample trace file I would add some description on the meaning of each column, and maybe even how they are integrated. Would also be useful in your presentation to demonstrate which columns you are using for a specific Mref.
+
+17) Section 5. I have severl local comments there. You should devote time to this, because your examiners are likely to review this section closely.
+
+18) Appendix C.This is s great addition and a very nice way to present some of the more technical aspects of your product. You should add a few words for context for each of the items you're presenting there.
