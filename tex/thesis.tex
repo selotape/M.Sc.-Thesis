@@ -1263,9 +1263,6 @@ Lastly, when we use $\Mref = \M_{clade(AB)}$, we see that the estimates of RBF a
 Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
 
 
-In summary, we see that model selection using relative Bayes factors significantly outperformed the harmonic mean estimator when comparing between models with different topological structures. Further more, using a comb reference model did in fact significantly increase the algorithms uncertainty.
-
-
 
 \subsection{Experiment II - Determining model topology}
 In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to $O$ and $ABC$ was set to 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
@@ -1333,8 +1330,6 @@ However, when using the $Clade(ABC)$ reference model (top of figure \ref{fig:res
 In the remaining two experiments ,$Clade(ROOT)$ and HM (figures \ref{fig:results-M4-divAB-clade} and \ref{fig:results-M4-divAB-HM}) we see no selection and a high degree of uncertainty.
 
 
-In summary, this experiment demonstrates that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the more localized the reference model is to the disputed hypothesis region, the better the algorithm performed.
-
 
 \subsection{Experiment III - Determining direction of gene flow}
 In this experiment we generated data sets where the divergence times are fixed to $\tau_{ABC} = 0.00300$, and $\tau_{AB} = 0.00150$ and simulated different migration rates from population $C$ to population $B$.
@@ -1363,7 +1358,7 @@ To present the results, we conducted a comparison between each of the three mode
 %
 We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). 
 %
-Unfortunately due to lack of time, the conditional distribution we used in calculation of RBFs did not handle reference model priors as described in appendix \ref{ap:cond_mig}. We plan on soon correcting this implementation detail and are nontheless confident in our results since we've empirically seen that model priors have little effect on results.
+Because the conditional distribution for migration events is not fully implemented, we applied a small shortcut and assumed the hypothesis and reference likelihoods cancel out. We estimate that this results in a relatively small correction, and believe strong trends in results will not be affected by this.
 
 
 
@@ -1408,8 +1403,6 @@ We also see that RBF using a comb reference model produces estimates with higher
 
 
 
-Following are our observations drawn from figures \ref{fig:results-migCB-1} and \ref{fig:results-migCB-2};
-%
 In figure \ref{fig:results-migCB-2} we see that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$.
 %
 RBFs however consistently score $\M_{migCB}$ and $\M_{migAL}$ higher than $\M_{nomig}$ in the 4 data sets with migration. The preference is correlated to the simulated migration rate. 
@@ -1419,7 +1412,16 @@ RBFs also score $\M_{migCB}$ and $\M_{migALL}$ higher than $\M_{migBC}$. This sh
 There doesn't seem to be a significant difference between the scores of $\M_{migCB}$ and $\M_{migALL}$. In principle, we would've liked to give a higher score to the most "compact" model, but this is not attained.
 
 
-In summary, we see RBFs have more discrimination power then the harmonic mean estimator when comparing models with different migration patterns. The success of the algorithm is correlated with migration rate but it's estimations are not of high certainty, neither did it succeed in choosing the more parsimonious hypothesis, meaning there is room for improvement.
+
+\subsection{summary}
+
+We've examined RBFs under three questions - 1) whether a divergence event occured, what is the migration pattern and what is the relationship between leaves. In all three scenarios, model selection using relative Bayes factors significantly outperform the harmonic mean estimator
+%
+We've also shown (in experiment 2) that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the more localized the reference model is to the disputed hypothesis region, the better the algorithm performed. 
+%
+We see that , as expected, the success of the algorithm is correlated with the true distance between models, but it's estimations are not of high certainty.
+%
+Finally we note that it did not succeed in choosing the more parsimonious hypothesis in experiment 3, leaving room for improvement.
 
 
 \newpage
