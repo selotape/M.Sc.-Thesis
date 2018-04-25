@@ -220,12 +220,15 @@ This work was carried out under the supervision of Dr. Ilan Gronau from the Efi 
 
 \newpage
 
+
 \section*{Abstract}
 The advent of high throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses. 
 
 In this work we review Bayesian inference of parameterized demographic models, and formalize the model selection problem.
 %
-We then define Relative Bayes Factors (RBFs), which represent demographic model fit, relative to some reference demographic model. We further derive RBFs for two types of reference models, clade and comb models, useful for different model-selection problem instances.
+We then define Relative Bayes Factors (RBFs), which represent demographic model fit, relative to some reference demographic model.
+%
+We further derive RBFs for two types of reference models. These reference models type - Clade models and Comb models - are useful for different model-selection problem instances.
 %
 Having reached tractable formulae for relative model fit, we describe in detail how these are calculated in an efficient manner, without incurring significant computational overhead during MCMC sampling. 
 %
