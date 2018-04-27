@@ -226,15 +226,15 @@ The advent of high throughput sequencing has greatly improved our ability to inv
 
 In this work we review Bayesian inference of parameterized demographic models, and formalize the model selection problem.
 %
-We then define Relative Bayes Factors (RBFs), which represent demographic model fit, relative to some reference demographic model.
+We then define Relative Bayes Factors (RBFs), which represent demographic model fit relative to some reference demographic model.
 %
 We further derive RBFs for two types of reference models. These reference models type - Clade models and Comb models - are useful for different model-selection problem instances.
 %
-Having reached tractable formulae for relative model fit, we describe in detail how these are calculated in an efficient manner, without incurring significant computational overhead during MCMC sampling. 
+Having reached tractable formulae for relative model fit, we describe in detail how they are calculated in an efficient manner, without incurring significant computational overhead during MCMC sampling. 
 %
-Finally, we test these model-fit assesments using a series of model-selection experiments, based on simulated sequence data.
+Finally, we test these model-fit assesments using a series of model-selection experiments based on simulated sequence data.
 %
-Our results show RBFs significantly improving on the base-line harmonic mean model fit estimator in the model-selection task.
+Our results show RBFs significantly improving on the base-line harmonic mean model fit estimator in the model selection task.
 
 \newpage
 
@@ -264,10 +264,7 @@ Evolutionary history is often modeled using a parameterized probabilistic demogr
 The structural components of $\M$ consist of a population phylogeny $\Tr$ and a collection
 of migration bands $B$ that indicate ordered pairs of populations between which gene flow is allowed.
 %
-The free parameters of $\M$, denoted by $\T$, consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population in } \Tr\}$,
-effective population sizes, $\thetas=\{\theta_p: p \text{ is a population in } \Tr\}$, and migration rates, $\migs=\{m_b:b \in B\}$.
-%
-Model parameters are scaled by mutation rate.
+The free parameters of $\M$, such as population divergence times, population sizes and migration rates, are denoted by $\T$.
 %
 The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
@@ -283,7 +280,8 @@ The algorithm effectively integrates out the genealogical relationships between 
 These methods have two key advantages. 1) The full probabilistic generative model of the data at their core allows modeling of more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
 However, because these methods condition on a given model structure $\M$, they provide no straightforward way to compare demographic model hypotheses.
-%
+
+
 In principle, measuring of model fit $P(X|\M)$ can be approximated by using importance sampling on the approximated posterior distribution, and this could be used to compare models.
 %
 However, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is. 
@@ -299,18 +297,18 @@ We accomplish this by estimating model fit relative to some Reference Model $\Mr
 %
 We implement the model-selection algorithm based on the parameter-inference framework \gp, but our theory and approach can be applied to all bayesian demography inference methods.
 
-We will start in subsection 1.1 by overviewing relevant work in the field.
+We will start in subsection \ref{Related work} by overviewing relevant work in the field.
 %
-Section 2 presents the some background on the demography inference problem.
+Subsections \ref{Bayesian inference and \gp}-\ref{The Model Selection Problem} present some background on the demography inference problem and state the model selection problem.
 %
-Section 3 formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and explains how they are used as model selection criteria. 
+Section \ref{Methods} formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and explains how they are used as model selection criteria. 
 %
-Section 4 explains in depth our implementation of McRef, our model selection algorithm which uses the \gp parameter-inference framework. McRef earned it's nickname due to it's employment of reference models in the MCMC process.
+Section \ref{sec:RBF Computational Scheme} explains in depth our implementation of McRef, our model selection algorithm which uses the \gp parameter-inference framework. McRef earned it's nickname due to it's employment of reference models in the MCMC process.
 %
-Finally, in section 5 we share empirical results from our model-selection experiments on simulated data, showcasing the advantages and limitations of our method.
+Finally, in section \ref{Results} we share empirical results from our model-selection experiments on simulated data, showcasing the advantages and limitations of our method.
 
 
-\subsection{Related work}
+\subsection{Related work} \label{Related work}
 
 There are several common approaches for demography inference. 
 %
@@ -342,20 +340,23 @@ This idea has since become the standard way to estimate model fit in a Bayesian 
 %
 In particular, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is. 
 %
-Several methods have suggested ways to improve the accuracy of HM estimation by sampling from ``hybrid'' models, which combine the prior $P(\T|\M)$ times some power of the conditional $P(\X,\G|\M,T)$ \citep{LARTPHIL06,XIEETAL11}.
+Several methods have suggested ways to improve the accuracy of HM estimation by sampling from ``hybrid'' models, which combine the prior $P(\T|\M)$ times some power of the conditional $P(\X,\G|\M,\T)$ \citep{LARTPHIL06,XIEETAL11}.
 %
 Unfortunately, though these methods are effective, they require an order of magnitude more sampling iterations compared to the number of iterations required for the MCMC of parameter estimation.
 
 
 
-\subsection{Bayesian inference and \gp}
+\subsection{Bayesian inference and \gp} \label{Bayesian inference and \gp}
 
 The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
 $P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
-
 %
-Because the conditional probability $P(\X|\M,\T)$ does not typically have a closed-form expression, an increasingly popular approach for
-inference is to introduce additional hidden variables $\G$, which represent genealogical relationships
+where $\T$ consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population in } \Tr\}$,
+effective population sizes, $\thetas=\{\theta_p: p \text{ is a population in } \Tr\}$, and migration rates, $\migs=\{m_b:b \in B\}$.
+%
+Values of parameters in $\T$ are scaled by mutation rate.
+
+Because the conditional probability $P(\X|\M,\T)$ does not typically have a closed-form expression, an increasingly popular approach for inference is to introduce additional hidden variables $\G$, which represent genealogical relationships
 between the sampled individuals.
 %
 The benefit of this is that given the genealogical information, the data $\X$ becomes independent of the model $\M$ and parameters $\T$,
@@ -377,7 +378,7 @@ A major advantage of this approach to parameter inference is that it is extremel
 
 
 \gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
-Equation \ref{eq:likelihood} shows the likelihood calculation used by \gp.
+Equation \ref{eq:likelihood} shows the likelihood calculation used by G-PhoCS.
 %
 \begin{equation}\label{eq:likelihood}
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
@@ -413,12 +414,12 @@ times across all genealogies by a multiplicative factor sampled close to 1.
 \includegraphics[width=0.8\textwidth]
 {multiple_loci_across_sequence}
 \captionsetup{width=.8\textwidth}
-\caption{\gp uses independant loci, chosen to be far away from genes and from each other to reduce the influence of selection and accomodate the assumption of independence. A local genealogy is represented over each locus and embedded in the population phylogeny.}
+\caption{\gp uses independant loci chosen to be far away from genes and from each other to reduce the influence of selection and accomodate the assumption of independence. A local genealogy is represented over each locus and embedded in the population phylogeny.}
 \label{fig:multiple_loci_across_sequence}
 \end{figure}
 
 
-\subsection{The Model Selection Problem}
+\subsection{The Model Selection Problem} \label{The Model Selection Problem}
 
 The model selection problem takes sequence data and a series of models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$).
 
@@ -428,7 +429,7 @@ The model selection problem takes sequence data and a series of models $\M_1,...
 \includegraphics[width=0.6\textwidth]
 {by_ilan/probgen_3_model_selection}
 \captionsetup{width=.8\textwidth}
-\caption{An example problem of selecting between three models with different topological structures. Mdoel $\M_1$ has three leaf populations and no migration. Model $\M_2$ has the same phylogeny as $\M_1$ but with an additional migration band. In model $\M_3$ the relationship between leaves is different. 
+\caption{An example problem of selecting between three models with different topological structures. Model $\M_1$ has three leaf populations and no migration. Model $\M_2$ has the same phylogeny as $\M_1$ but with an additional migration band. In model $\M_3$ the relationship between leaves is different. 
 %
 Given aligned sequence data and a set of structural hypotheses, we wish to choose which structural model best fits the data.}
 \label{fig:model_A__OR__model_b}
@@ -438,7 +439,7 @@ Given aligned sequence data and a set of structural hypotheses, we wish to choos
 %
 In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method for comparing models and their fit to the data, this without analytically calculating $P(X|\M_i)$.
 
-\section{Methods}
+\section{Methods} \label{Methods}
 
 
 \subsection{Estimating data likelihood via importance sampling}
@@ -557,7 +558,7 @@ We refer to this simple one-parameter model as the {\em null reference model} $\
 \includegraphics[width=0.8\textwidth]
 {null_reference_model_no_migration}
 \captionsetup{width=.8\textwidth}
-\caption{A mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The  hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_0$ to minimize RBF variance.}
+\caption{A mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_0$ to minimize RBF variance.}
 \label{fig:null_reference_model_no_migration}
 \end{figure}
 %
@@ -880,8 +881,7 @@ In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained 
 
 Identically mapping all structure and parameters outside the subtree of $p$ during step 3 leads to canceling-out of all corresponding terms in the RBF of $\M$ relative to $\Mref$.
 
-\section{RBF Computational Scheme}
-\label{sec:RBF Computational Scheme}
+\section{RBF Computational Scheme} \label{sec:RBF Computational Scheme}
 
 Having defined the concept of reference models and formulated their relative Bayes factors, we now describe the computational scheme we use to estimate RBFs as derived in subsection \ref{Relative Bayes factors}:
 %
@@ -1158,7 +1158,7 @@ Multiple debug plots are also emitted by mcref. Their goal is to help the resear
 
 
 
-\section{Results}
+\section{Results} \label{Results}
 
 In order to evaluate our new method we designed a series of experiments which measure it's strengths and weaknesses. 
 %
@@ -1223,13 +1223,13 @@ We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (
 
 
 \begin{figure}[h]
-
-\figuretitle{Selecting between $\M_{3pops}$ vs $\M_{2pops}$ using RBFs or HM}
-
+ 
 
 \includegraphics[scale=0.4]{results/results-divAB-select}
 \captionsetup{width=0.8\textwidth}
 \caption{
+Results of experiments selecting between $\M_{3pops}$ and $\M_{2pops}$ using the null reference model, a $clade(AB)$ reference model and HM.
+%
 Data sets are marked on the X-axis by divXX-a, where the value of $XX$ stands for $\tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
 %
 The divergence time of $AB$ used in the generation of the data set increases between comparisons (left to right).
@@ -1251,9 +1251,9 @@ We also notice that both HM and the two RBFs are able to determine the correct m
 %
 In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
 %
-Lastly, when we use $\Mref = \M_{clade(AB)}$, we see that the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
+We see that when we use $\Mref = \M_{clade(AB)}$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
 %
-Also, the added noise for $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
+Lastly, $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
 
 
 
@@ -1283,44 +1283,38 @@ Similiarly to experiment I, we used these techniques to compare the true model $
 
 \begin{figure}[H]
 
-\figuretitle{Comparing performance of multiple reference models and HM}
+\includegraphics[width=0.9\textwidth]{results/results-M4-divAB/M4-divAB-results-comb_ABC}
 
-\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/M4-divAB-results-comb_ABC}
+\includegraphics[width=0.9\textwidth]{results/results-M4-divAB/M4-divAB-results-comb_ROOT}
 
-\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/M4-divAB-results-comb_ROOT}
+\includegraphics[width=0.9\textwidth]{results/results-M4-divAB/M4-divAB-results-clade_ABC}
+
+\includegraphics[width=0.9\textwidth]{results/results-M4-divAB/M4-divAB-results-clade_ROOT}
+
+\includegraphics[width=0.9\textwidth]{results/results-M4-divAB/M4-divAB-results-HM}
 
 \captionsetup{width=0.8\textwidth}
 \caption{ 
+Results of experiments selecting between three model structures using each of multiple RBFs and HM.
+%
 Data sets are marked on the X-axis by $divAB\_XX-a$, where the value of $XX$ stands for $\tau(AB) \times 10,000$ and $a$ indicates the data replicate (1 or 2).
 %
 The true gap between divergence times $\tau(ABC)$ and $\tau(AB)$ starts from zero on the left (where $\tau(ABC) = 0.00300 = \tau(AB)$) and increases between comparisons (left to right).
 %
-We clearly see from figures \ref{fig:results-M4-divAB-comb} -  \ref{fig:results-M4-divAB-HM} that the more specialized reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable.}
-\label{fig:results-M4-divAB-comb}
+We see that the more informative reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable.}
+\label{fig:results-M4-divAB}
 \end{figure}
 
-\begin{figure}[H]
-\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/M4-divAB-results-clade_ABC}
-\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/M4-divAB-results-clade_ROOT}
-\caption{ }
-\label{fig:results-M4-divAB-clade}
-\end{figure}
 
-\begin{figure}[H]
-\includegraphics[width=1.0\textwidth]{results/results-M4-divAB/M4-divAB-results-HM}
-\caption{ }
-\label{fig:results-M4-divAB-HM}
-\end{figure}
-
-As seen in figure \ref{fig:results-M4-divAB-comb}, the two comb reference methods clearly and confidently choose the true hypothesis model, $\M_{AB_C}$.
+We see that the two comb reference methods (first two panels of Figure \ref{fig:results-M4-divAB}) clearly and confidently choose the true hypothesis model, $\M_{AB\_C\_O}$.
 %
 The comb reference methods also correctly show no preference to any model when the hypotheses were eqivalent. This is not true for the other methods.
 %
-Amongst the two comb reference methods, the more localized $Comb(ABC)$ provided a stronger and more confident signal.
+Amongst the two comb reference methods, the more localized $comb(ABC)$ provided a stronger and more confident signal.
 %
-However, when using the $Clade(ABC)$ reference model (top of figure \ref{fig:results-M4-divAB-clade}) we see at most a gentle upward trend in results, but no reproducable clear selection. 
+However, when using the $clade(ABC)$ reference model (3rd panel) we see at most a gentle upward trend in results, but no reproducable clear selection. 
 %
-In the remaining two experiments ,$Clade(ROOT)$ and HM (figures \ref{fig:results-M4-divAB-clade} and \ref{fig:results-M4-divAB-HM}) we see no selection and a high degree of uncertainty.
+In the remaining two experiments ,$clade(ROOT)$ and HM (seen in 4th and 5th panels) we see no selection and a high degree of uncertainty.
 
 
 
@@ -1351,17 +1345,20 @@ To present the results, we conducted a comparison between each of the three mode
 %
 We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). 
 %
-Because the conditional distribution for migration events is not fully implemented, we applied a small shortcut and assumed the hypothesis and reference likelihoods cancel out. We estimate that this results in a relatively small correction, and believe strong trends in results will not be affected by this.
+Because the conditional distribution for migration events is not fully implemented, we applied a small shortcut and assumed the hypothesis and reference likelihoods cancel out. We estimate that this results in a relatively small correction, and believe it will not affect any trend in results.
 
 
 
 \begin{figure}[H]
 
-\figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using HM}
+
+\includegraphics[width=1.0\textwidth]{results/results-migCB-select-1}
 
 \includegraphics[width=1.0\textwidth]{results/results-migCB-select-2}
 \captionsetup{width=1.0\textwidth}
 \caption{
+Results of experiments selecting between multiple migration patterns using the null reference model (panel 1) and using HM (panel 2).
+%
 Data sets are marked by $migXX-a$, where $XX$ stands for the migration rate from population $C$ to $B$ and $a$ indicates the data replicate (1 or 2).
 %
 The migration rate from $C$ to $B$ used in the generation of the data set increases between comparisons (left to right).
@@ -1370,29 +1367,11 @@ The bars heights are the values of the comparison metric against $\M_{nomig}$ , 
 %
 Each experiment was repeated twice to assess reproducability.
 %
-We see in the graph that the harmonic mean does not consistently prefer any model over another.
+We see in the 2nd panel that the harmonic mean does not consistently prefer any model over another, whereas the null RBF prefers models with migration to the migration-less base model. 
 }
 \label{fig:results-migCB-2}
 \end{figure}
 
-
-
-\begin{figure}[H]
-
-\figuretitle{Selecting between $\M_{migALL}$ vs $\M_{migCB}$ vs $\M_{migBC}$ using RBF with $\M_{null}$}
-
-
-\includegraphics[width=1.0\textwidth]{results/results-migCB-select-1}
-\captionsetup{width=1.0\textwidth}
-\caption{
-As opposed to in figure \ref{fig:results-migCB-2}, we see that the RBF prefers models with migration to the migration-less base model. 
-%
-This preference is correlated with migration rate. 
-%
-We also see that RBF using a comb reference model produces estimates with higher confidence.
-}
-\label{fig:results-migCB-1}
-\end{figure}
 
 
 
@@ -1408,13 +1387,13 @@ There doesn't seem to be a significant difference between the scores of $\M_{mig
 
 \subsection{summary}
 
-We've examined RBFs under three questions - 1) whether a divergence event occured, what is the migration pattern and what is the relationship between leaves. In all three scenarios, model selection using relative Bayes factors significantly outperform the harmonic mean estimator
+We've utilized RBFs in answering three model selection questions; 1) whether a divergence event occured, 2) what is the true migration pattern and 3) what is the relationship between leaf populations. In all three scenarios, model selection using relative Bayes factors significantly outperformed the harmonic mean estimator.
 %
-We've also shown (in experiment 2) that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the more localized the reference model is to the disputed hypothesis region, the better the algorithm performed. 
+We see in experiments 1 and 2 that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the best performing reference model is the most informative reference model that can be used, i.e. the one closest to all models being compared. 
 %
-We see that , as expected, the success of the algorithm is correlated with the true distance between models, but it's estimations are not of high certainty.
+We also see that, as expected, the success of the algorithm is correlated with the true distance between models, but it's estimations are not of high certainty.
 %
-Finally we note that it did not succeed in choosing the more parsimonious hypothesis in experiment 3 leaving room for improvement.
+Finally we note that in experiment 3 RBFs did not succeed in choosing the most parsimonious hypothesis.
 
 
 \newpage
