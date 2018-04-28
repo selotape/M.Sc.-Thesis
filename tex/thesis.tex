@@ -378,7 +378,7 @@ Consequently, the sampled parameter values have high joint probability with the 
 A major advantage of this approach to parameter inference is that it is extremely flexible and can be applied to a wide range of demographic models and different types of genomic data.
 
 
-\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and loci are assumed to be independent (figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
+\gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and loci are assumed to be independent (Figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
 Equation \ref{eq:likelihood} shows the likelihood calculation used by G-PhoCS.
 %
 \begin{equation}\label{eq:likelihood}
@@ -552,14 +552,15 @@ The following sections present specific constructions for $\Pref$ in a series of
 \label{The null reference model}
 We start by considering a simple case where $\M$ is a demographic model with no migration bands and $\Mref$ is the simplest possible model with a single population $p_0$ of constant size $\theta_0$.
 %
-We refer to this simple one-parameter model as the {\em null reference model} $\M_0$ (figure \ref{fig:null_reference_model_no_migration}).
+We refer to this simple one-parameter model as the {\em null reference model} $\M_0$ (Figure \ref{fig:null_reference_model_no_migration}).
 %
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]
 {null_reference_model_no_migration}
 \captionsetup{width=.8\textwidth}
-\caption{A mapping from hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_0$ to minimize RBF variance.}
+\caption{Mapping the hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Genealogies are mapped as-is and model parameters are mapped so as to satisfy the model-pairing requirements (\ref{eq:pref_integral} \& \ref{eq:pref_support}):
+Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The remaining parameter $p_0$ can be freely mapped so as to improve RBF variance.}
 \label{fig:null_reference_model_no_migration}
 \end{figure}
 %
@@ -646,17 +647,28 @@ and defining $\Pref(\taus|\G)$ as a product of uniform distributions in the feas
 
 \subsection{Models with gene flow}
 
-Assume now that the reference model is still the null model, $\M_0$, but the model of interest, $\M$, has a non-empty
-set of migration bands, $B$, associated with migration rate parameters, $\migs=\{m_b:b\in B\}$.
+Assume now that the reference model is still the null model, $\M_0$, but the model of interest, $\M$, has a non-empty set of migration bands, $B$, associated with migration rate parameters, $\migs=\{m_b:b\in B\}$.
 %
 Migrations complicate the mapping between $\M$ and $\M_0$ because the genealogies in $\M$ hold information
-about migration events, but the genealogies in $\M_0$ do not.
+about migration events, but the genealogies in $\M_0$ do not (Figure \ref{fig:null_model_with_migration}).
 %
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]
+{null_model_with_migration}
+\captionsetup{width=.8\textwidth}
+\caption{Mapping a model with migration onto the null reference model. Genealogies in $p_0$ do not hold information about migration events. The complex interplay between migration events and coalescence times makes defining the conditional probability distribution $\Pref$ challenging. Appendix \ref{ap:cond_mig} specifies the generative process used to address this. }
+\label{fig:null_model_with_migration}
+\end{figure}
+
+
+
+
 For a sequence of local genealogies $\G$ in $\M$, denote by $\Gc$ the coalescent trees implied by $\G$
 and denote by $\Gm$ the information on migration events in $\G$ (locus, timing of event, branch in $\Gc$, source and target populations).
 %
-%Because the genealogies $\Gref$ in $\M_0$ have no migration events, then t
-%There is a natural mapping between $\Gc$ (of $\M$) and $\Gref$ (of $\M_0$) and $P(\X|\Gref) = P(\X|\Gc)$.
 Thus, a mapping between the hidden variables of $\M$ ($\Gc,\Gm,\T$) and the hidden variables of $\M_0$ ($\Gref,\theta_0$) can be defined by
 mapping $\Gc$ to $\Gref$ and mapping some $\troot\in\T$ to $\theta_0$.
 %
@@ -738,10 +750,15 @@ where $\widetilde{\thetas}=\{\theta_p:p\in L\cup \{comb\}\}$ and $\widetilde{\mi
 \includegraphics[width=0.8\textwidth]
 {comb_model_with_migration_single_genealogy}
 \captionsetup{width=.8\textwidth}
-\caption{A mapping from a hypothesis model with a migration band $\M_{hyp}$ onto the null reference model $\M_0$. Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ and migration rate $m_{B->C}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper and lower bounds calculated as described in appendix \ref{ap:cond_mig}. The remaining hypothesis parameter $\theta_{root}$ is mapped onto the free parameter of the reference model $\theta_{p_0}$ so as to minimize the RBF ratio.
-}
+\caption{A mapping from hypothesis $\M_{hyp}$ onto the 
+reference model $\M_{comb}$. Genealogies and model parameters 
+above $min(\tau)$ are mapped according to the mapping into the 
+null model (Subsection \ref{The null reference model}) and those below $min(\tau)$ are mapped as is. The 
+remaining parameter $p_{comb}$ can be freely mapped in order to improve RBF estimation. }
 \label{fig:comb_model_with_migration_single_genealogy}
 \end{figure}
+
+
 
 
 %
@@ -864,7 +881,7 @@ The RBF may thus be re-expressed as follows:
 
 Subsections \ref{The null reference model}-\ref{The comb reference model} described two examples of reference models - the null reference model and the root comb reference model. 
 %
-During construction of both these reference models, the structure of the entire phylogeny (sans a portion of the leaves for the comb) is collapsed into a single population, and a mapping is derived from this.
+During construction of both these reference models, the structure of the entire phylogeny (sans a portion of the leaves in case of a comb mapping) is collapsed into a single population, and a mapping is derived from this.
 %
 However, in many cases of interest the modeling uncertainty is restricted to a certain subtree in the population phylogeny.
 %
@@ -877,7 +894,7 @@ In general, a reference model $\Mref$ for hypothesis model $\M$ may be obtained 
 
 \item Then \textbf{collapse the subtree structure} into either a clade structure, i.e. a single population $p_{clade}$, or a comb structure, i.e. an ancestral population $p_{comb}$ and a set of leaf populations and migration bands $L, B_L$. 
 
-\item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$, defining the model-pairing conditional distribution $\Pref$ s.t. conditions (\ref{eq:pref_integral}) and (\ref{eq:pref_support}) are met. This mapping should cancel-out as many terms of the RBF ratio as possible (equations (\ref{eq:rbf_mig}) \& (\ref{eq:rbf_comb1})).
+\item Finally, \textbf{map the hidden parameters} of $\M$ onto parameters of $\Mref$, defining the model-pairing conditional distribution $\Pref$ such that the necessary conditions (\ref{eq:pref_integral} \& \ref{eq:pref_support}) are met. This mapping should cancel-out as many terms of the RBF ratio as possible (equations (\ref{eq:rbf_mig}) \& (\ref{eq:rbf_comb1})).
 \end{enumerate}
 
 Identically mapping all structure and parameters outside the subtree of $p$ during step 3 leads to canceling-out of all corresponding terms in the RBF of $\M$ relative to $\Mref$.
@@ -891,7 +908,7 @@ Having defined the concept of reference models and formulated their relative Bay
  \frac{1}{\rbf(\M:\Mref|\X)}  ~~\approx~~ \frac{1}{N} \sum_{i=1}^{N}\frac{\Pref(\GT^{(i)}|\Mref) }{P(\GT^{(i)}|\M)} ~ 
 \end{equation}
 
-This RBF is further derived for clade and comb reference models in equations  \ref{eq:rbf_mig} and \ref{eq:rbf_comb1}. 
+This RBF is further derived for clade and comb reference models (Equations  \ref{eq:rbf_mig} \& \ref{eq:rbf_comb1}). 
 %
 We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation for a root clade reference model in equation \ref{eq:rbf_mig} - 
 \[ 
@@ -1015,7 +1032,7 @@ Using these notations, the genealogy log likelihood can be expressed as follows:
 \end{align}
 \end{small}
 
-The key to likelihood calculation is to sum over the log-likelihood contributions across time intervals and across loci (see figure \ref{fig:multiple_loci}):
+The key to likelihood calculation is to sum over the log-likelihood contributions across time intervals and across loci (Figure \ref{fig:multiple_loci}):
 %
 %
 \begin{small}
@@ -1376,7 +1393,7 @@ We see in the 2nd panel that the harmonic mean does not consistently prefer any 
 
 
 
-In figure \ref{fig:results-migCB-2} we see that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$.
+We see that the harmonic mean scores the three models with migrations similarly and it never significantly prefers models with migration to $\M_{nomig}$ (Figure \ref{fig:results-migCB-2}).
 %
 RBFs however consistently score $\M_{migCB}$ and $\M_{migAL}$ higher than $\M_{nomig}$ in the 4 data sets with migration. The preference is correlated to the simulated migration rate. 
 %

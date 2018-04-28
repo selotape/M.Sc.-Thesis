@@ -248,6 +248,51 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(0.8,0,0,0.8,10,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-33-1-2-9-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7031-4-6-9-6-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-33-1-2-9-8-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7031-4-6-9-6-6-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-33-1-2-9-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7031-4-6-9-6-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -256,9 +301,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.438544"
-     inkscape:cx="-1137.0657"
-     inkscape:cy="-1089.0033"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="-4538.4287"
+     inkscape:cy="-205.35546"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -3427,7 +3472,7 @@
            height="190"
            x="-1590"
            y="2052.5198" /></flowRegion><flowPara
-         id="flowPara6754"></flowPara></flowRoot>    <g
+         id="flowPara6754" /></flowRoot>    <g
        id="g6818"
        transform="translate(1.3824658)">
       <text
@@ -3505,6 +3550,1378 @@
    id="tspan6861">U</tspan> θ <tspan
    style="font-size:22.5px"
    id="tspan6863">U</tspan> m </tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4467.1875,517.98721 h 56.25 l 23.4375,-56.25001 28.1252,56.25001 h 56.25 l -26.2501,-56.25001 h 46.875 l 26.2501,56.25001 h 56.25 l -26.0577,-56.4851 -0.1923,-187.2649 H -4441.875 V 461.7372 Z"
+       id="path258-3-2-3-0-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54687548;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062557, 1.54687519;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -4329.3748,461.7372 H -4441.875"
+       id="path4910-5-8-6-0-6-9-0-1-6-4-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4382.6953"
+       y="259.43793"
+       id="text9177-2-8-8-4"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"><tspan
+         sodipodi:role="line"
+         id="tspan9175-2-3-8-6"
+         x="-4382.6953"
+         y="259.43793"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3136-0-8-7" /></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.5468756;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062571, 1.54687524;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4226.2498,461.74811 h -56.25"
+       id="path4910-5-8-6-0-6-9-0-1-6-1-9-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4446.2183"
+       y="537.8938"
+       id="text1831-7-7-0"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"><tspan
+         sodipodi:role="line"
+         id="tspan1829-8-7-9"
+         x="-4446.2183"
+         y="537.8938"
+         style="font-size:22.5px;stroke-width:0.9375"><tspan
+           style="font-size:20px;stroke-width:0.9375"
+           id="tspan3812-6-7">L</tspan><tspan
+           style="font-size:14.62499905px;baseline-shift:sub;stroke-width:0.9375"
+           id="tspan3805-4-5">A</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:22.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4341.4819"
+       y="537.8938"
+       id="text1831-9-9-3-9"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"><tspan
+         sodipodi:role="line"
+         id="tspan1829-2-1-0-7"
+         x="-4341.4819"
+         y="537.8938"
+         style="font-size:22.5px;stroke-width:0.9375"><tspan
+           style="font-size:20px;stroke-width:0.9375"
+           id="tspan3814-3-8">L</tspan><tspan
+           style="font-size:14.62499905px;baseline-shift:sub;stroke-width:0.9375"
+           id="tspan3808-0-5">B</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4237.2656"
+       y="537.79028"
+       id="text1831-9-5-5-9-3"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"><tspan
+         sodipodi:role="line"
+         id="tspan1829-2-4-4-2-3"
+         x="-4237.2656"
+         y="537.79028"
+         style="font-size:22.5px;stroke-width:0.9375"><tspan
+           style="font-size:20px;stroke-width:0.9375"
+           id="tspan3816-5-8">L</tspan><tspan
+           style="font-size:14.62499905px;baseline-shift:sub;stroke-width:0.9375"
+           id="tspan3810-4-3">C</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4429.6875"
+       y="302.36218"
+       id="text3141-9-0-7"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan3139-2-5-9"
+         x="-4429.6875"
+         y="302.36218"
+         style="stroke-width:0.9375"><tspan
+           style="font-size:25.00000572px;stroke-width:0.9375"
+           id="tspan3145-5-9-3">p</tspan><tspan
+           id="tspan3151-7-4-7"
+           style="font-size:15px;baseline-shift:sub;stroke-width:0.9375" /></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4334.0623,262.98721 v -9.375 h 4.6875 14.0625 v 9.375 -9.375 h -9.375 v 9.375"
+       id="path4048-6-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <g
+       style="display:inline"
+       id="g3076-9-7"
+       transform="translate(-1674.3746,-129.37505)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136">
+      <text
+         inkscape:export-ydpi="96"
+         inkscape:export-xdpi="96"
+         id="text642-6-5-1-7-2-4"
+         y="592.76404"
+         x="-2802.5312"
+         style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+         xml:space="preserve"><tspan
+           style="font-size:11.25px;stroke-width:0.9375"
+           y="592.76404"
+           x="-2802.5312"
+           id="tspan640-2-8-7-3-2-1"
+           sodipodi:role="line"><tspan
+             id="tspan3850-4-9"
+             style="font-size:20px">τ</tspan><tspan
+             style="font-size:10px;baseline-shift:sub"
+             id="tspan3854-7-0" /></tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4048-9-7-9"
+         d="m -2788.1249,593.92469 v -4.21867 h 2.1094 6.328 v 4.21867 -4.21867 h -4.2188 v 4.21867"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.93750012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4413.75,312.6747 v -7.5 h 3.75 11.25 v 7.5 -7.5 h -7.5 v 7.5"
+       id="path4048-94-5-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4759.6875,517.57671 h 56.25 L -4680,461.3267 l 28.125,56.25001 h 56.25 l -49.6875,-102.71451 h 44.0625 l 52.5,102.71451 h 56.25 L -4600.3125,306.6392 v -32.81249 h -70.3125 v 32.81249 z"
+       id="path258-8-8-4-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4758.6475"
+       y="461.8844"
+       id="text642-6-9-9-8-5"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-64-1-8"
+         x="-4758.6475"
+         y="461.8844"
+         style="font-size:11.25px;stroke-width:0.9375">τ<tspan
+   style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan644-5-8-3-2-4">ab</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937546, 0.70312515;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4576.875,353.5142 h -113.4375"
+       id="path4910-5-8-6-0-6-9-1-3-5-3-39-3-8-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937533, 0.70312513;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -4622.8125,461.3267 H -4736.25"
+       id="path4910-5-8-6-0-6-9-1-3-1-4-3-9-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4721.1743"
+       y="352.80579"
+       id="text642-1-8-36-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-29-6-80-3"
+         x="-4721.1743"
+         y="352.80579"
+         style="font-size:11.25px;stroke-width:0.9375">τ<tspan
+   style="font-size:11.25px;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan644-3-0-2-8">root</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009548, 1.54669852;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4576.875,353.5142 h -112.5"
+       id="path4910-5-8-6-0-8-4-1-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54687536;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062549, 1.54687515;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4623.75,461.3267 h -112.5"
+       id="path4910-5-8-6-0-6-9-5-8-0-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4544.5054"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-0-88-5-7"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4619.9673"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-9-9-11-9"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4636.1372"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-6-7-0-9"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="517.5332"
+       cx="4722.2803"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-3-7-8-3"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4743.7051"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-8-6-5-2"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="518.04761"
+       cx="4502.4888"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-5-4-06-4"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4515.9375,494.13921 -4.6875,23.4375"
+       id="path322-2-3-6-3-46-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4598.4375,400.7997 53.6184,116.96351"
+       id="path326-4-8-1-03-25-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4675.3125,437.8892 38.8057,79.13051"
+       id="path334-4-0-1-0-8-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4675.3125,437.8892 -46.875,79.68751"
+       id="path336-6-5-59-9-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4680,414.4517 -62.7525,101.22101"
+       id="path338-9-1-8-2-2-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4680,414.4517 4.6875,23.4375"
+       id="path340-2-1-4-5-8-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4680,414.4517 46.875,-93.75"
+       id="path342-2-0-8-4-4-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4595.625,367.5767 -37.5,-46.875"
+       id="path344-4-8-10-05-7-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -4633.125,320.7017 V 273.82671"
+       id="path342-2-0-5-3-9-2-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -4665.9375,386.3267 -4620,517.98721"
+       id="path338-9-1-4-0-4-4-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4530,470.7017 -65.625,-103.125"
+       id="path344-4-8-1-44-6-0-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="517.61719"
+       cx="4520.9365"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-92-6-7"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4530,470.7017 28.125,46.87501"
+       id="path322-2-3-0-4-2-29-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.61719"
+       cx="4534.999"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-7-4-90-1"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4557.1875,427.5767 23.4375,90.00001"
+       id="path322-2-3-5-6-7-8-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00031137;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.00187479, 2.00062598;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4650.0001,400.7997 h 51.5626"
+       id="path326-4-8-1-2-75-1-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4619.0625,383.9247 -26.0842,0.054 12.0217,-30.0543 14.0625,30.0003"
+       id="path6514-4-3-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4737.085"
+       y="526.03918"
+       id="text642-6-9-2-8-1-1"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-1-1-7"
+         x="-4737.085"
+         y="526.03918"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7654-2-0-0">a</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4525.1558"
+       y="526.03918"
+       id="text642-6-9-2-5-8-3-4"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-93-4-0"
+         x="-4525.1558"
+         y="526.03918"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7658-6-0-8">c</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4679.3535"
+       y="256.36035"
+       id="text9177-2-7-8-3-5"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"><tspan
+         sodipodi:role="line"
+         id="tspan9175-2-9-0-9-1"
+         x="-4679.3535"
+         y="256.36035"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3136-6-2-1-6">hyp</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4745.5225"
+       y="393.4469"
+       id="text642-6-9-2-0-10-9-6"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         x="-4745.5225"
+         y="393.4469"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
+         id="tspan6809-5-6-2">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7660-1-9-1">ab</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4718.1689"
+       y="294.36603"
+       id="text642-6-9-2-0-1-1-3-9"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         x="-4718.1689"
+         y="294.36603"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375"
+         id="tspan6809-0-0-3-6">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7662-8-8-4">root</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4637.6729"
+       y="417.98535"
+       id="text642-6-9-2-5-9-5-05-8"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-9-0-6-0"
+         x="-4637.6729"
+         y="417.98535"
+         style="font-size:12.50000286px;baseline-shift:sub;stroke-width:0.9375">ab→c</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4630.1558"
+       y="526.03918"
+       id="text642-6-9-2-5-1-6-6-8"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-0-4-4-1"
+         x="-4630.1558"
+         y="526.03918"
+         style="font-size:16.25px;baseline-shift:sub;stroke-width:0.9375">p<tspan
+   style="stroke-width:0.9375"
+   id="tspan7656-6-0-0">b</tspan></tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4654.6875,363.2997 4.6875,37.5"
+       id="path326-4-8-1-03-2-04-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4221.5623,495.07671 -4.6875,23.4375"
+       id="path322-2-3-6-3-5-6-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4380.9375,438.8268 38.8059,79.13041"
+       id="path334-4-0-1-0-6-6-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4380.9375,438.8268 -46.875,79.68751"
+       id="path336-6-5-59-9-2-7-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4385.625,415.3892 -62.7525,101.22101"
+       id="path338-9-1-8-2-8-5-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4385.625,415.3892 4.6875,23.4375"
+       id="path340-2-1-4-5-4-6-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4385.625,415.3892 46.8752,-93.75"
+       id="path342-2-0-8-4-7-9-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4301.2498,368.5142 -37.5,-46.875"
+       id="path344-4-8-10-05-2-8-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -4338.7498,321.6392 V 274.76421"
+       id="path342-2-0-5-3-9-4-7-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4371.5623,387.2643 45.9375,131.66041"
+       id="path338-9-1-4-0-4-0-2-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4235.6248,471.63931 -65.625,-103.12511"
+       id="path344-4-8-1-44-6-6-8-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4235.6248,471.6392 28.125,46.87501"
+       id="path322-2-3-0-4-2-2-2-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4262.8123,428.5142 23.4375,90.00001"
+       id="path322-2-3-5-6-7-9-9-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4250.1304"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-0-88-8-0-9"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4325.5923"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-9-9-1-2-1"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4341.7622"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-6-7-3-7-7"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.5332"
+       cx="4427.9053"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-3-7-1-6-0"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.81995"
+       cx="4449.3301"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-8-6-1-1-6"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928033"
+       rx="2.9880006"
+       cy="518.04761"
+       cx="4208.1138"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-5-4-0-3-0"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928031"
+       rx="2.9880006"
+       cy="517.61719"
+       cx="4226.5615"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-92-3-2-8"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928033"
+       rx="2.9880006"
+       cy="517.61719"
+       cx="4240.624"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-7-4-4-1-5"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4325.6248,461.7372 h -3.75 46.875 4.6875 z"
+       id="path2754-5-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.96875036;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart-33-1-2-9-8-8)"
+       d="m -4456.875,378.2997 c -72.1876,-0.065 -72.1876,-0.065 -72.1876,-0.065"
+       id="path7029-4-3-0-9-1-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4303.7314,401.20691 53.6184,116.9635"
+       id="path326-4-8-1-03-25-1-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00031137;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.001875, 2.00062605;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4355.294,401.20691 h 51.5626"
+       id="path326-4-8-1-2-75-1-0-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4359.9814,363.7069 4.6875,37.50001"
+       id="path326-4-8-1-03-2-04-3-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/comb_model_single_genealogy.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4590.9375,1398.8267 h 56.25 l 23.4375,-56.25 28.125,56.25 h 56.25 l -11.25,-23.0269 h 46.875 l 11.25,23.0269 h 56.25 l -107.8125,-210.9375 v -32.8125 h -70.3125 v 32.8125 z"
+       id="path258-8-8-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937539, 0.70312513;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4408.125,1234.7642 h -113.4375"
+       id="path4910-5-8-6-0-6-9-1-3-5-3-39-3-33"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#808080;stroke-width:0.703125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.10937526, 0.70312511;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -4454.0625,1342.5767 H -4567.5"
+       id="path4910-5-8-6-0-6-9-1-3-1-4-3-38"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54669857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64009533, 1.54669847;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4408.125,1234.7642 h -112.5"
+       id="path4910-5-8-6-0-8-4-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.54687524;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.64062533, 1.5468751;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4455,1342.5767 h -112.5"
+       id="path4910-5-8-6-0-6-9-5-8-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1399.0699"
+       cx="4375.7554"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-0-88-6"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1399.0699"
+       cx="4451.2173"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-9-9-3"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1399.0699"
+       cx="4467.3872"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-6-7-5"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1398.7832"
+       cx="4553.5303"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-3-7-0"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1399.0699"
+       cx="4574.9551"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-8-6-8"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="1399.2976"
+       cx="4333.7388"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-5-4-04"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4347.1875,1375.3892 -4.6875,23.4375"
+       id="path322-2-3-6-3-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4384.6875,1366.4247 8.6187,32.5885"
+       id="path326-4-8-1-03-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4506.5625,1319.1392 38.8057,79.1305"
+       id="path334-4-0-1-0-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4506.5625,1319.1392 -46.875,79.6875"
+       id="path336-6-5-59-9-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4511.25,1295.7017 -62.7525,101.221"
+       id="path338-9-1-8-2-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4511.25,1295.7017 4.6875,23.4375"
+       id="path340-2-1-4-5-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4511.25,1295.7017 46.875,-93.75"
+       id="path342-2-0-8-4-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4426.875,1248.8267 -37.5,-46.875"
+       id="path344-4-8-10-05-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4464.375,1201.9517 v -46.875"
+       id="path342-2-0-5-3-9-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4497.1875,1267.5767 45.9375,131.6605"
+       id="path338-9-1-4-0-4-08"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4361.25,1351.9517 -65.625,-103.125"
+       id="path344-4-8-1-44-6-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1398.8672"
+       cx="4352.1865"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-92-5"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4361.25,1351.9517 28.125,46.875"
+       id="path322-2-3-0-4-2-65"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928029"
+       rx="2.9880006"
+       cy="1398.8672"
+       cx="4366.249"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-7-4-99"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4388.4375,1308.8267 23.4375,90"
+       id="path322-2-3-5-6-7-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00031257;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.00187473, 2.00062492;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4449.375,1366.4247 64.6874,10e-5"
+       id="path326-4-8-1-2-75-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4483.125,1282.0498 18.75,-46.875 60.9375,117.1875 h -46.875 l -32.8125,-70.3125"
+       id="path6514-4-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4510.6035"
+       y="1137.6104"
+       id="text9177-2-7-8-5"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"><tspan
+         sodipodi:role="line"
+         id="tspan9175-2-9-0-0"
+         x="-4510.6035"
+         y="1137.6104"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3136-6-2-8">hyp</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4451.0933"
+       y="1341.3828"
+       id="text642-6-9-2-5-9-5-04"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"><tspan
+         sodipodi:role="line"
+         id="tspan640-2-0-6-8-9-0-2"
+         x="-4451.0933"
+         y="1341.3828"
+         style="font-size:17.50000191px;line-height:1.25;baseline-shift:sub;stroke-width:0.9375">B→C</tspan></text>
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4467.1875,1352.3622 17.8123,14.0625"
+       id="path326-4-8-1-03-2-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:1.96875036;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart-33-1-2-9-5)"
+       d="m -4310.625,1259.5497 c -72.1876,-0.065 -72.1876,-0.065 -72.1876,-0.065"
+       id="path7029-4-3-0-9-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png" />
+    <path
+       style="display:inline;fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4300.3184,1155.6539 v 243.75 h 267.1875 v -243.75 z"
+       id="path6669-40-3-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="-4191.8281"
+       y="1143.2245"
+       id="text9177-2-83"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"><tspan
+         sodipodi:role="line"
+         id="tspan9175-2-4"
+         x="-4191.8281"
+         y="1143.2245"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:cmsy10;-inkscape-font-specification:cmsy10;stroke-width:0.9375">M<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.375px;font-family:tahoma;-inkscape-font-specification:tahoma;baseline-shift:sub;stroke-width:0.9375"
+   id="tspan3136-2">0</tspan></tspan></text>
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="1399.2424"
+       cx="4087.9429"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse310-4-4-0-8-5"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="1399.2424"
+       cx="4159.6553"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse312-3-8-9-3-7"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="1399.2424"
+       cx="4179.5752"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse314-0-1-6-8-1"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="1398.9558"
+       cx="4265.7178"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse316-3-2-3-3-6"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="1399.2424"
+       cx="4287.1431"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse318-0-8-8-3-9"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1399.4701"
+       cx="4045.9263"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-3-5-3-8"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4059.375,1375.5617 -4.6875,23.4375"
+       id="path322-2-3-6-8-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4218.75,1319.3117 38.8057,79.1305"
+       id="path334-4-0-1-4-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4218.75,1319.3117 -46.875,79.6875"
+       id="path336-6-5-59-7-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4223.4375,1295.8742 -62.7525,101.221"
+       id="path338-9-1-8-6-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4223.4375,1295.8742 4.6875,23.4375"
+       id="path340-2-1-4-8-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4223.4375,1295.8742 46.875,-93.75"
+       id="path342-2-0-8-9-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4139.0625,1248.9992 -37.5,-46.875"
+       id="path344-4-8-10-0-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4176.5625,1202.1242 v -46.8749"
+       id="path342-2-0-5-3-6-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4209.375,1267.7492 51.5625,131.2501"
+       id="path338-9-1-4-0-8-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4073.4375,1352.1242 -65.625,-103.125"
+       id="path344-4-8-1-44-7-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928024"
+       rx="2.9880002"
+       cy="1399.0397"
+       cx="4064.374"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-4-90-4"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4073.4375,1352.1242 28.125,46.875"
+       id="path322-2-3-0-4-3-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <ellipse
+       ry="2.9928026"
+       rx="2.9880004"
+       cy="1399.0397"
+       cx="4078.4365"
+       style="display:inline;fill:#362a98;fill-opacity:1;stroke:#362a98;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse308-6-5-1-7-3-4"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4100.625,1308.9992 23.4375,90"
+       id="path322-2-3-5-6-3-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4096.8749,1366.4247 9.375,32.8124"
+       id="path326-4-8-1-03-1-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4176.2762,1352.3622 17.8123,14.0625"
+       id="path326-4-8-1-03-2-3-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
+    <path
+       style="display:inline;fill:none;stroke:#000080;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4158.75,1366.4247 h 61.8747"
+       id="path326-4-8-1-03-2-3-9-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/ron/Dropbox/Thesis/docs/thesis/images/null_model_with_migration.png"
+       inkscape:export-xdpi="760.39136"
+       inkscape:export-ydpi="760.39136" />
   </g>
   <g
      inkscape:groupmode="layer"
