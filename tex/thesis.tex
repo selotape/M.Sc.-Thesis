@@ -929,7 +929,7 @@ In the derivation we suggest that the parameter priors $P(\troot|\M)$ and $P(\th
 %
 However, in theory and practice, any parameter prior or constant value can be sused as $P(\theta_0|\M_0)$.
 %
-In such a case, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0|\M_0)$ is plugged into the calculation in section \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}.
+In such a case, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0|\M_0)$ is plugged into the calculation in section \ref{sec:Efficient sufficient statistics for reference model genealogy likelihood}.
 %
 %
 The condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig} and utilized as described in section \ref{sec:Finalizing the RBF computation}.
@@ -975,13 +975,13 @@ Phase 2 is then given a definition of specific reference model structure and map
 %
 Phase 2 can be repeatedly rerun with different reference models, utilizing the same sufficient statistics emitted by phase 1, thus calculating RBFs of different reference models.
 
-Subsection \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood} explains how to calculate sufficient statistics which meet conditions 2 \& 3 for a single model structure.
+Subsection \ref{sec:Efficient sufficient statistics for reference model genealogy likelihood} explains how to calculate sufficient statistics which meet conditions 2 \& 3 for a single model structure.
 %
-Subsections \ref{sec:Recursive Sufficient Statistics for All Clade Models} and \ref{sec:Recursive Sufficient Statistics for All Comb Models} attain condition 1 by efficiently extending these statistics to all comb and clade reference models.
+Subsections \ref{sec:Recursive sufficient statistics for all clade models} and \ref{sec:Recursive Sufficient Statistics for All Comb Models} attain condition 1 by efficiently extending these statistics to all comb and clade reference models.
 %
 Later, section \ref{sec:Finalizing the RBF computation} explains how the intermediate sufficient statistics are combined with other statistics into an RBF estimate for a specific reference model.
 
-\subsection{Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}
+\subsection{Efficient sufficient statistics for reference model genealogy likelihood}
 \label{sec:Efficient sufficient statistics for reference model genealogy likelihood}
 
 Sufficient statistics that satisfy conditions 2 \& 3 are derived from the expression for the genealogy likelihood $P(\G|\T, \Mref)$ under Kingman's coalescent, which we briefly recall here.
@@ -1223,7 +1223,7 @@ Since these errors correspond to the difference between two values, we took the 
 As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). We used these values to plot the confidence intervals seen in the figures of each experiment.
 
 
-\subsection{Experiment I - IdentifyingpPopulation separation}
+\subsection{Experiment I - Identifying population separation}
 In this experiment we generated data sets in which population $ABC$s divergence time is fixed to 0.00300, and perturbed $AB$s divergence time from 0 up to 0.00050. No migration was allowed between any population. We considered 2 hypotheses:
 %
 \begin{enumerate}
