@@ -911,7 +911,7 @@ Having defined the concept of reference models and formulated their relative Bay
 
 This RBF is further derived for clade and comb reference models (Equations  \ref{eq:rbf_mig} \& \ref{eq:rbf_comb1}). 
 %
-We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation for a root clade reference model in equation \ref{eq:rbf_mig} - 
+We now focus our attention on the components making up the model pairing conditional. Consider for example the RBF derivation for a null reference model in equation \ref{eq:rbf_mig} - 
 \[ 
 	\frac{\Pref(\GT|\M_0) }{P(\GT|\M)}
 	~~\approx~~ 
@@ -920,23 +920,23 @@ We now focus our attention on the components making up the model pairing conditi
 	\frac{ \Pref(\taus,\Gm|\Gc)}{P(\taus|\M)}
 \]
 
-The two denominators $P(\Gc,\Gm|\M,\T)$ and $P(\taus|\M)$ are calculated as part of the \gp flow.
+The two denominators $P(\Gc,\Gm|\M,\T)$ and $P(\taus|\M)$ are calculated as part of the \gp MCMC flow.
 %
 During RBF estimation these values are taken as-is from \gp and utilized as explained in section \ref{sec:Finalizing the RBF computation}.
 %
 %
-In the derivation the parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ share the same distribution and cancel out.
+In the derivation we suggest that the parameter priors $P(\troot|\M)$ and $P(\theta_0=\troot|\M_0)$ may share the same distribution and thus cancel out.
 %
-However in theory and practice, any parameter prior or constant value can be used as $P(\theta_0|\M_0)$.
+However, in theory and practice, any parameter prior or constant value can be sused as $P(\theta_0|\M_0)$.
 %
 In such a case, $P(\troot|\M)$ is taken from \gp as-is and $P(\theta_0|\M_0)$ is plugged into the calculation in section \ref{sec:Efficient Sufficient Statistics for Reference Model Genealogy Likelihood}.
 %
 %
-The divergence times condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig} and utilized as described in section \ref{sec:Finalizing the RBF computation}.
+The condtional distribution $\Pref(\taus,\Gm|\Gc)$ is calculated as described in appendices \ref{ap:cond_nomig} and \ref{ap:cond_mig} and utilized as described in section \ref{sec:Finalizing the RBF computation}.
 %
 Lastly, the genealogy likelihood in the reference model $P(\Gc|\M_0,\theta_0=\troot)$ is calculated from scratch under Kingman's coalescent. 
 %
-We consider this the main component of the model pairing conditional, as it represents the bulk of our computational challenge. The rest of section \ref{sec:RBF Computational Scheme} details it's calculation in an efficient manner.
+We consider this the main component of the model pairing conditional, as it represents the bulk of our computational challenge. The rest of section \ref{sec:RBF Computational Scheme} details its calculation in an efficient manner.
 
 \subsection{Maximizing algorithm flexibility}
 
