@@ -963,11 +963,10 @@ This is accomplished by identifying a collection of sufficient statistics for $\
 %
 \begin{enumerate}
  \item The sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for a wide variety of reference model structures, i.e. for any model structure obtained by applying a comb or clade collapse operation on an ancestral population.
- \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the unmapped parameter $\theta_{root}$.
- \item The number of sufficient statistics depends on the complexity of the hypothesis model $\Mhyp$, but not on the size of the data (i.e. the number of individuals and the number of loci).
+ \item Given a reference model structure, the sufficient statistics allow calculation of $P(\G|\T,\Mref)$ for any value of the freely parameter $\theta_{root}$.
+ \item The number of sufficient statistics depends on the complexity of the hypothesis model $\Mhyp$, but not on the size of the data (i.e. the number of individuals and of loci).
 \end{enumerate}
 %
-
 We then perform the RBF calculation in two phases. 
 %
 Phase 1, which is performed jointly with the MCMC sampling process, emits intermediate summary statistics which meet the above three conditions. 
