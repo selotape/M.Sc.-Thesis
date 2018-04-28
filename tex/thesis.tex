@@ -560,8 +560,8 @@ We refer to this simple one-parameter model as the {\em null reference model} $\
 \includegraphics[width=0.8\textwidth]
 {null_reference_model_no_migration}
 \captionsetup{width=.8\textwidth}
-\caption{Mapping the hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Genealogies are mapped as-is and model parameters are mapped so as to satisfy the model-pairing requirements (\ref{eq:pref_integral} \& \ref{eq:pref_support}):
-Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated as described in appendix \ref{ap:cond_nomig}. The remaining parameter $p_0$ can be freely mapped so as to improve RBF variance.}
+\caption{Mapping the hypothesis model $\M_{hyp}$ onto the null reference model $\M_0$. Genealogies are mapped as-is. The null population size $\theta_0$ is defined by associating it with the size of the population in $\M$ which we expect to best represent $p_0$ (usually $\theta_{root}$). The remaining model parameters are mapped so as to satisfy the model-pairing requirements (\ref{eq:pref_integral} \& \ref{eq:pref_support}):
+Population sizes $\{\theta_{p_a}, \theta_{p_b}, \theta_{p_c}, \theta_{p_{ab}}\}$ are mapped according to their prior probability in $\M_{hyp}$. These have no effect on the reference model structure. Divergence times $\{\tau_{ab}, \tau_{root}\}$ are mapped onto a uniform distribution with upper bound calculated (see Appendix \ref{ap:cond_nomig}).}
 \label{fig:null_reference_model_no_migration}
 \end{figure}
 %
@@ -570,8 +570,8 @@ of hidden variables in $\M$ to the space of hidden variables in $\M_0$.
 %
 In our case, denote by $\Gref$ and $\Tref$ the hidden variables of $\M_0$.
 %
-Because both $\M$ and $\M_0$ have no migration bands, then we may assume that the genealogical information used
-by both models is the same, implying a natural one-to-one mapping between $\G$ and $\Gref$ (the implications of migration are discussed in the next section).
+Since both $\M$ and $\M_0$ have no migration bands, we may assume that the genealogical information used
+by both models is the same, implying a natural one-to-one mapping between $\G$ and $\Gref$ (the implications of migration are discussed in the next subsection).
 %
 A mapping between $\T=(\taus,\thetas)$ and $\Tref=(\theta_0)$ can be defined by selecting one of the population size parameters in $\T$
 to be associated with $\theta_0$. This can be the size of the root population, $\troot$, or any other population
@@ -612,7 +612,7 @@ Equation \ref{eq:pref_support} is guaranteed by constricting $\Pref(\Z|\G,\troot
 Among the unmapped variables $\Z=(\taus,\thetas\setminus \{\troot\})$, the population size parameters $\thetas\setminus \{\troot\}$ do not 
 pose any restrictions on the mapped variables $\G,\troot$. This means that Equations \ref{eq:pref_support} is guaranteed regardless of how their marginal distribution is defined.
 %
-We thus define their conditional probability distribution according to their prior probability in $\M$, to cancel out terms in the RBF ratio and potentially reduce its variance.
+We thus define their conditional probability distribution according to their prior probability in $\M$, to cancel out terms in the RBF ratio and reduce its variance.
 %
 \begin{small}
 \begin{align}
