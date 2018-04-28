@@ -222,13 +222,13 @@ This work was carried out under the supervision of Dr. Ilan Gronau from the Efi 
 
 
 \section*{Abstract}
-The advent of high throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is by sampling genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses. 
+The advent of high throughput sequencing has greatly improved our ability to investigate the evolutionary history of species using detailed demographic models. A popular approach for inferring parameters in these demographic models is to sample genealogical histories at many short unlinked loci using a Markov Chain Monte Carlo algorithm. The use of explicit coalescent models by these methods makes them powerful for inferring demographic parameters, but they are limited in their ability to assess the fit of the inferred model to data. The purpose of this research is to examine a new approach, based on Relative Bayes Factors, for using genealogy samples to compare different evolutionary hypotheses. 
 
-In this work we review Bayesian inference of parameterized demographic models, and formalize the model selection problem.
+In this work we review Bayesian inference of parameterized demographic models and formalize the model selection problem.
 %
 We then define Relative Bayes Factors (RBFs), which represent demographic model fit relative to some reference demographic model.
 %
-We further derive RBFs for two types of reference models. These reference models type - Clade models and Comb models - are useful for different model-selection problem instances.
+We further derive RBFs for two types of reference models - Clade models and Comb models. The two types are useful for different model-selection problem instances.
 %
 Having reached tractable formulae for relative model fit, we describe in detail how they are calculated in an efficient manner, without incurring significant computational overhead during MCMC sampling. 
 %
@@ -269,21 +269,21 @@ The free parameters of $\M$, such as population divergence times, population siz
 %
 The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$ and a prior distribution over the free parameters of the model $P(\T|\M)$.
 %
-The conditional prxobability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
+The conditional probability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
 
 
 A common approach to inferring parameters of a demographic model $\M$ is to assume the model structure $(\Tr,B)$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci.
 %
 These genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. 
 %
-The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of the target parameters.
+The algorithm effectively integrates out the genealogical relationships between individuals and produces Bayesian estimates of target parameters.
 %
 These methods have two key advantages. 1) The full probabilistic generative model of the data at their core allows modeling of more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
 However, because these methods condition on a given model structure, they provide no straightforward way to compare demographic model hypotheses.
 
 
-In principle, measuring of model fit $P(X|\M)$ can be approximated by using importance sampling on the approximated posterior distribution, and this could be used to compare models.
+In principle, measuring of model fit $P(X|\M)$ can be approximated by using importance sampling on the approximated posterior distribution (\cite{NEWTRAFT94}), and this could be used to compare models.
 %
 However, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is \citep{XIEETAL11}. 
 %
@@ -294,19 +294,19 @@ These methods are very effective, but they require an order of magnitude more sa
 
 The goal of our research is thus to improve on existing importance-sampling approaches to model selection, without incurring significant additional computational cost.
 %
-We accomplish this by estimating model fit relative to some Reference Model $\Mref$. Reference models are base-line phylogenetic structures used to asses model fit within a specific context, allowing us to select between competing model candidates.
+We accomplish this by estimating model fit relative to some reference model $\Mref$. Reference models are base-line phylogenetic structures used to asses model fit within a specific context, allowing us to better select between competing model candidates.
 %
 We implement the model-selection algorithm based on the parameter-inference framework \gp, but our theory and approach can be applied to all bayesian demography inference methods.
 
 We will start in subsection \ref{Related work} by overviewing relevant work in the field.
 %
-Subsections \ref{Bayesian inference and \gp}-\ref{The Model Selection Problem} present some background on the demography inference problem and state the model selection problem.
+Subsections \ref{Bayesian inference and \gp}-\ref{The Model Selection Problem} present background on the demography inference problem and state the model selection problem.
 %
 Section \ref{Methods} formally introduces the concept of reference models and explains how they relate to phylogenetic population models. It then derives the theory behind our relative Bayes factors (RBFs), and explains how they are used as model selection criteria. 
 %
-Section \ref{sec:RBF Computational Scheme} explains in depth our implementation of McRef, our model selection algorithm which uses the \gp parameter-inference framework. McRef earned it's nickname due to it's employment of reference models in the MCMC process.
+Section \ref{sec:RBF Computational Scheme} explains in depth our implementation of McRef - our model selection algorithm which uses the \gp parameter-inference framework. McRef earned it's nickname due to it's employment of reference models in the MCMC process.
 %
-Finally, in section \ref{Results} we share empirical results from our model-selection experiments on simulated data, showcasing the advantages and limitations of our method.
+Finally, in section \ref{Results} we share empirical results from our model-selection experiments on simulated sequence data, showcasing the advantages and limitations of our method.
 
 
 \subsection{Related work} \label{Related work}
@@ -659,7 +659,7 @@ about migration events, but the genealogies in $\M_0$ do not (Figure \ref{fig:nu
 \includegraphics[width=0.8\textwidth]
 {null_model_with_migration}
 \captionsetup{width=.8\textwidth}
-\caption{Mapping a model with migration onto the null reference model. Genealogies in $p_0$ do not hold information about migration events. The complex interplay between migration events and coalescence times makes defining the conditional probability distribution $\Pref$ challenging. Appendix \ref{ap:cond_mig} specifies the generative process used to address this. }
+\caption{Mapping a model with migration onto the null reference model. Genealogies in $p_0$ do not hold information about migration events. A complex interplay between migration events and coalescence times makes defining the conditional probability distribution $\Pref$ challenging. Appendix \ref{ap:cond_mig} specifies the generative process used to address this.}
 \label{fig:null_model_with_migration}
 \end{figure}
 
