@@ -232,9 +232,10 @@ We further derive RBFs for two types of reference models. These reference models
 %
 Having reached tractable formulae for relative model fit, we describe in detail how they are calculated in an efficient manner, without incurring significant computational overhead during MCMC sampling. 
 %
-Finally, we test these model-fit assesments using a series of model-selection experiments based on simulated sequence data.
+Finally, we test these model-fit assessments using a series of model-selection experiments based on simulated sequence data.
 %
 Our results show RBFs significantly improving on the base-line harmonic mean model fit estimator in the model selection task.
+
 
 \newpage
 
@@ -271,7 +272,7 @@ The model $\M$ is thus defined by specifying the structural components $(\Tr,B)$
 The conditional prxobability distribution for the observed genomic data $P(\X|\M,\T)$ is defined by standard models for molecular evolution and population genetics (e.g., \cite{JUKECANT69,KING82A}).
 
 
-A common approach to for inferring parameters of a demographic model $\M$ is to assume the model structure $(\Tr,B)$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci.
+A common approach to inferring parameters of a demographic model $\M$ is to assume the model structure $(\Tr,B)$, and to explicitly represent the genealogy of the sequenced individuals at short unlinked loci.
 %
 These genealogies are used along-side the target model parameters as hidden variables in a Markov chain Monte Carlo (MCMC) sampling algorithm. 
 %
@@ -279,14 +280,14 @@ The algorithm effectively integrates out the genealogical relationships between 
 %
 These methods have two key advantages. 1) The full probabilistic generative model of the data at their core allows modeling of more complex evolutionary history, with more free parameters; 2) The parameter values sampled by the MCMC provide means to assess the uncertainty in the resulting estimates.
 %
-However, because these methods condition on a given model structure $\M$, they provide no straightforward way to compare demographic model hypotheses.
+However, because these methods condition on a given model structure, they provide no straightforward way to compare demographic model hypotheses.
 
 
 In principle, measuring of model fit $P(X|\M)$ can be approximated by using importance sampling on the approximated posterior distribution, and this could be used to compare models.
 %
-However, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is. 
+However, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is \citep{XIEETAL11}. 
 %
-There have been several methods suggested to improve the accuracy of importance sampling estimation by sampling from ``hybrid'' models.
+There have been several methods suggested to improve the accuracy of importance sampling estimation by sampling from ``hybrid'' models \citep{LARTPHIL06,XIEETAL11}.
 %
 These methods are very effective, but they require an order of magnitude more sampling iterations (~10x~) compared to the number of iterations required for the MCMC of parameter inference. So they are not very practical in our setting.
 
