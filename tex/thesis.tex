@@ -422,7 +422,7 @@ times across all genealogies by a multiplicative factor sampled close to 1.
 
 \subsection{The Model Selection Problem} \label{The Model Selection Problem}
 
-The model selection problem takes sequence data and a series of models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$).
+The model selection problem takes sequence data and a series of demography models $\M_1,... \M_n$, which differ in their structural components, and aims to find the one which best fits the data set, i.e. select the model $\M_i$ with maximal $P(X|\M_i)$. Typically only the structural assumptions of the models are compared ($\Tr$ and $B$), and not specific parameter values ($\T$). Figure \ref{fig:model_A__OR__model_b} is an example instance of the model selection problem, in which we need to choose the best fitting model amongst three structural hypotheses.
 
 
 \begin{figure}[h]
@@ -437,8 +437,7 @@ Given aligned sequence data and a set of structural hypotheses, we wish to choos
 \end{figure}
 
 
-%
-In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method for comparing models and their fit to the data, this without analytically calculating $P(X|\M_i)$.
+In this study, building upon the \gp demography inference method and MCMC sampler, we develop the theoretical framework for a robust model-selection scheme, and implement a method for comparing models and their fit to data, this without analytically calculating $P(X|\M_i)$.
 
 \section{Methods} \label{Methods}
 
@@ -487,9 +486,9 @@ As before, assume a collection $\{\GT^{(i)}\}$ sampled via MCMC according to an 
 %
 We wish to use these MCMC samples to estimate the {\em Bayes factor of $\M$ relative to $\Mref$}, defined as the ratio $P(\X|\M) / P(\X|\Mref)$.
 %
-The Bayes factor can be estimated by running an additional MCMC for $\Mref$ and taking the ratio of the two harmonc-mean estimates for $P(\X|\M)$ and $P(\X|\Mref)$.
+The Bayes factor can be estimated by running an additional MCMC for $\Mref$ and taking the ratio of the two harmonic-mean estimates for $P(\X|\M)$ and $P(\X|\Mref)$.
 %
-However, in some cases the relative Bayes factor may be estimated directly from $\{\GT^{(i)}\}$ without the need for an additional MCMC for $\Mref$.
+However, in some cases the relative Bayes factor may be estimated directly from $\{\GT^{(i)}\}$ without the need of an additional MCMC for $\Mref$.
 %
 This is done by connecting the models $\M$ and $\Mref$ via a conditional distribution over the the hidden variables of $\M$, $\Pref(\GT|\Mref)$,
 which satisfies the following two requirements:
@@ -505,7 +504,7 @@ which satisfies the following two requirements:
 %
 
 
-The \emph{model pairing conditional distribution}, $\Pref(\GT|\Mref)$, plays a key role in our estimator for the relative Bayes factor.
+The \emph{model pairing conditional distribution}, $\Pref(\GT|\Mref)$, plays a key role in our estimator of the relative Bayes factor.
 %
 The special notation $\Pref$ indicates that this probability function is not naturally defined by either
 $\M$ or $\Mref$, and there will typically be some degree of freedom associated with its specification.
@@ -534,7 +533,7 @@ and the condition of Equation \ref{eq:pref_support} guarantees no division-by-ze
 Interestingly, the contribution of the data to the likelihood cancels out in Equation \ref{eq:data_cancel} (because it is equal in both models).
 %
 Thus the ratio used for estimation, ${\Pref(\GT|\Mref) }/{P(\GT|\M)}$, is not a direct function of the data ($\X$),
-and the data affects the estimate only through its influence the sampled instances $\{\GT^{(i)}\}$.
+and the data affects the estimate only through its influence on the sampled instances $\{\GT^{(i)}\}$.
 %
 We refer to the ratio in Equation \ref{eq:pref1} as the {\em relative Bayes factor (RBF) ratio}, and employ it as a model selection criteria by comparing RBFs of competing hypothesis models, calculated using the same reference model - 
 \[ \frac{1}{\rbf(\M_i:\Mref|\X)} >  \frac{1}{\rbf(\M_j:\Mref|\X)} \Rightarrow P(\X|\M_j) >  P(\X|\M_i)\]
@@ -544,7 +543,9 @@ Importantly, the variance of the RBF depends on the definition of the model-pair
 %
 For instance, in the trivial case where $\Mref=M$, we can define $\Pref(\GT|\Mref)=P(\GT|\M)$ and the RBF ratio becomes 1 for all instances $\{\GT^{(i)}\}$.
 %
-This is the key advantage of direct estimation of the Bayes factor, when compared to estimation via harmonic mean, and realizing this advantage requires construction of an effective model-pairing conditional distribution for $\M$ and $\Mref$.
+This is the key advantage of direct estimation of the Bayes factor, when compared to estimation via harmonic mean.
+%
+Realizing this advantage requires construction of an effective model-pairing conditional distribution for $\M$ and $\Mref$.
 %
 The following sections present specific constructions for $\Pref$ in a series of cases.
 
