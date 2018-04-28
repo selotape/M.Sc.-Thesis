@@ -1152,7 +1152,7 @@ This is again calculated recursively down the population phylogeny of $\M$, but 
 \end{figure}
 
 
-\subsection{Finalizing the RBF computation using McRef}
+\subsection{Finalizing the RBF calculation using McRef}
 \label{sec:Finalizing the RBF computation}
 After the MCMC process is completed, we are left with sufficient statistics and parameter priors per iteration for each clade and comb reference model. These are stored in multiple trace files (see example trace snippet in appendix \ref{ap:scripts}).
 %
@@ -1180,11 +1180,13 @@ Multiple debug plots are also emitted by mcref. Their goal is to help the resear
 
 In order to evaluate our new method we designed a series of experiments which measure it's strengths and weaknesses. 
 %
-The experiments were set up to try to distinguish between different hypothesis structures. 
+The experiments were set up to try to distinguish between different hypothesis structures;
 %
-Experiment 1 tries to decide whether a divergence did or did not occur. Experiment 2 tries to decide the ancestral relationship between three leaf populations and an out-group, and experiment 3 tries to identify the true migration pattern between leaf populations. 
+Experiment 1 tries to decide whether a divergence between populations did or did not occur. 
 %
-We expect the RBF values to correlate with the degree of separation between different hypotheses.
+Experiment 2 tries to decide the ancestral relationship between three leaf populations and an out-group,
+%
+and experiment 3 tries to identify the true migration pattern between leaf populations. 
 %
 A secondary goal of the experiment design is to learn how best to employ RBFs and how to choose a reference model for a given set of hypotheses.
 
@@ -1196,7 +1198,7 @@ In experiments I and III, the generative population models (the "true" models) h
 %
 In experiment II the true model has another ancestor population $ROOT$ which splits to $ABC$ and an outgroup leaf population $O$. 
 %
-We use the coalescent software \textit{ms} to generate four haploid sequences per leaf population. Sequence are comprised of 5000 loci of length 1000 bases. See appendix C for a sample file.
+We use the coalescent software \textit{ms} to generate four haploid sequences per leaf population. Sequence data contains 5000 loci of length 1000 bases. See appendix C for a sample  \textit{ms} sequence generation script.
 %
 For each demographic scenario we generated two independent data sets (using the same generative hypothesis) to examine replication of results. 
 %
@@ -1205,22 +1207,24 @@ To further assess replication we ran 2 independent MCMC runs in each G-PhoCS set
 
 In each comparison instance we compared two hypothesis models $\M_1$ and $\M_2$ on a given data set. 
 %
-Depending on the specific test, comparison was done using relative Bayes factors with a differing reference model $\M_{ref}$ and using the harmonic mean for as a benchmark comparison. 
+Depending on the specific test, comparison was done using relative Bayes factors with a differing reference model $\M_{ref}$ and using the harmonic mean as a benchmark comparison. 
 %
-On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding four potential differences between the relevant stats (e.g., $HM(\M_{\mathbf{1}}, data) - HM(\M_{\mathbf{2}},data)$, $RBF(\M_{\mathbf{1}}, \M_{null}, data) - RBF(\M_{\mathbf{2}}, \M_{null}, data)$). 
+On each data set we ran \gp twice with $\M_1$ and twice with $\M_2$, yielding four potential differences between the relevant stats (e.g., $HM(\M_{\mathbf{1}}, data) - HM(\M_{\mathbf{2}},data)$, $RBF(\M_{\mathbf{1}}, \M_{null}, data) - RBF(\M_{\mathbf{2}}, \M_{null}, data)$ etc). 
 %
 The differences represent the algorithms final "choice" between $\M_1$ and $\M_2$, i.e. which model has higher estimated data likelihood relative to the reference model.
 
 
 For each comparison we recorded the maximum and minimum of the 4 differences with their standard error margins (which McRef computes via bootstrap). 
 %
-For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. Since the these errors correspond to the difference between two values, we took the square root of the sum of the two appropriate errors. 
+For the max value we recorded $max+ste$ and for the min value we recorded $min-ste$. 
 %
-As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). We used these values to plot the confidence intervals seen in the following figures.
+Since these errors correspond to the difference between two values, we took the square root of the sum of the two appropriate errors. 
+%
+As a result we attained 4 values for each comparison of $M_1$ and $M_2$ on a given data set and each method of comparison (e.g. $HM$, $RBF$ with null model, etc). We used these values to plot the confidence intervals seen in the figures of each experiment.
 
 
 \subsection{Experiment I - IdentifyingpPopulation separation}
-In this experiment we generated data sets for which population $ABC$s divergence time is fixed to 0.00300, and perturbed $AB$s divergence time from 0 up to 0.00050. No migration was allowed between any population. We considered 2 hypotheses:
+In this experiment we generated data sets in which population $ABC$s divergence time is fixed to 0.00300, and perturbed $AB$s divergence time from 0 up to 0.00050. No migration was allowed between any population. We considered 2 hypotheses:
 %
 \begin{enumerate}
 \item $\M_{3pops}$ - A model with 3 leaf populations $A$, $B$ and $C$. This is the true model used to generate the sequence data
@@ -1246,9 +1250,9 @@ We used these three techniques to compare models $\M_{3pops}$ and $\M_{2pops}$ (
 \includegraphics[scale=0.4]{results/results-divAB-select}
 \captionsetup{width=0.8\textwidth}
 \caption{
-Results of experiments selecting between $\M_{3pops}$ and $\M_{2pops}$ using the null reference model, a $clade(AB)$ reference model and HM.
+Results of experiments selecting between $\M_{3pops}$ and $\M_{2pops}$ using three techniques - 1) RBF of the null reference model, 2) RBF of a $clade(AB)$ reference model and 3) HM.
 %
-Data sets are marked on the X-axis by divXX-a, where the value of $XX$ stands for $\tau_{AB} \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+Data sets are marked on the X-axis by \textit{divXX-a}, where the value of \textit{XX} stands for $\tau_{AB} \times 10,000$ and \textit{a} indicates the data replicate (1 or 2).
 %
 The divergence time of $AB$ used in the generation of the data set increases between comparisons (left to right).
 %
@@ -1263,39 +1267,39 @@ RBFs, however, prefer $\M_{3pops}$ starting from $\tau_{AB} \geq 0.00010$, regar
 \end{figure}
 
 
-First, we observe that when computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)}$, we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation. 
+We observe that when computing $RBF(\Mhyp=\M_{2pops}, \Mref=\M_{clade(AB)})$, we get values near 0 ($<1e^{-6}$). This is because the reference and hypothesis models converge to the same model. We consider this a simple validation of our RBF calculation. 
 %
 We also notice that both HM and the two RBFs are able to determine the correct model ($\M_{3pops}$) for $div\-50$, and they don't reject $\M_{2pops}$ for $div\-00$ (although $null\_RBF$ does give positive values). 
 %
 In $div\-20$ we see that both RBFs determine the correct model, while the harmonic mean does not significantly reject $\M_{2pops}$.
 %
-We see that when we use $\Mref = \M_{clade(AB)}$, the estimates of RBF are much less noisy than when using $\Mref = \M_{null}$.
+We see that when we use $\M_{clade(AB)}$, the estimates of RBF are less noisy than when using $\M_{null}$.
 %
 Lastly, $\M_{null}$ appears to bias upward the RBF estimates, resulting in false-positives for low divergence data sets ($div\-00$ and $div\-10$).
 
 
 
 \subsection{Experiment II - Determining model topology}
-In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to $O$ and $ABC$ was set to 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
+In this experiment the true model contained an additional outgroup leaf population $O$. The divergence time of population $ROOT$ to populations $O$ \& $ABC$ was set to 0.01000. The divergence time of $ABC$ was again fixed to 0.00300 and the divergence time of $AB$ was perturbed between 0.00300 and 0.00180. Again, no migration was allowed between any population. We considered 3 hypotheses:
 %
 \begin{enumerate}
-\item $\M_{AB\_C}$ - A model with four leaf populations $A$, $B$ and $C$ and $O$ where $A$ and $B$ are siblings. This is the true model used to generate the sequence data
-\item $\M_{A\_BC}$ - A similiar model but in which $B$ and $C$ are siblings
-\item $\M_{AC\_B}$ - A similiar model but in which $A$ and $C$ are siblings
+\item $\M_{AB\_C\_O}$ - A model with four leaf populations $A$, $B$ and $C$ and $O$ where $A$ and $B$ are siblings. This is the true model used to generate the sequence data
+\item $\M_{A\_BC\_O}$ - A similiar model but in which $B$ and $C$ are siblings
+\item $\M_{AC\_B\_O}$ - A similiar model but in which $A$ and $C$ are siblings
 \end{enumerate}
 %
-Note that when $\tau(AB) = 0.00300 = \tau(ABC)$, the simulated model is one in which  the three populations instantaneously diverge, so we expect the three hypothesis models to have similiar fit to data. We compared these models using each of five techniques:
+Note that when $\tau(AB) = 0.00300 = \tau(ABC)$, the simulated model is one in which  the three populations instantaneously diverge, so we expect the three hypotheses to have similiar fit to data. We compared these models using each of five techniques:
 %
 \begin{enumerate}
 \item The harmonic mean
-\item Relative Bayes factors with a reference model of $\M_{Clade(ROOT)} = \M_{null}$
+\item Relative Bayes factors with a reference model of $\M_{Clade(ROOT)}$ ($\M_{null}$)
 \item Relative Bayes factors with a reference model of $\M_{Clade(ABC)}$
 \item Relative Bayes factors with a reference model of $\M_{Comb(ROOT)}$
 \item Relative Bayes factors with a reference model of $\M_{Comb(ABC)}$
 \end{enumerate}
 
 
-Similiarly to experiment I, we used these techniques to compare the true model $\M_{AB\_C}$ against the alternatives $\M_{A\_BC}$ and $\M_{AC\_B}$. Figures \ref{fig:results-M4-divAB-comb}-\ref{fig:results-M4-divAB-HM} show the results of the comparisons.
+Similiarly to experiment I, we used these techniques to compare the true model $\M_{AB\_C\_O}$ against the alternatives $\M_{A\_BC\_O}$ and $\M_{AC\_B\_O}$. Figure \ref{fig:results-M4-divAB} shows the results of the comparisons.
 
 
 
@@ -1315,9 +1319,9 @@ Similiarly to experiment I, we used these techniques to compare the true model $
 \caption{ 
 Results of experiments selecting between three model structures using each of multiple RBFs and HM.
 %
-Data sets are marked on the X-axis by $divAB\_XX-a$, where the value of $XX$ stands for $\tau(AB) \times 10,000$ and $a$ indicates the data replicate (1 or 2).
+Data sets are marked on the X-axis by \textit{divAB\_XX-a}, where the value of \textit{XX} stands for $\tau(AB) \times 10,000$ and \textit{a} indicates the data replicate (1 or 2).
 %
-The true gap between divergence times $\tau(ABC)$ and $\tau(AB)$ starts from zero on the left (where $\tau(ABC) = 0.00300 = \tau(AB)$) and increases between comparisons (left to right).
+The true gap between divergence times $\tau(ABC)$ and $\tau(AB)$ starts from zero on the left -most bar (where $\tau_{ABC} = 0.00300 = \tau_{AB}$) and increases between comparisons (left to right).
 %
 We see that the more informative reference models ($Comb(ABC)$ followed by $Comb(ROOT)$) successfully select the true model, whereas the  more general methods are very noisy and uncertain, even when the hypotheses should be indistinguishable.}
 \label{fig:results-M4-divAB}
@@ -1326,9 +1330,9 @@ We see that the more informative reference models ($Comb(ABC)$ followed by $Comb
 
 We see that the two comb reference methods (first two panels of Figure \ref{fig:results-M4-divAB}) clearly and confidently choose the true hypothesis model, $\M_{AB\_C\_O}$.
 %
-The comb reference methods also correctly show no preference to any model when the hypotheses were eqivalent. This is not true for the other methods.
+The comb reference methods also correctly show no preference to any model when the hypotheses are eqivalent. This is not true for the other methods.
 %
-Amongst the two comb reference methods, the more localized $comb(ABC)$ provided a stronger and more confident signal.
+Amongst the two comb reference methods, the more localized $comb(ABC)$ provides a stronger and more confident signal.
 %
 However, when using the $clade(ABC)$ reference model (3rd panel) we see at most a gentle upward trend in results, but no reproducable clear selection. 
 %
@@ -1361,9 +1365,9 @@ and examined two ways to compare these 4 models:
 
 To present the results, we conducted a comparison between each of the three models with migration against $\M_{nomig}$ as a base model (e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$). 
 %
-We ploted for each data set and each model with migration the 4 values associated with this comparison, under $null\_RBF$ (Figure \ref{fig:results-migCB-1}) and the harmonic mean (Figure \ref{fig:results-migCB-2}). 
+We ploted for each hypothesis and each data set the results when comparing using an RBF with the null modeland when using the harmonic mean (Figure \ref{fig:results-migCB-2}). 
 %
-Because the conditional distribution for migration events is not fully implemented, we applied a small shortcut and assumed the hypothesis and reference likelihoods cancel out. We estimate that this results in a relatively small correction, and believe it will not affect any trend in results.
+Because the conditional distribution for migration events is not fully implemented, we applied a small shortcut and assumed migration priors of the hypothesis and reference models cancel out. We estimate that this results in a relatively small correction, and believe it does not affect any trend in results.
 
 
 
@@ -1373,19 +1377,19 @@ Because the conditional distribution for migration events is not fully implement
 \includegraphics[width=1.0\textwidth]{results/results-migCB-select-1}
 
 \includegraphics[width=1.0\textwidth]{results/results-migCB-select-2}
-\captionsetup{width=1.0\textwidth}
+\captionsetup{width=0.8\textwidth}
 \caption{
 Results of experiments selecting between multiple migration patterns using the null reference model (panel 1) and using HM (panel 2).
 %
-Data sets are marked by $migXX-a$, where $XX$ stands for the migration rate from population $C$ to $B$ and $a$ indicates the data replicate (1 or 2).
+Data sets are marked by \textit{migXX-a}, where \textit{XX} stands for the migration rate from population $C$ to $B$ and \textit{a} indicates the data replicate (1 or 2).
 %
 The migration rate from $C$ to $B$ used in the generation of the data set increases between comparisons (left to right).
 %
-The bars heights are the values of the comparison metric against $\M_{nomig}$ , e.g. $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$.
+The bars heights are the values of the comparison metric against $\M_{nomig}$, $\log{ \frac{P(X|\M_{migBC})}{P(X|\M_{nomig})}}$.
 %
 Each experiment was repeated twice to assess reproducability.
 %
-We see in the 2nd panel that the harmonic mean does not consistently prefer any model over another, whereas the null RBF prefers models with migration to the migration-less base model. 
+We see that the harmonic mean (2nd panel) does not consistently prefer any model over another, whereas the null RBF (1st panel) prefers models with migration to the migration-less base model. 
 }
 \label{fig:results-migCB-2}
 \end{figure}
@@ -1407,7 +1411,7 @@ There doesn't seem to be a significant difference between the scores of $\M_{mig
 
 We've utilized RBFs in answering three model selection questions; 1) whether a divergence event occured, 2) what is the true migration pattern and 3) what is the relationship between leaf populations. In all three scenarios, model selection using relative Bayes factors significantly outperformed the harmonic mean estimator.
 %
-We see in experiments 1 and 2 that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the best performing reference model is the most informative reference model that can be used, i.e. the one closest to all models being compared. 
+We saw in experiments 1 and 2 that the choice of reference model has a great impact on algorithm performance. Generaly speaking, the best performing reference model is the most informative reference model that can be used, i.e. the one closest to all models being compared. 
 %
 We also see that, as expected, the success of the algorithm is correlated with the true distance between models, but it's estimations are not of high certainty.
 %
