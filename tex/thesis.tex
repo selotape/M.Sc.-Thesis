@@ -350,7 +350,7 @@ Unfortunately, though these methods are effective, they require an order of magn
 \subsection{Bayesian inference and \gp} \label{Bayesian inference and \gp}
 
 The objective of demography inference methods is to infer values for $\T$ that have high joint probability with the data:
-$P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$.
+$P(\X,\T|\M)=P(\T|\M)P(\X|\M,\T)$,
 %
 where $\T$ consist of divergence times, $\taus=\{\tau_p:p \text{ is an ancestral population in } \Tr\}$,
 effective population sizes, $\thetas=\{\theta_p: p \text{ is a population in } \Tr\}$, and migration rates, $\migs=\{m_b:b \in B\}$.
@@ -379,13 +379,13 @@ A major advantage of this approach to parameter inference is that it is extremel
 
 
 \gp is one such Bayesian demography inference method. \gp considers a model of sequence data at short unlinked loci, where $\G$ contains the information on the local tree in each locus, and loci are assumed to be independent (Figure \ref{fig:multiple_loci_across_sequence}) (e.g., \cite{NIELWAKE01,RANNYANG03,GRONETAL11}).
-Equation \ref{eq:likelihood} shows the likelihood calculation used by G-PhoCS.
+Equation \ref{eq:likelihood} shows the probability distribution approximated by G-PhoCS.
 %
 \begin{equation}\label{eq:likelihood}
  P(\X,\G,\T|\M) ~=~ P(\T|\M) P(\G|\M,\T) P(\X|\G) ~=~ P(\T|\M) \prod_l P(\G_l|\M,\T) P(\X_l|\G_l).
 \end{equation}
 
-In the above equation $P(\T|\M)$ is the prior probability of model parameters to take current values. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}).
+In the above Equation \ref{eq:likelihood} $P(\T|\M)$ is the prior probability of model parameters. $P(\G_l|\M,\T)$ is the probability of local genealogy $G_l$ at locus $l$ given the model parameters. This is calculated under the Kingman Coalescent model, with special regard to migration events. $P(\X_l|\G_l)$ is the local data likelihood given local genealogy $G_l$, which is computed using standard DNA substitution models (\cite{JUKECANT69}).
 %
 In each MCMC update step \gp proposes a new instace of $\G \& \T$. It then decides whether to accept the proposal based on the ratio between complete likelihoods of the current instance and proposed instance.
 %
@@ -397,9 +397,9 @@ Metropolis-Hastings updates of subsets of variables. The update steps are:
 
 \item Update genealogy structure: For each subtree of each genealogy, alter the subtree using a subtree prune-and-regraft operation. 
 
-\item Update $\theta_p$: For each population $p$, slightly perturb $\theta_p$.
+\item Update $\theta_p$: For each population $p$, perturb $\theta_p$.
 
-\item Update $\tau_p$: For each population $p$, slightly perturb $\tau_p$. If nescessary, also “stretch” or "squeeze" each genealogy $G_i$ as needed to accommodate the proposed change in $\tau_p$. 
+\item Update $\tau_p$: For each population $p$, perturb $\tau_p$. If nescessary, also “stretch” or "squeeze" each genealogy $G_i$ as needed to accommodate the proposed change in $\tau_p$. 
 %
 
 \item Rescale all parameters: Slightly perturb all model parameters ${\theta_p}$, ${\tau_p}$, ${m_b}$ and all coalescent
