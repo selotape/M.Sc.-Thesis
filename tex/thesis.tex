@@ -738,7 +738,7 @@ This advantage, however, comes at the cost of collapsing all population structur
 In many cases we know the population designation of the sampled individuals, and model uncertainty is restricted to the relationships between the sampled populations.
 %
 To capture this simple structure we use a population phylogeny with a single ancestral population splitting simultaneously into all sampled populations.
-We refer to such reference models as {\em comb} models and denote them by $\Mcomb$,  due to the comb-like structure of the population phylogeny.
+We refer to such reference models as {\em comb} models and denote them by $\Mcomb$,  due to the comb-like structure of the population phylogeny (Figure \ref{fig:comb_model_with_migration_single_genealogy}).
 %
 A comb model is defined by: (1) a set of sampled (leaf) populations, $L$; (2) an ancestral population, $comb$; and (3) a set of migration bands $B_L$ between populations in $L$.
 %
@@ -880,7 +880,7 @@ The RBF may thus be re-expressed as follows:
 
 \subsection{Constructing a Reference Model}  \label{Constructing a Reference Model}
 
-Subsections \ref{The null reference model}-\ref{The comb reference model} described two examples of reference models - the null reference model and the root comb reference model. 
+Subsections \ref{The null reference model}-\ref{The comb reference model} described two examples of reference models - the null reference model and the comb reference model. 
 %
 During construction of both these reference models, the structure of the entire phylogeny (sans a portion of the leaves in case of a comb mapping) is collapsed into a single population, and a mapping is derived from this.
 %
