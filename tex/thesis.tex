@@ -311,7 +311,7 @@ Finally, in section \ref{Results} we share empirical results from our model-sele
 
 \subsection{Related work} \label{Related work}
 
-There are several common approaches for demography inference. 
+There are several common approaches for demography inference;
 %
 Likelihood-based models associate each model $\M$ with the most likely parameter values $\T$.
 %
@@ -321,19 +321,19 @@ There are methods which assume that all sites are independent (i.e. allow free r
 %
 Other methods use summary statistics extracted from the data, such as the lengths of shared haplotypes \citep{HARRNIEL13,BROWBROW15}. 
 %
-The key disadvantages of these methods is that 1)they make many simplifying assumptions, and 2)they associate a model with its most likely parameter values. 
+The key disadvantages of these methods is that 1) they make many simplifying assumptions, and 2) they associate a model with its most likely parameter values. 
 %
 This means they give an advantage to models which imply high confidence in the parameter values compared to models where the likelihood is more spread out across the parameter space.
 
-Bayesian model-based methods, such as IM \citep{NIELWAKE01} (most updated version IMa2p \citep{HEYNIEL07,SETHHEY16}), MCMCcoal \cite{RANNYANG03} (most updated version BPP \citep{YANG15}), and \gp \citep{GRONETAL11} all explicitly model genealogies coalescing in a population phylogeny, and differ mostly on additional modeling assumptions and software design.
+Bayesian model-based methods, such as IM \citep{NIELWAKE01} (most updated version IMa2p \citep{HEYNIEL07,SETHHEY16}), MCMCcoal \cite{RANNYANG03} (most updated version BPP \citep{YANG15}), and \gp \citep{GRONETAL11} all explicitly model genealogies coalescing in a population phylogeny, and differ mostly in additional modeling assumptions and software design.
 %
 BPP does not model gene flow between populations and is thus mostly used for relatively diverged species. 
 %
-IM was originally developed for analyzing data from models with two leaf populations. 
+IM was originally developed for analyzing data from models with only two leaf populations. 
 %
-It has since been extended for larger population phylogenies, but its design limits its use for relatively small data sets (few populations and up to 1,000 loci). 
+It has since been extended for larger population phylogenies, but its design limits its use to relatively small data sets (few populations and up to 1,000 loci). 
 %
-Importantly, all methods use MCMC to generate samples of the model parameters, and the model selection methods we develop here are can be applied to all of them.
+Importantly, all methods use MCMC to generate posterior samples of the model parameters, and the model selection methods we develop here can be applied to all of them.
 
 Regarding estimation of Bayes factors, the basic idea to use importance sampling (IS) to estimate $P(\X|\M)$ in a Bayesian setting was suggested by \cite{NEWTRAFT94}. 
 %
@@ -341,7 +341,7 @@ This idea has since become the standard way to estimate model fit in a Bayesian 
 %
 In particular, it was shown that estimates tend to be biased upward, and they are more biased the more parameter-rich the model is. 
 %
-Several methods have suggested ways to improve the accuracy of HM estimation by sampling from ``hybrid'' models, which combine the prior $P(\T|\M)$ times some power of the conditional $P(\X,\G|\M,\T)$ \citep{LARTPHIL06,XIEETAL11}.
+Several methods have suggested ways to improve the accuracy of IS estimation by sampling from ``hybrid'' models, which combine the prior $P(\T|\M)$ times some power of the conditional $P(\X,\G|\M,\T)$ \citep{LARTPHIL06,XIEETAL11}.
 %
 Unfortunately, though these methods are effective, they require an order of magnitude more sampling iterations compared to the number of iterations required for the MCMC of parameter estimation.
 
